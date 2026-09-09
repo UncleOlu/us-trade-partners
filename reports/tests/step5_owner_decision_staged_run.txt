@@ -7,7 +7,7 @@ collecting ... collected 127 items
 
 tests/test_config_overrides.py::test_ovr01_data_dir_override_used_when_set PASSED [  0%]
 tests/test_config_overrides.py::test_ovr02_data_dir_override_missing_directory_reports_reason PASSED [  1%]
-tests/test_config_overrides.py::test_ovr03_data_dir_no_override_falls_back_to_default_discovery PASSED [  2%]
+tests/test_config_overrides.py::test_ovr03_data_dir_no_override_falls_back_to_default_discovery SKIPPED [  2%]
 tests/test_config_overrides.py::test_ovr04_raw_dir_override_used_regardless_of_data_dir_name PASSED [  3%]
 tests/test_config_overrides.py::test_ovr05_raw_dir_no_override_derives_from_data_dir_name PASSED [  3%]
 tests/test_config_overrides.py::test_ovr06_validation_csv_override_used_when_file_exists PASSED [  4%]
@@ -134,6 +134,7 @@ tests/test_validation_csv_contract.py::test_vcsv03_check_values_are_allowed PASS
 tests/test_validation_csv_contract.py::test_vcsv04_empty_cells_are_empty_strings_not_the_word_null PASSED [100%]
 
 =========================== short test summary info ============================
+SKIPPED [1] tests/test_config_overrides.py:41: not run: data/ now exists in this checkout; default-path branch covered elsewhere
 SKIPPED [1] tests/test_determinism.py:97: not run: DATA_A and DATA_B environment variables are unset
 SKIPPED [1] tests/test_typescript_types_placeholder.py:28: not run: src/ does not exist yet (step 4 not run)
-================== 125 passed, 2 skipped in 67.26s (0:01:07) ===================
+================== 124 passed, 3 skipped in 67.85s (0:01:07) ===================
