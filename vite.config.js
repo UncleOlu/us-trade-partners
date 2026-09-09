@@ -1,0 +1,154 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import fs from 'node:fs';
+import fsp from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
+// Base path: every data fetch URL, the Vite base, and the React Router basename
+// all read this one value. Default matches the GitHub Pages project path.
+const basePath = normalizeBasePath(process.env.VITE_BASE_PATH ?? '/us-trade-partners/');
+function normalizeBasePath(raw) {
+    let p = raw.trim();
+    if (!p.startsWith('/'))
+        p = '/' + p;
+    if (!p.endsWith('/'))
+        p = p + '/';
+    return p;
+}
+// snapshot_id comes from reports/pipeline/last_snapshot_id.txt at build/dev time.
+// Agent B never hard-codes a snapshot id in source; the build injects this constant.
+function readSnapshotId() {
+    const snapshotFile = path.join(rootDir, 'reports', 'pipeline', 'last_snapshot_id.txt');
+    const raw = fs.readFileSync(snapshotFile, 'utf-8').trim();
+    if (!raw) {
+        throw new Error(`reports/pipeline/last_snapshot_id.txt is empty; cannot determine snapshot_id`);
+    }
+    return raw;
+}
+const snapshotId = readSnapshotId();
+async function copyDir(src, dest) {
+    let count = 0;
+    await fsp.mkdir(dest, { recursive: true });
+    const entries = await fsp.readdir(src, { withFileTypes: true });
+    for (const entry of entries) {
+        const s = path.join(src, entry.name);
+        const d = path.join(dest, entry.name);
+        if (entry.isDirectory()) {
+            count += await copyDir(s, d);
+        }
+        else if (entry.isFile()) {
+            await fsp.copyFile(s, d);
+            count += 1;
+        }
+    }
+    return count;
+}
+// Serves data/<snapshot_id>/ under the same base path used in production,
+// and (on build) copies only the current snapshot into dist/data/<snapshot_id>/.
+function snapshotDataPlugin() {
+    const dataUrlPrefix = `${basePath}data/${snapshotId}/`;
+    const snapshotDir = path.join(rootDir, 'data', snapshotId);
+    return {
+        name: 'snapshot-data',
+        configureServer(server) {
+            const middleware = (req, res, next) => {
+                if (!req.url)
+                    return next();
+                const urlPath = req.url.split('?')[0] ?? '';
+                if (!urlPath.startsWith(dataUrlPrefix))
+                    return next();
+                const rel = decodeURIComponent(urlPath.slice(dataUrlPrefix.length));
+                if (rel.includes('..')) {
+                    res.statusCode = 400;
+                    res.end('bad request');
+                    return;
+                }
+                const filePath = path.join(snapshotDir, rel);
+                fs.readFile(filePath, (err, data) => {
+                    if (err) {
+                        res.statusCode = 404;
+                        res.setHeader('Content-Type', 'application/json');
+                        res.end(JSON.stringify({ error: 'snapshot file not found', path: rel }));
+                        return;
+                    }
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+                    res.end(data);
+                });
+            };
+            server.middlewares.use(middleware);
+        },
+        async closeBundle() {
+            // Only runs for `vite build`, not `vite dev`.
+            if (!fs.existsSync(snapshotDir)) {
+                throw new Error(`snapshot directory missing at build time: ${snapshotDir}`);
+            }
+            const outDir = path.join(rootDir, 'dist', 'data', snapshotId);
+            const count = await copyDir(snapshotDir, outDir);
+            // eslint-disable-next-line no-console
+            console.log(`[snapshot-data] copied ${count} files from data/${snapshotId} to dist/data/${snapshotId}`);
+            // GitHub Pages SPA fallback: 404.html is a copy of index.html, used only
+            // so a direct load of a client-side route (e.g. /partner/5700) that GitHub
+            // Pages cannot resolve as a real file still serves the app shell. It is
+            // never a substitute for a real per-route index.html and never a valid
+            // route on its own.
+            const indexHtml = path.join(rootDir, 'dist', 'index.html');
+            const notFoundHtml = path.join(rootDir, 'dist', '404.html');
+            await fsp.copyFile(indexHtml, notFoundHtml);
+            // eslint-disable-next-line no-console
+            console.log('[snapshot-data] copied dist/index.html to dist/404.html (SPA fallback)');
+        },
+    };
+}
+// Serves docs/methodology-content.md under the base path (dev) and copies it
+// into dist/ (build), so the methodology page reads content from its one
+// source of truth in docs/ instead of a duplicated copy under src/.
+function methodologyContentPlugin() {
+    const urlPath = `${basePath}methodology-content.md`;
+    const sourceFile = path.join(rootDir, 'docs', 'methodology-content.md');
+    return {
+        name: 'methodology-content',
+        configureServer(server) {
+            const middleware = (req, res, next) => {
+                if (!req.url)
+                    return next();
+                const reqPath = req.url.split('?')[0];
+                if (reqPath !== urlPath)
+                    return next();
+                fs.readFile(sourceFile, 'utf-8', (err, data) => {
+                    if (err) {
+                        res.statusCode = 404;
+                        res.end('methodology-content.md not found');
+                        return;
+                    }
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+                    res.end(data);
+                });
+            };
+            server.middlewares.use(middleware);
+        },
+        async closeBundle() {
+            if (!fs.existsSync(sourceFile)) {
+                throw new Error(`docs/methodology-content.md missing at build time`);
+            }
+            const outFile = path.join(rootDir, 'dist', 'methodology-content.md');
+            await fsp.copyFile(sourceFile, outFile);
+            // eslint-disable-next-line no-console
+            console.log('[methodology-content] copied docs/methodology-content.md to dist/methodology-content.md');
+        },
+    };
+}
+export default defineConfig({
+    base: basePath,
+    define: {
+        __SNAPSHOT_ID__: JSON.stringify(snapshotId),
+        __BASE_PATH__: JSON.stringify(basePath),
+    },
+    plugins: [react(), snapshotDataPlugin(), methodologyContentPlugin()],
+    build: {
+        outDir: 'dist',
+        emptyOutDir: true,
+    },
+});

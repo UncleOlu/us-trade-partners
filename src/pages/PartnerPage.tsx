@@ -1,0 +1,474 @@
+import { useMemo, useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ReferenceLine,
+  BarChart,
+  Bar,
+} from 'recharts';
+import { fetchPartner } from '../lib/dataClient';
+import { useAsyncData } from '../lib/useAsyncData';
+import { Loading } from '../components/Loading';
+import { DataError } from '../components/DataError';
+import { MoneyCell } from '../components/MoneyCell';
+import { isUsable } from '../lib/status';
+import { formatAutoUsd, formatExactUsd } from '../lib/units';
+import { toCsv, downloadCsv } from '../lib/csv';
+import type { PartnerFile, FlowValue, DerivedValue } from '../types/generated';
+
+function chartValue(flow: FlowValue | DerivedValue): number | null {
+  return isUsable(flow) ? flow.value : null;
+}
+
+function YearsTable({
+  partner,
+  showExact,
+}: {
+  partner: PartnerFile;
+  showExact: boolean;
+}): JSX.Element {
+  const download = () => {
+    const rows = partner.years.map((y) => [
+      y.year,
+      y.imports.status,
+      y.imports.status === 'observed' || y.imports.status === 'confirmed_zero' ? y.imports.value : '',
+      y.exports.status,
+      y.exports.status === 'observed' || y.exports.status === 'confirmed_zero' ? y.exports.value : '',
+      y.balance.status,
+      y.balance.status === 'observed' ? y.balance.value : '',
+      y.total_trade_value.status,
+      y.total_trade_value.status === 'observed' ? y.total_trade_value.value : '',
+      y.note ?? '',
+    ]);
+    const csv = toCsv(
+      [
+        'year',
+        'imports_status',
+        'imports_usd',
+        'exports_status',
+        'exports_usd',
+        'balance_status',
+        'balance_usd',
+        'total_trade_value_status',
+        'total_trade_value_usd',
+        'note',
+      ],
+      rows,
+    );
+    downloadCsv(`partner_${partner.partner.code}_years.csv`, csv);
+  };
+
+  return (
+    <section aria-labelledby="years-table-heading">
+      <div className="section-heading-row">
+        <h2 id="years-table-heading">Trade by year</h2>
+        <button type="button" onClick={download}>
+          Download CSV
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Imports</th>
+            <th>Exports</th>
+            <th>Balance</th>
+            <th>Total trade value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {partner.years.map((y) => (
+            <tr key={y.year}>
+              <td>
+                {y.year}
+                {y.note && <span title={y.note}> *</span>}
+              </td>
+              <td>
+                <MoneyCell flow={y.imports} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={y.exports} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={y.balance} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={y.total_trade_value} showExact={showExact} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {partner.years.some((y) => y.note) && (
+        <p className="chart-note">* See the membership-change notes above the chart.</p>
+      )}
+    </section>
+  );
+}
+
+function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
+  const data = partner.years.map((y) => ({
+    year: y.year,
+    imports: chartValue(y.imports),
+    exports: chartValue(y.exports),
+    balance: chartValue(y.balance),
+  }));
+  const isEu = partner.partner.code === 'EU';
+  const noteYears = isEu ? partner.years.filter((y) => (y.year === 2013 || y.year === 2020) && y.note) : [];
+
+  return (
+    <section aria-labelledby="trend-chart-heading">
+      <h2 id="trend-chart-heading">Imports, exports, and balance by year</h2>
+      {isEu && (
+        <p className="chart-note">
+          Membership-change years are marked on the chart. Gaps in a line mean the value is absent for that
+          year, not zero.
+        </p>
+      )}
+      <ResponsiveContainer width="100%" height={340}>
+        <LineChart data={data} margin={{ top: 8, right: 24, left: 8, bottom: 8 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="year" />
+          <YAxis tickFormatter={(v: number) => formatAutoUsd(v).display} width={80} />
+          <Tooltip
+            formatter={(value: number | string | Array<number | string>, name: string) => [
+              typeof value === 'number' ? formatExactUsd(value) : 'absent',
+              name,
+            ]}
+          />
+          <Legend />
+          {noteYears.map((y) => (
+            <ReferenceLine
+              key={y.year}
+              x={y.year}
+              stroke="#888"
+              strokeDasharray="4 4"
+              label={{ value: 'membership change', position: 'top', fontSize: 10 }}
+            />
+          ))}
+          <Line type="monotone" dataKey="imports" stroke="#c0392b" connectNulls={false} />
+          <Line type="monotone" dataKey="exports" stroke="#2980b9" connectNulls={false} />
+          <Line type="monotone" dataKey="balance" stroke="#27ae60" connectNulls={false} />
+        </LineChart>
+      </ResponsiveContainer>
+      {isEu && noteYears.length > 0 && (
+        <ul className="eu-notes">
+          {noteYears.map((y) => (
+            <li key={y.year}>
+              {y.year}: {y.note}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function GroupsSection({
+  partner,
+  year,
+  selectedGroup,
+  onSelectGroup,
+  showExact,
+}: {
+  partner: PartnerFile;
+  year: number;
+  selectedGroup: string | null;
+  onSelectGroup: (id: string) => void;
+  showExact: boolean;
+}): JSX.Element {
+  const yearSections = partner.sections.find((s) => s.year === year);
+
+  const download = () => {
+    if (!yearSections) return;
+    const rows = yearSections.groups.map((g) => [
+      g.section_id,
+      g.imports.status,
+      g.imports.status === 'observed' || g.imports.status === 'confirmed_zero' ? g.imports.value : '',
+      g.exports.status,
+      g.exports.status === 'observed' || g.exports.status === 'confirmed_zero' ? g.exports.value : '',
+      g.total_trade_value.status,
+      g.total_trade_value.status === 'observed' ? g.total_trade_value.value : '',
+    ]);
+    const csv = toCsv(
+      ['section_id', 'imports_status', 'imports_usd', 'exports_status', 'exports_usd', 'total_trade_value_status', 'total_trade_value_usd'],
+      rows,
+    );
+    downloadCsv(`partner_${partner.partner.code}_groups_${year}.csv`, csv);
+  };
+
+  if (!yearSections) {
+    return (
+      <section>
+        <h2>HS sections for {year}</h2>
+        <p>No section data for {year} in this snapshot.</p>
+      </section>
+    );
+  }
+
+  const chartData = yearSections.groups.map((g) => ({
+    section_id: g.section_id,
+    imports: chartValue(g.imports),
+    exports: chartValue(g.exports),
+  }));
+
+  return (
+    <section aria-labelledby="groups-heading">
+      <div className="section-heading-row">
+        <h2 id="groups-heading">HS sections, {year}</h2>
+        <button type="button" onClick={download}>
+          Download CSV
+        </button>
+      </div>
+      <p>Click a bar or a table row to see chapter detail for that group.</p>
+      <ResponsiveContainer width="100%" height={320}>
+        <BarChart
+          data={chartData}
+          margin={{ top: 8, right: 24, left: 8, bottom: 8 }}
+          onClick={(state) => {
+            const label = state?.activeLabel;
+            if (typeof label === 'string') onSelectGroup(label);
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="section_id" />
+          <YAxis tickFormatter={(v: number) => formatAutoUsd(v).display} width={80} />
+          <Tooltip
+            formatter={(value: number | string | Array<number | string>, name: string) => [
+              typeof value === 'number' ? formatExactUsd(value) : 'absent',
+              name,
+            ]}
+          />
+          <Legend />
+          <Bar dataKey="imports" fill="#c0392b" cursor="pointer" />
+          <Bar dataKey="exports" fill="#2980b9" cursor="pointer" />
+        </BarChart>
+      </ResponsiveContainer>
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Imports</th>
+            <th>Exports</th>
+            <th>Total trade value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {yearSections.groups.map((g) => (
+            <tr
+              key={g.section_id}
+              className={g.section_id === selectedGroup ? 'selected-row' : undefined}
+              onClick={() => onSelectGroup(g.section_id)}
+              style={{ cursor: 'pointer' }}
+            >
+              <td>{g.section_id}</td>
+              <td>
+                <MoneyCell flow={g.imports} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={g.exports} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={g.total_trade_value} showExact={showExact} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+}
+
+function ChapterTable({
+  partner,
+  year,
+  groupId,
+  showExact,
+}: {
+  partner: PartnerFile;
+  year: number;
+  groupId: string;
+  showExact: boolean;
+}): JSX.Element {
+  const yearSections = partner.sections.find((s) => s.year === year);
+  const group = yearSections?.groups.find((g) => g.section_id === groupId);
+
+  const sorted = useMemo(() => {
+    if (!group) return [];
+    const usable = group.chapters.filter((c) => c.total_trade_value.status === 'observed');
+    const rest = group.chapters.filter((c) => c.total_trade_value.status !== 'observed');
+    usable.sort((a, b) => {
+      const av = a.total_trade_value.status === 'observed' ? a.total_trade_value.value : 0;
+      const bv = b.total_trade_value.status === 'observed' ? b.total_trade_value.value : 0;
+      return bv - av;
+    });
+    rest.sort((a, b) => a.chapter.localeCompare(b.chapter));
+    return [...usable, ...rest];
+  }, [group]);
+
+  const download = () => {
+    const rows = sorted.map((c) => [
+      c.chapter,
+      c.description ?? '',
+      c.imports.status,
+      c.imports.status === 'observed' || c.imports.status === 'confirmed_zero' ? c.imports.value : '',
+      c.exports.status,
+      c.exports.status === 'observed' || c.exports.status === 'confirmed_zero' ? c.exports.value : '',
+      c.total_trade_value.status,
+      c.total_trade_value.status === 'observed' ? c.total_trade_value.value : '',
+    ]);
+    const csv = toCsv(
+      [
+        'chapter',
+        'description',
+        'imports_status',
+        'imports_usd',
+        'exports_status',
+        'exports_usd',
+        'total_trade_value_status',
+        'total_trade_value_usd',
+      ],
+      rows,
+    );
+    downloadCsv(`partner_${partner.partner.code}_chapters_${groupId}_${year}.csv`, csv);
+  };
+
+  if (!group) {
+    return (
+      <section>
+        <h2>Chapters</h2>
+        <p>No chapter data for group {groupId} in {year}.</p>
+      </section>
+    );
+  }
+
+  return (
+    <section aria-labelledby="chapters-heading">
+      <div className="section-heading-row">
+        <h2 id="chapters-heading">
+          Chapters in group {groupId}, {year}
+        </h2>
+        <button type="button" onClick={download}>
+          Download CSV
+        </button>
+      </div>
+      <p>Sorted by total trade value, highest first. Rows without an observed total sort after, by chapter.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Chapter</th>
+            <th>Description</th>
+            <th>Imports</th>
+            <th>Exports</th>
+            <th>Total trade value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((c) => (
+            <tr key={c.chapter}>
+              <td>{c.chapter}</td>
+              <td>{c.description ?? ''}</td>
+              <td>
+                <MoneyCell flow={c.imports} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={c.exports} showExact={showExact} />
+              </td>
+              <td>
+                <MoneyCell flow={c.total_trade_value} showExact={showExact} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+}
+
+export function PartnerPage(): JSX.Element {
+  const { code } = useParams<{ code: string }>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const [showExact, setShowExact] = useState(false);
+
+  const state = useAsyncData(() => {
+    if (!code) return Promise.reject(new Error('missing partner code'));
+    return fetchPartner(code);
+  }, [code]);
+
+  if (state.status === 'loading') return <Loading label={`Loading ${code}`} />;
+  if (state.status === 'error') return <DataError error={state.error} />;
+
+  const partner = state.data;
+  const years = partner.years.map((y) => y.year);
+  const latestYear = years[years.length - 1];
+  const yearParam = searchParams.get('year');
+  const year = yearParam && years.includes(Number(yearParam)) ? Number(yearParam) : latestYear;
+  const effectiveGroup = selectedGroup ?? partner.sections.find((s) => s.year === year)?.groups[0]?.section_id ?? null;
+
+  const onYearChange = (newYear: number) => {
+    const next = new URLSearchParams(searchParams);
+    next.set('year', String(newYear));
+    setSearchParams(next);
+  };
+
+  const { partner: info } = partner;
+
+  return (
+    <div className="partner-page">
+      <header className="partner-header">
+        <h1>
+          {info.name}
+          {info.kind === 'aggregate' && <span className="aggregate-tag"> (aggregate)</span>}
+        </h1>
+        <dl className="partner-meta">
+          <dt>Kind</dt>
+          <dd>{info.kind}</dd>
+          <dt>Code</dt>
+          <dd>{info.code}</dd>
+          {info.iso3 && (
+            <>
+              <dt>ISO</dt>
+              <dd>{info.iso3}</dd>
+            </>
+          )}
+        </dl>
+      </header>
+
+      <div className="controls-row">
+        <label htmlFor="year-select">Year</label>
+        <select id="year-select" value={year} onChange={(e) => onYearChange(Number(e.target.value))}>
+          {years.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
+        </select>
+        <label className="exact-toggle">
+          <input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />
+          Show exact USD in tables
+        </label>
+      </div>
+
+      <TrendChart partner={partner} />
+      <YearsTable partner={partner} showExact={showExact} />
+      <GroupsSection
+        partner={partner}
+        year={year}
+        selectedGroup={effectiveGroup}
+        onSelectGroup={setSelectedGroup}
+        showExact={showExact}
+      />
+      {effectiveGroup && (
+        <ChapterTable partner={partner} year={year} groupId={effectiveGroup} showExact={showExact} />
+      )}
+    </div>
+  );
+}

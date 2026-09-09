@@ -32,7 +32,7 @@ The Census API returns a detail-level partner row with code 8220 and a null name
 
 ### Kosovo (4803)
 
-Kosovo has no ISO 3166-1 code. It is treated as a country partner with no ISO code {{kosovo_map_note}}.
+Kosovo has no ISO 3166-1 code. It is treated as a country partner with no ISO code and no map shape, because the world-atlas file used for the map carries no numeric id for its Kosovo feature and features are never matched by name.
 
 ## The European Union as one partner
 
