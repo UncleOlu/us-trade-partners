@@ -1,0 +1,10 @@
+[PASS] all-years home uses derived summary, fixed world totals and complete CSV scope (792ms)
+[PASS] all period survives Hub partner section refresh navigation and browser Back (1908ms)
+[PASS] all-years map shows summed country values and preserves period on selection (619ms)
+[PASS] all-years partner totals and group chapter CSVs match independent sums; annual trend retained (4766ms)
+[PASS] all-years section retains annual trend and one table with exact period CSV (1196ms)
+[PASS] missing whole annual record retains configured range and marks aggregate incomplete (1192ms)
+[PASS] home rank and money align centrally; partner names align left and mobile table scrolls (1960ms) detail=[{"width":1280,"head":["center","left","center","center","center","center"],"body":["center","left","center","center","center","center"]},{"width":390,"head":["center","left","center","center","center","center"],"body":["center","left","center","center","center","center"]},{"width":320,"head":["center","left","center","center","center","center"],"body":["center","left","center","center","center","center"]}]
+[PASS] all-years Hub partner section and methodology screenshots show period context (4492ms)
+
+collected=8 passed=8 failed=0 not_run=0

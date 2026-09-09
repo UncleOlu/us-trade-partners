@@ -1,0 +1,37 @@
+{
+  "example": {
+    "balance_status": "observed",
+    "balance_usd": "-2336175413335",
+    "code": "EU",
+    "end_year": "2025",
+    "exports_status": "observed",
+    "exports_usd": "4031701361380",
+    "imports_status": "observed",
+    "imports_usd": "6367876774715",
+    "kind": "aggregate",
+    "name": "European Union",
+    "period": "all",
+    "start_year": "2013",
+    "total_trade_value_status": "observed",
+    "total_trade_value_usd": "10399578136095"
+  },
+  "filename": "home-all.csv",
+  "headers": [
+    "period",
+    "start_year",
+    "end_year",
+    "code",
+    "name",
+    "kind",
+    "imports_status",
+    "imports_usd",
+    "exports_status",
+    "exports_usd",
+    "balance_status",
+    "balance_usd",
+    "total_trade_value_status",
+    "total_trade_value_usd"
+  ],
+  "rows": 236,
+  "sha256": "8646f2093e50e5ca29af57fd3353b04820e247523a11188e3d88cefa5696d484"
+}

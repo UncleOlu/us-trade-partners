@@ -21,8 +21,8 @@ export function useUrlState(years: number[] | undefined, groups?: string[]) {
   const rawYear = params.get('year');
   const rawRank = params.get('rank');
   const rawGroup = params.get('section');
-  const validYear = rawYear !== null && /^\d{4}$/.test(rawYear) && years?.includes(Number(rawYear));
-  const year = validYear ? Number(rawYear) : years?.[years.length - 1];
+  const validYear = rawYear === 'all' || rawYear !== null && /^\d{4}$/.test(rawYear) && years?.includes(Number(rawYear));
+  const year = rawYear === 'all' ? (years?.length ? 'all' as const : undefined) : validYear ? Number(rawYear) : years?.[years.length - 1];
   const rank = RANK_FIELDS.includes(rawRank as RankField) ? rawRank as RankField : 'total_trade_value';
   const group = groups?.includes(rawGroup ?? '') ? rawGroup : groups?.[0] ?? null;
   const query = params.toString();

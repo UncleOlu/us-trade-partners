@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { fetchMeta, fetchPartners, fetchHsSections } from '../lib/dataClient';
 import { useAsyncData } from '../lib/useAsyncData';
 import { contextUrl, useUrlState } from '../lib/urlState';
+import { periodLabel } from '../lib/aggregate';
 import { SECTION_LABELS } from '../lib/sectionLabels';
 import { Loading } from '../components/Loading';
 import { DataError } from '../components/DataError';
@@ -26,7 +27,7 @@ export function HubPage(): JSX.Element {
   return <div className="hub-page">
     <header className="page-intro"><p className="eyebrow">The data directory</p><h1>Browse partners and products</h1><p className="intro-text">A direct route to every partner, product group and year.</p></header>
     <UrlNotice message={notice} />
-    <section className="panel hub-controls" aria-label="Browse controls"><div className="field"><label htmlFor="hub-year-select">Year for all links</label><select id="hub-year-select" value={year} onChange={(e) => update({ year: e.target.value })}>{years?.map((y) => <option key={y}>{y}</option>)}</select></div>
+    <section className="panel hub-controls" aria-label="Browse controls"><div className="field"><label htmlFor="hub-year-select">Year for all links</label><select id="hub-year-select" value={year} onChange={(e) => update({ year: e.target.value })}><option value="all">{periodLabel('all', years!)}</option>{years?.map((y) => <option key={y}>{y}</option>)}</select></div>
       <nav className="jump-links" aria-label="Hub sections"><a href="#hub-partners">Partners</a><a href="#hub-sections">Product groups</a><a href="#hub-years">Years</a><Link to={contextUrl('/methodology', params)}>Methodology</Link></nav>
     </section>
     <section id="hub-partners" className="panel" aria-labelledby="hub-partner-title"><div className="section-heading-row"><div><p className="eyebrow">Choose a trading partner</p><h2 id="hub-partner-title">Partners</h2></div><span className="count-badge">{approved.length} in this snapshot</span></div>
@@ -41,6 +42,6 @@ export function HubPage(): JSX.Element {
       {!matchingSections.length && <div className="empty-state"><h3>No matching product groups</h3><button onClick={() => setSectionQuery('')}>Clear product search</button></div>}
       <div className="section-directory">{matchingSections.map((g) => <article className="section-card" key={g.id}><p className="eyebrow">HS {g.id}</p><h3><Link to={contextUrl(`/section/${g.id}`, params)}>{SECTION_LABELS[g.id] ?? g.name}</Link></h3><p className="chart-note">Chapters {g.chapters.join(', ')}</p><details><summary>Full official name</summary><p>{g.name}</p></details></article>)}</div>
     </section>
-    <section id="hub-years" className="panel" aria-labelledby="hub-year-title"><h2 id="hub-year-title">Explore by year</h2><ul className="year-links">{years?.map((y) => <li key={y}><Link to={contextUrl('/', params, { year: String(y) })}>{y}</Link></li>)}</ul></section>
+    <section id="hub-years" className="panel" aria-labelledby="hub-year-title"><h2 id="hub-year-title">Explore by year</h2><ul className="year-links"><li><Link to={contextUrl('/', params, { year: 'all' })}>{periodLabel('all', years!)}</Link></li>{years?.map((y) => <li key={y}><Link to={contextUrl('/', params, { year: String(y) })}>{y}</Link></li>)}</ul></section>
   </div>;
 }

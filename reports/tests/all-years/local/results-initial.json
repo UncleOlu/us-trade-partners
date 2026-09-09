@@ -1,0 +1,50 @@
+{
+  "sourceIndexSHA256": "89fe23b376da7dc8fcbadb93fd8ace66a64a83c6f93bbf090ff7dc605e95a58d",
+  "target": "local",
+  "results": [
+    {
+      "name": "all-years home uses derived summary, fixed world totals and complete CSV scope",
+      "status": "PASS",
+      "ms": 939
+    },
+    {
+      "name": "all period survives Hub partner section refresh navigation and browser Back",
+      "status": "FAIL",
+      "reason": "locator.click: Error: strict mode violation: locator('a[href*=\"section/XVI\"]') resolved to 3 elements:\n    1) <a href=\"/us-trade-partners/section/XVI?year=all&rank=exports\">Machinery and electrical equipment</a> aka getByRole('link', { name: 'Machinery and electrical' })\n    2) <a href=\"/us-trade-partners/section/XVII?year=all&rank=exports\">Transport equipment</a> aka getByRole('link', { name: 'Transport equipment' })\n    3) <a href=\"/us-trade-partners/section/XVIII?year=all&rank=exports\">Instruments, clocks and music</a> aka getByRole('link', { name: 'Instruments, clocks and music' })\n\nCall log:\n\u001b[2m  - waiting for locator('a[href*=\"section/XVI\"]')\u001b[22m\n",
+      "ms": 1243
+    },
+    {
+      "name": "all-years map shows summed country values and preserves period on selection",
+      "status": "PASS",
+      "ms": 621
+    },
+    {
+      "name": "all-years partner totals and group chapter CSVs match independent sums; annual trend retained",
+      "status": "PASS",
+      "ms": 4798
+    },
+    {
+      "name": "all-years section retains annual trend and one table with exact period CSV",
+      "status": "PASS",
+      "ms": 1190
+    },
+    {
+      "name": "missing whole annual record retains configured range and marks aggregate incomplete",
+      "status": "FAIL",
+      "reason": "The input did not match the regular expression /All years \\(2013-2025\\)/. Input:\n\n'CANADA\\n' +\n  '\\n' +\n  'country\\n' +\n  '·\\n' +\n  'Census code 1220 · CAN\\n' +\n  '\\n' +\n  'Trend\\n' +\n  'Yearly values\\n' +\n  'Product groups\\n' +\n  'Chapters\\n' +\n  'Year\\n' +\n  'All years (2014-2025)\\n' +\n  '2014\\n' +\n  '2015\\n' +\n  '2016\\n' +\n  '2017\\n' +\n  '2018\\n' +\n  '2019\\n' +\n  '2020\\n' +\n  '2021\\n' +\n  '2022\\n' +\n  '2023\\n' +\n  '2024\\n' +\n  '2025\\n' +\n  'Show exact USD in tables\\n' +\n  '\\n' +\n  \"All years adds annual values in nominal USD; it is not an annual average or adjusted for inflation. A missing required year makes the period value absent. Years explicitly marked not applicable are excluded. EU values use each year's historical membership.\\n\" +\n  '\\n' +\n  'Trade in All years (2014-2025)\\n' +\n  '\\n' +\n  'IMPORTS\\n' +\n  '\\n' +\n  '$4.14tn\\n' +\n  '\\n' +\n  'EXPORTS\\n' +\n  '\\n' +\n  '$3.70tn\\n' +\n  '\\n' +\n  'BALANCE\\n' +\n  '\\n' +\n  '-$437bn\\n' +\n  '\\n' +\n  'Exports minus imports\\n' +\n  '\\n' +\n  'TOTAL TRADE\\n' +\n  '\\n' +\n  '$7.84tn\\n' +\n  '\\n' +\n  'Imports, exports, and balance by year\\n' +\n  '\\n' +\n  'Each chart point is one year, including when All years is selected.\\n' +\n  '\\n' +\n  '2014\\n' +\n  '2015\\n' +\n  '2016\\n' +\n  '2017\\n' +\n  '2018\\n' +\n  '2019\\n' +\n  '2020\\n' +\n  '2021\\n' +\n  '2022\\n' +\n  '2023\\n' +\n  '2024\\n' +\n  '2025\\n' +\n  '-$150bn\\n' +\n  '$0\\n' +\n  '$150bn\\n' +\n  '$300bn\\n' +\n  '$450bn\\n' +\n  'importsexportsbalance\\n' +\n  'Trade by year\\n' +\n  'Download CSV\\n' +\n  '\\n' +\n  'Scroll horizontally to see all columns. Use Show exact USD to see full dollar amounts.\\n' +\n  '\\n' +\n  'Year\\tImports\\tExports\\tBalance\\tTotal trade value\\n' +\n  '2014\\t$349bn\\t$313bn\\t-$36.5bn\\t$662bn\\n' +\n  '2015\\t$296bn\\t$281bn\\t-$15.4bn\\t$577bn\\n' +\n  '2016\\t$278bn\\t$267bn\\t-$11.0bn\\t$544bn\\n' +\n  '2017\\t$299bn\\t$283bn\\t-$16.3bn\\t$582bn\\n' +\n  '2018\\t$319bn\\t$300bn\\t-$18.8bn\\t$618bn\\n' +\n  '2019\\t$319bn\\t$293bn\\t-$25.8bn\\t$611bn\\n' +\n  '2020\\t$270bn\\t$256bn\\t-$13.8bn\\t$526bn\\n' +\n  '2021\\t$357bn\\t$310bn\\t-$47.7bn\\t$667bn\\n' +\n  '2022\\t$437bn\\t$359bn\\t-$78.3bn\\t$797bn\\n' +\n  '2023\\t$418bn\\t$354bn\\t-$63.6bn\\t$772bn\\n' +\n  '2024\\t$412bn\\t$351bn\\t-$61.2bn\\t$762bn\\n' +\n  '2025\\t$382bn\\t$334bn\\t-$48.3bn\\t$716bn\\n' +\n  'HS sections, All years (2014-2025)\\n' +\n  'Download CSV\\n' +\n  '\\n' +\n  'Select a chart bar or a product-group button to see its chapters below. View selected chapters ↓\\n' +\n  '\\n' +\n  'I\\n' +\n  'II\\n' +\n  'III\\n' +\n  'IV\\n' +\n  'V\\n' +\n  'VI\\n' +\n  'VII\\n' +\n  'VIII\\n' +\n  'IX\\n' +\n  'X\\n' +\n  'XI\\n' +\n  'XII\\n' +\n  'XIII\\n' +\n  'XIV\\n' +\n  'XV\\n' +\n  'XVI\\n' +\n  'XVII\\n' +\n  'XVIII\\n' +\n  'XIX\\n' +\n  'XX\\n' +\n  'SPECIAL\\n' +\n  '$0\\n' +\n  '$300bn\\n' +\n  '$600bn\\n' +\n  '$900bn\\n' +\n  '$1.20tn\\n' +\n  'importsexports\\n' +\n  '\\n' +\n  'Scroll horizontally to see all columns. Use Show exact USD to see full dollar amounts.\\n' +\n  '\\n' +\n  'Group\\tImports\\tExports\\tTotal trade value\\n' +\n  'I: Animals and animal products\\t$101bn\\t$43.4bn\\t$144bn\\n' +\n  'II: Vegetable products\\t$80.2bn\\t$117bn\\t$197bn\\n' +\n  'III: Fats, oils and waxes\\t$37.6bn\\t$8.79bn\\t$46.4bn\\n' +\n  'IV: Food, beverages and tobacco\\t$175bn\\t$179bn\\t$354bn\\n' +\n  'V: Mineral products\\t$1.18tn\\t$338bn\\t$1.52tn\\n' +\n  'VI: Chemicals\\t$245bn\\t$315bn\\t$561bn\\n' +\n  'VII: Plastics and rubber\\t$180bn\\t$219bn\\t$399bn\\n' +\n  'VIII: Leather, hides and travel goods\\t$2.07bn\\t$8.76bn\\t$10.8bn\\n' +\n  'IX: Wood, cork and basketware\\t$134bn\\t$27.9bn\\t$162bn\\n' +\n  'X: Pulp, paper and paperboard\\t$106bn\\t$90.7bn\\t$197bn\\n' +\n  'XI: Textiles\\t$20.4bn\\t$54.4bn\\t$74.8bn\\n' +\n  'XII: Footwear, headwear and accessories\\t$1.13bn\\t$7.79bn\\t$8.92bn\\n' +\n  'XIII: Stone, ceramics and glass\\t$18.8bn\\t$41.6bn\\t$60.4bn\\n' +\n  'XIV: Precious metals, stones and jewelry\\t$93.6bn\\t$74.0bn\\t$168bn\\n' +\n  'XV: Base metals\\t$326bn\\t$236bn\\t$562bn\\n' +\n  'XVI: Machinery and electrical equipment\\t$390bn\\t$870bn\\t$1.26tn\\n' +\n  'XVII: Transport equipment\\t$696bn\\t$736bn\\t$1.43tn\\n' +\n  'XVIII: Instruments, clocks and music\\t$45.9bn\\t$116bn\\t$162bn\\n' +\n  'XIX: Arms and ammunition\\t$2.22bn\\t$3.82bn\\t$6.03bn\\n' +\n  'XX: Other manufactured articles\\t$72.7bn\\t$103bn\\t$175bn\\n' +\n  'XXI: Art and antiques\\t$1.30bn\\t$1.75bn\\t$3.05bn\\n' +\n  'SPECIAL: Special classification\\t$222bn\\t$108bn\\t$330bn\\n' +\n  'Chapters in group I, All years (2014-2025)\\n' +\n  'Download CSV\\n' +\n  '\\n' +\n  'Sorted by total trade value, highest first. Rows without an observed total sort after, by chapter.\\n' +\n  '\\n' +\n  'Scroll horizontally to see all columns. Use Show exact USD to see full dollar amounts.\\n' +\n  '\\n' +\n  'Chapter\\tDescription\\tImports\\tExports\\tTotal trade value\\n' +\n  '02\\tMEAT AND EDIBLE MEAT OFFAL\\t$37.7bn\\t$18.4bn\\t$56.1bn\\n' +\n  '03\\tFISH, CRUSTACEANS & AQUATIC INVERTEBRATES\\t$37.0bn\\t$12.7bn\\t$49.7bn\\n' +\n  '01\\tLIVE ANIMALS\\t$21.6bn\\t$5.29bn\\t$26.9bn\\n' +\n  '04\\tDAIRY PRODS; BIRDS EGGS; HONEY; ED ANIMAL PR NESOI\\t$2.71bn\\t$5.79bn\\t$8.50bn\\n' +\n  '05\\tPRODUCTS OF ANIMAL ORIGIN, NESOI\\t$1.75bn\\t$1.22bn\\t$2.97bn'\n",
+      "ms": 619
+    },
+    {
+      "name": "home rank and money align centrally; partner names align left and mobile table scrolls",
+      "status": "FAIL",
+      "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'center'\n- 'left'",
+      "ms": 612
+    },
+    {
+      "name": "all-years Hub partner section and methodology screenshots show period context",
+      "status": "PASS",
+      "ms": 4529
+    }
+  ],
+  "errors": []
+}

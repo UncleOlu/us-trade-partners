@@ -25,7 +25,7 @@ const snapshot = currentSnapshotId();
 const buildEvidence={target:live?'production':'local',expected_local_index_sha256:createHash('sha256').update(fs.readFileSync(path.join(REPO_ROOT,'dist/index.html'))).digest('hex'),index_modified:fs.statSync(path.join(REPO_ROOT,'dist/index.html')).mtime.toISOString(),snapshot};
 const read = file => JSON.parse(fs.readFileSync(path.join(REPO_ROOT,'data',snapshot,file)));
 const latest = read('meta.json').configured_coverage.end_year;
-const reportDir = path.join(REPO_ROOT,live?'reports/tests/robustness-live':'reports/tests/robustness-after');
+const reportDir = path.join(REPO_ROOT,process.env.ROBUST_REPORT_DIR ?? (live?'reports/tests/robustness-live':'reports/tests/robustness-after'));
 fs.mkdirSync(reportDir,{recursive:true});
 const allPageErrors = [];
 async function withPage(fn, {viewport={width:1280,height:900}, expectedError=false}={}) {

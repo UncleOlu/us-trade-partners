@@ -1,4 +1,6 @@
 import { defineConfig, type Plugin, type Connect } from 'vite';
+import { aggregateSummary } from './src/lib/aggregate';
+import type { Meta, Summary } from './src/types/generated';
 import react from '@vitejs/plugin-react';
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
@@ -48,11 +50,24 @@ async function copyDir(src: string, dest: string): Promise<number> {
   return count;
 }
 
+// Deterministic UI-only view. Canonical snapshot files and release assets stay unchanged.
+async function buildAllYearsSummary(): Promise<string> {
+  const dir = path.join(rootDir, 'data', snapshotId);
+  const meta: Meta = JSON.parse(await fsp.readFile(path.join(dir, 'meta.json'), 'utf8'));
+  const summaries: Summary[] = await Promise.all(meta.configured_coverage.years.map(async (year) => JSON.parse(await fsp.readFile(path.join(dir, 'summary', `${year}.json`), 'utf8'))));
+  const view = aggregateSummary(summaries, meta.configured_coverage.years);
+  const stable = (value: unknown): unknown => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
+    ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, item]) => [key, stable(item)])) : value;
+  return JSON.stringify(stable(view)) + '\n';
+}
+
 // Serves data/<snapshot_id>/ under the same base path used in production,
 // and (on build) copies only the current snapshot into dist/data/<snapshot_id>/.
 function snapshotDataPlugin(): Plugin {
   const dataUrlPrefix = `${basePath}data/${snapshotId}/`;
   const snapshotDir = path.join(rootDir, 'data', snapshotId);
+  const allUrl = `${basePath}derived/${snapshotId}/summary-all.json`;
+  let derived: Promise<string> | undefined;
 
   return {
     name: 'snapshot-data',
@@ -60,6 +75,11 @@ function snapshotDataPlugin(): Plugin {
       const middleware: Connect.NextHandleFunction = (req, res, next) => {
         if (!req.url) return next();
         const urlPath = req.url.split('?')[0] ?? '';
+        if (urlPath === allUrl) {
+          derived ??= buildAllYearsSummary().catch((error) => { derived = undefined; throw error; });
+          derived.then((body) => { res.setHeader('Content-Type', 'application/json; charset=utf-8'); res.end(body); }, () => { res.statusCode = 500; res.end('Could not build the all-years view.'); });
+          return;
+        }
         if (!urlPath.startsWith(dataUrlPrefix)) return next();
         const rel = decodeURIComponent(urlPath.slice(dataUrlPrefix.length));
         if (rel.includes('..')) {
@@ -89,6 +109,9 @@ function snapshotDataPlugin(): Plugin {
       }
       const outDir = path.join(rootDir, 'dist', 'data', snapshotId);
       const count = await copyDir(snapshotDir, outDir);
+      const derivedDir = path.join(rootDir, 'dist', 'derived', snapshotId);
+      await fsp.mkdir(derivedDir, { recursive: true });
+      await fsp.writeFile(path.join(derivedDir, 'summary-all.json'), await buildAllYearsSummary());
       // eslint-disable-next-line no-console
       console.log(`[snapshot-data] copied ${count} files from data/${snapshotId} to dist/data/${snapshotId}`);
       // Per-route index.html generation and the 404.html SPA fallback copy

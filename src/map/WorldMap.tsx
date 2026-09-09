@@ -22,6 +22,7 @@ interface JoinedFeature {
 
 export function WorldMap({
   year,
+  periodLabel,
   summaryPartners,
   partners,
   selectedCode,
@@ -29,6 +30,7 @@ export function WorldMap({
   basePath,
   diagnostics,
 }: WorldMapProps): JSX.Element {
+  const period = periodLabel ?? (year === 'all' ? 'All years' : String(year));
   const [attempt, setAttempt] = useState(0);
   const atlas = useAtlas(basePath, attempt);
   const descriptionId = useId();
@@ -157,6 +159,7 @@ export function WorldMap({
 
   return (
     <div className="world-map" ref={containerRef}>
+      {year === 'all' && <p className="world-map-instructions">Cumulative balance across the covered years; not an annual average. Color bands stay fixed.</p>}
       <p className="world-map-instructions" id={descriptionId}>
         Select a country to open its trade details. Keyboard: arrow keys move by country name;
         Home and End jump to the first and last; Enter or Space opens details. Tab leaves the map.
@@ -168,7 +171,7 @@ export function WorldMap({
         height={height}
         role="group"
         aria-describedby={descriptionId}
-        aria-label={`World map of US goods trade balance for ${year}`}
+        aria-label={`World map of US goods trade balance for ${period}`}
       >
         <defs>
           <pattern
@@ -203,7 +206,7 @@ export function WorldMap({
               return <path key={key} {...commonProps} className="world-map-feature" aria-hidden="true" />;
             }
 
-            const label = ariaLabelFor(partner.name, summaryPartner);
+            const label = `${ariaLabelFor(partner.name, summaryPartner)} Period: ${period}.`;
             const code = partner.code;
 
             return (
@@ -247,7 +250,7 @@ export function WorldMap({
         </g>
       </svg>
 
-      <div className="world-map-readout" aria-label="Country trade readout">
+      <div className="world-map-readout" aria-label={`Country trade readout for ${period}`}>
         {activeReadout?.partner && activeReadout.summaryPartner ? (
           <>
             <strong>{activeReadout.partner.name}</strong>

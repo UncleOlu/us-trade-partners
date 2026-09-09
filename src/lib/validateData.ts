@@ -59,6 +59,13 @@ export function validateData(value: unknown, file: string): void {
   } else if (file === 'hs_sections.json') {
     for (const item of list(root.groups)) { const row = object(item); text(row.id); text(row.name); list(row.chapters).forEach(text); }
     if (list(root.groups).length !== 22) throw new Error('Invalid section count');
+  } else if (file === 'summary-all.json') {
+    if (root.year !== 'all' || root.view_version !== '1') throw new Error('Invalid all-years view');
+    const period = list(root.years);
+    if (!period.length || period.some((year, i) => !Number.isSafeInteger(year) || (i > 0 && Number(year) <= Number(period[i - 1])))) throw new Error('Invalid all-years coverage');
+    money(root.world);
+    if (!list(root.partners).length) throw new Error('No partners in period view');
+    for (const item of list(root.partners)) { partner(item); money(item); }
   } else if (file.startsWith('summary/')) {
     integer(root.year);
     if (`summary/${root.year}.json` !== file) throw new Error('Wrong summary year');

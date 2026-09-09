@@ -26,8 +26,10 @@ export interface WorldMapDiagnostics {
 }
 
 export interface WorldMapProps {
-  year: number;
-  /** summary.partners for the given year: approved partners only, with that year's flows. */
+  year: number | 'all';
+  /** Human-readable period from the caller, including coverage for all-years totals. */
+  periodLabel?: string;
+  /** Approved partner flows for the selected year or cumulative covered period. */
   summaryPartners: MapSummaryPartner[];
   /** partners.json partners: every code ever observed, approved and excluded, carries map_feature_id. */
   partners: MapPartner[];

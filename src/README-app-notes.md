@@ -79,3 +79,29 @@ reading. Reload retries with a fresh session. No fallback snapshot is allowed.
 FlowValue status/value/reason rules, including safe integers. These guards cover
 app inputs. The source JSON schemas and pipeline validation remain the full
 contract. A route boundary gives a reload action for render or lazy-load failure.
+
+## All-years view
+
+`year=all` selects the sum of every year in `meta.configured_coverage.years`.
+The latest single year remains the default. Home, partner, section and Hub
+selectors share this URL state. Trend charts and their yearly CSV remain annual.
+Selected-period CSV exports add `period`, `start_year` and `end_year` columns.
+
+`src/lib/aggregate.ts` contains the shared pure calculations. Required missing
+records or absent flows produce absent period values. Explicit not-applicable
+years do not contribute a number; all-not-applicable flows remain not applicable.
+Safe-integer checks reject overflow. Balance and total trade use complete summed
+flows. World and section totals use their annual independent world/universe
+fields, never visible partner rows. EU sums retain the historical annual rules.
+
+The all-years home request reads `derived/<snapshot_id>/summary-all.json`.
+Vite creates this compact, sorted JSON view from the existing annual summaries
+for both development and production. It has `year: "all"`, `years`, and
+`view_version: "1"`; it is not a canonical annual Summary file. Runtime checks
+verify its snapshot, view shape and configured coverage. No canonical data,
+raw archive, release asset or pipeline output changes. A clean checkout restored
+from the committed release pin can reproduce the view with `npm run build`.
+
+All-year sums are nominal USD, not annual averages or inflation-adjusted values.
+Missing all-year ranking metrics show Not ranked and remain accessible below
+complete rows. Numeric alignment changes apply only to the home ranking table.

@@ -1,0 +1,10 @@
+[PASS] summary world and every partner match independent annual sums (3ms)
+[PASS] Canada China EU Norfolk totals, every group and chapter match independent sums (21ms)
+[PASS] section XVI universe and every partner match independent annual sums (15ms)
+[PASS] strict missing year and absent flow never produce partial totals (0ms)
+[PASS] structural NA and confirmed zero preserve distinct status semantics (0ms)
+[PASS] missing partner group and chapter records do not become partial aggregates (12ms)
+[PASS] unsafe source sums and derived sums fail instead of rounding (0ms)
+[PASS] duplicate years mixed snapshots and invalid coverage reject aggregation (4ms)
+
+collected=8 passed=8 failed=0 not_run=0

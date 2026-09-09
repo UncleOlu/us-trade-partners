@@ -14,6 +14,16 @@ US goods trade with every trading partner, by year and by Harmonized System (HS)
 - Full-year values are the December year-to-date reading (time=YYYY-12). Year-to-date values are never summed across months.
 - Census basis versus balance of payments (BOP) basis: the BOP figures published by the Bureau of Economic Analysis adjust Census-basis goods for coverage, valuation, and timing and add services. Figures here are Census basis and do not match BOP totals.
 
+## All years
+
+All years adds the annual values from {{configured_coverage.start_year}} through {{configured_coverage.end_year}}. It is a cumulative sum of nominal dollars, not an annual average or an inflation-adjusted amount. Trend charts still show each year separately.
+
+A missing required year makes its cumulative flow absent. Categories marked not applicable for a year contribute no value; if every year is not applicable, the cumulative value stays not applicable. Balance and total trade require complete cumulative imports and exports. Missing ranking values sort last and do not receive a computed rank in this view.
+
+World totals add the separately fetched annual world totals, not the partner rows. The EU row adds its annual historical-membership totals, so its membership changes within the combined period. It remains separate from world and section totals. The map keeps the same dollar bands, so more cumulative balances may enter its darkest bands.
+
+The app calculates this view from the pinned annual snapshot. It does not replace the source files or change the snapshot's pipeline commit.
+
 ## Categories
 
 Level 1 is the 21 HS sections (I to XXI) plus one group, Special classification, for chapters 98 and 99. Level 2 is the HS 2-digit chapter. Chapter 77 is reserved in the HS and never appears. Chapter 99 (special import provisions) appears in imports only. The chapter set for each flow and year is derived from the data, not hard-coded. Section membership follows the World Customs Organization HS 2022 section list ({{hs_sections_version}}).
@@ -58,7 +68,7 @@ The Census aggregate and this calculation are marked not comparable because comp
 
 Every imports and exports value carries a status:
 
-- observed: a value returned by the Census API.
+- observed: a value returned by the Census API, or a total computed from complete usable inputs.
 - confirmed zero: Census returned zero, or no row was returned for that chapter and the present chapters sum exactly to the separately fetched partner total. The value reason states the evidence.
 - absent: no row was returned and no reconciliation proves it is zero. Absent values are never treated as zero, and totals that depend on them are also absent.
 - not applicable: the category does not exist for that flow (for example chapter 99 in exports).

@@ -14,7 +14,8 @@ Props (`WorldMapProps` in `types.ts`):
 
 | Prop | Type | Notes |
 |---|---|---|
-| `year` | `number` | Used only for the map's `aria-label` and to key the balance data already filtered into `summaryPartners`. Does not trigger an atlas refetch. |
+| `year` | `number` or `"all"` | Identifies an annual view or cumulative totals across the covered years. Does not trigger an atlas refetch. |
+| `periodLabel` | `string` (optional) | Human-readable period, such as `All years (2013-2025)`. Used in map and country labels and the readout. |
 | `summaryPartners` | `Summary['partners']` | `summary/<year>.json` partners for the given year: approved partners only, with that year's imports, exports, balance, total_trade_value. |
 | `partners` | `Partners['partners']` | `partners.json` partners: every code ever observed, approved and excluded, carries `map_feature_id`. Used to look up each partner's atlas feature id and, for excluded and unmapped partners, to build the diagnostics. |
 | `selectedCode` | `string \| null` | The partner code to outline as selected. |
@@ -35,6 +36,8 @@ Only partners with `resolution: "approved"` are considered for the join and for 
 (the world-total row, country-groupings such as OPEC and the Census EU aggregate row) never have a `map_feature_id`
 and never render on the map, so including them in the diagnostics would only add 13 meaningless rows (`partners.json`
 has 249 total partners, 236 approved, 13 excluded, in the snapshot used for local testing).
+
+All-years mode receives cumulative values from the app. It uses the same fixed dollar bands as annual views and states that the figures are cumulative, not annual averages. Large cumulative balances can occupy the darkest bands; no automatic rescaling occurs.
 
 ## Band thresholds (`bands.ts`)
 

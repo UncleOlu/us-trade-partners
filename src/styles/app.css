@@ -49,7 +49,7 @@ main { padding-top: 32px; }
 .intro-text { color: var(--muted); font-size: 1.08rem; max-width: 760px; }
 .scope-label { color: var(--muted); font-size: .76rem; margin: 16px 0 0; }
 .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 24px 0; min-width: 0; }
-.explore-controls { display: grid; grid-template-columns: 110px minmax(0, 1fr) 220px; gap: 18px 20px; border-top: 3px solid var(--accent); }
+.explore-controls { display: grid; grid-template-columns: 230px minmax(0, 1fr) 220px; gap: 18px 20px; border-top: 3px solid var(--accent); }
 .field { min-width: 0; }
 .field label { display: block; font-size: .8rem; font-weight: 650; margin-bottom: 7px; }
 .year-range { grid-column: 1 / 3; display: flex; align-items: center; gap: 12px; font-size: .78rem; color: var(--muted); }
@@ -75,6 +75,8 @@ main { padding-top: 32px; }
 .results-toolbar, .controls-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 18px 0; }
 .controls-row select { width: auto; }
 .controls-row label { font-size: .82rem; font-weight: 600; }
+.controls-row .control-field { width: 230px; max-width: 100%; }
+.controls-row .control-field select { width: 100%; }
 .results-toolbar p { font-size: .85rem; color: var(--muted); margin: 0; }
 .exact-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; min-height: 44px; }
 .results-toolbar .exact-toggle { margin-right: auto; }
@@ -108,7 +110,7 @@ tr.selected-row > * { background: #e7f3f4 !important; }
 .jump-links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 12px 0; }
 .jump-links a { font-size: .83rem; display: inline-flex; align-items: center; min-height: 44px; }
 .hub-controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.hub-controls .field { width: 170px; }
+.hub-controls .field { width: 230px; max-width: 100%; }
 .partner-directory { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; padding: 0; list-style: none; margin: 8px 0 0; }
 .partner-directory li { border-top: 1px solid #e7edf1; padding: 7px 0; font-size: .78rem; }
 .partner-directory li > a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; text-decoration: none; font-weight: 550; }
@@ -137,7 +139,7 @@ details p { margin-top: 8px; }
 .snapshot-label { display: inline-block; margin-left: 16px; font-size: .68rem; }
 @media (max-width: 900px) {
   .app-shell { padding: 0 24px 32px; }
-  .explore-controls { grid-template-columns: 110px minmax(0, 1fr); }
+  .explore-controls { grid-template-columns: 230px minmax(0, 1fr); }
   .rank-field { grid-column: 2; }
   .year-range { grid-column: 1 / -1; }
   .partner-directory, .section-directory { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -172,3 +174,10 @@ details p { margin-top: 8px; }
   .methodology-page { font-size: .9rem; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+
+/* Center numeric home ranking columns only. Keep partner names left aligned. */
+.home-ranking-table thead th:not(:nth-child(2)),
+.home-ranking-table tbody td { text-align: center; }
+.home-ranking-table tbody th { text-align: left; }
+.slider-note { grid-column: 1 / -1; margin: 0; }
+.period-note { padding: 12px 16px; background: #eaf3f5; border-radius: 7px; }

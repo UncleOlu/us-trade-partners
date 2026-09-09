@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import { fetchSection } from '../lib/dataClient';
+import { fetchSection, fetchMeta } from '../lib/dataClient';
 import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
 import { DataError } from '../components/DataError';
@@ -18,6 +18,8 @@ import { MoneyCell } from '../components/MoneyCell';
 import { TableScroll } from '../components/TableScroll';
 import { isUsable } from '../lib/status';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
+import { aggregateSection, periodLabel, periodCsv } from '../lib/aggregate';
+import { PeriodNote } from '../components/PeriodNote';
 import { toCsv, downloadCsv } from '../lib/csv';
 import { contextUrl, useUrlState, RANK_FIELDS, RANK_LABELS, type RankField } from '../lib/urlState';
 import { SECTION_LABELS } from '../lib/sectionLabels';
@@ -43,6 +45,7 @@ function SectionTrend({ section }: { section: Section }): JSX.Element {
   return (
     <section aria-labelledby="section-trend-heading">
       <h2 id="section-trend-heading">Imports and exports over time</h2>
+      <p className="chart-note">Each chart point is one year, including when All years is selected.</p>
       <p>
         Totals cover all individual partners. The EU aggregate is excluded to avoid counting its members twice.
       </p>
@@ -75,15 +78,16 @@ function SectionTrend({ section }: { section: Section }): JSX.Element {
 export function SectionPage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const [showExact, setShowExact] = useState(false);
+  const meta = useAsyncData(fetchMeta, []);
 
   const state = useAsyncData(() => {
     if (!id) return Promise.reject(new Error('missing section id'));
     return fetchSection(id);
   }, [id]);
 
-  const years = state.status === 'ready' ? state.data.years?.map((y) => y.year) : undefined;
+  const years = meta.status === 'ready' ? meta.data.configured_coverage.years : undefined;
   const { year, rank: rankField, params, notice, update } = useUrlState(years);
-  const yearEntry = state.status === 'ready' ? state.data.years.find((y) => y.year === year) : undefined;
+  const yearEntry = useMemo(() => state.status === 'ready' && years ? year === 'all' ? aggregateSection(state.data, years) : state.data.years.find((y) => y.year === year) : undefined, [state, years, year]);
 
   const ranked = useMemo(() => {
     if (!yearEntry) return [];
@@ -92,15 +96,18 @@ export function SectionPage(): JSX.Element {
     return list;
   }, [yearEntry, rankField]);
 
-  if (state.status === 'loading') return <Loading label={`Loading section ${id}`} />;
+  if (meta.status === 'error') return <DataError error={meta.error} />;
   if (state.status === 'error') return <DataError error={state.error} />;
+  if (state.status === 'loading' || meta.status === 'loading' || !years || !year) return <Loading label={`Loading section ${id}`} />;
 
   const section = state.data;
+  const label = periodLabel(year, years);
+  const csvPeriod = periodCsv(year, years);
 
   const download = () => {
     if (!yearEntry) return;
     const rows = ranked.map((p) => [
-      p.code,
+      ...csvPeriod.cells, p.code,
       p.name,
       p.kind,
       p.imports.status,
@@ -114,7 +121,7 @@ export function SectionPage(): JSX.Element {
     ]);
     const csv = toCsv(
       [
-        'code',
+        ...csvPeriod.headers, 'code',
         'name',
         'kind',
         'imports_status',
@@ -139,14 +146,17 @@ export function SectionPage(): JSX.Element {
       </header>
       <UrlNotice message={notice} />
       <div className="controls-row">
+        <div className="field control-field">
         <label htmlFor="section-year-select">Year</label>
         <select id="section-year-select" value={year} onChange={(e) => update({ year: e.target.value })}>
-          {years?.map((y) => (
+          <option value="all">{periodLabel('all', years)}</option>{years?.map((y) => (
             <option key={y} value={y}>
               {y}
             </option>
           ))}
         </select>
+        </div>
+        <div className="field control-field">
         <label htmlFor="section-rank-field">Rank by</label>
         <select id="section-rank-field" value={rankField} onChange={(e) => update({ rank: e.target.value })}>
           {RANK_FIELDS.map((f) => (
@@ -155,22 +165,24 @@ export function SectionPage(): JSX.Element {
             </option>
           ))}
         </select>
+        </div>
       </div>
 
+      {year === 'all' && <PeriodNote />}
       {yearEntry && <section aria-label="Reconciliation universe totals" className="world-total-card">
-        <div className="section-heading-row"><h2>All-partner totals <span className="heading-year">{year}</span></h2><p>EU aggregate excluded to avoid double counting.</p></div>
+        <div className="section-heading-row"><h2>All-partner totals <span className="heading-year">{label}</span></h2><p>EU aggregate excluded to avoid double counting.</p></div>
         <TradeTotals values={yearEntry.universe} />
       </section>}
       <div className="panel"><SectionTrend section={section} /></div>
       <section className="panel" aria-label="Section partner ranking">
       <div className="section-heading-row">
-        <h2>Partners ranked by {RANK_LABELS[rankField].toLowerCase()}, {year}</h2>
+        <h2>Partners ranked by {RANK_LABELS[rankField].toLowerCase()}, {label}</h2>
         <button type="button" onClick={download}>
           Download CSV
         </button>
       </div>
       <label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label>
-      <TableScroll label={`Partners in section ${section.section.id} for ${year}`}>
+      <TableScroll label={`Partners in section ${section.section.id} for ${label}`}>
         <table>
           <thead>
             <tr>
@@ -186,7 +198,7 @@ export function SectionPage(): JSX.Element {
           <tbody>
             {ranked.map((p, i) => (
               <tr key={p.code}>
-                <td>{i + 1}</td>
+                <td>{year === 'all' && p[rankField].value === null ? 'Not ranked' : i + 1}</td>
                 <td>
                   <Link to={contextUrl(`/partner/${p.code}`, params, { section: section.section.id })}>{p.name}</Link> ({p.code})
                   {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}

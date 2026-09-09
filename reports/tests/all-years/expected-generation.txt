@@ -1,0 +1,1 @@
+{"sourceFiles":19,"years":13,"partners":236,"world":{"imports":{"status":"observed","value":34582057997635},"exports":{"status":"observed","value":22539343650542},"balance":{"status":"observed","value":-12042714347093},"total_trade_value":{"status":"observed","value":57121401648177}}}

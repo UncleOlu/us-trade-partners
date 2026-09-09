@@ -1,4 +1,5 @@
-import { dataUrl, SNAPSHOT_ID } from './config';
+import type { AllSummary } from './aggregate';
+import { dataUrl, SNAPSHOT_ID, BASE_PATH } from './config';
 import { validateData } from './validateData';
 import type {
   Meta,
@@ -38,7 +39,7 @@ function fetchJson<T>(relativePath: string): Promise<T> {
 }
 
 async function loadJson<T>(relativePath: string): Promise<T> {
-  const url = dataUrl(relativePath);
+  const url = relativePath === 'summary-all.json' ? `${BASE_PATH}derived/${SNAPSHOT_ID}/summary-all.json` : dataUrl(relativePath);
   const controller = new AbortController();
   const timer = window.setTimeout(() => controller.abort(), 30_000);
   let received = false;
@@ -80,4 +81,8 @@ export function fetchPartner(code: string): Promise<PartnerFile> {
 
 export function fetchSection(id: string): Promise<Section> {
   return fetchJson<Section>(`section/${id}.json`);
+}
+
+export function fetchAllSummary(): Promise<AllSummary> {
+  return fetchJson<AllSummary>('summary-all.json');
 }

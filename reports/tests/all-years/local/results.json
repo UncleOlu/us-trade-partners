@@ -1,0 +1,106 @@
+{
+  "sourceIndexSHA256": "955d626f3a6c7e87d0599540974032d4a37f22cff1cf6743c085a5f4efd407b2",
+  "target": "local",
+  "results": [
+    {
+      "name": "all-years home uses derived summary, fixed world totals and complete CSV scope",
+      "status": "PASS",
+      "ms": 792
+    },
+    {
+      "name": "all period survives Hub partner section refresh navigation and browser Back",
+      "status": "PASS",
+      "ms": 1908
+    },
+    {
+      "name": "all-years map shows summed country values and preserves period on selection",
+      "status": "PASS",
+      "ms": 619
+    },
+    {
+      "name": "all-years partner totals and group chapter CSVs match independent sums; annual trend retained",
+      "status": "PASS",
+      "ms": 4766
+    },
+    {
+      "name": "all-years section retains annual trend and one table with exact period CSV",
+      "status": "PASS",
+      "ms": 1196
+    },
+    {
+      "name": "missing whole annual record retains configured range and marks aggregate incomplete",
+      "status": "PASS",
+      "ms": 1192
+    },
+    {
+      "name": "home rank and money align centrally; partner names align left and mobile table scrolls",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 1280,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        },
+        {
+          "width": 390,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        },
+        {
+          "width": 320,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        }
+      ],
+      "ms": 1960
+    },
+    {
+      "name": "all-years Hub partner section and methodology screenshots show period context",
+      "status": "PASS",
+      "ms": 4492
+    }
+  ],
+  "errors": []
+}

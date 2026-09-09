@@ -1,0 +1,37 @@
+{
+  "example": {
+    "balance_status": "observed",
+    "balance_usd": "-657502685407",
+    "code": "2010",
+    "end_year": "2025",
+    "exports_status": "observed",
+    "exports_usd": "1162682710205",
+    "imports_status": "observed",
+    "imports_usd": "1820185395612",
+    "kind": "country",
+    "name": "MEXICO",
+    "period": "all",
+    "start_year": "2013",
+    "total_trade_value_status": "observed",
+    "total_trade_value_usd": "2982868105817"
+  },
+  "filename": "section-XVI-all.csv",
+  "headers": [
+    "period",
+    "start_year",
+    "end_year",
+    "code",
+    "name",
+    "kind",
+    "imports_status",
+    "imports_usd",
+    "exports_status",
+    "exports_usd",
+    "balance_status",
+    "balance_usd",
+    "total_trade_value_status",
+    "total_trade_value_usd"
+  ],
+  "rows": 236,
+  "sha256": "ddf4f0665ab2d09572291d7968ba73f5193446b9b6d5c02e5cec30f3c9055a9d"
+}

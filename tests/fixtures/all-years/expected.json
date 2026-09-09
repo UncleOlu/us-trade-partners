@@ -1,0 +1,360 @@
+{
+  "partners": {
+    "1220": {
+      "sectionXVI": {
+        "balance": {
+          "status": "observed",
+          "value": 524660295332
+        },
+        "chapters": {
+          "84": {
+            "balance": {
+              "status": "observed",
+              "value": 291060911278
+            },
+            "exports": {
+              "status": "observed",
+              "value": 600757559993
+            },
+            "imports": {
+              "status": "observed",
+              "value": 309696648715
+            },
+            "total_trade_value": {
+              "status": "observed",
+              "value": 910454208708
+            }
+          },
+          "85": {
+            "balance": {
+              "status": "observed",
+              "value": 233599384054
+            },
+            "exports": {
+              "status": "observed",
+              "value": 341963327856
+            },
+            "imports": {
+              "status": "observed",
+              "value": 108363943802
+            },
+            "total_trade_value": {
+              "status": "observed",
+              "value": 450327271658
+            }
+          }
+        },
+        "exports": {
+          "status": "observed",
+          "value": 942720887849
+        },
+        "imports": {
+          "status": "observed",
+          "value": 418060592517
+        },
+        "total_trade_value": {
+          "status": "observed",
+          "value": 1360781480366
+        }
+      },
+      "totals": {
+        "balance": {
+          "status": "observed",
+          "value": -468440310950
+        },
+        "exports": {
+          "status": "observed",
+          "value": 4000020927865
+        },
+        "imports": {
+          "status": "observed",
+          "value": 4468461238815
+        },
+        "total_trade_value": {
+          "status": "observed",
+          "value": 8468482166680
+        }
+      }
+    },
+    "5700": {
+      "sectionXVI": {
+        "balance": {
+          "status": "observed",
+          "value": -2543793429362
+        },
+        "chapters": {
+          "84": {
+            "balance": {
+              "status": "observed",
+              "value": -1083325324915
+            },
+            "exports": {
+              "status": "observed",
+              "value": 170731567767
+            },
+            "imports": {
+              "status": "observed",
+              "value": 1254056892682
+            },
+            "total_trade_value": {
+              "status": "observed",
+              "value": 1424788460449
+            }
+          },
+          "85": {
+            "balance": {
+              "status": "observed",
+              "value": -1460468104447
+            },
+            "exports": {
+              "status": "observed",
+              "value": 184005789193
+            },
+            "imports": {
+              "status": "observed",
+              "value": 1644473893640
+            },
+            "total_trade_value": {
+              "status": "observed",
+              "value": 1828479682833
+            }
+          }
+        },
+        "exports": {
+          "status": "observed",
+          "value": 354737356960
+        },
+        "imports": {
+          "status": "observed",
+          "value": 2898530786322
+        },
+        "total_trade_value": {
+          "status": "observed",
+          "value": 3253268143282
+        }
+      },
+      "totals": {
+        "balance": {
+          "status": "observed",
+          "value": -4336069525994
+        },
+        "exports": {
+          "status": "observed",
+          "value": 1660515506907
+        },
+        "imports": {
+          "status": "observed",
+          "value": 5996585032901
+        },
+        "total_trade_value": {
+          "status": "observed",
+          "value": 7657100539808
+        }
+      }
+    },
+    "6022": {
+      "sectionXVI": {
+        "balance": {
+          "status": "absent",
+          "value": null
+        },
+        "chapters": {
+          "84": {
+            "balance": {
+              "status": "absent",
+              "value": null
+            },
+            "exports": {
+              "status": "absent",
+              "value": null
+            },
+            "imports": {
+              "status": "absent",
+              "value": null
+            },
+            "total_trade_value": {
+              "status": "absent",
+              "value": null
+            }
+          },
+          "85": {
+            "balance": {
+              "status": "absent",
+              "value": null
+            },
+            "exports": {
+              "status": "absent",
+              "value": null
+            },
+            "imports": {
+              "status": "absent",
+              "value": null
+            },
+            "total_trade_value": {
+              "status": "absent",
+              "value": null
+            }
+          }
+        },
+        "exports": {
+          "status": "absent",
+          "value": null
+        },
+        "imports": {
+          "status": "absent",
+          "value": null
+        },
+        "total_trade_value": {
+          "status": "absent",
+          "value": null
+        }
+      },
+      "totals": {
+        "balance": {
+          "status": "absent",
+          "value": null
+        },
+        "exports": {
+          "status": "absent",
+          "value": null
+        },
+        "imports": {
+          "status": "absent",
+          "value": null
+        },
+        "total_trade_value": {
+          "status": "absent",
+          "value": null
+        }
+      }
+    },
+    "EU": {
+      "sectionXVI": {
+        "balance": {
+          "status": "observed",
+          "value": -652874751965
+        },
+        "chapters": {
+          "84": {
+            "balance": {
+              "status": "observed",
+              "value": -567836082506
+            },
+            "exports": {
+              "status": "observed",
+              "value": 419003959608
+            },
+            "imports": {
+              "status": "observed",
+              "value": 986840042114
+            },
+            "total_trade_value": {
+              "status": "observed",
+              "value": 1405844001722
+            }
+          },
+          "85": {
+            "balance": {
+              "status": "observed",
+              "value": -85038669459
+            },
+            "exports": {
+              "status": "observed",
+              "value": 297727809372
+            },
+            "imports": {
+              "status": "observed",
+              "value": 382766478831
+            },
+            "total_trade_value": {
+              "status": "observed",
+              "value": 680494288203
+            }
+          }
+        },
+        "exports": {
+          "status": "observed",
+          "value": 716731768980
+        },
+        "imports": {
+          "status": "observed",
+          "value": 1369606520945
+        },
+        "total_trade_value": {
+          "status": "observed",
+          "value": 2086338289925
+        }
+      },
+      "totals": {
+        "balance": {
+          "status": "observed",
+          "value": -2336175413335
+        },
+        "exports": {
+          "status": "observed",
+          "value": 4031701361380
+        },
+        "imports": {
+          "status": "observed",
+          "value": 6367876774715
+        },
+        "total_trade_value": {
+          "status": "observed",
+          "value": 10399578136095
+        }
+      }
+    }
+  },
+  "sectionXVIUniverse": {
+    "balance": {
+      "status": "observed",
+      "value": -4929231487531
+    },
+    "exports": {
+      "status": "observed",
+      "value": 5241897642239
+    },
+    "imports": {
+      "status": "observed",
+      "value": 10171129129770
+    },
+    "total_trade_value": {
+      "status": "observed",
+      "value": 15413026772009
+    }
+  },
+  "snapshot": "20260909T091429Z-c638aff167ea",
+  "world": {
+    "balance": {
+      "status": "observed",
+      "value": -12042714347093
+    },
+    "exports": {
+      "status": "observed",
+      "value": 22539343650542
+    },
+    "imports": {
+      "status": "observed",
+      "value": 34582057997635
+    },
+    "total_trade_value": {
+      "status": "observed",
+      "value": 57121401648177
+    }
+  },
+  "years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ]
+}

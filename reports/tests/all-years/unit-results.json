@@ -1,0 +1,45 @@
+{
+  "comparedFlowValues": 3832,
+  "results": [
+    {
+      "name": "summary world and every partner match independent annual sums",
+      "status": "PASS",
+      "ms": 3
+    },
+    {
+      "name": "Canada China EU Norfolk totals, every group and chapter match independent sums",
+      "status": "PASS",
+      "ms": 21
+    },
+    {
+      "name": "section XVI universe and every partner match independent annual sums",
+      "status": "PASS",
+      "ms": 15
+    },
+    {
+      "name": "strict missing year and absent flow never produce partial totals",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "structural NA and confirmed zero preserve distinct status semantics",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "missing partner group and chapter records do not become partial aggregates",
+      "status": "PASS",
+      "ms": 12
+    },
+    {
+      "name": "unsafe source sums and derived sums fail instead of rounding",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "duplicate years mixed snapshots and invalid coverage reject aggregation",
+      "status": "PASS",
+      "ms": 4
+    }
+  ]
+}

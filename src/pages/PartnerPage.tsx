@@ -13,7 +13,7 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
-import { fetchPartner } from '../lib/dataClient';
+import { fetchPartner, fetchMeta } from '../lib/dataClient';
 import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
 import { DataError } from '../components/DataError';
@@ -26,7 +26,9 @@ import { SECTION_LABELS } from '../lib/sectionLabels';
 import { useUrlState } from '../lib/urlState';
 import { UrlNotice } from '../components/UrlNotice';
 import { TradeTotals } from '../components/TradeTotals';
-import type { PartnerFile, FlowValue, DerivedValue } from '../types/generated';
+import { aggregatePartnerSections, periodTotals, periodLabel, periodCsv, type PartnerView, type Period } from '../lib/aggregate';
+import { PeriodNote } from '../components/PeriodNote';
+import type { FlowValue, DerivedValue } from '../types/generated';
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
   return isUsable(flow) ? flow.value : null;
@@ -36,7 +38,7 @@ function YearsTable({
   partner,
   showExact,
 }: {
-  partner: PartnerFile;
+  partner: PartnerView;
   showExact: boolean;
 }): JSX.Element {
   const download = () => {
@@ -120,7 +122,7 @@ function YearsTable({
   );
 }
 
-function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
+function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
   const data = partner.years?.map((y) => ({
     year: y.year,
     imports: chartValue(y.imports),
@@ -133,6 +135,7 @@ function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
   return (
     <section className="panel" aria-labelledby="trend-chart-heading">
       <h2 id="trend-chart-heading">Imports, exports, and balance by year</h2>
+      <p className="chart-note">Each chart point is one year, including when All years is selected.</p>
       {isEu && (
         <p className="chart-note">
           Membership-change years are marked on the chart. Gaps in a line mean the value is absent for that
@@ -219,18 +222,20 @@ function GroupsSection({
   onSelectGroup,
   showExact,
 }: {
-  partner: PartnerFile;
-  year: number;
+  partner: PartnerView;
+  year: Period;
   selectedGroup: string | null;
   onSelectGroup: (id: string) => void;
   showExact: boolean;
 }): JSX.Element {
   const yearSections = partner.sections.find((s) => s.year === year);
+  const label = periodLabel(year, partner.periodYears);
+  const csvPeriod = periodCsv(year, partner.periodYears);
 
   const download = () => {
     if (!yearSections) return;
     const rows = yearSections.groups.map((g) => [
-      g.section_id,
+      ...csvPeriod.cells, g.section_id,
       g.imports.status,
       g.imports.status === 'observed' || g.imports.status === 'confirmed_zero' ? g.imports.value : '',
       g.exports.status,
@@ -239,7 +244,7 @@ function GroupsSection({
       g.total_trade_value.status === 'observed' ? g.total_trade_value.value : '',
     ]);
     const csv = toCsv(
-      ['section_id', 'imports_status', 'imports_usd', 'exports_status', 'exports_usd', 'total_trade_value_status', 'total_trade_value_usd'],
+      [...csvPeriod.headers, 'section_id', 'imports_status', 'imports_usd', 'exports_status', 'exports_usd', 'total_trade_value_status', 'total_trade_value_usd'],
       rows,
     );
     downloadCsv(`partner_${partner.partner.code}_groups_${year}.csv`, csv);
@@ -248,8 +253,8 @@ function GroupsSection({
   if (!yearSections) {
     return (
       <section>
-        <h2>HS sections for {year}</h2>
-        <p>No section data for {year} in this snapshot.</p>
+        <h2>HS sections for {label}</h2>
+        <p>No section data for {label} in this snapshot.</p>
       </section>
     );
   }
@@ -263,7 +268,7 @@ function GroupsSection({
   return (
     <section className="panel" aria-labelledby="groups-heading">
       <div className="section-heading-row">
-        <h2 id="groups-heading">HS sections, {year}</h2>
+        <h2 id="groups-heading">HS sections, {label}</h2>
         <button type="button" onClick={download}>
           Download CSV
         </button>
@@ -333,12 +338,14 @@ function ChapterTable({
   groupId,
   showExact,
 }: {
-  partner: PartnerFile;
-  year: number;
+  partner: PartnerView;
+  year: Period;
   groupId: string;
   showExact: boolean;
 }): JSX.Element {
   const yearSections = partner.sections.find((s) => s.year === year);
+  const label = periodLabel(year, partner.periodYears);
+  const csvPeriod = periodCsv(year, partner.periodYears);
   const group = yearSections?.groups.find((g) => g.section_id === groupId);
 
   const sorted = useMemo(() => {
@@ -356,7 +363,7 @@ function ChapterTable({
 
   const download = () => {
     const rows = sorted.map((c) => [
-      c.chapter,
+      ...csvPeriod.cells, c.chapter,
       c.description ?? '',
       c.imports.status,
       c.imports.status === 'observed' || c.imports.status === 'confirmed_zero' ? c.imports.value : '',
@@ -367,7 +374,7 @@ function ChapterTable({
     ]);
     const csv = toCsv(
       [
-        'chapter',
+        ...csvPeriod.headers, 'chapter',
         'description',
         'imports_status',
         'imports_usd',
@@ -385,7 +392,7 @@ function ChapterTable({
     return (
       <section>
         <h2>Chapters</h2>
-        <p>No chapter data for group {groupId} in {year}.</p>
+        <p>No chapter data for group {groupId} in {label}.</p>
       </section>
     );
   }
@@ -394,7 +401,7 @@ function ChapterTable({
     <section className="panel" aria-labelledby="chapters-heading">
       <div className="section-heading-row">
         <h2 id="chapters-heading">
-          Chapters in group {groupId}, {year}
+          Chapters in group {groupId}, {label}
         </h2>
         <button type="button" onClick={download}>
           Download CSV
@@ -438,22 +445,25 @@ function ChapterTable({
 export function PartnerPage(): JSX.Element {
   const { code } = useParams<{ code: string }>();
   const [showExact, setShowExact] = useState(false);
+  const meta = useAsyncData(fetchMeta, []);
 
   const state = useAsyncData(() => {
     if (!code) return Promise.reject(new Error('missing partner code'));
     return fetchPartner(code);
   }, [code]);
 
-  const years = state.status === 'ready' ? state.data.years?.map((y) => y.year) : undefined;
+  const years = meta.status === 'ready' ? meta.data.configured_coverage.years : undefined;
   const groups = state.status === 'ready' ? state.data.sections[0]?.groups.map((g) => g.section_id) : undefined;
   const { year, group: effectiveGroup, notice, update } = useUrlState(years, groups);
   useEffect(() => {
     if (state.status === 'ready') document.title = `${state.data.partner.name} | US goods trade`;
   }, [state]);
+  if (meta.status === 'error') return <DataError error={meta.error} />;
   if (state.status === 'error') return <DataError error={state.error} />;
-  if (state.status === 'loading' || !year) return <Loading label={`Loading ${code}`} />;
-  const partner = state.data;
-  const yearEntry = partner.years.find((y) => y.year === year);
+  if (state.status === 'loading' || meta.status === 'loading' || !year || !years) return <Loading label={`Loading ${code}`} />;
+  const partner: PartnerView = { ...state.data, periodYears: years, sections: year === 'all' ? [aggregatePartnerSections(state.data, years)] : state.data.sections };
+  const yearEntry = year === 'all' ? periodTotals(partner.years, years) : partner.years.find((y) => y.year === year);
+  const label = periodLabel(year, years);
 
   const { partner: info } = partner;
 
@@ -472,7 +482,7 @@ export function PartnerPage(): JSX.Element {
       <div className="controls-row">
         <label htmlFor="year-select">Year</label>
         <select id="year-select" value={year} onChange={(e) => update({ year: e.target.value })}>
-          {years?.map((y) => (
+          <option value="all">{periodLabel('all', years)}</option>{years?.map((y) => (
             <option key={y} value={y}>
               {y}
             </option>
@@ -484,7 +494,8 @@ export function PartnerPage(): JSX.Element {
         </label>
       </div>
 
-      {yearEntry && <section aria-label="Partner totals" className="world-total-card"><h2>Trade in {year}</h2><TradeTotals values={yearEntry} /></section>}
+      {year === 'all' && <PeriodNote />}
+      {yearEntry && <section aria-label="Partner totals" className="world-total-card"><h2>Trade in {label}</h2><TradeTotals values={yearEntry} /></section>}
       <TrendChart partner={partner} />
       <YearsTable partner={partner} showExact={showExact} />
       <GroupsSection

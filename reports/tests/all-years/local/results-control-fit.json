@@ -1,0 +1,130 @@
+{
+  "sourceIndexSHA256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+  "target": "local",
+  "results": [
+    {
+      "name": "all period survives Hub partner section refresh navigation and browser Back",
+      "status": "PASS",
+      "ms": 2114
+    },
+    {
+      "name": "home rank and money align centrally; partner names align left and mobile table scrolls",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 1280,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        },
+        {
+          "width": 390,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        },
+        {
+          "width": 320,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        }
+      ],
+      "ms": 1961
+    },
+    {
+      "name": "all-years period control text fits home and Hub at desktop and mobile widths",
+      "status": "PASS",
+      "detail": [
+        {
+          "name": "home",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "hub",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "home",
+          "width": 322,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "hub",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "home",
+          "width": 252,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "hub",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        }
+      ],
+      "ms": 3526
+    },
+    {
+      "name": "all-years Hub partner section and methodology screenshots show period context",
+      "status": "PASS",
+      "ms": 4444
+    }
+  ],
+  "errors": []
+}
