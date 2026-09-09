@@ -1,0 +1,6 @@
+..s............s........................................................ [ 56%]
+........................................................                 [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_config_overrides.py:41: not run: data/ now exists in this checkout; default-path branch covered elsewhere
+SKIPPED [1] tests/test_determinism.py:97: not run: DATA_A and DATA_B environment variables are unset
+126 passed, 2 skipped in 69.73s (0:01:09)

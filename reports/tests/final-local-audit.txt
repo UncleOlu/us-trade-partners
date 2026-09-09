@@ -1,0 +1,48 @@
+
+> us-trade-partners-app@0.1.0 build
+> tsc -b && vite build && node scripts/generate-routes.mjs && node scripts/check-methodology.mjs
+
+vite v5.4.21 building for production...
+transforming...
+✓ 930 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                            0.58 kB │ gzip:   0.34 kB
+dist/assets/index-CyHPlMRu.css             3.58 kB │ gzip:   1.29 kB
+dist/assets/NotFoundPage-DFSKf_EP.js       0.26 kB │ gzip:   0.21 kB
+dist/assets/HubPage-Cf2JKUvt.js            2.64 kB │ gzip:   1.01 kB
+dist/assets/MethodologyPage-ButXnI0K.js    3.89 kB │ gzip:   1.63 kB
+dist/assets/SectionPage-F3e7usCI.js        5.84 kB │ gzip:   1.98 kB
+dist/assets/PartnerPage-BcXz1ihj.js       10.19 kB │ gzip:   2.97 kB
+dist/assets/index-BQkog3VO.js            207.33 kB │ gzip:  69.43 kB
+dist/assets/LineChart-BGPdWWJq.js        383.75 kB │ gzip: 105.65 kB
+✓ built in 1.30s
+[methodology-content] copied docs/methodology-content.md to dist/methodology-content.md
+[world-atlas] copied countries-110m.json to dist/atlas/countries-110m.json
+[snapshot-data] copied 274 files from data/20260909T091429Z-c638aff167ea to dist/data/20260909T091429Z-c638aff167ea
+[generate-routes] 261 known routes (1 home + 1 hub + 1 methodology + 236 partners + 22 sections); wrote 260 index.html files plus dist/404.html
+[check-methodology] PASS: no unfilled {{ }} markers
+
+field                                | meta.json value                              | found on rendered page
+------------------------------------------------------------------------------------------------------------------------
+snapshot_id                           | 20260909T091429Z-c638aff167ea                 | yes
+fetched_at                            | 2026-09-09T09:14:29.094701+00:00              | yes
+latest_period                         | 2026-07                                       | yes
+configured_coverage.start_year        | 2013                                          | yes
+configured_coverage.end_year          | 2025                                          | yes
+verified_availability.from_year       | 2010                                          | yes
+verified_availability.to_year         | 2025                                          | yes
+documented_availability.from_year     | 2010                                          | yes
+code_commit                           | e15309d0cf6468d4b4d64d00555aa33711221b89      | yes
+
+[check-methodology] PASS: rendered methodology page matches meta.json
+[PASS] home: full width map, 25 default, all rows, search, fixed world totals, trillion exact access (749ms) detail={"total":236,"mapWidth":1068,"mapHeight":562}
+[PASS] home and section: year/rank survive refresh and one sorted section table (2217ms)
+[PASS] map: mouse and keyboard selection preserve year (1657ms)
+[PASS] methodology: filled metadata, 8220, no template markers (536ms)
+[PASS] partner: exact integer CSV with statuses and missing-data labels (650ms)
+[PASS] all known routes: real HTTP 200 and query preservation (87ms) detail={"routes":261}
+[PASS] desktop/mobile: route refresh, no overflow, numeric nowrap, container scroll, screenshots (12097ms)
+[PASS] cold-load network transfer: measured bytes and all request encodings (1168ms) detail={"home":550993,"partner":1506351}
+
+collected=8 passed=8 failed=0 not_run=0

@@ -1,0 +1,11 @@
+Starting preview server (building dist/ first only if stale)...
+Preview server ready at http://127.0.0.1:54387/us-trade-partners/ (snapshot 20260909T091429Z-c638aff167ea)
+
+[PASS] e2e partner trend chart point counts match observed years: 5700 (976ms) detail={"code":"5700","url":"http://127.0.0.1:54387/us-trade-partners/partner/5700?year=2025","expected":{"totalYears":13,"imports":13,"exports":13,"balance":13},"actual":{"imports":13,"exports":13,"balance":13}}
+[PASS] e2e partner trend chart point counts match observed years: EU (944ms) detail={"code":"EU","url":"http://127.0.0.1:54387/us-trade-partners/partner/EU?year=2025","expected":{"totalYears":13,"imports":13,"exports":13,"balance":13},"actual":{"imports":13,"exports":13,"balance":13}}
+[PASS] e2e partner trend chart point counts match observed years: 1610 (938ms) detail={"code":"1610","url":"http://127.0.0.1:54387/us-trade-partners/partner/1610?year=2025","expected":{"totalYears":13,"imports":13,"exports":13,"balance":13},"actual":{"imports":13,"exports":13,"balance":13}}
+[PASS] e2e partner trend chart point counts match observed years: 6022 (938ms) detail={"code":"6022","url":"http://127.0.0.1:54387/us-trade-partners/partner/6022?year=2025","expected":{"totalYears":13,"imports":12,"exports":10,"balance":10},"actual":{"imports":12,"exports":10,"balance":10}}
+[PASS] e2e /hub returns 200, shows global label, links back to hub (525ms) detail={"url":"http://127.0.0.1:54387/us-trade-partners/hub","status":200,"hasGlobalLabel":true,"hubLinkCount":2}
+[PASS] e2e /section/I?year=2025 returns 200, shows global label, hub link, table with partner rows, and trend chart (540ms) detail={"url":"http://127.0.0.1:54387/us-trade-partners/section/I?year=2025","status":200,"hasGlobalLabel":true,"hubLinkCount":2,"rowCount":236,"chartCount":1}
+
+collected=6 passed=6 failed=0 not_run=0

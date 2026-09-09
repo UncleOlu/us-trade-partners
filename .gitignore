@@ -27,3 +27,8 @@ reports/pipeline/validation.csv
 # Offline verification builds are not publication source.
 reports/pipeline/final_build_a/
 reports/pipeline/final_build_b/
+
+# Full local inventories and preliminary images remain local audit evidence.
+reports/pipeline/final_asset_contents.json
+reports/pipeline/final_raw_asset_contents.json
+reports/tests/local-audit/

@@ -1,0 +1,2454 @@
+{
+  "source_commit": "caa2547",
+  "routes": 261,
+  "checks": 146,
+  "passed": 73,
+  "failed": 188,
+  "consoleErrors": [],
+  "results": [
+    {
+      "route": "",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/?year=2020&rank=exports",
+          "heading": "US goods trade partners"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/?year=2020&rank=exports",
+          "heading": "US goods trade partners"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "hub",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/hub/?year=2020&rank=exports",
+          "heading": "Hub"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/hub/?year=2020&rank=exports",
+          "heading": "Hub"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "methodology",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/methodology/?year=2020&rank=exports",
+          "heading": "Methodology"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/methodology/?year=2020&rank=exports",
+          "heading": "Methodology"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/1010",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/1010/?year=2020&rank=exports",
+          "heading": "GREENLAND"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/1010/?year=2020&rank=exports",
+          "heading": "GREENLAND"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/1220",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/1220/?year=2020&rank=exports",
+          "heading": "CANADA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/1220/?year=2020&rank=exports",
+          "heading": "CANADA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/1610",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/1610/?year=2020&rank=exports",
+          "heading": "ST PIERRE AND MIQUELON"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/1610/?year=2020&rank=exports",
+          "heading": "ST PIERRE AND MIQUELON"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2010",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2010/?year=2020&rank=exports",
+          "heading": "MEXICO"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2010/?year=2020&rank=exports",
+          "heading": "MEXICO"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2050",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2050/?year=2020&rank=exports",
+          "heading": "GUATEMALA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2050/?year=2020&rank=exports",
+          "heading": "GUATEMALA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2080",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2080/?year=2020&rank=exports",
+          "heading": "BELIZE"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2080/?year=2020&rank=exports",
+          "heading": "BELIZE"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2110",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2110/?year=2020&rank=exports",
+          "heading": "EL SALVADOR"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2110/?year=2020&rank=exports",
+          "heading": "EL SALVADOR"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2150",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2150/?year=2020&rank=exports",
+          "heading": "HONDURAS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2150/?year=2020&rank=exports",
+          "heading": "HONDURAS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2190",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2190/?year=2020&rank=exports",
+          "heading": "NICARAGUA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2190/?year=2020&rank=exports",
+          "heading": "NICARAGUA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2230",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2230/?year=2020&rank=exports",
+          "heading": "COSTA RICA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2230/?year=2020&rank=exports",
+          "heading": "COSTA RICA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2250",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2250/?year=2020&rank=exports",
+          "heading": "PANAMA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2250/?year=2020&rank=exports",
+          "heading": "PANAMA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2320",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2320/?year=2020&rank=exports",
+          "heading": "BERMUDA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2320/?year=2020&rank=exports",
+          "heading": "BERMUDA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2360",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2360/?year=2020&rank=exports",
+          "heading": "BAHAMAS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2360/?year=2020&rank=exports",
+          "heading": "BAHAMAS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2390",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2390/?year=2020&rank=exports",
+          "heading": "CUBA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2390/?year=2020&rank=exports",
+          "heading": "CUBA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2410",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2410/?year=2020&rank=exports",
+          "heading": "JAMAICA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2410/?year=2020&rank=exports",
+          "heading": "JAMAICA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2430",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2430/?year=2020&rank=exports",
+          "heading": "TURKS AND CAICOS ISLANDS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2430/?year=2020&rank=exports",
+          "heading": "TURKS AND CAICOS ISLANDS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2440",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2440/?year=2020&rank=exports",
+          "heading": "CAYMAN ISLANDS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2440/?year=2020&rank=exports",
+          "heading": "CAYMAN ISLANDS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2450",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2450/?year=2020&rank=exports",
+          "heading": "HAITI"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2450/?year=2020&rank=exports",
+          "heading": "HAITI"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2470",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2470/?year=2020&rank=exports",
+          "heading": "DOMINICAN REPUBLIC"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2470/?year=2020&rank=exports",
+          "heading": "DOMINICAN REPUBLIC"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2481",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2481/?year=2020&rank=exports",
+          "heading": "ANGUILLA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2481/?year=2020&rank=exports",
+          "heading": "ANGUILLA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2482",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2482/?year=2020&rank=exports",
+          "heading": "BRITISH VIRGIN ISLANDS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2482/?year=2020&rank=exports",
+          "heading": "BRITISH VIRGIN ISLANDS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2483",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2483/?year=2020&rank=exports",
+          "heading": "ST KITTS AND NEVIS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2483/?year=2020&rank=exports",
+          "heading": "ST KITTS AND NEVIS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2484",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2484/?year=2020&rank=exports",
+          "heading": "ANTIGUA AND BARBUDA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2484/?year=2020&rank=exports",
+          "heading": "ANTIGUA AND BARBUDA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2485",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2485/?year=2020&rank=exports",
+          "heading": "MONTSERRAT"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2485/?year=2020&rank=exports",
+          "heading": "MONTSERRAT"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2486",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2486/?year=2020&rank=exports",
+          "heading": "DOMINICA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2486/?year=2020&rank=exports",
+          "heading": "DOMINICA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2487",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2487/?year=2020&rank=exports",
+          "heading": "ST LUCIA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2487/?year=2020&rank=exports",
+          "heading": "ST LUCIA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2488",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2488/?year=2020&rank=exports",
+          "heading": "ST VINCENT AND THE GRENADINES"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2488/?year=2020&rank=exports",
+          "heading": "ST VINCENT AND THE GRENADINES"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2489",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2489/?year=2020&rank=exports",
+          "heading": "GRENADA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2489/?year=2020&rank=exports",
+          "heading": "GRENADA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2720",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2720/?year=2020&rank=exports",
+          "heading": "BARBADOS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2720/?year=2020&rank=exports",
+          "heading": "BARBADOS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2740",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2740/?year=2020&rank=exports",
+          "heading": "TRINIDAD AND TOBAGO"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2740/?year=2020&rank=exports",
+          "heading": "TRINIDAD AND TOBAGO"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2774",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2774/?year=2020&rank=exports",
+          "heading": "SINT MAARTEN"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2774/?year=2020&rank=exports",
+          "heading": "SINT MAARTEN"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2777",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2777/?year=2020&rank=exports",
+          "heading": "CURACAO"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2777/?year=2020&rank=exports",
+          "heading": "CURACAO"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2779",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2779/?year=2020&rank=exports",
+          "heading": "ARUBA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2779/?year=2020&rank=exports",
+          "heading": "ARUBA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2831",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2831/?year=2020&rank=exports",
+          "heading": "GUADELOUPE"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2831/?year=2020&rank=exports",
+          "heading": "GUADELOUPE"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/2839",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2839/?year=2020&rank=exports",
+          "heading": "MARTINIQUE"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/2839/?year=2020&rank=exports",
+          "heading": "MARTINIQUE"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3010",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3010/?year=2020&rank=exports",
+          "heading": "COLOMBIA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3010/?year=2020&rank=exports",
+          "heading": "COLOMBIA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3070",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3070/?year=2020&rank=exports",
+          "heading": "VENEZUELA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3070/?year=2020&rank=exports",
+          "heading": "VENEZUELA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3120",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3120/?year=2020&rank=exports",
+          "heading": "GUYANA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3120/?year=2020&rank=exports",
+          "heading": "GUYANA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3150",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3150/?year=2020&rank=exports",
+          "heading": "SURINAME"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3150/?year=2020&rank=exports",
+          "heading": "SURINAME"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3170",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3170/?year=2020&rank=exports",
+          "heading": "FRENCH GUIANA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3170/?year=2020&rank=exports",
+          "heading": "FRENCH GUIANA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3310",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3310/?year=2020&rank=exports",
+          "heading": "ECUADOR"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3310/?year=2020&rank=exports",
+          "heading": "ECUADOR"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3330",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3330/?year=2020&rank=exports",
+          "heading": "PERU"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3330/?year=2020&rank=exports",
+          "heading": "PERU"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3350",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3350/?year=2020&rank=exports",
+          "heading": "BOLIVIA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3350/?year=2020&rank=exports",
+          "heading": "BOLIVIA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3370",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3370/?year=2020&rank=exports",
+          "heading": "CHILE"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3370/?year=2020&rank=exports",
+          "heading": "CHILE"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3510",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3510/?year=2020&rank=exports",
+          "heading": "BRAZIL"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3510/?year=2020&rank=exports",
+          "heading": "BRAZIL"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3530",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3530/?year=2020&rank=exports",
+          "heading": "PARAGUAY"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3530/?year=2020&rank=exports",
+          "heading": "PARAGUAY"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3550",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3550/?year=2020&rank=exports",
+          "heading": "URUGUAY"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3550/?year=2020&rank=exports",
+          "heading": "URUGUAY"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3570",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3570/?year=2020&rank=exports",
+          "heading": "ARGENTINA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3570/?year=2020&rank=exports",
+          "heading": "ARGENTINA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/3720",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3720/?year=2020&rank=exports",
+          "heading": "FALKLAND ISLANDS (ISLAS MALVINAS)"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/3720/?year=2020&rank=exports",
+          "heading": "FALKLAND ISLANDS (ISLAS MALVINAS)"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4000",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4000/?year=2020&rank=exports",
+          "heading": "ICELAND"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4000/?year=2020&rank=exports",
+          "heading": "ICELAND"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4010",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4010/?year=2020&rank=exports",
+          "heading": "SWEDEN"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4010/?year=2020&rank=exports",
+          "heading": "SWEDEN"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4031",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4031/?year=2020&rank=exports",
+          "heading": "SVALBARD, JAN MAYEN ISLAND"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4031/?year=2020&rank=exports",
+          "heading": "SVALBARD, JAN MAYEN ISLAND"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4039",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4039/?year=2020&rank=exports",
+          "heading": "NORWAY"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4039/?year=2020&rank=exports",
+          "heading": "NORWAY"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4050",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4050/?year=2020&rank=exports",
+          "heading": "FINLAND"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4050/?year=2020&rank=exports",
+          "heading": "FINLAND"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4091",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4091/?year=2020&rank=exports",
+          "heading": "FAROE ISLANDS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4091/?year=2020&rank=exports",
+          "heading": "FAROE ISLANDS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4099",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4099/?year=2020&rank=exports",
+          "heading": "DENMARK"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4099/?year=2020&rank=exports",
+          "heading": "DENMARK"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4120",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4120/?year=2020&rank=exports",
+          "heading": "UNITED KINGDOM"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4120/?year=2020&rank=exports",
+          "heading": "UNITED KINGDOM"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4190",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4190/?year=2020&rank=exports",
+          "heading": "IRELAND"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4190/?year=2020&rank=exports",
+          "heading": "IRELAND"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4210",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4210/?year=2020&rank=exports",
+          "heading": "NETHERLANDS"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4210/?year=2020&rank=exports",
+          "heading": "NETHERLANDS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4231",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4231/?year=2020&rank=exports",
+          "heading": "BELGIUM"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4231/?year=2020&rank=exports",
+          "heading": "BELGIUM"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4239",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4239/?year=2020&rank=exports",
+          "heading": "LUXEMBOURG"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4239/?year=2020&rank=exports",
+          "heading": "LUXEMBOURG"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4271",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4271/?year=2020&rank=exports",
+          "heading": "ANDORRA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4271/?year=2020&rank=exports",
+          "heading": "ANDORRA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4272",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4272/?year=2020&rank=exports",
+          "heading": "MONACO"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4272/?year=2020&rank=exports",
+          "heading": "MONACO"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4279",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4279/?year=2020&rank=exports",
+          "heading": "FRANCE"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4279/?year=2020&rank=exports",
+          "heading": "FRANCE"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4280",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4280/?year=2020&rank=exports",
+          "heading": "GERMANY"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4280/?year=2020&rank=exports",
+          "heading": "GERMANY"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4330",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4330/?year=2020&rank=exports",
+          "heading": "AUSTRIA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4330/?year=2020&rank=exports",
+          "heading": "AUSTRIA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4351",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4351/?year=2020&rank=exports",
+          "heading": "CZECH REPUBLIC"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4351/?year=2020&rank=exports",
+          "heading": "CZECH REPUBLIC"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4359",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4359/?year=2020&rank=exports",
+          "heading": "SLOVAKIA"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4359/?year=2020&rank=exports",
+          "heading": "SLOVAKIA"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4370",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4370/?year=2020&rank=exports",
+          "heading": "HUNGARY"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4370/?year=2020&rank=exports",
+          "heading": "HUNGARY"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4411",
+      "checks": [
+        {
+          "mode": "entry",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4411/?year=2020&rank=exports",
+          "heading": "LIECHTENSTEIN"
+        },
+        {
+          "mode": "refresh",
+          "status": 200,
+          "url": "https://uncleolu.github.io/us-trade-partners/partner/4411/?year=2020&rank=exports",
+          "heading": "LIECHTENSTEIN"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "route": "partner/4419",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('main h1') to be visible\u001b[22m\n"
+    },
+    {
+      "route": "partner/4470",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4490",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4510",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4550",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4621",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4622",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4623",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4631",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4632",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4633",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4634",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4635",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4641",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4642",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4643",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4644",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4700",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4710",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4720",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4730",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4751",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4752",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4759",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4791",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4792",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4793",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4794",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4801",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4803",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4804",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4810",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4840",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4850",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4870",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4890",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/4910",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5020",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5040",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5050",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5070",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5081",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5082",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5083",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5110",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5130",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5170",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5180",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5200",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5210",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5230",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5250",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5310",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5330",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5350",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5360",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5380",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5420",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5460",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5490",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5520",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5530",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5550",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5570",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5590",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5600",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5601",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5610",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5650",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5660",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5682",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5683",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5700",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5740",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5790",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5800",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5820",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5830",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/5880",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6021",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6022",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6023",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6024",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6029",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6040",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6141",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6142",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6143",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6144",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6150",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6223",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6224",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6225",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6226",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6227",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6412",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6413",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6414",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6810",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6820",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6830",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6862",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6863",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/6864",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7140",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7210",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7230",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7250",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7290",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7321",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7323",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7370",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7380",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7410",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7420",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7440",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7450",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7460",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7470",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7480",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7490",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7500",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7510",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7520",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7530",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7540",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7550",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7560",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7580",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7600",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7610",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7620",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7630",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7642",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7643",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7644",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7650",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7660",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7670",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7690",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7700",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7741",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7749",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7770",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7780",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7790",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7800",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7810",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7830",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7850",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7870",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7880",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7881",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7890",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7904",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7905",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7910",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7920",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7930",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7940",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7950",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7960",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7970",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/7990",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/8220",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "partner/EU",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/I",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/II",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/III",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/IV",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/V",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/VI",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/VII",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/VIII",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/IX",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/X",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XI",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XII",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XIII",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XIV",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XV",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XVI",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XVII",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XVIII",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XIX",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XX",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/XXI",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "route": "section/SPECIAL",
+      "checks": [],
+      "status": "FAIL",
+      "reason": "page.goto: Target page, context or browser has been closed"
+    }
+  ],
+  "status": "INTERRUPTED",
+  "note": "Extra check stopped at coordinator request. Browser-closed errors reflect termination, not site defects. This is not final audit evidence."
+}

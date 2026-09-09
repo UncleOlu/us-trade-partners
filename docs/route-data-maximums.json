@@ -1,0 +1,16 @@
+{
+  "partner": {
+    "files": 236,
+    "largest": {
+      "gzip_bytes": 76559,
+      "name": "1220.json"
+    }
+  },
+  "summary": {
+    "files": 13,
+    "largest": {
+      "gzip_bytes": 10797,
+      "name": "2013.json"
+    }
+  }
+}

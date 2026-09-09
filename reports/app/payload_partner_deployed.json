@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 69431,
+      "raw_bytes": 207333,
+      "status": 200,
+      "transferred_bytes": 70227,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/index-BQkog3VO.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 1286,
+      "raw_bytes": 3583,
+      "status": 200,
+      "transferred_bytes": 1480,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/index-CyHPlMRu.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 105649,
+      "raw_bytes": 383752,
+      "status": 200,
+      "transferred_bytes": 106287,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/LineChart-BGPdWWJq.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 2973,
+      "raw_bytes": 10185,
+      "status": 200,
+      "transferred_bytes": 3214,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/PartnerPage-BcXz1ihj.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 76559,
+      "raw_bytes": 900513,
+      "status": 200,
+      "transferred_bytes": 82344,
+      "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/1220.json"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 0,
+      "raw_bytes": 0,
+      "status": 301,
+      "transferred_bytes": 406,
+      "url": "https://uncleolu.github.io/us-trade-partners/partner/1220?year=2025"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 342,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 578,
+      "url": "https://uncleolu.github.io/us-trade-partners/partner/1220/?year=2025"
+    }
+  ],
+  "budget_bytes": 300000,
+  "budget_pass": true,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "deployed",
+  "totals": {
+    "gzip_bytes": 256240,
+    "raw_bytes": 1505941,
+    "transferred_bytes": 264536
+  },
+  "url": "https://uncleolu.github.io/us-trade-partners/partner/1220?year=2025"
+}

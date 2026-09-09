@@ -41,3 +41,7 @@ package dependencies remain necessary to restore the site or rebuild data.
 
 Usage: uncached input, cache writes by duration, cache reads and output
 metrics are unknown. Billing cost is unknown.
+
+Final raw release inventory: 4,146 archive members, including 2,071 response
+files: 1,880 `.response.json` and 191 `.response.txt`. Counts come from the
+raw ZIP member list. The earlier figure of 1,880 counted JSON responses only.

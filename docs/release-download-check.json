@@ -1,0 +1,15 @@
+{
+  "assets": [
+    {
+      "asset": "20260909T091429Z-c638aff167ea.zip",
+      "bytes": 17928237,
+      "sha256": "ad408822949e953f318e88084a06d278ef8b87a899dd108c0264481d47627607"
+    },
+    {
+      "asset": "20260909T091429Z-c638aff167ea.raw.zip",
+      "bytes": 8263420,
+      "sha256": "fd106b0b71828cb0fc4ef3f2c4fe6de3f46b113666368357a7b9d91b880c7c8b"
+    }
+  ],
+  "descriptor_matches": true
+}

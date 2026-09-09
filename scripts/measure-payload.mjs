@@ -38,7 +38,7 @@ try {
     if (prior && event.redirectResponse) {
       prior.status = event.redirectResponse.status;
       prior.transferred_bytes = event.redirectResponse.encodedDataLength;
-      prior.encoding = 'redirect';
+      prior.encoding = Object.entries(event.redirectResponse.headers).find(([key]) => key.toLowerCase() === 'content-encoding')?.[1] ?? 'identity';
       prior.raw_bytes = 0;
       prior.gzip_bytes = 0;
       completed.push(prior);
@@ -87,6 +87,7 @@ try {
   const lines = [
     `# Payload: ${title ?? route}`, '', `Route: ${report.url}`, `Mode: ${report.mode}; cold context; cache disabled; service workers blocked.`,
     'Gzip budget: sum of each response body compressed locally with Node zlib gzip level 6. This is not a network transfer measurement.',
+    'Redirect bodies are excluded from decoded and gzip budget totals (shown as zero); CDP redirect transfer bytes are included in transfer totals.',
     'Transfer: Chrome Network.loadingFinished.encodedDataLength, including response headers reported by Chrome. Redirect bytes use response.encodedDataLength. These counts exclude TLS and transport overhead.',
     '', '| Requested asset | Status | Content encoding | Decoded bytes | Gzip budget bytes | CDP transferred bytes |', '|---|---:|---|---:|---:|---:|',
     ...rows.map((row) => `| ${deployed ? row.url : new URL(row.url).pathname + new URL(row.url).search} | ${row.status ?? 'unknown'} | ${row.encoding ?? 'unknown'} | ${row.raw_bytes ?? 'unknown'} | ${row.gzip_bytes ?? 'unknown'} | ${row.transferred_bytes ?? 'unknown'} |`),
