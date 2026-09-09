@@ -110,7 +110,7 @@ Run validation on the complete required dataset. Any FAIL in checks 1 to 9 (exce
 - Pipeline: Python 3, requests with timeouts and bounded retries, pandas.
 - App: Vite, React, TypeScript, react-router. D3-geo and world-atlas TopoJSON for the map. Recharts for charts. No backend. No database.
 - Routes: /?year=YYYY, /hub, /partner/:code?year=YYYY, /section/:id?year=YYYY, /methodology. Year and section state live in the URL.
-- GitHub Pages. Configure Vite base, React Router basename, and all data fetch URLs to the same repo base path. Generate one index.html per known route at build time. Copy index.html to 404.html as a fallback only. No hash routing.
+- GitHub Pages project site, repository us-trade-partners, base path /us-trade-partners/ (VITE_BASE_PATH default). Configure Vite base, React Router basename, and all data fetch URLs to the same repo base path. Generate one index.html per known route at build time. Copy index.html to 404.html as a fallback only. No hash routing.
 
 ## UI RULES
 - Global label on every page: "US goods trade, Census basis. Excludes services. Values are nominal USD." Link to /methodology: customs value, FAS, re-exports, Census vs BOP basis, EU definition and month rules, snapshot_id and source dates.
@@ -119,7 +119,7 @@ Run validation on the complete required dataset. Any FAIL in checks 1 to 9 (exce
 - Units: auto-select $k, $m, $bn with three significant figures. Exact integer on hover. CSV download per table with exact integers and statuses.
 - Partner page: line chart of imports, exports, balance by year. Bar chart of sections by flow for the selected year. Chapter table sorted by total_trade_value. Status label for every non-observed value.
 - Load only the selected snapshot files for the current route.
-- Payload budget for the home route: 400 KB compressed, pending owner approval at step 4. The agent never sets the budget from the measured value.
+- Payload budgets, set by the owner on 2026-09-09: home route 250 KB gzip, partner route 300 KB gzip, both measured on the production build under the base path at the step 6 audit. The 110m world-atlas file loads only on the home route; a 50m file, if Agent C proposes one, loads lazily on zoom and its cost is reported separately. The agent never sets a budget from the measured value.
 
 ## FILE OWNERSHIP
 - Orchestrator: schema/, docs/SPEC.md, .claude/agents/, AGENTS.md, CLAUDE.md, README.
