@@ -18,10 +18,8 @@ function roundToSignificantFigures(n: number, sig: number): number {
 }
 
 function formatSignificand(n: number): string {
-  // Avoid exponential notation and trim needless trailing zeros while keeping
-  // at least the integer part.
-  if (Number.isInteger(n)) return n.toString();
-  return n.toFixed(10).replace(/0+$/, '').replace(/\.$/, '');
+  if (n === 0) return '0';
+  return n.toPrecision(3);
 }
 
 export function formatExactUsd(value: number): string {

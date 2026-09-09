@@ -1,6 +1,6 @@
 # US Goods Trade Partner Visualization: Specification
 
-Setup before running: set the orchestrator model in Claude Code settings. Set `model: <sonnet id>` in each file under `.claude/agents/`. Fill both model IDs in CONTEXT AND COST CONTROL. Save this file as docs/SPEC.md.
+Continuation approved 2026-09-09: use the current Codex model. Earlier Claude model settings and session limits do not apply. The owner approved completion through deployment and final audit, including the history cleanup and release work listed in docs/continuation-audit.md.
 
 ## ROLE
 You are the orchestrator. You plan, write contracts, delegate, and review. You do not write pipeline or UI code. Follow AGENTS.md. CLAUDE.md stays a thin shim. Neither file imports this specification in full. The chief-of-staff audit is the final gate and is read-only.
@@ -115,8 +115,8 @@ Run validation on the complete required dataset. Any FAIL in checks 1 to 9 (exce
 ## UI RULES
 - Global label on every page: "US goods trade, Census basis. Excludes services. Values are nominal USD." Link to /methodology: customs value, FAS, re-exports, Census vs BOP basis, EU definition and month rules, snapshot_id and source dates.
 - Map: diverging scale, deficit red, surplus blue, zero white. Fixed dollar bands across all years. Distinct no-data style. Year slider. Click and keyboard select. Hover or focus shows name, imports, exports, balance.
-- Partner search and a ranked partner table next to the map. Hover is never the only path to a value.
-- Units: auto-select $k, $m, $bn with three significant figures. Exact integer on hover. CSV download per table with exact integers and statuses.
+- A prominent full-width desktop map, followed by partner search and a ranked table. Show the top 25 by default, with access to all partners and displayed/total counts. Search covers all partners. Year and rank remain in the URL. Hover is never the only path to a value.
+- Units: auto-select $k, $m, $bn, $tn with three significant figures. Exact integer on hover. CSV download per table with exact integers and statuses.
 - Partner page: line chart of imports, exports, balance by year. Bar chart of sections by flow for the selected year. Chapter table sorted by total_trade_value. Status label for every non-observed value.
 - Load only the selected snapshot files for the current route.
 - Payload budgets, set by the owner on 2026-09-09: home route 250 KB gzip, partner route 300 KB gzip, both measured on the production build under the base path at the step 6 audit. The 110m world-atlas file loads only on the home route; a 50m file, if Agent C proposes one, loads lazily on zoom and its cost is reported separately. The agent never sets a budget from the measured value.
@@ -131,7 +131,7 @@ Run validation on the complete required dataset. Any FAIL in checks 1 to 9 (exce
 No agent edits outside its ownership. The orchestrator merges.
 
 ## CONTEXT AND COST CONTROL
-- Pinned model IDs: orchestrator claude-fable-5-1, subagents claude-sonnet-5. Record them in meta.json and every usage report.
+- Use the current Codex model for this continuation. Do not invent an exact model ID or usage metrics that the session does not expose. Preserve earlier acquisition evidence.
 - Keep one canonical specification in docs/SPEC.md. Keep startup instructions short. Do not automatically import the full specification into every agent.
 - Give each agent the shared block (HARD RULES, DATA CONTRACT, AGGREGATES AND ADDITIVE TOTALS, FILE OWNERSHIP, its acceptance criteria) plus its task-specific sections. Each agent may read further sections when needed.
 - Save full responses, logs, and reports to disk. Default to at most 8,000 characters per routine tool result. Print file paths, counts, key findings, and bounded examples. State when output is truncated.

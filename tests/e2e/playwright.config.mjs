@@ -44,4 +44,51 @@ export const config = {
   navigationTimeoutMs: 20000,
   chartStabilizePollMs: 200,
   chartStabilizeMaxWaitMs: 8000,
+
+  // Owner requirements, step 5/6 (2026-09-09 onward). Task ids below
+  // match the coordinator's numbered list in that message.
+
+  // Task 1: home table default row limit and show-all.
+  homeDefaultRowLimit: 25,
+  // A partner outside the default top 25 by whatever the default rank
+  // is, used to prove search still finds it: St Pierre and Miquelon.
+  homeSearchOutsideTop25: { code: '1610', name: 'St Pierre and Miquelon' },
+  // Desktop and mobile viewports used across this suite.
+  desktopViewport: { width: 1280, height: 900 },
+  mobileViewport: { width: 390, height: 844 },
+
+  // Task 2: unit formatting. World imports 2025 in
+  // data/<snapshot_id>/summary/2025.json, quoted by the owner:
+  // 3,414,510,592,814 -> "$3.41tn" (3 significant figures).
+  trillionExample: { year: 2025, expectedInteger: 3414510592814, expectedDisplay: '$3.41tn' },
+
+  // Task 4: methodology page, quoted verbatim from
+  // docs/methodology-content.md's "Unidentified Countries (Census code
+  // 8220)" section heading and partners.json's owner-approved name for
+  // 8220 (schema/CONTRACT.md amended Published examples paragraph /
+  // tests/test_validation_checks.py::test_partner_8220_matches_owner_approved_record).
+  code8220Text: 'Unidentified Countries (Census code 8220)',
+
+  // Task 5: deployed-site audit. BASE_URL env var overrides; unset means
+  // the local static server in lib/static-server.mjs (mimics GitHub
+  // Pages: real 404 status and body for unknown paths, since `npm run
+  // preview`'s SPA fallback always returns 200 and cannot be used to
+  // prove this).
+  auditRoutes: [
+    '/hub',
+    '/methodology',
+    '/partner/5700?year=2025',
+    '/partner/EU?year=2013',
+    '/section/XVI?year=2025&rank=exports',
+  ],
+  auditUnknownRoute: '/nope',
+  missingDataPartnerRoute: { code: '6022', year: 2023, flow: 'exports' },
+  payloadBudgets: {
+    // Bytes, set by the owner 2026-09-09 (docs/SPEC.md UI RULES payload
+    // budgets paragraph: 250 KB / 300 KB gzip); the owner's message for
+    // this task gives the exact byte figures used here directly.
+    home: 250000,
+    partner: 300000,
+    partnerRoute: '/partner/5700?year=2025',
+  },
 };

@@ -9,6 +9,7 @@ import { TableScroll } from '../components/TableScroll';
 import { MapSlot } from '../components/MapSlot';
 import { BASE_PATH } from '../lib/config';
 import type { Summary } from '../types/generated';
+import { toCsv, downloadCsv } from '../lib/csv';
 
 type RankField = 'balance' | 'imports' | 'exports' | 'total_trade_value';
 
@@ -111,8 +112,8 @@ export function HomePage(): JSX.Element {
     setSearchParams(next);
   };
 
-  if (metaState.status === 'loading' || !year) return <Loading label="Loading" />;
   if (metaState.status === 'error') return <DataError error={metaState.error} />;
+  if (metaState.status === 'loading' || !year) return <Loading label="Loading" />;
   if (summaryState.status === 'loading' || partnersState.status === 'loading') {
     return <Loading label={`Loading ${year}`} />;
   }
@@ -121,6 +122,13 @@ export function HomePage(): JSX.Element {
 
   const summary = summaryState.data;
   const yearIndex = configuredYears ? configuredYears.indexOf(year) : 0;
+  const download = () => {
+    const fields = ['imports', 'exports', 'balance', 'total_trade_value'] as const;
+    downloadCsv(`partners_${year}.csv`, toCsv(
+      ['code', 'name', 'kind', ...fields.flatMap((field) => [`${field}_status`, `${field}_usd`])],
+      ranked.map((p) => [p.code, p.name, p.kind, ...fields.flatMap((field) => [p[field].status, p[field].value ?? ''])]),
+    ));
+  };
 
   return (
     <div className="home-page">
@@ -190,6 +198,7 @@ export function HomePage(): JSX.Element {
 
       <section className="home-table-pane" aria-label="Ranked partners">
         <div className="controls-row">
+          <button type="button" onClick={download}>Download all partners CSV</button>
           <label htmlFor="partner-search">Search partners</label>
           <input
             id="partner-search"
@@ -267,6 +276,7 @@ export function HomePage(): JSX.Element {
           </table>
         </TableScroll>
         <p className="chart-note">
+          Select a value to show its exact dollar amount.{' '}
           Rows without an observed value for the chosen rank field sort last; absent is never shown as zero.
         </p>
       </section>

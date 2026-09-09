@@ -30,82 +30,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Read snapshot id
-        id: snapshot
-        run: |
-          set -euo pipefail
-          if [ ! -f reports/pipeline/last_snapshot_id.txt ]; then
-            echo "::error::reports/pipeline/last_snapshot_id.txt is missing"
-            exit 1
-          fi
-          SNAPSHOT_ID="$(tr -d '[:space:]' < reports/pipeline/last_snapshot_id.txt)"
-          if [ -z "$SNAPSHOT_ID" ]; then
-            echo "::error::reports/pipeline/last_snapshot_id.txt is empty"
-            exit 1
-          fi
-          echo "id=$SNAPSHOT_ID" >> "$GITHUB_OUTPUT"
-
-      - name: Download and verify the published snapshot
+      - name: Download and verify the pinned snapshot
         env:
           GH_TOKEN: ${{ github.token }}
-          SNAPSHOT_ID: ${{ steps.snapshot.outputs.id }}
-        run: |
-          set -euo pipefail
-          TAG="snapshot-${SNAPSHOT_ID}"
-          DL_DIR=".snapshot-download"
-          ZIP="${SNAPSHOT_ID}.zip"
-          SUM="${SNAPSHOT_ID}.zip.sha256"
-          mkdir -p "$DL_DIR"
+        run: node scripts/restore-snapshot.mjs
 
-          gh release download "$TAG" \
-            --repo "${GITHUB_REPOSITORY}" \
-            --pattern "$ZIP" \
-            --pattern "$SUM" \
-            --dir "$DL_DIR" \
-            --clobber
-
-          if [ ! -f "$DL_DIR/$ZIP" ]; then
-            echo "::error::release asset $ZIP not found on tag $TAG"
-            exit 1
-          fi
-          if [ ! -f "$DL_DIR/$SUM" ]; then
-            echo "::error::release asset $SUM not found on tag $TAG"
-            exit 1
-          fi
-
-          EXPECTED="$(awk '{print $1}' "$DL_DIR/$SUM")"
-          ACTUAL="$(sha256sum "$DL_DIR/$ZIP" | awk '{print $1}')"
-          if [ "$EXPECTED" != "$ACTUAL" ]; then
-            echo "::error::sha256 mismatch for $ZIP: expected $EXPECTED, got $ACTUAL"
-            exit 1
-          fi
-          echo "sha256 verified for $ZIP"
-
-          EXTRACT_DIR="$DL_DIR/extracted"
-          mkdir -p "$EXTRACT_DIR"
-          unzip -q "$DL_DIR/$ZIP" -d "$EXTRACT_DIR"
-
-          # The zip may contain the snapshot files directly at its root, or
-          # nested one level under a directory named after the snapshot id.
-          # Never guess beyond these two layouts: fail hard otherwise.
-          if [ -f "$EXTRACT_DIR/meta.json" ]; then
-            SRC="$EXTRACT_DIR"
-          elif [ -f "$EXTRACT_DIR/$SNAPSHOT_ID/meta.json" ]; then
-            SRC="$EXTRACT_DIR/$SNAPSHOT_ID"
-          else
-            echo "::error::unexpected zip layout: meta.json not found at the zip root or under $SNAPSHOT_ID/"
-            exit 1
-          fi
-
-          mkdir -p "data/${SNAPSHOT_ID}"
-          cp -r "$SRC"/. "data/${SNAPSHOT_ID}/"
-          rm -rf "$DL_DIR"
-
-          if [ ! -f "data/${SNAPSHOT_ID}/meta.json" ]; then
-            echo "::error::data/${SNAPSHOT_ID}/meta.json missing after unpack"
-            exit 1
-          fi
-          echo "Snapshot ${SNAPSHOT_ID} downloaded, verified, and unpacked to data/${SNAPSHOT_ID}/"
+      - name: Install Chromium for rendered build checks
+        run: npx playwright install --with-deps chromium
 
       - name: Generate types and fail on drift
         run: |

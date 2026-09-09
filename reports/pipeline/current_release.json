@@ -1,0 +1,10 @@
+{
+  "archive_scope": "built data plus separate complete raw acquisition",
+  "asset": "20260909T091429Z-c638aff167ea.zip",
+  "pipeline_commit": "e15309d0cf6468d4b4d64d00555aa33711221b89",
+  "raw_asset": "20260909T091429Z-c638aff167ea.raw.zip",
+  "raw_sha256": "fd106b0b71828cb0fc4ef3f2c4fe6de3f46b113666368357a7b9d91b880c7c8b",
+  "sha256": "ad408822949e953f318e88084a06d278ef8b87a899dd108c0264481d47627607",
+  "snapshot_id": "20260909T091429Z-c638aff167ea",
+  "tag": "build-20260909T091429Z-c638aff167ea-e15309d0cf64-ad408822949e"
+}

@@ -6,11 +6,10 @@
 // generate-routes.mjs, so dist/methodology/index.html exists).
 
 import { chromium } from 'playwright';
-import { spawn } from 'node:child_process';
+import { preview } from 'vite';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import http from 'node:http';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
@@ -23,26 +22,6 @@ function normalizeBasePath(raw) {
 
 const basePath = normalizeBasePath(process.env.VITE_BASE_PATH ?? '/us-trade-partners/');
 
-async function waitForServer(url, timeoutMs) {
-  const start = Date.now();
-  while (Date.now() - start < timeoutMs) {
-    const ok = await new Promise((resolve) => {
-      const req = http.get(url, (res) => {
-        res.resume();
-        resolve(true);
-      });
-      req.on('error', () => resolve(false));
-      req.setTimeout(1000, () => {
-        req.destroy();
-        resolve(false);
-      });
-    });
-    if (ok) return;
-    await new Promise((r) => setTimeout(r, 200));
-  }
-  throw new Error(`preview server did not become ready at ${url} within ${timeoutMs}ms`);
-}
-
 async function readSnapshotId() {
   const raw = await fs.readFile(path.join(rootDir, 'reports', 'pipeline', 'last_snapshot_id.txt'), 'utf-8');
   return raw.trim();
@@ -54,24 +33,20 @@ async function main() {
     await fs.readFile(path.join(rootDir, 'data', snapshotId, 'meta.json'), 'utf-8'),
   );
 
-  const port = 4321 + Math.floor(Math.random() * 500);
-  const preview = spawn('npx', ['vite', 'preview', '--port', String(port), '--strictPort'], {
-    cwd: rootDir,
-    stdio: ['ignore', 'pipe', 'pipe'],
-  });
-
+  const server = await preview({ preview: { port: 0, host: '127.0.0.1' } });
+  let browser;
   let exitCode = 0;
   try {
-    const baseUrl = `http://localhost:${port}${basePath}`;
-    await waitForServer(baseUrl, 20000);
+    const address = server.httpServer.address();
+    if (!address || typeof address === 'string') throw new Error('Preview has no TCP address');
+    const baseUrl = `http://127.0.0.1:${address.port}${basePath}`;
 
-    const browser = await chromium.launch();
+    browser = await chromium.launch();
     const page = await browser.newPage();
     await page.goto(baseUrl.replace(/\/$/, '') + '/methodology', {
       waitUntil: 'networkidle',
       timeout: 30000,
     });
-    await page.waitForTimeout(500);
 
     const bodyText = await page.evaluate(() => document.body.innerText);
 
@@ -107,9 +82,9 @@ async function main() {
       if (!found) exitCode = 1;
     }
 
-    await browser.close();
   } finally {
-    preview.kill();
+    await browser?.close();
+    await new Promise((resolve, reject) => server.httpServer.close((error) => error ? reject(error) : resolve()));
   }
 
   if (exitCode !== 0) {

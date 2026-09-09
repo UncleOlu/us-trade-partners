@@ -22,7 +22,7 @@ Level 1 is the 21 HS sections (I to XXI) plus one group, Special classification,
 
 Partners are Census country codes (Schedule C). Country-group rows published by Census (for example the European Union code 0003, USMCA, APEC, and the continent totals) are excluded from every partner list and every total by explicit code list. The Census world total row is fetched separately and used only for reconciliation.
 
-Every total on this site sums the reconciliation universe: partners flagged include_in_world_reconciliation. That set is non-overlapping by construction and reconciles exactly to the separately fetched Census world total for every year and flow in this snapshot. Aggregate rows, such as the EU, appear in rankings with an aggregate label and never enter sums or shares.
+World totals use the separately fetched Census totals. Section totals sum the reconciliation universe: partners flagged include_in_world_reconciliation. That set is non-overlapping by construction and reconciles exactly to the separately fetched Census world total for every year and flow in this snapshot. Aggregate rows, such as the EU, appear in rankings with an aggregate label and never enter sums or shares.
 
 Partners without a map shape (small territories and non-geographic codes) still appear in search, tables, the hub, and section pages.
 
@@ -47,11 +47,11 @@ EU charts mark 2013 and 2020 with a membership-change note.
 
 ### Comparison with the Census EU aggregate (code 0003)
 
-The Census aggregate uses a different membership convention, so the two are reported as not comparable rather than reconciled. The differences in this snapshot are exact and explained by membership alone:
+The Census aggregate and this calculation are marked not comparable because compatible membership and release definitions have not been verified. The observed differences equal these member contributions; this numerical match does not establish the Census method:
 
-- 2013: the Census aggregate is larger by 220,327,927 USD in imports and 140,367,870 USD in exports, exactly Croatia's January to June trade. Census counts Croatia for all of 2013.
-- 2019: the Census aggregate is smaller by 63,272,043,613 USD in imports and 69,079,944,687 USD in exports, exactly the UK's 2019 trade. Census excludes the UK for all of 2019 although it was a member.
-- 2020: the Census aggregate is smaller by 4,602,430,446 USD in imports and 5,830,208,879 USD in exports, exactly the UK's January 2020 trade. Census excludes the UK for all of 2020.
+- 2013: the Census aggregate is larger by 220,327,927 USD in imports and 140,367,870 USD in exports, exactly Croatia's January to June trade.
+- 2019: the Census aggregate is smaller by 63,272,043,613 USD in imports and 69,079,944,687 USD in exports, exactly the UK's 2019 trade.
+- 2020: the Census aggregate is smaller by 4,602,430,446 USD in imports and 5,830,208,879 USD in exports, exactly the UK's January 2020 trade.
 - 2014 to 2018 and 2021 to 2025: the two agree exactly.
 
 ## Value status labels
@@ -59,7 +59,7 @@ The Census aggregate uses a different membership convention, so the two are repo
 Every imports and exports value carries a status:
 
 - observed: a value returned by the Census API.
-- confirmed zero: no row was returned for that chapter, and the chapters that were returned sum exactly to the separately fetched partner total, which proves the missing chapters are zero.
+- confirmed zero: Census returned zero, or no row was returned for that chapter and the present chapters sum exactly to the separately fetched partner total. The value reason states the evidence.
 - absent: no row was returned and no reconciliation proves it is zero. Absent values are never treated as zero, and totals that depend on them are also absent.
 - not applicable: the category does not exist for that flow (for example chapter 99 in exports).
 
@@ -67,7 +67,7 @@ Example: Norfolk Island exports in 2023 are absent. The Census API returns no ro
 
 ## Validation
 
-Before publication the snapshot passed: unique records per year, partner, chapter, and flow; chapter sums equal to separately fetched partner totals for every partner, year, and flow; reconciliation-universe sums equal to the Census world total for every year and flow; section sums equal to chapter sums; balances and totals derived only from observed inputs; comparison with published Census Trade in Goods pages for China, Germany, St Pierre and Miquelon, Norfolk Island, and Kosovo (2023) within display rounding; the EU calculation check; status integrity; and partner resolution. The full report is reports/pipeline/validation.csv in the repository.
+Before publication the snapshot passed: unique records per year, partner, chapter, and flow; chapter sums equal to separately fetched partner totals for every partner, year, and flow; reconciliation-universe sums equal to the Census world total for every year and flow; section sums equal to chapter sums; balances and totals derived only from observed inputs; comparison with published Census Trade in Goods pages for China, Germany, St Pierre and Miquelon, Norfolk Island, and Kosovo (2023), plus Unidentified Countries (2013), where observed values permit comparison within display rounding; the EU calculation check; status integrity; and partner resolution. Two published-example flow comparisons are not comparable because the API value is absent. All 26 EU aggregate comparisons are marked not comparable. The full validation.csv ships with the built snapshot release; the repository holds its summary.
 
 ## Snapshot and source dates
 

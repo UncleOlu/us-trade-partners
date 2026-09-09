@@ -29,7 +29,22 @@ export function basePath() {
 function distIsFreshFor(snapshotId) {
   const indexHtml = path.join(REPO_ROOT, 'dist', 'index.html');
   const snapshotDataDir = path.join(REPO_ROOT, 'dist', 'data', snapshotId);
-  return fs.existsSync(indexHtml) && fs.existsSync(snapshotDataDir);
+  if (!fs.existsSync(indexHtml) || !fs.existsSync(snapshotDataDir)) return false;
+  const sourceMeta = path.join(REPO_ROOT, 'data', snapshotId, 'meta.json');
+  const builtMeta = path.join(snapshotDataDir, 'meta.json');
+  if (!fs.existsSync(builtMeta) || !fs.readFileSync(sourceMeta).equals(fs.readFileSync(builtMeta))) return false;
+  const builtAt = fs.statSync(indexHtml).mtimeMs;
+  function changed(dir) {
+    return fs.readdirSync(dir, { withFileTypes: true }).some(entry => {
+      const file = path.join(dir, entry.name);
+      return entry.isDirectory() ? changed(file) : fs.statSync(file).mtimeMs > builtAt;
+    });
+  }
+  return !['src', 'scripts', 'schema'].some(dir => changed(path.join(REPO_ROOT, dir))) &&
+    !['package.json', 'package-lock.json', 'vite.config.ts', 'tsconfig.json', 'tsconfig.app.json'].some(name => {
+      const file = path.join(REPO_ROOT, name);
+      return fs.existsSync(file) && fs.statSync(file).mtimeMs > builtAt;
+    });
 }
 
 function getFreePort() {
@@ -75,6 +90,28 @@ function waitForHttp200(url, { timeoutMs = 20000, intervalMs = 300 } = {}) {
 }
 
 /**
+ * Runs `npm run build` if dist/ is absent or stale for the current
+ * snapshot (or if forceBuild is true), never otherwise. Never edits
+ * package.json; uses the existing "build" script as-is. Shared by
+ * startPreviewServer below and by lib/static-server.mjs.
+ */
+export async function ensureFreshBuild({ forceBuild = false } = {}) {
+  const snapshotId = currentSnapshotId();
+  if (!forceBuild && distIsFreshFor(snapshotId)) return;
+  const buildResult = spawnSync('npm', ['run', 'build'], {
+    cwd: REPO_ROOT,
+    stdio: 'inherit',
+    env: process.env,
+  });
+  if (buildResult.status !== 0) {
+    throw new Error(`npm run build failed with exit code ${buildResult.status}`);
+  }
+  if (!distIsFreshFor(snapshotId)) {
+    throw new Error('dist/ still not fresh for the current snapshot after npm run build');
+  }
+}
+
+/**
  * Ensures dist/ is a fresh build for the current snapshot (runs `npm run
  * build` if absent or stale), starts `npx vite preview` on a free port,
  * and resolves once it answers HTTP requests. Returns
@@ -84,19 +121,7 @@ export async function startPreviewServer({ forceBuild = false } = {}) {
   const snapshotId = currentSnapshotId();
   const bp = basePath();
 
-  if (forceBuild || !distIsFreshFor(snapshotId)) {
-    const buildResult = spawnSync('npm', ['run', 'build'], {
-      cwd: REPO_ROOT,
-      stdio: 'inherit',
-      env: process.env,
-    });
-    if (buildResult.status !== 0) {
-      throw new Error(`npm run build failed with exit code ${buildResult.status}`);
-    }
-    if (!distIsFreshFor(snapshotId)) {
-      throw new Error('dist/ still not fresh for the current snapshot after npm run build');
-    }
-  }
+  await ensureFreshBuild({ forceBuild });
 
   const port = await getFreePort();
   const previewArgs = ['run', 'preview', '--', '--port', String(port), '--strictPort', '--host', '127.0.0.1'];

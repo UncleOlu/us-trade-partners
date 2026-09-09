@@ -20,3 +20,10 @@ reports/pipeline/releases/
 data/
 # full validation report ships inside the release zip; the summary stays in git
 reports/pipeline/validation.csv
+
+# Incremental TypeScript build state is machine-local.
+*.tsbuildinfo
+
+# Offline verification builds are not publication source.
+reports/pipeline/final_build_a/
+reports/pipeline/final_build_b/

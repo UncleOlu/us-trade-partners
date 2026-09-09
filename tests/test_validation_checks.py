@@ -1146,8 +1146,12 @@ def test_kind02_only_EU_has_a_non_numeric_code_in_partners_json(snapshot_dir):
 # ---------------- owner-approved records: 8220 kind special, 4803 kind country ----------------
 #
 # Owner decisions relayed by the orchestrator: code 8220 is approved as
-# kind special, name exactly "Unidentified partner (Census code 8220)",
-# in the reconciliation universe, no map shape. Kosovo 4803 is kind
+# kind special, name exactly "Unidentified Countries (Census code 8220)"
+# (updated by a later owner decision from the original "Unidentified
+# partner (Census code 8220)"; docs/methodology-content.md's "Unidentified
+# Countries (Census code 8220)" heading and body text are the current
+# source of truth for this string), in the reconciliation universe, no
+# map shape. Kosovo 4803 is kind
 # country (schema/CONTRACT.md amended Published examples paragraph:
 # "kind special is reserved for non-geographic codes; a geographic
 # partner without an ISO 3166-1 code (Kosovo 4803) is kind country with
@@ -1160,11 +1164,14 @@ def _find_partner(partners, code):
 
 
 def test_partner_8220_matches_owner_approved_record(snapshot_dir):
-    """Owner decision: 8220 is kind special, name exactly 'Unidentified
-    partner (Census code 8220)', include_in_world_reconciliation true,
-    iso3 null, map_feature_id null (no map shape), resolution approved,
-    resolution_note containing '2026-09-09' (the approval date) and not
-    containing 'pending'."""
+    """Owner decision (updated): 8220 is kind special, name exactly
+    'Unidentified Countries (Census code 8220)' (this superseded the
+    original 'Unidentified partner (Census code 8220)'; the current
+    string matches the heading in docs/methodology-content.md and the
+    Census page's own title 'Unidentified Countries'),
+    include_in_world_reconciliation true, iso3 null, map_feature_id null
+    (no map shape), resolution approved, resolution_note containing
+    '2026-09-09' (the approval date) and not containing 'pending'."""
     path = require_snapshot(snapshot_dir)
     partners_file = path / "partners.json"
     if not partners_file.exists():
@@ -1175,8 +1182,8 @@ def test_partner_8220_matches_owner_approved_record(snapshot_dir):
     failures = []
     if p.get("kind") != "special":
         failures.append(("kind", p.get("kind"), "expected", "special"))
-    if p.get("name") != "Unidentified partner (Census code 8220)":
-        failures.append(("name", p.get("name"), "expected", "Unidentified partner (Census code 8220)"))
+    if p.get("name") != "Unidentified Countries (Census code 8220)":
+        failures.append(("name", p.get("name"), "expected", "Unidentified Countries (Census code 8220)"))
     if p.get("include_in_world_reconciliation") is not True:
         failures.append(("include_in_world_reconciliation", p.get("include_in_world_reconciliation"), "expected", True))
     if p.get("iso3") is not None:

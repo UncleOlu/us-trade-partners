@@ -31,16 +31,21 @@ def test_ovr02_data_dir_override_missing_directory_reports_reason(tmp_path, monk
     assert str(missing) in reason
 
 
-def test_ovr03_data_dir_no_override_falls_back_to_default_discovery(monkeypatch):
-    """With DATA_DIR unset, discovery falls back to scanning ROOT/data/,
-    which does not exist in this checkout at test-authoring time (step 3
-    not run), so this documents the unchanged default-path behavior."""
+def test_ovr03_data_dir_no_override_falls_back_to_default_discovery(tmp_path, monkeypatch):
+    """Check default discovery with absent, single, and ambiguous fixtures."""
     monkeypatch.delenv("DATA_DIR", raising=False)
+    root = tmp_path / "data"
+    monkeypatch.setattr(conftest, "DATA_DIR", root)
     path, reason = discover_snapshot_dir()
-    if conftest.DATA_DIR.is_dir():
-        pytest.skip("not run: data/ now exists in this checkout; default-path branch covered elsewhere")
     assert path is None
     assert reason == "data/ directory does not exist yet (step 3 not run)"
+    first = root / "20260101T000000Z-0123456789ab"
+    first.mkdir(parents=True)
+    assert discover_snapshot_dir() == (first, None)
+    (root / "20260102T000000Z-0123456789ab").mkdir()
+    path, reason = discover_snapshot_dir()
+    assert path is None
+    assert "multiple directories" in reason
 
 
 def test_ovr04_raw_dir_override_used_regardless_of_data_dir_name(monkeypatch):

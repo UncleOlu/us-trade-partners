@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { FlowValue, DerivedValue } from '../types/generated';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
 import { statusLabel } from '../lib/status';
@@ -15,14 +16,17 @@ interface MoneyCellProps {
  * values always show a visible status label and never a numeric 0.
  */
 export function MoneyCell({ flow, showExact }: MoneyCellProps): JSX.Element {
+  const [expanded, setExpanded] = useState(false);
   if (flow.status === 'observed' || flow.status === 'confirmed_zero') {
     const { display, exact } = formatAutoUsd(flow.value);
-    const text = showExact ? exact : display;
+    const text = showExact || expanded ? exact : display;
     return (
-      <span className="money-cell" title={exact} tabIndex={0}>
+      <button type="button" className="money-cell money-value" title={exact}
+        aria-label={`${text}; ${expanded ? 'show short value' : 'show exact value'}`}
+        onClick={() => setExpanded(!expanded)}>
         {text}
         {flow.status === 'confirmed_zero' && <span className="status-tag"> (confirmed zero)</span>}
-      </span>
+      </button>
     );
   }
 

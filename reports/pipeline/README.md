@@ -20,7 +20,7 @@ Changed built bytes get a different tag. Existing remote assets cannot be
 overwritten by the pipeline. Reuse requires matching download checks.
 
 Deployment pins the built asset and full SHA256 in
-`scripts/snapshot-release.json`; it must verify before extracting.
+`reports/pipeline/current_release.json`; it must verify before extracting.
 The raw ZIP does not enter the site deployment. Restoring built JSON also
 requires the source commit and Node dependencies to build the app.
 Rebuilding from raw requires the pipeline commit, Python dependencies,

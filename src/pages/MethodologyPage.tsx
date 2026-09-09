@@ -1,4 +1,5 @@
 import { fetchMeta } from '../lib/dataClient';
+import { Link } from 'react-router-dom';
 import { BASE_PATH, SNAPSHOT_ID } from '../lib/config';
 import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
@@ -41,7 +42,7 @@ function MapDiagnosticsSection(): JSX.Element {
       <h2 id="map-diagnostics-heading">Map diagnostics</h2>
       {!diagnostics && (
         <p>
-          Not yet available in this session: visit the <a href="./?year=2025">home page</a> first so the map can
+          Not yet available in this session: visit the <Link to="/">home page</Link> first so the map can
           report which feature ids and partner codes it could not match.
         </p>
       )}

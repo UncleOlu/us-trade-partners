@@ -99,6 +99,8 @@ def test_det05_rebuild_byte_identity():
     assert a_path.is_dir(), f"DATA_A does not exist or is not a directory: {a_path}"
     assert b_path.is_dir(), f"DATA_B does not exist or is not a directory: {b_path}"
 
+    assert a_path.resolve() != b_path.resolve(), "DATA_A and DATA_B must be separate rebuilds"
+    assert (a_path / "meta.json").is_file(), "DATA_A must contain a built snapshot"
     a_files = {p.relative_to(a_path) for p in a_path.rglob("*") if p.is_file()}
     b_files = {p.relative_to(b_path) for p in b_path.rglob("*") if p.is_file()}
     only_a = sorted(str(p) for p in (a_files - b_files))

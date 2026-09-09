@@ -1,7 +1,7 @@
 {
   "code": "8220",
   "name": "Unidentified Countries",
-  "name_note": "Census's own page title for this code is 'Unidentified Countries' (recorded here as published evidence). The owner-approved data/<snapshot_id>/partners.json display name for this roster entry is the distinct string 'Unidentified partner (Census code 8220)', per the orchestrator's owner decision; that name is not Census's page title and is asserted separately by tests/test_validation_checks.py's partners.json tests, not by this published-examples fixture.",
+  "name_note": "Census's own page title for this code is 'Unidentified Countries' (recorded here as published evidence). The owner-approved data/<snapshot_id>/partners.json display name for this roster entry is 'Unidentified Countries (Census code 8220)', matching Census's page title plus the code in parentheses; an earlier owner decision had used the distinct string 'Unidentified partner (Census code 8220)', since superseded. The current name is asserted separately by tests/test_validation_checks.py's partners.json tests and by tests/e2e/tests/methodology.mjs (the /methodology route also shows this exact string), not by this published-examples fixture.",
   "year": 2013,
   "url_tried": "https://www.census.gov/foreign-trade/balance/c8220.html",
   "url": "https://www.census.gov/foreign-trade/balance/c8220.html",
