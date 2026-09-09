@@ -1,0 +1,31 @@
+{
+  "filename": "partner_1220_chapters_XVI_all.csv",
+  "sha256": "6a2a71c0a0f91096e16c741c6ba7b9b983cc4c5398e16c175ea757ba33d64265",
+  "rows": 2,
+  "headers": [
+    "period",
+    "start_year",
+    "end_year",
+    "chapter",
+    "description",
+    "imports_status",
+    "imports_usd",
+    "exports_status",
+    "exports_usd",
+    "total_trade_value_status",
+    "total_trade_value_usd"
+  ],
+  "example": {
+    "period": "all",
+    "start_year": "2013",
+    "end_year": "2025",
+    "chapter": "84",
+    "description": "NUCLEAR REACTORS, BOILERS, MACHINERY ETC.; PARTS",
+    "imports_status": "observed",
+    "imports_usd": "309696648715",
+    "exports_status": "observed",
+    "exports_usd": "600757559993",
+    "total_trade_value_status": "observed",
+    "total_trade_value_usd": "910454208708"
+  }
+}

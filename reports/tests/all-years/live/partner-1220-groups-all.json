@@ -1,0 +1,29 @@
+{
+  "filename": "partner_1220_groups_all.csv",
+  "sha256": "bbae46bd204bbde1007932626fd54a80c43cb92f0d1be2962fa2769c0bb9f845",
+  "rows": 22,
+  "headers": [
+    "period",
+    "start_year",
+    "end_year",
+    "section_id",
+    "imports_status",
+    "imports_usd",
+    "exports_status",
+    "exports_usd",
+    "total_trade_value_status",
+    "total_trade_value_usd"
+  ],
+  "example": {
+    "period": "all",
+    "start_year": "2013",
+    "end_year": "2025",
+    "section_id": "I",
+    "imports_status": "observed",
+    "imports_usd": "107088812389",
+    "exports_status": "observed",
+    "exports_usd": "47011905598",
+    "total_trade_value_status": "observed",
+    "total_trade_value_usd": "154100717987"
+  }
+}

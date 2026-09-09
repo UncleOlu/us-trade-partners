@@ -1,0 +1,150 @@
+{
+  "sourceIndexSHA256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+  "target": "production",
+  "results": [
+    {
+      "name": "all-years home uses derived summary, fixed world totals and complete CSV scope",
+      "status": "PASS",
+      "ms": 921
+    },
+    {
+      "name": "all period survives Hub partner section refresh navigation and browser Back",
+      "status": "PASS",
+      "ms": 2982
+    },
+    {
+      "name": "all-years map shows summed country values and preserves period on selection",
+      "status": "PASS",
+      "ms": 740
+    },
+    {
+      "name": "all-years partner totals and group chapter CSVs match independent sums; annual trend retained",
+      "status": "PASS",
+      "ms": 5759
+    },
+    {
+      "name": "all-years section retains annual trend and one table with exact period CSV",
+      "status": "PASS",
+      "ms": 1326
+    },
+    {
+      "name": "home rank and money align centrally; partner names align left and mobile table scrolls",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 1280,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        },
+        {
+          "width": 390,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        },
+        {
+          "width": 320,
+          "head": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ],
+          "body": [
+            "center",
+            "left",
+            "center",
+            "center",
+            "center",
+            "center"
+          ]
+        }
+      ],
+      "ms": 2087
+    },
+    {
+      "name": "all-years period control text fits home and Hub at desktop and mobile widths",
+      "status": "PASS",
+      "detail": [
+        {
+          "name": "home",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "hub",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "home",
+          "width": 322,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "hub",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "home",
+          "width": 252,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        },
+        {
+          "name": "hub",
+          "width": 228,
+          "text": "All years (2013-2025)",
+          "textWidth": 158.203125,
+          "padding": 24
+        }
+      ],
+      "ms": 3843
+    },
+    {
+      "name": "all-years Hub partner section and methodology screenshots show period context",
+      "status": "PASS",
+      "ms": 4916
+    }
+  ],
+  "errors": []
+}

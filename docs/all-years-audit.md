@@ -30,3 +30,17 @@ Final local gzip budgets use the established sum of response bodies compressed a
 Publication checks: Gitleaks scans of staged publication files and built dist each exited 0 with no findings. Targeted private-path, personal-email and em dash checks found no matches outside exempt saved third-party source evidence.
 
 Clean-source proof passed without copied data or node_modules: npm ci, download and SHA verification of the pinned release, restore of 274 canonical JSON files, and production build. The clean build matches the local index and derived JSON hashes. This pre-commit proof used a clean source export; the Pages workflow provides the committed-checkout proof. npm ci reports four existing dependency findings, three moderate and one high. This task changes no dependencies; dependency remediation remains outside this UI update.
+
+Deployment: implementation commit `eaef5f6`, published source `9aa6990c7b97ad6d05a058d7b5396c2a2d8802fb`. [Pages run 34404959040](https://github.com/UncleOlu/us-trade-partners/actions/runs/34404959040) passed the committed checkout, pinned restore, full build and deployment. [Open All years](https://uncleolu.github.io/us-trade-partners/?year=all).
+
+Production: 8 of 8 browser cases passed with no unexpected console or page errors. The missing-record fault case runs locally only. Live index SHA256 `8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328` and the derived JSON SHA256 above match the tested clean build. Root inspected live desktop table and mobile hub screenshots plus the page in Chrome. All assets returned successfully. The reports list each requested asset and content encoding.
+
+| Production route | Gzip budget bytes | Measured cold transfer bytes |
+|---|---:|---:|
+| Home All years | 137,318 | 141,949 |
+| Home 2025 | 137,269 | 141,870 |
+| Partner 1220 All years | 267,246 | 276,054 |
+
+Cold transfer uses Chrome encodedDataLength with cache off and service workers blocked, including reported response headers and redirects, excluding TLS and transport overhead. Responses use gzip; redirect responses, where present, use identity encoding. These measurements are separate from the local gzip budget calculation. See `reports/tests/all-years/live/` for screenshots, exact CSV receipts and asset lists.
+
+Final read-only audit: APPROVED. The independent reviewer checked source, workflow and hash receipts, test results, per-asset transfer reports, and desktop/mobile screenshots. Both implementation findings remain closed. Browser coverage uses Chromium. The final evidence-only commit does not change app or build inputs and skips a redundant deployment; the deployed source remains the verified commit above.

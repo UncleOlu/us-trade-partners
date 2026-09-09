@@ -1,6 +1,6 @@
 # All-years test audit
 
-Local checks pass. Final production checks are pending deployment.
+Local checks pass. Final production checks also pass: eight normal-flow cases, matching deployed hashes and all three budgets. See live/summary.md and live/ledger.json.
 
 ## Counts and scope
 
@@ -39,7 +39,7 @@ Final local index SHA256: `8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76
 | Partner 1220 all years | 267,246 | 300,000 | PASS |
 | Home 2025 | 137,269 | 250,000 | PASS |
 
-Budget uses the reproducible sum of response bodies compressed with Node zlib level 6. It is not a deployed network transfer measurement. Payload files separately show local server CDP transfer and all assets. Production transfer remains pending. Clean npm ci reports four dependency advisories (three moderate, one high) in the existing lockfile; this task made no dependency upgrade.
+Budget uses the reproducible sum of response bodies compressed with Node zlib level 6. It is not a deployed network transfer measurement. Payload files separately show local server CDP transfer and all assets. Measured production transfer is reported separately in live/summary.md. Clean npm ci reports four dependency advisories (three moderate, one high) in the existing lockfile; this task made no dependency upgrade.
 
 ## Images and reproduction
 

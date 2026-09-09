@@ -1,0 +1,31 @@
+{
+  "filename": "partner_5700_chapters_XVI_all.csv",
+  "sha256": "0237efa0cf4dea76a5e1793552710651c258ffe8c16f2ba19927b4e12723f8bc",
+  "rows": 2,
+  "headers": [
+    "period",
+    "start_year",
+    "end_year",
+    "chapter",
+    "description",
+    "imports_status",
+    "imports_usd",
+    "exports_status",
+    "exports_usd",
+    "total_trade_value_status",
+    "total_trade_value_usd"
+  ],
+  "example": {
+    "period": "all",
+    "start_year": "2013",
+    "end_year": "2025",
+    "chapter": "85",
+    "description": "ELECTRIC MACHINERY ETC; SOUND EQUIP; TV EQUIP; PTS",
+    "imports_status": "observed",
+    "imports_usd": "1644473893640",
+    "exports_status": "observed",
+    "exports_usd": "184005789193",
+    "total_trade_value_status": "observed",
+    "total_trade_value_usd": "1828479682833"
+  }
+}

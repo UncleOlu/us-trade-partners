@@ -1,0 +1,83 @@
+{
+  "collected": 8,
+  "commands": [
+    {
+      "command": "BASE_URL=https://uncleolu.github.io/us-trade-partners/ node tests/e2e/all-years.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/measure-payload.mjs 'https://uncleolu.github.io/us-trade-partners/?year=all' reports/tests/all-years/live/payload-home-all.md home-all",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/measure-payload.mjs 'https://uncleolu.github.io/us-trade-partners/?year=2025' reports/tests/all-years/live/payload-home-annual.md home-annual",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/measure-payload.mjs 'https://uncleolu.github.io/us-trade-partners/partner/1220?year=all' reports/tests/all-years/live/payload-partner-all.md partner-all",
+      "exit_code": 0
+    }
+  ],
+  "deployment_run": 34404959040,
+  "failed": 0,
+  "fault_injection": false,
+  "hashes": [
+    {
+      "actual_sha256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+      "bytes": 575,
+      "expected_sha256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+      "match": true,
+      "status": 200,
+      "url": "https://uncleolu.github.io/us-trade-partners/"
+    },
+    {
+      "actual_sha256": "bc55f3b65c66b9d60b1a2d8e7cfa0587d4ddde0526eb6ac6304aa2d113d8fea7",
+      "bytes": 87853,
+      "expected_sha256": "bc55f3b65c66b9d60b1a2d8e7cfa0587d4ddde0526eb6ac6304aa2d113d8fea7",
+      "match": true,
+      "status": 200,
+      "url": "https://uncleolu.github.io/us-trade-partners/derived/20260909T091429Z-c638aff167ea/summary-all.json"
+    }
+  ],
+  "images_inspected": 15,
+  "passed": 8,
+  "payloads": {
+    "home-all": {
+      "encodings": [
+        "gzip"
+      ],
+      "requests": 7,
+      "totals": {
+        "gzip_bytes": 137318,
+        "raw_bytes": 526857,
+        "transferred_bytes": 141949
+      }
+    },
+    "home-annual": {
+      "encodings": [
+        "gzip"
+      ],
+      "requests": 7,
+      "totals": {
+        "gzip_bytes": 137269,
+        "raw_bytes": 577531,
+        "transferred_bytes": 141870
+      }
+    },
+    "partner-all": {
+      "encodings": [
+        "gzip",
+        "identity"
+      ],
+      "requests": 9,
+      "totals": {
+        "gzip_bytes": 267246,
+        "raw_bytes": 1539853,
+        "transferred_bytes": 276054
+      }
+    }
+  },
+  "skipped": 0,
+  "source_commit": "9aa6990c7b97ad6d05a058d7b5396c2a2d8802fb",
+  "unexpected_errors": []
+}

@@ -1,0 +1,22 @@
+{
+  "source_commit": "9aa6990c7b97ad6d05a058d7b5396c2a2d8802fb",
+  "run": 34404959040,
+  "receipts": [
+    {
+      "url": "https://uncleolu.github.io/us-trade-partners/",
+      "status": 200,
+      "bytes": 575,
+      "expected_sha256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+      "actual_sha256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+      "match": true
+    },
+    {
+      "url": "https://uncleolu.github.io/us-trade-partners/derived/20260909T091429Z-c638aff167ea/summary-all.json",
+      "status": 200,
+      "bytes": 87853,
+      "expected_sha256": "bc55f3b65c66b9d60b1a2d8e7cfa0587d4ddde0526eb6ac6304aa2d113d8fea7",
+      "actual_sha256": "bc55f3b65c66b9d60b1a2d8e7cfa0587d4ddde0526eb6ac6304aa2d113d8fea7",
+      "match": true
+    }
+  ]
+}

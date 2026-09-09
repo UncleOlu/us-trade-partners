@@ -1,0 +1,10 @@
+[PASS] all-years home uses derived summary, fixed world totals and complete CSV scope (921ms)
+[PASS] all period survives Hub partner section refresh navigation and browser Back (2982ms)
+[PASS] all-years map shows summed country values and preserves period on selection (740ms)
+[PASS] all-years partner totals and group chapter CSVs match independent sums; annual trend retained (5759ms)
+[PASS] all-years section retains annual trend and one table with exact period CSV (1326ms)
+[PASS] home rank and money align centrally; partner names align left and mobile table scrolls (2087ms) detail=[{"width":1280,"head":["center","left","center","center","center","center"],"body":["center","left","center","center","center","center"]},{"width":390,"head":["center","left","center","center","center","center"],"body":["center","left","center","center","center","center"]},{"width":320,"head":["center","left","center","center","center","center"],"body":["center","left","center","center","center","center"]}]
+[PASS] all-years period control text fits home and Hub at desktop and mobile widths (3843ms) detail=[{"name":"home","width":228,"text":"All years (2013-2025)","textWidth":158.203125,"padding":24},{"name":"hub","width":228,"text":"All years (2013-2025)","textWidth":158.203125,"padding":24},{"name":"home","width":322,"text":"All years (2013-2025)","textWidth":158.203125,"padding":24},{"name":"hub","width":228,"text":"All years (2013-2025)","textWidth":158.203125,"padding":24},{"name":"home","width":252,"text":"All years (2013-2025)","textWidth":158.203125,"padding":24},{"name":"hub","width":228,"text":"All years (2013-2025)","textWidth":158.203125,"padding":24}]
+[PASS] all-years Hub partner section and methodology screenshots show period context (4916ms)
+
+collected=8 passed=8 failed=0 not_run=0

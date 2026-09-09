@@ -1,0 +1,29 @@
+{
+  "filename": "partner_6022_groups_all.csv",
+  "sha256": "910541831245a3349722f734fd7befc4c167e73bd985825b8ad99aba12043813",
+  "rows": 22,
+  "headers": [
+    "period",
+    "start_year",
+    "end_year",
+    "section_id",
+    "imports_status",
+    "imports_usd",
+    "exports_status",
+    "exports_usd",
+    "total_trade_value_status",
+    "total_trade_value_usd"
+  ],
+  "example": {
+    "period": "all",
+    "start_year": "2013",
+    "end_year": "2025",
+    "section_id": "I",
+    "imports_status": "absent",
+    "imports_usd": "",
+    "exports_status": "absent",
+    "exports_usd": "",
+    "total_trade_value_status": "absent",
+    "total_trade_value_usd": ""
+  }
+}

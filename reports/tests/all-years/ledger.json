@@ -48,7 +48,13 @@
     "real": 1,
     "selector": 2
   },
-  "production": "pending",
+  "production": {
+    "failed": 0,
+    "passed": 8,
+    "report": "live/ledger.json",
+    "skipped": 0,
+    "source_commit": "9aa6990c7b97ad6d05a058d7b5396c2a2d8802fb"
+  },
   "runs": [
     {
       "collected": 8,
