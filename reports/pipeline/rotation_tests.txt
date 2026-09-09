@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- ./.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: .
+configfile: pyproject.toml
+collecting ... collected 9 items
+
+pipeline/tests_rotation/test_rotation.py::test_real_rotation_removes_and_logs PASSED [ 11%]
+pipeline/tests_rotation/test_rotation.py::test_archive_failure_preserves PASSED [ 22%]
+pipeline/tests_rotation/test_rotation.py::test_upload_failure_preserves PASSED [ 33%]
+pipeline/tests_rotation/test_rotation.py::test_download_back_failure_preserves PASSED [ 44%]
+pipeline/tests_rotation/test_rotation.py::test_no_remote_preserves PASSED [ 55%]
+pipeline/tests_rotation/test_rotation.py::test_dry_run_no_changes PASSED [ 66%]
+pipeline/tests_rotation/test_rotation.py::test_dry_run_nothing_to_rotate PASSED [ 77%]
+pipeline/tests_rotation/test_rotation.py::test_release_builds_and_verifies_without_removing PASSED [ 88%]
+pipeline/tests_rotation/test_rotation.py::test_release_no_remote_still_builds_locally PASSED [100%]
+
+============================== 9 passed in 1.35s ===============================

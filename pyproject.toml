@@ -8,3 +8,8 @@ dependencies = [
     "pandas>=2.2",
     "pycountry>=24.6",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]

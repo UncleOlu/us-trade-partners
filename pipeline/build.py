@@ -921,12 +921,12 @@ def build(snapshot_id: str, out_dir: Path, publish: bool) -> Path:
             "Code 8220 (kind=special; see partners.json resolution_note): the API returns a "
             "null CTY_NAME for this code, and it is absent from Schedule C and the API guide. "
             "Census does publish a page for it, titled 'Trade in Goods with Unidentified "
-            "Countries' (https://www.census.gov/foreign-trade/balance/c8220.html; saved copy "
-            "tests/fixtures/published_examples/sources/8220_attempt.txt). Owner approved on "
-            "2026-09-09 under the display name 'Unidentified partner (Census code 8220)': the "
-            "API gives no name for this code, and the published page gives 'Unidentified "
-            f"Countries'. See reports/pipeline/unresolved_codes_{snapshot_id}.json for the "
-            "record of that approval.")
+            "Countries' (https://www.census.gov/foreign-trade/balance/c8220.html; captured "
+            "page saved at tests/fixtures/published_examples/sources/8220_attempt.txt). Owner "
+            "approved the display name 'Unidentified Countries (Census code 8220)' on "
+            "2026-09-09, citing that captured page (Census's own page title, 'Unidentified "
+            f"Countries', plus the code). See reports/pipeline/unresolved_codes_{snapshot_id}.json "
+            "for the record of that approval.")
 
     latest_periods = manifest["fingerprint_after"]["latest_period"]
     top_latest_period = min(latest_periods.values())

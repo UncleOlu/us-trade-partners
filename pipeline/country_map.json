@@ -2176,12 +2176,12 @@
     },
     {
       "census_code": "8220",
-      "census_name": "Unidentified partner (Census code 8220)",
+      "census_name": "Unidentified Countries (Census code 8220)",
       "iso2": null,
       "iso3": null,
       "kind_hint": "special",
       "map_feature_id": null,
-      "note": "Observed live with SUMMARY_LVL=DET (like a real detail-level partner, not a country grouping) in exports partner_totals for 2013-12 (179871109), 2014-12 (101833), and 2016-12 (1771484) only; absent from imports in every year and from exports in every other configured year. The API returns a null CTY_NAME in every occurrence (raw/<snapshot_id>/partner_totals/exports_{2013,2014,2016}-12.response.json). Code 8220 is absent from raw/reference/schedule_c_country.txt (U.S. Census Bureau Schedule C Country List) and from the API guide (raw/source_test/api_guide/guide.txt). Census does publish a page for this code: https://www.census.gov/foreign-trade/balance/c8220.html (HTTP 200), titled 'Trade in Goods with Unidentified Countries', showing 179.9 million USD of exports for 2013, consistent with the API value 179871109; saved copy at tests/fixtures/published_examples/sources/8220_attempt.txt. Classified kind=special with iso3 and map_feature_id null, consistent with SPEC PARTNERS kind enum. Owner approved on 2026-09-09 under the display name 'Unidentified partner (Census code 8220)': the API gives no name for this code, and the published page gives 'Unidentified Countries'."
+      "note": "Observed live with SUMMARY_LVL=DET (like a real detail-level partner, not a country grouping) in exports partner_totals for 2013-12 (179871109), 2014-12 (101833), and 2016-12 (1771484) only; absent from imports in every year and from exports in every other configured year. The API returns a null CTY_NAME in every occurrence (raw/<snapshot_id>/partner_totals/exports_{2013,2014,2016}-12.response.json). Code 8220 is absent from raw/reference/schedule_c_country.txt (U.S. Census Bureau Schedule C Country List) and from the API guide (raw/source_test/api_guide/guide.txt). Census does publish a page for this code: https://www.census.gov/foreign-trade/balance/c8220.html (HTTP 200), titled 'Trade in Goods with Unidentified Countries', showing 179.9 million USD of exports for 2013, consistent with the API value 179871109; captured page saved at tests/fixtures/published_examples/sources/8220_attempt.txt. Classified kind=special with iso3 and map_feature_id null, consistent with SPEC PARTNERS kind enum. Owner approved the display name 'Unidentified Countries (Census code 8220)' on 2026-09-09, citing that captured page (Census's own page title, 'Unidentified Countries', plus the code)."
     }
   ],
   "sources": [

@@ -26,9 +26,9 @@ Every total on this site sums the reconciliation universe: partners flagged incl
 
 Partners without a map shape (small territories and non-geographic codes) still appear in search, tables, the hub, and section pages.
 
-### Unidentified partner (Census code 8220)
+### Unidentified Countries (Census code 8220)
 
-The Census API returns a detail-level partner row with code 8220 and a null name. It appears in exports only, in three years: 2013 (179,871,109 USD), 2014 (101,833 USD), and 2016 (1,771,484 USD). The code is not in the Census Schedule C country list or the API documentation. The Census published page for the code (https://www.census.gov/foreign-trade/balance/c8220.html) is titled "Trade in Goods with Unidentified Countries" and shows 179.9 million USD of exports for 2013, consistent with the API value. It is kept as a partner named "Unidentified partner (Census code 8220)" because the exports world total for those years reconciles exactly only with it included. No country identity is assumed.
+The Census API returns a detail-level partner row with code 8220 and a null name. It appears in exports only, in three years: 2013 (179,871,109 USD), 2014 (101,833 USD), and 2016 (1,771,484 USD). The code is not in the Census Schedule C country list or the API documentation. The Census published page for the code (https://www.census.gov/foreign-trade/balance/c8220.html) is titled "Trade in Goods with Unidentified Countries" and shows 179.9 million USD of exports for 2013, consistent with the API value. It is kept as a partner named "Unidentified Countries (Census code 8220)", the name Census uses on that page, because the exports world total for those years reconciles exactly only with it included. No country identity is assumed. The captured copy of the Census page is kept in the repository at tests/fixtures/published_examples/sources/8220_attempt.txt.
 
 ### Kosovo (4803)
 
