@@ -292,7 +292,9 @@ test('table headers align with fixed year cells and scroll with product names',(
    if(label==='Trade by year')assert.ok(Math.abs(geometry.headerLeft-geometry.regionLeft)<=2,JSON.stringify({width,label,geometry}));
    else assert.ok(geometry.headerLeft<geometry.regionLeft-10,JSON.stringify({width,label,geometry}));
    checks.push({width,label,...geometry});
-   await region.screenshot({path:path.join(reportDir,`${width}-${label==='Trade by year'?'year':'product'}-table-maxscroll.png`)});
+   await region.evaluate(e=>e.scrollIntoView({block:'start'}));
+   const box=await region.boundingBox();
+   await page.screenshot({path:path.join(reportDir,`${width}-${label==='Trade by year'?'year':'product'}-table-maxscroll.png`),clip:{x:box.x,y:box.y,width:box.width,height:Math.min(360,900-box.y)}});
   }
  }
  return checks;

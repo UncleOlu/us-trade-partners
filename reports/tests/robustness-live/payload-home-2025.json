@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 342,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 758,
+      "url": "https://uncleolu.github.io/us-trade-partners/?year=2025"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3592,
+      "raw_bytes": 13378,
+      "status": 200,
+      "transferred_bytes": 3798,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/index-DpBObqI5.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 73659,
+      "raw_bytes": 220088,
+      "status": 200,
+      "transferred_bytes": 74371,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/index-DXl5PV71.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 38423,
+      "raw_bytes": 107761,
+      "status": 200,
+      "transferred_bytes": 39936,
+      "url": "https://uncleolu.github.io/us-trade-partners/atlas/countries-110m.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 1730,
+      "raw_bytes": 3561,
+      "status": 200,
+      "transferred_bytes": 2036,
+      "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 7098,
+      "raw_bytes": 88097,
+      "status": 200,
+      "transferred_bytes": 7409,
+      "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 10611,
+      "raw_bytes": 138527,
+      "status": 200,
+      "transferred_bytes": 11478,
+      "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2025.json"
+    }
+  ],
+  "budget_bytes": 250000,
+  "budget_pass": true,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "deployed",
+  "totals": {
+    "gzip_bytes": 135455,
+    "raw_bytes": 571987,
+    "transferred_bytes": 139786
+  },
+  "url": "https://uncleolu.github.io/us-trade-partners/?year=2025"
+}

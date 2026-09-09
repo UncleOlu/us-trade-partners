@@ -82,3 +82,5 @@ This is a bounded browser and visual audit, not an accessibility certification. 
 Production normal-flow checks use BASE_URL and write robustness-live. The runner explicitly excludes all fault-injection cases in that mode. Production results are pending and are not included above.
 
 Usage: current Codex model. Uncached input, cache writes by duration, cache reads, output, and cost are unknown.
+
+Screenshot-only refinement after source 26d08bd: four max-scroll proof images now show the visible first 360px of each table region. The capture excludes offscreen fixed content from full element screenshots. App assets and geometry assertions are unchanged. The 25-case ledger retains prior geometry results; this refinement adds no case. Reproduce with `ROBUST_FILTER="table headers" ROBUST_RUN=header-check node tests/e2e/robustness.mjs`.

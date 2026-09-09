@@ -1,0 +1,14 @@
+[PASS] invalid year/rank query recovery agrees with visible state (3970ms)
+[PASS] valid year/rank, header and hub navigation keep context (1668ms)
+[PASS] back and forward restore year with matching values (1041ms)
+[PASS] section choice survives share/refresh and exact-value clicks are separate (1980ms)
+[PASS] missing reasons are available by tap and keyboard (930ms)
+[PASS] hub search keeps all partners and sections reachable (888ms)
+[PASS] home filtered search preserves totals and full-export scope (782ms)
+[PASS] map has one tab stop, arrow navigation, escape and keyboard selection (798ms)
+[PASS] exact KPI values fit the card and keep keyboard focus (2468ms) detail=[{"width":320,"left":29,"right":230.171875,"cardLeft":16,"cardRight":304},{"width":390,"left":29,"right":230.171875,"cardLeft":16,"cardRight":374},{"width":640,"left":41,"right":231.65625,"cardLeft":24,"cardRight":616},{"width":1280,"left":89,"right":381.71875,"cardLeft":72,"cardRight":634}]
+[PASS] table headers align with fixed year cells and scroll with product names (1644ms) detail=[{"width":320,"label":"Trade by year","headerLeft":34,"bodyLeft":34,"regionLeft":33,"scrollLeft":328},{"width":320,"label":"Product groups","headerLeft":-294,"bodyLeft":-294,"regionLeft":33,"scrollLeft":328},{"width":390,"label":"Trade by year","headerLeft":34,"bodyLeft":34,"regionLeft":33,"scrollLeft":258},{"width":390,"label":"Product groups","headerLeft":-224,"bodyLeft":-224,"regionLeft":33,"scrollLeft":258}]
+[PASS] product group max scroll reveals the full last numeric column (1420ms)
+[PASS] responsive layouts, focus and keyboard table scroll (13500ms)
+
+collected=12 passed=12 failed=0 not_run=0

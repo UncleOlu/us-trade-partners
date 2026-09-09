@@ -1,0 +1,135 @@
+{
+  "build": {
+    "target": "production",
+    "expected_local_index_sha256": "ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e",
+    "index_modified": "2026-09-09T20:21:31.517Z",
+    "snapshot": "20260909T091429Z-c638aff167ea"
+  },
+  "results": [
+    {
+      "name": "invalid year/rank query recovery agrees with visible state",
+      "status": "PASS",
+      "ms": 3970
+    },
+    {
+      "name": "valid year/rank, header and hub navigation keep context",
+      "status": "PASS",
+      "ms": 1668
+    },
+    {
+      "name": "back and forward restore year with matching values",
+      "status": "PASS",
+      "ms": 1041
+    },
+    {
+      "name": "section choice survives share/refresh and exact-value clicks are separate",
+      "status": "PASS",
+      "ms": 1980
+    },
+    {
+      "name": "missing reasons are available by tap and keyboard",
+      "status": "PASS",
+      "ms": 930
+    },
+    {
+      "name": "hub search keeps all partners and sections reachable",
+      "status": "PASS",
+      "ms": 888
+    },
+    {
+      "name": "home filtered search preserves totals and full-export scope",
+      "status": "PASS",
+      "ms": 782
+    },
+    {
+      "name": "map has one tab stop, arrow navigation, escape and keyboard selection",
+      "status": "PASS",
+      "ms": 798
+    },
+    {
+      "name": "exact KPI values fit the card and keep keyboard focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 320,
+          "left": 29,
+          "right": 230.171875,
+          "cardLeft": 16,
+          "cardRight": 304
+        },
+        {
+          "width": 390,
+          "left": 29,
+          "right": 230.171875,
+          "cardLeft": 16,
+          "cardRight": 374
+        },
+        {
+          "width": 640,
+          "left": 41,
+          "right": 231.65625,
+          "cardLeft": 24,
+          "cardRight": 616
+        },
+        {
+          "width": 1280,
+          "left": 89,
+          "right": 381.71875,
+          "cardLeft": 72,
+          "cardRight": 634
+        }
+      ],
+      "ms": 2468
+    },
+    {
+      "name": "table headers align with fixed year cells and scroll with product names",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 320,
+          "label": "Trade by year",
+          "headerLeft": 34,
+          "bodyLeft": 34,
+          "regionLeft": 33,
+          "scrollLeft": 328
+        },
+        {
+          "width": 320,
+          "label": "Product groups",
+          "headerLeft": -294,
+          "bodyLeft": -294,
+          "regionLeft": 33,
+          "scrollLeft": 328
+        },
+        {
+          "width": 390,
+          "label": "Trade by year",
+          "headerLeft": 34,
+          "bodyLeft": 34,
+          "regionLeft": 33,
+          "scrollLeft": 258
+        },
+        {
+          "width": 390,
+          "label": "Product groups",
+          "headerLeft": -224,
+          "bodyLeft": -224,
+          "regionLeft": 33,
+          "scrollLeft": 258
+        }
+      ],
+      "ms": 1644
+    },
+    {
+      "name": "product group max scroll reveals the full last numeric column",
+      "status": "PASS",
+      "ms": 1420
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 13500
+    }
+  ],
+  "pageErrors": []
+}

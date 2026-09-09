@@ -1,0 +1,54 @@
+[
+  {
+    "name": "home: full width map, 25 default, all rows, search, fixed world totals, trillion exact access",
+    "status": "PASS",
+    "detail": {
+      "total": 236,
+      "mapWidth": 1086,
+      "mapHeight": 572
+    },
+    "ms": 983
+  },
+  {
+    "name": "home and section: year/rank survive refresh and one sorted section table",
+    "status": "PASS",
+    "ms": 2421
+  },
+  {
+    "name": "map: mouse and keyboard selection preserve year",
+    "status": "PASS",
+    "ms": 1632
+  },
+  {
+    "name": "methodology: filled metadata, 8220, no template markers",
+    "status": "PASS",
+    "ms": 813
+  },
+  {
+    "name": "partner: exact integer CSV with statuses and missing-data labels",
+    "status": "PASS",
+    "ms": 677
+  },
+  {
+    "name": "all known routes: real HTTP 200 and query preservation",
+    "status": "PASS",
+    "detail": {
+      "routes": 261
+    },
+    "ms": 31936
+  },
+  {
+    "name": "desktop/mobile: route refresh, no overflow, numeric nowrap, container scroll, screenshots",
+    "status": "PASS",
+    "ms": 12904
+  },
+  {
+    "name": "cold-load network transfer: measured bytes and all request encodings",
+    "status": "PASS",
+    "detail": {
+      "home": 139782,
+      "partner": 271661
+    },
+    "ms": 1517
+  }
+]

@@ -78,3 +78,32 @@ Source 02393fc55297d265f3bd28bcb6c5c45beef3455e passed GitHub Pages run 34400235
 The fixed identifier column uses some available width. Intermediate edge columns can be partly visible at a given scroll position, including maximum scroll. This is a stated horizontal-scroll trade-off, not a claim that all columns fit at once. Users can move the table to read each column; wide product labels do not stay fixed. The header regression passes at both narrow widths after replacing an ambiguous test region locator with the table's named scroll region. The geometry assertions did not change.
 
 The independent read-only re-audit approved the CSS correction. The final cumulative ledger now has 25 unique cases, all latest results PASS, with zero skips. The final index SHA-256 is ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e. Header evidence: header-fix-build.txt, header-check.txt, results-header-check.json and the 320/390 table-maxscroll screenshots under reports/tests/robustness-after/. No required local fixes remain.
+
+## Production result
+
+Live app: https://uncleolu.github.io/us-trade-partners/?year=2025
+
+Repository: https://github.com/UncleOlu/us-trade-partners
+
+Audited UI source: 26d08bddf47e1e5eb4dc04976e1ed77ca74f0f26. GitHub Pages run 34401062519 completed successfully. The production index returned HTTP 200 and its SHA-256 matches the final local index above. The workflow used a clean checkout, verified the pinned snapshot archive, checked type drift, built the app, and checked rendered methodology metadata.
+
+- Production normal-flow checks: 12/12 PASS, zero skips and zero page errors.
+- Production audit: 8/8 groups PASS, including all 261 routes. This covers direct entry and refresh, URL state, keyboard selection, exports, missing values, metadata and responsive behavior.
+- Fault injection ran locally only. The local cumulative count remains 25 passing focused cases, plus 6 legacy browser tests and 8 legacy audit groups.
+- No app source changed after the audited UI commit. The later screenshot-helper change only crops test evidence to the visible table area; it does not change geometry assertions or deployed assets.
+
+| Cold route | Gzip body-sum budget bytes | Limit | Measured CDP transfer bytes |
+|---|---:|---:|---:|
+| Home 2025 | 135,455 | 250,000 | 139,786 |
+| Home 2013, largest home payload | 135,641 | 250,000 | 139,937 |
+| Partner 1220, largest partner payload | 263,497 | 300,000 | 272,152 |
+
+All requested assets completed. Successful responses used gzip. The partner canonical-path redirect used identity encoding. CDP transfer counts include response headers as reported by Chrome and redirect bytes, but exclude TLS and transport overhead. Gzip body sums use local gzip level 6 and are a separate budget calculation. Per-asset URLs, encodings and sizes are in [production payload reports](../reports/tests/robustness-live/summary.md).
+
+The orchestrator inspected production desktop and mobile viewport images for home, partner, section, hub and methodology, plus both map captures. Agent D also inspected all 20 viewport states and four maximum-scroll proofs. Selected evidence: [desktop map](../reports/tests/robustness-live/desktop-map.png), [mobile home](../reports/tests/robustness-live/mobile-home-viewport.png), [desktop hub](../reports/tests/robustness-live/desktop-hub-viewport.png), [mobile hub](../reports/tests/robustness-live/mobile-hub-viewport.png).
+
+No known blocking UI defects remain in the tested flows. Limits: browser checks used Chromium; no screen-reader session, Safari audit or actual browser zoom test ran. The 640px captures test equivalent layout width. Small shapes and 66 partners without a map shape require the search/list path. Wide tables require horizontal scrolling, and exact summary cards expand when opened. Slow requests time out after 30 seconds and may need a retry. Full names remain in disclosures, and exact table mode affects the whole table. No billing or token-cost estimate is available.
+
+Data storage and reproducibility remain unchanged. The [release pin](../reports/pipeline/current_release.json) records snapshot, pipeline commit, immutable built/raw release identity and both SHA-256 checksums. The earlier archive/rotation and data-validation results remain in [the continuation audit](continuation-audit.md); this UI pass did not rerun or alter that pipeline.
+
+Final independent read-only verdict: APPROVED for the deployed UI, with no unresolved material findings. The auditor inspected deployment, index hash, commands, results, payload encodings and production screenshots. It did not rerun the browser tests itself. Later evidence-only commits can be verified with a successful deployment receipt and the same index hash; any app change requires affected tests again.

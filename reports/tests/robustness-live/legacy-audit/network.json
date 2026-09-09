@@ -1,0 +1,162 @@
+{
+  "home": {
+    "url": "https://uncleolu.github.io/us-trade-partners/",
+    "totalBytes": 139782,
+    "metric": "CDP Network.loadingFinished encodedDataLength, including response headers",
+    "assets": [
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/",
+        "bytes": 756,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "text/html",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/index-DpBObqI5.css",
+        "bytes": 3823,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "text/css",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/index-DXl5PV71.js",
+        "bytes": 74323,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/atlas/countries-110m.json",
+        "bytes": 39958,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json",
+        "bytes": 1950,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json",
+        "bytes": 7494,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2025.json",
+        "bytes": 11478,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ]
+  },
+  "partner": {
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700?year=2025",
+    "totalBytes": 271661,
+    "metric": "CDP Network.loadingFinished encodedDataLength, including response headers",
+    "assets": [
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/index-DpBObqI5.css",
+        "bytes": 3821,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "text/css",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/index-DXl5PV71.js",
+        "bytes": 74514,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/LineChart-DKJo0-jJ.js",
+        "bytes": 106263,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/PartnerPage-DWwhpT8h.js",
+        "bytes": 3522,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/assets/sectionLabels-DNAnCw3g.js",
+        "bytes": 548,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/5700.json",
+        "bytes": 82014,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/partner/5700?year=2025",
+        "bytes": 425,
+        "finished": true,
+        "status": 301
+      },
+      {
+        "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2025",
+        "bytes": 554,
+        "finished": true,
+        "status": 200,
+        "encoding": "gzip",
+        "mimeType": "text/html",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ]
+  }
+}

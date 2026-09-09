@@ -1,0 +1,46 @@
+{
+  "commands": [
+    {
+      "command": "BASE_URL=https://uncleolu.github.io/us-trade-partners/ node tests/e2e/robustness.mjs > reports/tests/robustness-live/normal-flow.txt 2>&1",
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 12
+    },
+    {
+      "command": "BASE_URL=https://uncleolu.github.io/us-trade-partners/ AUDIT_REPORT_DIR=reports/tests/robustness-live/legacy-audit node tests/e2e/audit.mjs > reports/tests/robustness-live/legacy-audit.txt 2>&1",
+      "exit_code": 0,
+      "failed": 0,
+      "known_routes": 261,
+      "passed": 8
+    },
+    {
+      "command": "node scripts/measure-payload.mjs 'https://uncleolu.github.io/us-trade-partners/?year=2025' reports/tests/robustness-live/payload-home-2025.md home-2025",
+      "exit_code": 0,
+      "totals": {
+        "gzip_bytes": 135455,
+        "raw_bytes": 571987,
+        "transferred_bytes": 139786
+      }
+    },
+    {
+      "command": "node scripts/measure-payload.mjs 'https://uncleolu.github.io/us-trade-partners/?year=2013' reports/tests/robustness-live/payload-home-2013.md home-2013",
+      "exit_code": 0,
+      "totals": {
+        "gzip_bytes": 135641,
+        "raw_bytes": 571577,
+        "transferred_bytes": 139937
+      }
+    },
+    {
+      "command": "node scripts/measure-payload.mjs 'https://uncleolu.github.io/us-trade-partners/partner/1220?year=2025' reports/tests/robustness-live/payload-partner-1220.md partner-1220",
+      "exit_code": 0,
+      "totals": {
+        "gzip_bytes": 263497,
+        "raw_bytes": 1530204,
+        "transferred_bytes": 272152
+      }
+    }
+  ],
+  "deployment_run": "34401062519",
+  "source_commit": "26d08bddf47e1e5eb4dc04976e1ed77ca74f0f26"
+}

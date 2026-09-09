@@ -177,6 +177,18 @@
       "skipped": 0
     }
   ],
+  "screenshot_refinement": {
+    "after_source_commit": "26d08bddf47e1e5eb4dc04976e1ed77ca74f0f26",
+    "change": "Capture visible first 360px of table region after scrolling it into view. This excludes offscreen fixed content included by full element capture. Geometry assertions and app assets unchanged.",
+    "files": [
+      "320-year-table-maxscroll.png",
+      "390-year-table-maxscroll.png",
+      "320-product-table-maxscroll.png",
+      "390-product-table-maxscroll.png"
+    ],
+    "reproduction": "ROBUST_FILTER=\"table headers\" ROBUST_RUN=header-check node tests/e2e/robustness.mjs",
+    "result_scope": "Retains prior passing geometry evidence. Screenshot capture refinement does not add unique cases."
+  },
   "source_base": "b19843c",
   "unique_cases": 25
 }

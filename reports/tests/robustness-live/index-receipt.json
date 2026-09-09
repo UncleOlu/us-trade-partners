@@ -1,0 +1,9 @@
+{
+  "url": "https://uncleolu.github.io/us-trade-partners/",
+  "source_commit": "26d08bddf47e1e5eb4dc04976e1ed77ca74f0f26",
+  "deployment_run": "34401062519",
+  "status": 200,
+  "expected_sha256": "ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e",
+  "actual_sha256": "ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e",
+  "match": true
+}
