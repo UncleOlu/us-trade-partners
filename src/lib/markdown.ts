@@ -99,6 +99,19 @@ export function renderMarkdown(source: string): ReactNode {
   return createElement(Fragment, null, blocks);
 }
 
+/**
+ * docs/methodology-content.md opens with an H1 title and an authoring note
+ * ("Agent B renders it; values marked {{...}} are injected...") aimed at
+ * whoever edits that file, not at the end user, and that note's literal
+ * "{{...}}" example is not a real template key so it is never filled. Skip
+ * both and start the rendered page at the first real section heading.
+ */
+export function stripAuthoringPreamble(source: string): string {
+  const match = /\n##\s/.exec(source);
+  if (!match) return source;
+  return source.slice(match.index + 1);
+}
+
 export function fillTemplate(source: string, values: Record<string, string>): string {
   return source.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (whole, path: string) => {
     return path in values ? values[path] : whole;

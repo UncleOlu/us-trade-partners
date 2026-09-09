@@ -110,6 +110,9 @@ tr.selected-row {
 
 .money-cell {
   cursor: default;
+  /* A dollar figure must never wrap mid-number, in any table. */
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .money-cell-missing {
@@ -170,23 +173,30 @@ tr.selected-row {
   font-weight: 600;
 }
 
-.home-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
+.home-map-pane {
+  /* Map is prominent: full content width, stacked above the table. */
+  display: block;
+  width: 100%;
+  margin: 20px 0;
 }
 
 .home-map-pane,
 .home-table-pane {
-  /* Grid items default to min-width: auto, which lets a child with an
-     intrinsic/measured width (the map SVG, sized before its own
-     ResizeObserver settles) blow out the track and the page's horizontal
-     scroll on mobile. min-width: 0 lets these panes actually shrink to the
-     grid track's width; overflow hidden is a second guard against any
-     child that briefly renders wider than its container. */
+  /* A child that briefly renders wider than its container before its own
+     ResizeObserver settles (the map SVG) must never blow out the page's
+     horizontal scroll on mobile. */
   min-width: 0;
   overflow: hidden;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
 }
 
 .map-placeholder {
@@ -203,9 +213,6 @@ tr.selected-row {
 }
 
 @media (max-width: 900px) {
-  .home-layout {
-    grid-template-columns: 1fr;
-  }
   .stat-cards {
     grid-template-columns: repeat(2, 1fr);
   }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import {
   ResponsiveContainer,
@@ -23,12 +23,19 @@ import type { Section, FlowValue, DerivedValue } from '../types/generated';
 
 type RankField = 'imports' | 'exports' | 'balance' | 'total_trade_value';
 
+const RANK_FIELDS: RankField[] = ['total_trade_value', 'imports', 'exports', 'balance'];
+const DEFAULT_RANK: RankField = 'total_trade_value';
+
 const RANK_LABELS: Record<RankField, string> = {
   imports: 'Imports',
   exports: 'Exports',
   balance: 'Balance',
   total_trade_value: 'Total trade value',
 };
+
+function parseRankField(raw: string | null): RankField {
+  return raw && (RANK_FIELDS as string[]).includes(raw) ? (raw as RankField) : DEFAULT_RANK;
+}
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
   return isUsable(flow) ? flow.value : null;
@@ -80,7 +87,7 @@ function SectionTrend({ section }: { section: Section }): JSX.Element {
 export function SectionPage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [rankField, setRankField] = useState<RankField>('total_trade_value');
+  const rankField = parseRankField(searchParams.get('rank'));
 
   const state = useAsyncData(() => {
     if (!id) return Promise.reject(new Error('missing section id'));
@@ -114,6 +121,16 @@ export function SectionPage(): JSX.Element {
   const onYearChange = (newYear: number) => {
     const next = new URLSearchParams(searchParams);
     next.set('year', String(newYear));
+    setSearchParams(next);
+  };
+
+  const onRankChange = (field: RankField) => {
+    const next = new URLSearchParams(searchParams);
+    if (field === DEFAULT_RANK) {
+      next.delete('rank');
+    } else {
+      next.set('rank', field);
+    }
     setSearchParams(next);
   };
 
@@ -170,8 +187,8 @@ export function SectionPage(): JSX.Element {
           ))}
         </select>
         <label htmlFor="section-rank-field">Rank by</label>
-        <select id="section-rank-field" value={rankField} onChange={(e) => setRankField(e.target.value as RankField)}>
-          {(Object.keys(RANK_LABELS) as RankField[]).map((f) => (
+        <select id="section-rank-field" value={rankField} onChange={(e) => onRankChange(e.target.value as RankField)}>
+          {RANK_FIELDS.map((f) => (
             <option key={f} value={f}>
               {RANK_LABELS[f]}
             </option>

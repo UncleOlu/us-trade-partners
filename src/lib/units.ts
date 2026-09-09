@@ -1,4 +1,4 @@
-// Unit auto-selection: $k, $m, $bn with three significant figures for display.
+// Unit auto-selection: $k, $m, $bn, $tn with three significant figures for display.
 // Exact integer values are always available too (title attribute plus a visible
 // exact column), because hover is never the only path to a value.
 
@@ -31,6 +31,7 @@ export function formatExactUsd(value: number): string {
 }
 
 const UNITS: Array<{ threshold: number; divisor: number; suffix: string }> = [
+  { threshold: 1_000_000_000_000, divisor: 1_000_000_000_000, suffix: 'tn' },
   { threshold: 1_000_000_000, divisor: 1_000_000_000, suffix: 'bn' },
   { threshold: 1_000_000, divisor: 1_000_000, suffix: 'm' },
   { threshold: 1_000, divisor: 1_000, suffix: 'k' },

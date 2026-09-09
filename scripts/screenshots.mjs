@@ -41,7 +41,9 @@ async function waitForServer(url, timeoutMs) {
 }
 
 const targets = [
-  { route: '/?year=2025', name: 'home_2025' },
+  // Home gets both a full-page capture (name below) and a viewport-only,
+  // not-full-page capture (name + "_viewport"), per the step-5 follow-up.
+  { route: '/?year=2025', name: 'home_2025', alsoViewportOnly: true },
   { route: '/hub', name: 'hub' },
   { route: '/section/XVI?year=2025', name: 'section_XVI_2025' },
   { route: '/partner/5700?year=2025', name: 'china_5700' },
@@ -78,6 +80,11 @@ async function main() {
         const filePath = path.join(outDir, `${t.name}_${vp.name}.png`);
         await page.screenshot({ path: filePath, fullPage: true });
         written.push(filePath);
+        if (t.alsoViewportOnly) {
+          const viewportFilePath = path.join(outDir, `${t.name}_${vp.name}_viewport.png`);
+          await page.screenshot({ path: viewportFilePath, fullPage: false });
+          written.push(viewportFilePath);
+        }
       }
       await page.close();
     }

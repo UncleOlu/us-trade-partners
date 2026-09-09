@@ -3,7 +3,7 @@ import { BASE_PATH, SNAPSHOT_ID } from '../lib/config';
 import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
 import { DataError } from '../components/DataError';
-import { fillTemplate, renderMarkdown } from '../lib/markdown';
+import { fillTemplate, renderMarkdown, stripAuthoringPreamble } from '../lib/markdown';
 import { useMapDiagnostics } from '../lib/mapDiagnosticsStore';
 import type { Meta } from '../types/generated';
 
@@ -86,10 +86,12 @@ export function MethodologyPage(): JSX.Element {
   if (contentState.status === 'error') return <DataError error={contentState.error} />;
 
   const values = buildTemplateValues(metaState.data);
-  const filled = fillTemplate(contentState.data, values);
+  const body = stripAuthoringPreamble(contentState.data);
+  const filled = fillTemplate(body, values);
 
   return (
     <div className="methodology-page">
+      <h1>Methodology</h1>
       <p className="chart-note">Snapshot {SNAPSHOT_ID}. Source: docs/methodology-content.md.</p>
       {renderMarkdown(filled)}
       <MapDiagnosticsSection />

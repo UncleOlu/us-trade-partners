@@ -12,6 +12,10 @@ import type { Summary } from '../types/generated';
 
 type RankField = 'balance' | 'imports' | 'exports' | 'total_trade_value';
 
+const RANK_FIELDS: RankField[] = ['total_trade_value', 'balance', 'imports', 'exports'];
+const DEFAULT_RANK: RankField = 'total_trade_value';
+const DEFAULT_PAGE_SIZE = 25;
+
 const RANK_LABELS: Record<RankField, string> = {
   balance: 'Balance',
   imports: 'Imports',
@@ -19,25 +23,31 @@ const RANK_LABELS: Record<RankField, string> = {
   total_trade_value: 'Total trade value',
 };
 
+function parseRankField(raw: string | null): RankField {
+  return raw && (RANK_FIELDS as string[]).includes(raw) ? (raw as RankField) : DEFAULT_RANK;
+}
+
 function rankValue(row: Summary['partners'][number], field: RankField): number {
   const v = row[field];
   return v.status === 'observed' || v.status === 'confirmed_zero' ? v.value : -Infinity;
 }
 
 /**
- * Home route: year slider (URL-driven), partner search, a ranked partner
- * table next to the world map, and summary cards from summary.world only
- * (never a client-side sum across partner rows).
+ * Home route: year slider (URL-driven), rank field (URL-driven, ?rank=),
+ * partner search, a ranked partner table below a full-width world map, and
+ * summary cards from summary.world only (never a client-side sum across
+ * partner rows).
  */
 export function HomePage(): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
-  const [rankField, setRankField] = useState<RankField>('total_trade_value');
+  const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
 
   const metaState = useAsyncData(() => fetchMeta(), []);
 
   const yearParam = searchParams.get('year');
+  const rankField = parseRankField(searchParams.get('rank'));
   const configuredYears = metaState.status === 'ready' ? metaState.data.configured_coverage.years : null;
   const latestYear = configuredYears ? configuredYears[configuredYears.length - 1] : null;
 
@@ -66,16 +76,38 @@ export function HomePage(): JSX.Element {
     return list;
   }, [summaryState, rankField]);
 
-  const filtered = useMemo(() => {
+  const hasQuery = query.trim().length > 0;
+
+  // Search always matches across every approved partner, regardless of the
+  // default top-25 cutoff below.
+  const searched = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return ranked;
     return ranked.filter((p) => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q));
   }, [ranked, query]);
 
+  const displayed = hasQuery || showAll ? searched : searched.slice(0, DEFAULT_PAGE_SIZE);
+
+  const rankByCode = useMemo(() => {
+    const map = new Map<string, number>();
+    ranked.forEach((p, i) => map.set(p.code, i + 1));
+    return map;
+  }, [ranked]);
+
   const onYearIndexChange = (index: number) => {
     if (!configuredYears) return;
     const next = new URLSearchParams(searchParams);
     next.set('year', String(configuredYears[index]));
+    setSearchParams(next);
+  };
+
+  const onRankChange = (field: RankField) => {
+    const next = new URLSearchParams(searchParams);
+    if (field === DEFAULT_RANK) {
+      next.delete('rank');
+    } else {
+      next.set('rank', field);
+    }
     setSearchParams(next);
   };
 
@@ -145,85 +177,99 @@ export function HomePage(): JSX.Element {
         </div>
       </section>
 
-      <div className="home-layout">
-        <div className="home-map-pane">
-          <MapSlot
-            year={year}
-            summaryPartners={summary.partners}
-            partners={partnersState.data.partners}
-            selectedCode={null}
-            onSelect={(code) => navigate(`/partner/${code}?year=${year}`)}
-            basePath={BASE_PATH}
+      <section aria-label="World map" className="home-map-pane">
+        <MapSlot
+          year={year}
+          summaryPartners={summary.partners}
+          partners={partnersState.data.partners}
+          selectedCode={null}
+          onSelect={(code) => navigate(`/partner/${code}?year=${year}`)}
+          basePath={BASE_PATH}
+        />
+      </section>
+
+      <section className="home-table-pane" aria-label="Ranked partners">
+        <div className="controls-row">
+          <label htmlFor="partner-search">Search partners</label>
+          <input
+            id="partner-search"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Name or code"
           />
+          <label htmlFor="rank-field">Rank by</label>
+          <select id="rank-field" value={rankField} onChange={(e) => onRankChange(e.target.value as RankField)}>
+            {RANK_FIELDS.map((f) => (
+              <option key={f} value={f}>
+                {RANK_LABELS[f]}
+              </option>
+            ))}
+          </select>
         </div>
+        <p>
+          Showing {displayed.length} of {summary.partners.length} approved partners for {year}, ranked by{' '}
+          {RANK_LABELS[rankField].toLowerCase()}.
+          {!hasQuery && !showAll && searched.length > DEFAULT_PAGE_SIZE && (
+            <>
+              {' '}
+              <button type="button" className="link-button" onClick={() => setShowAll(true)}>
+                Show all {searched.length}
+              </button>
+            </>
+          )}
+          {!hasQuery && showAll && (
+            <>
+              {' '}
+              <button type="button" className="link-button" onClick={() => setShowAll(false)}>
+                Show top {DEFAULT_PAGE_SIZE}
+              </button>
+            </>
+          )}
+        </p>
 
-        <div className="home-table-pane">
-          <div className="controls-row">
-            <label htmlFor="partner-search">Search partners</label>
-            <input
-              id="partner-search"
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Name or code"
-            />
-            <label htmlFor="rank-field">Rank by</label>
-            <select id="rank-field" value={rankField} onChange={(e) => setRankField(e.target.value as RankField)}>
-              {(Object.keys(RANK_LABELS) as RankField[]).map((f) => (
-                <option key={f} value={f}>
-                  {RANK_LABELS[f]}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p>
-            {filtered.length} of {summary.partners.length} approved partners shown for {year}, ranked by{' '}
-            {RANK_LABELS[rankField].toLowerCase()}.
-          </p>
-
-          <TableScroll>
-            <table>
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Partner</th>
-                  <th>Imports</th>
-                  <th>Exports</th>
-                  <th>Balance</th>
-                  <th>Total trade value</th>
+        <TableScroll>
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Partner</th>
+                <th>Imports</th>
+                <th>Exports</th>
+                <th>Balance</th>
+                <th>Total trade value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayed.map((p) => (
+                <tr key={p.code}>
+                  <td>{rankByCode.get(p.code)}</td>
+                  <td>
+                    <Link to={`/partner/${p.code}?year=${year}`}>{p.name}</Link>{' '}
+                    <span className="partner-code">({p.code})</span>
+                    {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}
+                  </td>
+                  <td>
+                    <MoneyCell flow={p.imports} showExact={false} />
+                  </td>
+                  <td>
+                    <MoneyCell flow={p.exports} showExact={false} />
+                  </td>
+                  <td>
+                    <MoneyCell flow={p.balance} showExact={false} />
+                  </td>
+                  <td>
+                    <MoneyCell flow={p.total_trade_value} showExact={false} />
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {filtered.map((p, i) => (
-                  <tr key={p.code}>
-                    <td>{i + 1}</td>
-                    <td>
-                      <Link to={`/partner/${p.code}?year=${year}`}>{p.name}</Link>{' '}
-                      <span className="partner-code">({p.code})</span>
-                      {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}
-                    </td>
-                    <td>
-                      <MoneyCell flow={p.imports} showExact={false} />
-                    </td>
-                    <td>
-                      <MoneyCell flow={p.exports} showExact={false} />
-                    </td>
-                    <td>
-                      <MoneyCell flow={p.balance} showExact={false} />
-                    </td>
-                    <td>
-                      <MoneyCell flow={p.total_trade_value} showExact={false} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </TableScroll>
-          <p className="chart-note">
-            Rows without an observed value for the chosen rank field sort last; absent is never shown as zero.
-          </p>
-        </div>
-      </div>
+              ))}
+            </tbody>
+          </table>
+        </TableScroll>
+        <p className="chart-note">
+          Rows without an observed value for the chosen rank field sort last; absent is never shown as zero.
+        </p>
+      </section>
     </div>
   );
 }

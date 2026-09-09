@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/generate-routes.mjs",
+    "build": "tsc -b && vite build && node scripts/generate-routes.mjs && node scripts/check-methodology.mjs",
     "preview": "vite preview",
     "gen:types": "node scripts/gen-types.mjs",
     "screenshots": "node scripts/screenshots.mjs",
