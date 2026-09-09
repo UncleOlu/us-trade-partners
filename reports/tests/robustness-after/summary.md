@@ -1,22 +1,24 @@
 # Final local UI regression ledger
 
-Final status: 24 distinct focused cases have passing latest results. The six earlier chart/route cases and eight behavior groups also passed. The behavior suite includes all 261 known HTTP routes. No active test failure or skip remains.
+Final status: 25 distinct focused cases have passing latest results. The six earlier chart/route cases and eight behavior groups also passed. The behavior suite includes all 261 known HTTP routes. No active test failure or skip remains.
 
-The 24-case result combines retained checks and affected reruns. It does not claim one 24-case run against the last CSS build. Source work started from b19843c. Snapshot and pipeline metadata stayed unchanged. Final build: final-build-css.txt. Final index SHA-256: `4bed7d1bb619a035f073c1376e98cf7f6f5fc917059e4c8420e47bde7885852f`. Index file time: 2026-09-09T20:13:22.662Z.
+The 25-case result combines retained checks and affected reruns. It does not claim one 25-case run against the last CSS build. Source work started from b19843c. Snapshot and pipeline metadata stayed unchanged. Final build: header-fix-build.txt. Final index SHA-256: `ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e`. Index file time: 2026-09-09T20:21:31.517Z.
 
 ## Run ledger
 
 | Evidence | Completed UTC | Collected | Passed | Failed | Skipped |
 |---|---|---:|---:|---:|---:|
-| results.json | 2026-09-09T20:05:37.406953+00:00 | 19 | 19 | 0 | 0 |
-| results-final-affected.json | 2026-09-09T20:10:33.433779+00:00 | 6 | 5 | 1 | 0 |
-| results-final-css.json | 2026-09-09T20:14:23.859234+00:00 | 4 | 4 | 0 | 0 |
+| results.json | 2026-09-09T20:18:22.099458+00:00 | 19 | 19 | 0 | 0 |
+| results-final-affected.json | 2026-09-09T20:18:22.099299+00:00 | 6 | 5 | 1 | 0 |
+| results-final-css.json | 2026-09-09T20:18:22.099375+00:00 | 4 | 4 | 0 | 0 |
+| results-header-fix.json | 2026-09-09T20:22:38.531535+00:00 | 3 | 2 | 1 | 0 |
+| results-header-check.json | 2026-09-09T20:23:39.315060+00:00 | 1 | 1 | 0 | 0 |
 
-The first run passed 19 cases. The next run added two methodology timeouts and a recovery-link check, and repeated three affected checks. Its single failure came from a test selector that required a trailing slash in the root link. The link retained the correct year/rank; the test now selects the named home-page link. The final four-case run passed that corrected check, both new geometry checks, and final responsive checks.
+The first run passed 19 cases. The next run added two methodology timeouts and a recovery-link check, and repeated three affected checks. Its single failure came from a test selector that required a trailing slash in the root link. The link retained the correct year/rank; the test now selects the named home-page link. The four-case CSS run passed that corrected check, both new geometry checks, and final responsive checks.
 
-The retained cases cover unchanged behavior. Sixteen first-run cases were not repeated. The stricter wrong-shape check and map guide check passed in the affected run. Both actual methodology header/body timeout fixtures passed there. Final CSS geometry and screenshots passed after the last app edit. There were 29 focused case executions across these runs: 28 passes and one superseded selector failure. Zero pageerror events appeared in all three reports. The lazy-page case deliberately blocks a page file to test its error boundary; failed resource requests in fault tests are intentional.
+The retained cases cover unchanged behavior. Sixteen first-run cases were not repeated. The stricter wrong-shape check and map guide check passed in the affected run. Both actual methodology header/body timeout fixtures passed there. Final CSS geometry and screenshots passed after the last app edit. The separate header fix added one geometry case and repeated the product-column and responsive cases. Its first selector matched both the named section and named scroll region. Scoping it to the scroll region preserved all geometry assertions; the single-case rerun passed. At 320/390, year header and body both start at x=34. Product header and body both scroll to x=-294/-224. There were 33 focused case executions: 31 passes and two superseded selector failures. Zero pageerror events appeared in all three reports. The lazy-page case deliberately blocks a page file to test its error boundary; failed resource requests in fault tests are intentional.
 
-Legacy evidence: legacy-browser.txt has 6 collected, 6 passed, 0 failed, 0 skipped. legacy-audit.txt has 8 collected, 8 passed, 0 failed, 0 skipped, including 261 route HTTP/query checks. Those results predate the last two CSS fixes; the final geometry and responsive cases cover those CSS changes. Do not add repeated case executions to the count of distinct focused cases.
+Legacy evidence: legacy-browser.txt has 6 collected, 6 passed, 0 failed, 0 skipped. legacy-audit.txt has 8 collected, 8 passed, 0 failed, 0 skipped, including 261 route HTTP/query checks. Those results predate the last three CSS fixes; the final geometry and responsive cases cover those CSS changes. Do not add repeated case executions to the count of distinct focused cases.
 
 ## Setup failures retained as evidence
 
@@ -29,17 +31,17 @@ Neither setup failure is a passing test or a current product defect.
 
 | Route | Local gzip body sum, bytes | Budget | Result |
 |---|---:|---:|---|
-| /?year=2025 | 135425 | 250000 | PASS |
-| /?year=2013 | 135611 | 250000 | PASS |
-| /partner/1220?year=2025 | 263469 | 300000 | PASS |
+| /?year=2025 | 135455 | 250000 | PASS |
+| /?year=2013 | 135641 | 250000 | PASS |
+| /partner/1220?year=2025 | 263497 | 300000 | PASS |
 
-Evidence: payload-home-2025.md, payload-home-2013.md, payload-partner-1220.md and matching JSON files. Each uses gzip level 6 on response bodies in a cold browser context. This is not a deployed network transfer measurement. Initial payload reports remain under initial-payload-* and are superseded by the final files. Each final scan has zero incomplete assets and zero console errors.
+Evidence: payload-home-2025.md, payload-home-2013.md, payload-partner-1220.md and matching JSON files. Each uses gzip level 6 on response bodies in a cold browser context. This is not a deployed network transfer measurement. Earlier payload reports remain under initial-payload-* and pre-header-payload-* and are superseded by the final files. Each final scan has zero incomplete assets and zero console errors.
 
 ## Visual evidence and limits
 
 Final screenshots cover home, partner, hub, section, and methodology at 1280, 390, 320, and 640 CSS pixels. Desktop and mobile also have full-page images. The 640-pixel view is an equivalent reduced viewport for reflow review, not an actual browser zoom measurement. Keyboard table-scroll evidence has its own narrow-partner-table-focus.png image. Default narrow partner and map-detail images supplement the overview shots.
 
-The test agent inspected desktop/mobile/320 overview images, plus reduced-viewport images and separate map views. Tests verify no horizontal page overflow; tables retain their own scroll areas. At maximum horizontal scroll, three hit-test points prove the last product-group value is fully uncovered at 320/390. Expanded world exact values fit inside their card at 320/390/640/1280 and keep keyboard focus. Bigger controls, the controls-before-map layout, nonsticky product names, and expanded KPI cards use more space; these are the approved design trade-offs.
+The test agent inspected desktop/mobile/320 overview images, plus reduced-viewport images and separate map views. Tests verify no horizontal page overflow; tables retain their own scroll areas. At maximum horizontal scroll, three hit-test points prove the last product-group value is fully uncovered at 320/390. Expanded world exact values fit inside their card at 320/390/640/1280 and keep keyboard focus. Bigger controls, the controls-before-map layout, nonsticky product names, and expanded KPI cards use more space; these are the approved design trade-offs. Horizontal scrolling can show part of an intermediate edge column. The max-scroll checks prove aligned fixed identifiers and full access to the final numeric column; they do not claim every intermediate column remains fully visible at every scroll offset.
 
 This is a bounded browser and visual audit, not an accessibility certification. No data or pipeline tests reran because this work changed UI and its tests only. Earlier data validation and 128-test results remain separate evidence.
 
@@ -65,11 +67,12 @@ This is a bounded browser and visual audit, not an accessibility certification. 
 | methodology headers timeout is bounded and retry restores content | PASS | results-final-affected.json |
 | methodology normal and boundary recovery links keep context | PASS | results-final-css.json |
 | missing reasons are available by tap and keyboard | PASS | results.json |
-| product group max scroll reveals the full last numeric column | PASS | results-final-css.json |
-| responsive layouts, focus and keyboard table scroll | PASS | results-final-css.json |
+| product group max scroll reveals the full last numeric column | PASS | results-header-fix.json |
+| responsive layouts, focus and keyboard table scroll | PASS | results-header-fix.json |
 | section choice survives share/refresh and exact-value clicks are separate | PASS | results.json |
 | select stays mounted and focused during rapid year changes; latest response wins | PASS | results.json |
 | slider stays mounted and focused during rapid year changes; latest response wins | PASS | results.json |
+| table headers align with fixed year cells and scroll with product names | PASS | results-header-check.json |
 | valid year/rank, header and hub navigation keep context | PASS | results.json |
 
 ## Reproduction

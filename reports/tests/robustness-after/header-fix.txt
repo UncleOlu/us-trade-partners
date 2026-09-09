@@ -1,0 +1,11 @@
+[FAIL] table headers align with fixed year cells and scroll with product names (614ms) reason=locator.scrollIntoViewIfNeeded: Error: strict mode violation: getByRole('region', { name: 'Trade by year', exact: true }) resolved to 2 elements:
+    1) <section class="panel" aria-labelledby="years-table-heading">…</section> aka getByText('Trade by yearDownload CSVScroll horizontally to see all columns. Use Show exact')
+    2) <div tabindex="0" role="region" class="table-scroll" aria-describedby=":r4:" aria-label="Trade by year">…</div> aka getByRole('region', { name: 'Trade by year', description: 'Scroll horizontally to see all columns. Use Show exact USD to see full dollar amounts.' })
+
+Call log:
+[2m  - waiting for getByRole('region', { name: 'Trade by year', exact: true })[22m
+
+[PASS] product group max scroll reveals the full last numeric column (1248ms)
+[PASS] responsive layouts, focus and keyboard table scroll (13367ms)
+
+collected=3 passed=2 failed=1 not_run=0

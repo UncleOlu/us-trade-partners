@@ -1,0 +1,27 @@
+{
+  "build": {
+    "target": "local",
+    "expected_local_index_sha256": "ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e",
+    "index_modified": "2026-09-09T20:21:31.517Z",
+    "snapshot": "20260909T091429Z-c638aff167ea"
+  },
+  "results": [
+    {
+      "name": "table headers align with fixed year cells and scroll with product names",
+      "status": "FAIL",
+      "reason": "locator.scrollIntoViewIfNeeded: Error: strict mode violation: getByRole('region', { name: 'Trade by year', exact: true }) resolved to 2 elements:\n    1) <section class=\"panel\" aria-labelledby=\"years-table-heading\">…</section> aka getByText('Trade by yearDownload CSVScroll horizontally to see all columns. Use Show exact')\n    2) <div tabindex=\"0\" role=\"region\" class=\"table-scroll\" aria-describedby=\":r4:\" aria-label=\"Trade by year\">…</div> aka getByRole('region', { name: 'Trade by year', description: 'Scroll horizontally to see all columns. Use Show exact USD to see full dollar amounts.' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Trade by year', exact: true })\u001b[22m\n",
+      "ms": 614
+    },
+    {
+      "name": "product group max scroll reveals the full last numeric column",
+      "status": "PASS",
+      "ms": 1248
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 13367
+    }
+  ],
+  "pageErrors": []
+}

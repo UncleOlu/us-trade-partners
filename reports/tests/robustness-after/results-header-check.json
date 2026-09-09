@@ -1,0 +1,50 @@
+{
+  "build": {
+    "target": "local",
+    "expected_local_index_sha256": "ea825b4bfa5a1d35b5bde3b8ac6ae63028a979cae8d143466abcd2f2f5879c9e",
+    "index_modified": "2026-09-09T20:21:31.517Z",
+    "snapshot": "20260909T091429Z-c638aff167ea"
+  },
+  "results": [
+    {
+      "name": "table headers align with fixed year cells and scroll with product names",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 320,
+          "label": "Trade by year",
+          "headerLeft": 34,
+          "bodyLeft": 34,
+          "regionLeft": 33,
+          "scrollLeft": 328
+        },
+        {
+          "width": 320,
+          "label": "Product groups",
+          "headerLeft": -294,
+          "bodyLeft": -294,
+          "regionLeft": 33,
+          "scrollLeft": 328
+        },
+        {
+          "width": 390,
+          "label": "Trade by year",
+          "headerLeft": 34,
+          "bodyLeft": 34,
+          "regionLeft": 33,
+          "scrollLeft": 258
+        },
+        {
+          "width": 390,
+          "label": "Product groups",
+          "headerLeft": -224,
+          "bodyLeft": -224,
+          "regionLeft": 33,
+          "scrollLeft": 258
+        }
+      ],
+      "ms": 1618
+    }
+  ],
+  "pageErrors": []
+}

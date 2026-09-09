@@ -89,6 +89,7 @@ tbody tr:last-child > * { border-bottom: none; }
 tbody tr:hover > * { background: #f6fafa; }
 td:has(.money-cell), th:has(.money-cell) { text-align: right; }
 tbody td:first-child { position: sticky; left: 0; background: #fff; z-index: 1; }
+table:has(tbody td:first-child):not(:has(.group-button)) thead th:first-child { left: 0; z-index: 3; }
 tbody td:first-child:has(.group-button) { position: static; }
 tr.selected-row > * { background: #e7f3f4 !important; }
 .money-cell { white-space: nowrap; font-variant-numeric: tabular-nums; }

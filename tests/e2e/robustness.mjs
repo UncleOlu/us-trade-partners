@@ -8,7 +8,7 @@ import { REPO_ROOT, currentSnapshotId } from './lib/server.mjs';
 import { test as registerTest, runAll, formatResults } from './lib/harness.mjs';
 
 const live=process.env.BASE_URL;
-const liveAllowed=/invalid year|valid year|back and forward|section choice|missing reasons|hub search|home filtered|map has|product group max|exact KPI|responsive layouts/;
+const liveAllowed=/invalid year|valid year|back and forward|section choice|missing reasons|hub search|home filtered|map has|product group max|table headers|exact KPI|responsive layouts/;
 const filter=process.env.ROBUST_FILTER?new RegExp(process.env.ROBUST_FILTER):null;
 function test(name,fn){if(live&&!liveAllowed.test(name))return;if(!filter||filter.test(name))registerTest(name,fn);}
 let markdownFault=null;
@@ -275,6 +275,25 @@ test('exact KPI values fit the card and keep keyboard focus',()=>withPage(async 
   await page.keyboard.press('Enter');assert.equal(await amount.getAttribute('aria-pressed'),'false');assert.equal(await amount.evaluate(e=>document.activeElement===e),true);
   assert.ok(Math.abs(await amount.evaluate(e=>e.closest('.stat-card').getBoundingClientRect().width)-initial)<1);
   checks.push({width,...geometry});
+ }
+ return checks;
+}));
+
+test('table headers align with fixed year cells and scroll with product names',()=>withPage(async page=>{
+ const checks=[];
+ for(const width of [320,390]){
+  await page.setViewportSize({width,height:900});await go(page,'partner/5700?year=2025');
+  for(const label of ['Trade by year','Product groups']){
+   const region=page.locator('.table-scroll').and(page.getByRole('region',{name:label,exact:true}));await region.scrollIntoViewIfNeeded();
+   await region.evaluate(e=>{e.scrollLeft=e.scrollWidth;});
+   const geometry=await region.evaluate(e=>{const h=e.querySelector('thead th:first-child').getBoundingClientRect();const b=e.querySelector('tbody tr:first-child td:first-child').getBoundingClientRect();const r=e.getBoundingClientRect();return {headerLeft:h.left,bodyLeft:b.left,regionLeft:r.left,scrollLeft:e.scrollLeft};});
+   assert.ok(geometry.scrollLeft>0,JSON.stringify({width,label,geometry}));
+   assert.ok(Math.abs(geometry.headerLeft-geometry.bodyLeft)<=1,JSON.stringify({width,label,geometry}));
+   if(label==='Trade by year')assert.ok(Math.abs(geometry.headerLeft-geometry.regionLeft)<=2,JSON.stringify({width,label,geometry}));
+   else assert.ok(geometry.headerLeft<geometry.regionLeft-10,JSON.stringify({width,label,geometry}));
+   checks.push({width,label,...geometry});
+   await region.screenshot({path:path.join(reportDir,`${width}-${label==='Trade by year'?'year':'product'}-table-maxscroll.png`)});
+  }
  }
  return checks;
 }));

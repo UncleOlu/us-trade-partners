@@ -1,0 +1,3 @@
+[PASS] table headers align with fixed year cells and scroll with product names (1618ms) detail=[{"width":320,"label":"Trade by year","headerLeft":34,"bodyLeft":34,"regionLeft":33,"scrollLeft":328},{"width":320,"label":"Product groups","headerLeft":-294,"bodyLeft":-294,"regionLeft":33,"scrollLeft":328},{"width":390,"label":"Trade by year","headerLeft":34,"bodyLeft":34,"regionLeft":33,"scrollLeft":258},{"width":390,"label":"Product groups","headerLeft":-224,"bodyLeft":-224,"regionLeft":33,"scrollLeft":258}]
+
+collected=1 passed=1 failed=0 not_run=0

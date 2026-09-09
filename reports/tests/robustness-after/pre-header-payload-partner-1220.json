@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 73658,
+      "raw_bytes": 220088,
+      "status": 200,
+      "transferred_bytes": 74081,
+      "url": "http://127.0.0.1:56993/us-trade-partners/assets/index-BxjP7JUB.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3564,
+      "raw_bytes": 13283,
+      "status": 200,
+      "transferred_bytes": 3929,
+      "url": "http://127.0.0.1:56993/us-trade-partners/assets/index-D1ls8H9p.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 105651,
+      "raw_bytes": 383752,
+      "status": 200,
+      "transferred_bytes": 106098,
+      "url": "http://127.0.0.1:56993/us-trade-partners/assets/LineChart-DfQH5aHF.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3282,
+      "raw_bytes": 11225,
+      "status": 200,
+      "transferred_bytes": 3654,
+      "url": "http://127.0.0.1:56993/us-trade-partners/assets/PartnerPage-DJqtPjLK.js"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 414,
+      "raw_bytes": 673,
+      "status": 200,
+      "transferred_bytes": 995,
+      "url": "http://127.0.0.1:56993/us-trade-partners/assets/sectionLabels-DNAnCw3g.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 76559,
+      "raw_bytes": 900513,
+      "status": 200,
+      "transferred_bytes": 76936,
+      "url": "http://127.0.0.1:56993/us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/1220.json"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 341,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 825,
+      "url": "http://127.0.0.1:56993/us-trade-partners/partner/1220?year=2025"
+    }
+  ],
+  "budget_bytes": 300000,
+  "budget_pass": true,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "local preview",
+  "totals": {
+    "gzip_bytes": 263469,
+    "raw_bytes": 1530109,
+    "transferred_bytes": 266518
+  },
+  "url": "/partner/1220?year=2025"
+}
