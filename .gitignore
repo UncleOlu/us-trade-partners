@@ -16,3 +16,7 @@ reports/pipeline/rebuild_check/
 tests/.pytest_cache/
 # release zips are uploaded as GitHub Release assets, not committed
 reports/pipeline/releases/
+# published snapshots live as GitHub Release assets; the deploy workflow fetches them by id
+data/
+# full validation report ships inside the release zip; the summary stays in git
+reports/pipeline/validation.csv
