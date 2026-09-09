@@ -1,0 +1,21 @@
+Starting preview server (building dist/ first only if stale)...
+Preview server ready at http://127.0.0.1:52577/us-trade-partners/ (snapshot 20260909T091429Z-c638aff167ea)
+
+[PASS] e2e partner trend chart point counts match observed years: 5700 (1017ms) detail={"code":"5700","url":"http://127.0.0.1:52577/us-trade-partners/partner/5700?year=2025","expected":{"totalYears":13,"imports":13,"exports":13,"balance":13},"actual":{"imports":13,"exports":13,"balance":13}}
+[PASS] e2e partner trend chart point counts match observed years: EU (975ms) detail={"code":"EU","url":"http://127.0.0.1:52577/us-trade-partners/partner/EU?year=2025","expected":{"totalYears":13,"imports":13,"exports":13,"balance":13},"actual":{"imports":13,"exports":13,"balance":13}}
+[PASS] e2e partner trend chart point counts match observed years: 1610 (970ms) detail={"code":"1610","url":"http://127.0.0.1:52577/us-trade-partners/partner/1610?year=2025","expected":{"totalYears":13,"imports":13,"exports":13,"balance":13},"actual":{"imports":13,"exports":13,"balance":13}}
+[PASS] e2e partner trend chart point counts match observed years: 6022 (971ms) detail={"code":"6022","url":"http://127.0.0.1:52577/us-trade-partners/partner/6022?year=2025","expected":{"totalYears":13,"imports":12,"exports":10,"balance":10},"actual":{"imports":12,"exports":10,"balance":10}}
+[PASS] e2e /hub returns 200, shows global label, links back to hub (527ms) detail={"url":"http://127.0.0.1:52577/us-trade-partners/hub","status":200,"hasGlobalLabel":true,"hubLinkCount":2}
+[FAIL] e2e /section/I?year=2025 returns 200, shows global label, hub link, table with partner rows, and trend chart (528ms) reason=global label text not found on http://127.0.0.1:52577/us-trade-partners/section/I?year=2025: "US goods trade, Census basis. Excludes services. Values are nominal USD." -- a browser error occurred during render, likely the real cause: Error: Minified React error #310; visit https://reactjs.org/docs/error-decoder.html?invariant=310 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at Ne (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:39:17533)
+    at Object.mc [as useMemo] (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:39:21195)
+    at T.useMemo (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:10:6193)
+    at O (http://127.0.0.1:52577/us-trade-partners/assets/SectionPage-C5nBjNa7.js:1:1922)
+    at Gi (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:39:16959)
+    at bo (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:41:3134)
+    at Hc (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:41:44503)
+    at Ac (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:41:39531)
+    at Lp (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:41:39462)
+    at gl (http://127.0.0.1:52577/us-trade-partners/assets/index-DeTPOMFl.js:41:39320) | Minified React error #310; visit https://reactjs.org/docs/error-decoder.html?invariant=310 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+
+collected=6 passed=5 failed=1 not_run=0

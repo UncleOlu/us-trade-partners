@@ -1,6 +1,9 @@
 # Test list
 
-127 tests, grouped by file. "Runs now" means the test executes to a real
+128 tests (pytest, this file's tables below) plus a separate 6-test
+browser-level e2e suite under tests/e2e/ (its own runner, not pytest;
+see the "tests/e2e/" section near the end of this file and
+tests/README.md). "Runs now" means the test executes to a real
 pass/fail today. "Waits for step 3" means the test body checks for
 `data/<snapshot_id>/`, `raw/<snapshot_id>/`, or
 `reports/pipeline/validation.csv` at run time and calls `pytest.skip(...)`
@@ -201,7 +204,7 @@ reports/pipeline/ is touched. All 8 run now.
 |---|---|---|
 | test_ovr01_data_dir_override_used_when_set | discover_snapshot_dir returns the DATA_DIR path directly, no scan | tmp_path, monkeypatch |
 | test_ovr02_data_dir_override_missing_directory_reports_reason | discover_snapshot_dir reports a not-run reason naming DATA_DIR when the override path is not a directory | tmp_path, monkeypatch |
-| test_ovr03_data_dir_no_override_falls_back_to_default_discovery | with DATA_DIR unset, the original data/ scan behavior is unchanged | monkeypatch |
+| test_ovr03_data_dir_no_override_falls_back_to_default_discovery | with DATA_DIR unset, the original data/ scan behavior is unchanged; self-skips (reports not run) once data/<snapshot_id> is published for real, since that branch is then covered by every other integration test's default-path run instead | monkeypatch, live data/ directory state |
 | test_ovr04_raw_dir_override_used_regardless_of_data_dir_name | resolve_raw_dir returns the RAW_DIR path regardless of the data dir's name | monkeypatch |
 | test_ovr05_raw_dir_no_override_derives_from_data_dir_name | with RAW_DIR unset, resolve_raw_dir derives ROOT/raw/<data_dir_path.name>, unchanged | monkeypatch |
 | test_ovr06_validation_csv_override_used_when_file_exists | require_validation_csv reads the VALIDATION_CSV path directly when it exists | tmp_path, monkeypatch |
@@ -215,8 +218,34 @@ partners.json directory>` was set and
 and passed against that staged directory, confirming the override wires
 through a real integration test, not just conftest's own functions.
 
+## tests/test_data_level_checks.py
+
+Data-level tests that are not one of the numbered VALIDATION checks 1-9
+but are directly implied by schema/CONTRACT.md and the schema files.
+
+| id | proves | inputs | status |
+|---|---|---|---|
+| test_dl01_partner_years_match_configured_coverage_and_derived_consistency | for every data/<snapshot_id>/partner/<code>.json: years[] has exactly one entry per meta.json configured_coverage.years, sorted; and the set of years with both imports and exports observed/confirmed_zero equals the set of years with an observed balance and total_trade_value (exact set equality both directions) | data/<snapshot_id>/partner/*.json, data/<snapshot_id>/meta.json | waits for step 3 |
+
 ## tests/test_typescript_types_placeholder.py
 
 | id | proves | inputs | status |
 |---|---|---|---|
 | test_ts01_generated_types_match_fresh_generation | src/types/generated.ts matches a fresh `npm run gen:types` run | src/types/generated.ts, package.json | waits for step 4 (src/ does not exist yet) |
+
+## tests/e2e/ (browser-level, Node runner, not pytest)
+
+Separate suite, own runner: `node tests/e2e/run.mjs`. Full detail
+(custom-harness rationale, layout, selector evidence, route-test
+placeholder policy) in tests/README.md. 6 tests, all run now against a
+live headless Chromium and the production build in dist/. Report:
+reports/tests/step5_e2e_run.txt.
+
+| id | proves | inputs | status |
+|---|---|---|---|
+| e2e partner trend chart point counts match observed years: 5700 | /partner/5700 trend chart renders exactly one point per year whose imports/exports/balance is observed or confirmed_zero, per data/<snapshot_id>/partner/5700.json | dist/ (built from data/<snapshot_id>/), live DOM | runs now, PASS (13/13/13) |
+| e2e partner trend chart point counts match observed years: EU | same, for EU | dist/, live DOM | runs now, PASS (13/13/13) |
+| e2e partner trend chart point counts match observed years: 1610 | same, for St Pierre and Miquelon | dist/, live DOM | runs now, PASS (13/13/13) |
+| e2e partner trend chart point counts match observed years: 6022 | same, for Norfolk Island, plus asserts every series has fewer points than total configured years (absent years present) | dist/, live DOM | runs now, PASS (12/10/10 of 13) |
+| e2e /hub returns 200, shows global label, links back to hub | HTTP 200, the SPEC UI RULES global label text, and a link back to /hub are all present on /hub | dist/, live DOM | runs now, PASS |
+| e2e /section/I?year=2025 returns 200, shows global label, hub link, table with partner rows, and trend chart | same checks for /section/<id>, plus a partner table with rows, plus the section trend chart (not-run with a cited reason if only the chart is missing) | dist/, live DOM | runs now, FAIL: SectionPage.tsx throws React error #310 (hooks called in a different order between renders: useState before two early returns, useMemo after them), a real defect in src/, not a test issue; captured verbatim in reports/tests/step5_e2e_run.txt |
