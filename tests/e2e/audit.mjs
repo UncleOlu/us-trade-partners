@@ -7,7 +7,7 @@ import { currentSnapshotId, REPO_ROOT } from './lib/server.mjs';
 import { measureColdLoadBytes } from './lib/cdp.mjs';
 import { test, runAll, formatResults } from './lib/harness.mjs';
 
-const reportDir = path.join(REPO_ROOT, 'reports/tests', process.env.BASE_URL ? 'deployed' : 'local-audit');
+const reportDir = process.env.AUDIT_REPORT_DIR ? path.resolve(REPO_ROOT,process.env.AUDIT_REPORT_DIR) : path.join(REPO_ROOT, 'reports/tests', process.env.BASE_URL ? 'deployed' : 'local-audit');
 fs.mkdirSync(reportDir, { recursive: true });
 const server = process.env.BASE_URL ? null : await startStaticServer();
 const base = (process.env.BASE_URL || server.baseUrl).replace(/\/?$/, '/');
@@ -40,7 +40,7 @@ test('home: full width map, 25 default, all rows, search, fixed world totals, tr
   await amount.click();
   assert.equal(await amount.innerText(), '$3,414,510,592,814');
   await amount.click();
-  const map = await page.locator('.world-map svg[role="img"]').boundingBox();
+  const map = await page.locator('.world-map svg[role="group"]').boundingBox();
   const main = await page.locator('main').boundingBox();
   assert.ok(map.width >= main.width * 0.85 && map.height >= 300, JSON.stringify({map,main}));
   await page.getByRole('button', { name: /Show all/ }).click();

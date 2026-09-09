@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { geoNaturalEarth1, geoPath } from 'd3-geo';
 import type { GeoPath, GeoPermissibleObjects } from 'd3-geo';
 import { LEGEND, NO_DATA_FILL, NO_DATA_HATCH_ID, NO_DATA_HATCH_STROKE, bandForBalance } from './bands';
 import { ariaLabelFor, describeFlows } from './describe';
+import { formatExactUsd } from '../lib/units';
+import './map.css';
 import { useAtlas, type CountryFeature } from './useAtlas';
 import { useContainerWidth } from './useContainerWidth';
 import { isUsable } from '../lib/status';
@@ -18,12 +20,6 @@ interface JoinedFeature {
   summaryPartner: MapSummaryPartner | null;
 }
 
-interface TooltipState {
-  code: string;
-  x: number;
-  y: number;
-}
-
 export function WorldMap({
   year,
   summaryPartners,
@@ -33,15 +29,19 @@ export function WorldMap({
   basePath,
   diagnostics,
 }: WorldMapProps): JSX.Element {
-  const atlas = useAtlas(basePath);
+  const [attempt, setAttempt] = useState(0);
+  const atlas = useAtlas(basePath, attempt);
+  const descriptionId = useId();
+  const countryRefs = useRef(new Map<string, SVGPathElement>());
+  const [focusCode, setFocusCode] = useState<string | null>(selectedCode);
   const [containerRef, width] = useContainerWidth<HTMLDivElement>(FALLBACK_WIDTH);
   const height = Math.round(width / ASPECT_RATIO);
-  const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+  const [readoutCode, setReadoutCode] = useState<string | null>(null);
 
   const partnerByFeatureId = useMemo(() => {
     const m = new Map<number, MapPartner>();
     for (const p of partners) {
-      if (p.map_feature_id !== null && !m.has(p.map_feature_id)) {
+      if (p.resolution === 'approved' && p.map_feature_id !== null && !m.has(p.map_feature_id)) {
         m.set(p.map_feature_id, p);
       }
     }
@@ -129,32 +129,45 @@ export function WorldMap({
     }));
   }, [joined, pathGenerator]);
 
+  const selectableFeatures = useMemo(() => featurePaths
+    .filter((f) => f.partner && f.summaryPartner)
+    .sort((a, b) => a.partner!.name.localeCompare(b.partner!.name, 'en')), [featurePaths]);
+  const tabCode = selectableFeatures.some((f) => f.partner!.code === focusCode)
+    ? focusCode : selectableFeatures[0]?.partner?.code;
+
   if (atlas.status === 'error') {
     return (
-      <div className="world-map world-map-error" role="alert">
-        Could not load the world map atlas: {atlas.error.message}
+      <div className="world-map world-map-error" ref={containerRef} role="alert">
+        <p>Could not load the world map. You can still use the partner list.</p>
+        <button type="button" onClick={() => setAttempt((value) => value + 1)}>Retry map</button>
+        <a href="#partner-results">Go to partner results</a>
       </div>
     );
   }
 
   if (atlas.status === 'loading' || !pathGenerator) {
     return (
-      <div className="world-map world-map-loading" ref={containerRef}>
+      <div className="world-map world-map-loading" ref={containerRef} role="status">
         Loading map
       </div>
     );
   }
 
-  const activeTooltip =
-    tooltip && featurePaths.find((f) => f.partner?.code === tooltip.code && f.summaryPartner);
+  const activeReadout = featurePaths.find((f) => f.partner?.code === readoutCode && f.summaryPartner);
 
   return (
     <div className="world-map" ref={containerRef}>
+      <p className="world-map-instructions" id={descriptionId}>
+        Select a country to open its trade details. Keyboard: arrow keys move by country name;
+        Home and End jump to the first and last; Enter or Space opens details. Tab leaves the map.
+      </p>
       <svg
+        className="world-map-canvas"
         viewBox={`0 0 ${width} ${height}`}
         width="100%"
         height={height}
-        role="img"
+        role="group"
+        aria-describedby={descriptionId}
         aria-label={`World map of US goods trade balance for ${year}`}
       >
         <defs>
@@ -170,8 +183,8 @@ export function WorldMap({
           </pattern>
         </defs>
         <g>
-          {featurePaths.map(({ feature, featureId, partner, summaryPartner, d }) => {
-            const key = featureId !== null ? String(featureId) : `noid-${feature.properties?.name ?? Math.random()}`;
+          {featurePaths.map(({ featureId, partner, summaryPartner, d }, index) => {
+            const key = featureId !== null ? String(featureId) : `noid-${index}`;
             const hasData = !!summaryPartner && isUsable(summaryPartner.balance);
             const fill = hasData
               ? bandForBalance((summaryPartner!.balance.value as number)).color
@@ -198,66 +211,71 @@ export function WorldMap({
                 key={key}
                 {...commonProps}
                 className={`world-map-feature world-map-feature-interactive${isSelected ? ' selected' : ''}`}
-                tabIndex={0}
+                ref={(element) => {
+                  if (element) countryRefs.current.set(code, element);
+                  else countryRefs.current.delete(code);
+                }}
+                tabIndex={code === tabCode ? 0 : -1}
                 role="button"
                 aria-label={label}
-                aria-pressed={isSelected}
                 onClick={() => onSelect(code)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === 'Escape') {
+                    setReadoutCode(null);
+                  } else if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     onSelect(code);
+                  } else if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key)) {
+                    e.preventDefault();
+                    const current = selectableFeatures.findIndex((f) => f.partner!.code === code);
+                    const count = selectableFeatures.length;
+                    const next = e.key === 'Home' ? 0 : e.key === 'End' ? count - 1
+                      : (current + (e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 1) + count) % count;
+                    const nextCode = selectableFeatures[next].partner!.code;
+                    setFocusCode(nextCode);
+                    countryRefs.current.get(nextCode)?.focus();
                   }
                 }}
-                onMouseEnter={(e) => setTooltip({ code, x: e.clientX, y: e.clientY })}
-                onMouseMove={(e) => setTooltip({ code, x: e.clientX, y: e.clientY })}
-                onMouseLeave={() => setTooltip((t) => (t?.code === code ? null : t))}
-                onFocus={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  setTooltip({ code, x: rect.left + rect.width / 2, y: rect.top });
+                onMouseEnter={() => setReadoutCode(code)}
+                onFocus={() => {
+                  setFocusCode(code);
+                  setReadoutCode(code);
                 }}
-                onBlur={() => setTooltip((t) => (t?.code === code ? null : t))}
               />
             );
           })}
         </g>
       </svg>
 
-      {activeTooltip && activeTooltip.partner && activeTooltip.summaryPartner && (
-        <Tooltip
-          x={tooltip!.x}
-          y={tooltip!.y}
-          name={activeTooltip.partner.name}
-          flows={describeFlows(activeTooltip.summaryPartner)}
-        />
-      )}
-
+      <div className="world-map-readout" aria-label="Country trade readout">
+        {activeReadout?.partner && activeReadout.summaryPartner ? (
+          <>
+            <strong>{activeReadout.partner.name}</strong>
+            <dl>
+              {(['imports', 'exports', 'balance'] as const).map((flow) => {
+                const value = activeReadout.summaryPartner![flow];
+                return <div key={flow}><dt>{flow[0].toUpperCase() + flow.slice(1)}</dt>
+                  <dd>{describeFlows(activeReadout.summaryPartner!)[flow]}</dd>
+                  <dd className="world-map-exact">{isUsable(value) ? formatExactUsd(value.value) : value.reason}</dd>
+                </div>;
+              })}
+            </dl>
+          </>
+        ) : <>
+          <strong>Reading the map</strong>
+          <ul className="world-map-guide">
+            <li>Red bands: imports exceed exports.</li>
+            <li>Blue bands: exports exceed imports.</li>
+            <li>White: within $100m of balance.</li>
+            <li>Hatching: no balance or no mapped partner.</li>
+          </ul>
+        </>}
+      </div>
+      <p className="world-map-coverage">
+        {selectableFeatures.length} of {summaryPartners.length} partners appear on this map.
+        {' '}<a href="#partner-results">Search all partners</a>, including small territories and aggregates.
+      </p>
       <Legend />
-    </div>
-  );
-}
-
-function Tooltip({
-  x,
-  y,
-  name,
-  flows,
-}: {
-  x: number;
-  y: number;
-  name: string;
-  flows: { imports: string; exports: string; balance: string };
-}): JSX.Element {
-  return (
-    <div
-      className="world-map-tooltip"
-      role="tooltip"
-      style={{ position: 'fixed', left: x + 12, top: y + 12, pointerEvents: 'none' }}
-    >
-      <strong>{name}</strong>
-      <div>Imports {flows.imports}</div>
-      <div>Exports {flows.exports}</div>
-      <div>Balance {flows.balance}</div>
     </div>
   );
 }

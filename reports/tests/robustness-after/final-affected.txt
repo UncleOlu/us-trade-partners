@@ -1,0 +1,11 @@
+[PASS] data failure wrong shape: visible recovery restores pinned snapshot (697ms)
+[PASS] methodology headers timeout is bounded and retry restores content (130ms)
+[PASS] methodology body timeout is bounded and retry restores content (131ms)
+[FAIL] methodology normal and boundary recovery links keep context (559ms) reason=The expression evaluated to a falsy value:
+
+  assert.ok(links.length)
+
+[PASS] map has one tab stop, arrow navigation, escape and keyboard selection (622ms)
+[PASS] responsive layouts, focus and keyboard table scroll (12847ms)
+
+collected=6 passed=5 failed=1 not_run=0

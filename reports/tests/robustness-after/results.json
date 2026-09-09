@@ -1,0 +1,100 @@
+{
+  "results": [
+    {
+      "name": "invalid year/rank query recovery agrees with visible state",
+      "status": "PASS",
+      "ms": 2876
+    },
+    {
+      "name": "valid year/rank, header and hub navigation keep context",
+      "status": "PASS",
+      "ms": 1274
+    },
+    {
+      "name": "back and forward restore year with matching values",
+      "status": "PASS",
+      "ms": 686
+    },
+    {
+      "name": "section choice survives share/refresh and exact-value clicks are separate",
+      "status": "PASS",
+      "ms": 1756
+    },
+    {
+      "name": "data failure 404: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 756
+    },
+    {
+      "name": "data failure 500: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 737
+    },
+    {
+      "name": "data failure invalid JSON: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 686
+    },
+    {
+      "name": "data failure wrong shape: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 688
+    },
+    {
+      "name": "data failure wrong snapshot: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 702
+    },
+    {
+      "name": "data timeout is bounded and retry restores the page",
+      "status": "PASS",
+      "ms": 175
+    },
+    {
+      "name": "failed lazy page shows recovery rather than a blank app",
+      "status": "PASS",
+      "ms": 640
+    },
+    {
+      "name": "select stays mounted and focused during rapid year changes; latest response wins",
+      "status": "PASS",
+      "ms": 654
+    },
+    {
+      "name": "slider stays mounted and focused during rapid year changes; latest response wins",
+      "status": "PASS",
+      "ms": 651
+    },
+    {
+      "name": "missing reasons are available by tap and keyboard",
+      "status": "PASS",
+      "ms": 644
+    },
+    {
+      "name": "hub search keeps all partners and sections reachable",
+      "status": "PASS",
+      "ms": 694
+    },
+    {
+      "name": "home filtered search preserves totals and full-export scope",
+      "status": "PASS",
+      "ms": 663
+    },
+    {
+      "name": "map has one tab stop, arrow navigation, escape and keyboard selection",
+      "status": "PASS",
+      "ms": 647
+    },
+    {
+      "name": "atlas failure offers retry and keeps table usable",
+      "status": "PASS",
+      "ms": 700
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 13119
+    }
+  ],
+  "pageErrors": []
+}

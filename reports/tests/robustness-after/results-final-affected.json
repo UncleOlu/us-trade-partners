@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "name": "data failure wrong shape: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 697
+    },
+    {
+      "name": "methodology headers timeout is bounded and retry restores content",
+      "status": "PASS",
+      "ms": 130
+    },
+    {
+      "name": "methodology body timeout is bounded and retry restores content",
+      "status": "PASS",
+      "ms": 131
+    },
+    {
+      "name": "methodology normal and boundary recovery links keep context",
+      "status": "FAIL",
+      "reason": "The expression evaluated to a falsy value:\n\n  assert.ok(links.length)\n",
+      "ms": 559
+    },
+    {
+      "name": "map has one tab stop, arrow navigation, escape and keyboard selection",
+      "status": "PASS",
+      "ms": 622
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 12847
+    }
+  ],
+  "pageErrors": []
+}

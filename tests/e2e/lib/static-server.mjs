@@ -83,7 +83,7 @@ function resolveDistFile(distDir, pathname) {
   return null;
 }
 
-export async function startStaticServer({ forceBuild = false } = {}) {
+export async function startStaticServer({ forceBuild = false, handleRequest } = {}) {
   await ensureFreshBuild({ forceBuild });
 
   const snapshotId = currentSnapshotId();
@@ -92,6 +92,7 @@ export async function startStaticServer({ forceBuild = false } = {}) {
   const notFoundFile = path.join(distDir, '404.html');
 
   const server = http.createServer((req, res) => {
+    if (handleRequest?.(req, res)) return;
     const parsed = new URL(req.url, 'http://internal.invalid');
     let pathname = decodeURIComponent(parsed.pathname);
     // Strip the base path prefix, same as GitHub Pages project-site routing.

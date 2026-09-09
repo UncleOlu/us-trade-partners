@@ -39,20 +39,43 @@ source of truth instead of a duplicated copy under src/.
 ## Local development needs data/<snapshot_id>/ on disk
 
 The published snapshot no longer lives in git history. `data/<snapshot_id>/`
-is expected to already be gitignored and present on disk before you run `npm
-run dev` or `npm run build` locally; `vite.config.ts` reads
-`reports/pipeline/last_snapshot_id.txt` for the id and fails immediately if
-`data/<that id>/` is missing. Get it one of two ways:
+must be present before `npm run dev` or `npm run build`. In a clean checkout,
+set `GITHUB_REPOSITORY=UncleOlu/us-trade-partners` and run:
 
-- Run the pipeline locally (`make data`, see the repository root `Makefile`),
-  which writes `data/<snapshot_id>/` directly, or
-- Download and unpack the matching GitHub Release: find the tag
-  `snapshot-<snapshot_id>` in the repository's Releases, download
-  `<snapshot_id>.zip`, verify it against the published `<snapshot_id>.zip.sha256`
-  (`shasum -a 256 -c`), and unzip it into `data/<snapshot_id>/` so that
-  `data/<snapshot_id>/meta.json` exists.
+```
+node scripts/restore-snapshot.mjs
+```
 
-`.github/workflows/deploy.yml` does the second path automatically on every
-deploy, using `gh release download` plus a sha256 check, and fails the build
-if the asset is missing or the checksum does not match. It never falls back
-to a different snapshot.
+The script downloads the immutable build release pinned in
+`reports/pipeline/current_release.json`. It checks the ZIP against the checksum
+in that committed pin before extraction and checks the snapshot and pipeline
+commit in metadata. It restores only built dataset files. It refuses to replace
+an existing dataset. The deployment workflow uses this same script. A separate
+raw release asset supports rebuilds and does not enter the app bundle.
+
+## Navigation and values
+
+- `year` and `rank` stay in shared links. `rank` controls partner tables only.
+- Partner chapter selection uses `section=<HS id>` and survives refresh.
+- A section-page partner link selects that same section on the partner page.
+- Invalid values use replace navigation to a valid value and show a notice.
+  A later valid navigation clears the notice.
+- Home controls remain mounted during year changes. Results show loading or
+  an error instead of figures from the previous year.
+- Each table view has a Show exact USD control. Table numbers are static text;
+  their titles also carry exact values. Summary cards retain individual buttons.
+- Missing-value buttons expose source reasons on click, tap or keyboard.
+- Table scroll regions have names, hints and keyboard focus. Product-group
+  buttons select chapters without changing selection when a value is used.
+
+## Data failures
+
+`useAsyncData` ties results to their dependency values and ignores results after
+cleanup. Successful data requests are cached for this app session; failed
+requests leave the cache. A 30-second timeout covers headers and response-body
+reading. Reload retries with a fresh session. No fallback snapshot is allowed.
+
+`validateData` checks the envelope, requested identity, required UI fields and
+FlowValue status/value/reason rules, including safe integers. These guards cover
+app inputs. The source JSON schemas and pipeline validation remain the full
+contract. A route boundary gives a reload action for render or lazy-load failure.

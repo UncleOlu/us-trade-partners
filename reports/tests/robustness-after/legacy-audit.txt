@@ -1,0 +1,10 @@
+[PASS] home: full width map, 25 default, all rows, search, fixed world totals, trillion exact access (767ms) detail={"total":236,"mapWidth":1086,"mapHeight":572}
+[PASS] home and section: year/rank survive refresh and one sorted section table (2221ms)
+[PASS] map: mouse and keyboard selection preserve year (1632ms)
+[PASS] methodology: filled metadata, 8220, no template markers (522ms)
+[PASS] partner: exact integer CSV with statuses and missing-data labels (649ms)
+[PASS] all known routes: real HTTP 200 and query preservation (105ms) detail={"routes":261}
+[PASS] desktop/mobile: route refresh, no overflow, numeric nowrap, container scroll, screenshots (12236ms)
+[PASS] cold-load network transfer: measured bytes and all request encodings (1158ms) detail={"home":573326,"partner":1530611}
+
+collected=8 passed=8 failed=0 not_run=0

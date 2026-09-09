@@ -1,0 +1,156 @@
+{
+  "home": {
+    "url": "http://127.0.0.1:56302/us-trade-partners/",
+    "totalBytes": 573326,
+    "metric": "CDP Network.loadingFinished encodedDataLength, including response headers",
+    "assets": [
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/",
+        "bytes": 783,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/html",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/index-_zFtMQiL.css",
+        "bytes": 13368,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/css",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/index-hx1mI6gp.js",
+        "bytes": 220330,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/atlas/countries-110m.json",
+        "bytes": 107986,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json",
+        "bytes": 3776,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json",
+        "bytes": 88322,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2025.json",
+        "bytes": 138761,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ]
+  },
+  "partner": {
+    "url": "http://127.0.0.1:56302/us-trade-partners/partner/5700?year=2025",
+    "totalBytes": 1530611,
+    "metric": "CDP Network.loadingFinished encodedDataLength, including response headers",
+    "assets": [
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/index-_zFtMQiL.css",
+        "bytes": 13368,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/css",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/index-hx1mI6gp.js",
+        "bytes": 220330,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/LineChart-CPpBHIE5.js",
+        "bytes": 384012,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/PartnerPage-BXIVly8t.js",
+        "bytes": 11440,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/assets/sectionLabels-DNAnCw3g.js",
+        "bytes": 887,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/javascript",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/5700.json",
+        "bytes": 899791,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "application/json",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "url": "http://127.0.0.1:56302/us-trade-partners/partner/5700?year=2025",
+        "bytes": 783,
+        "finished": true,
+        "status": 200,
+        "encoding": "identity",
+        "mimeType": "text/html",
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ]
+  }
+}

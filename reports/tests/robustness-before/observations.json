@@ -1,0 +1,382 @@
+[
+  {
+    "name": "home invalid year abc",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=abc",
+    "main": "Loading...",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "home invalid year 0",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=0",
+    "main": "Loading...",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "home invalid year 2099",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=2099",
+    "main": "Could not load this page\n\nSnapshot data file is missing: /us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2099.json\n\nSnapshot: 20260909T091429Z-c638aff167ea\n\nThis page will not switch to a different snapshot. Reload to try again.\n\nReload",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "Reload",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "partner invalid year",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=abc",
+    "main": "CHINA\nKind\ncountry\nCode\n5700\nISO\nCHN\nYear\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\nShow exact USD in tables\nImports, exports, and balance by year\n2013\n2016\n2019\n2022\n2025\n-$600bn\n-$300bn\n$0\n$300bn\n$600bn\nimportsexportsbalance\nTrade by year\nDownload CSV\nYear\tImports\tExports\tBalance\tTotal trade value\n2013\t$440bn\t$122bn\t-$319bn\t$562bn\n2014\t$468bn\t$124bn\t-$345bn\t$592bn\n2015\t$483bn\t$116bn\t-$367bn\t$599bn\n2016\t$462bn\t$116bn\t-$347bn\t$578bn\n2017\t$505bn\t$130bn\t-$375bn\t$635bn\n2018\t$539bn\t$120bn\t-$418bn\t$659bn\n2019\t$449bn\t$106bn\t-$343bn\t$556bn\n2020\t$433bn\t$125bn\t-$308bn\t$557bn\n2021\t$504bn\t$151bn\t-$353bn\t$656bn\n2022\t$536bn\t$154bn\t-$382bn\t$690bn\n2023\t$427bn\t$148bn\t-$280bn\t$575bn\n2024\t$440bn\t$143bn\t-$297bn\t$584bn\n2025\t$309bn\t$106bn\t-$203bn\t$415bn\nHS sections, 2025\nDownload CSV\n\nClick a bar or a table row to see chapter detail for that group.\n\nI\nIII\nV\nVII\nIX\nXI\nXIV\nXVII\nSPECIAL\n$0\n$35.0bn\n$70.0bn\n$105bn\n$140bn\nimportsexports\nGroup\tImports\tExports\tTotal trade value\nI\t$1.21bn\t$2.89bn\t$4.10bn\nII\t$1.14bn\t$3.82bn\t$4.96bn\nIII\t$663m\t$31.8m\t$694m\nIV\t$2.31bn\t$1.85bn\t$4.16bn\nV\t$426m\t$5.84bn\t$6.27bn\nVI\t$19.3bn\t$18.5bn\t$37.8bn\nVII\t$16.5bn\t$6.37bn\t$22.8bn\nVIII\t$2.04bn\t$405m\t$2.45bn\nIX\t$1.55bn\t$799m\t$2.35bn\nX\t$3.66bn\t$1.51bn\t$5.17bn\nXI\t$19.3bn\t$676m\t$20.0bn\nXII\t$9.41bn\t$86.1m\t$9.50bn\nXIII\t$4.41bn\t$860m\t$5.27bn\nXIV\t$1.16bn\t$1.02bn\t$2.19bn\nXV\t$18.5bn\t$3.15bn\t$21.6bn\nXVI\t$132bn\t$26.8bn\t",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "yearSelect": "2025",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "2013201420152016201720182019202020212022",
+          "height": 19
+        },
+        {
+          "text": "",
+          "height": 13
+        },
+        {
+          "text": "Download CSV",
+          "height": 21
+        },
+        {
+          "text": "$440bn",
+          "height": 17
+        },
+        {
+          "text": "$122bn",
+          "height": 17
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "section invalid year and rank",
+    "url": "https://uncleolu.github.io/us-trade-partners/section/XVI/?year=2099&rank=oops",
+    "main": "XVI: MACHINERY AND MECHANICAL APPLIANCES; ELECTRICAL EQUIPMENT; PARTS THEREOF; SOUND RECORDERS AND REPRODUCERS, TELEVISION IMAGE AND SOUND RECORDERS AND REPRODUCERS, AND PARTS AND ACCESSORIES OF SUCH ARTICLES\n\nChapters: 84, 85\n\nUniverse imports and exports by year\n\nReconciliation-universe sums only (section.years[].universe), never a sum of the partner rows shown below.\n\n2013\n2016\n2019\n2022\n2025\n$0\n$300bn\n$600bn\n$900bn\n$1.20tn\nimportsexports\nYear\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\nRank by\nTotal trade value\nImports\nExports\nBalance\nUniverse totals, 2025\n\nSums over the reconciliation universe only, from section.years[].universe. Never a sum of displayed rows.\n\nIMPORTS\n\n$1.16tn\n\nEXPORTS\n\n$511bn\n\nBALANCE\n\n-$647bn\n\nTOTAL TRADE VALUE\n\n$1.67tn\n\nPartners ranked by total trade value, 2025\nDownload CSV\nRank\tPartner\tKind\tImports\tExports\tBalance\tTotal trade value\n1\tMEXICO (2010)\tcountry\t$241bn\t$123bn\t-$118bn\t$364bn\n2\tTAIWAN (5830)\tcountry\t$175bn\t$27.6bn\t-$148bn\t$203bn\n3\tEuropean Union (EU) aggregate\taggregate\t$128bn\t$68.3bn\t-$59.8bn\t$197bn\n4\tCHINA (5700)\tcountry\t$132bn\t$26.8bn\t-$105bn\t$159bn\n5\tCANADA (1220)\tcountry\t$40.9bn\t$80.6bn\t$39.7bn\t$122bn\n6\tVIETNAM (5520)\tcountry\t$116bn\t$4.00bn\t-$112bn\t$120bn\n7\tJAPAN (5880)\tcountry\t$55.0bn\t$13.1bn\t-$41.9bn\t$68.0bn\n8\tTHAILAND (5490)\tcountry\t$62.4bn\t$4.69bn\t-$57.7bn\t$67.1bn\n9\tKOREA, SOUTH (5800)\tcountry\t$46.8bn\t$13.8bn\t-$3",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "yearSelect": "2025",
+      "rank": "total_trade_value",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "2013201420152016201720182019202020212022",
+          "height": 19
+        },
+        {
+          "text": "Total trade valueImportsExportsBalance",
+          "height": 19
+        },
+        {
+          "text": "$1.16tn",
+          "height": 21
+        },
+        {
+          "text": "$511bn",
+          "height": 21
+        },
+        {
+          "text": "-$647bn",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "missing snapshot",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "main": "Could not load this page\n\nSnapshot data file is missing: /us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/5700.json\n\nSnapshot: 20260909T091429Z-c638aff167ea\n\nThis page will not switch to a different snapshot. Reload to try again.\n\nReload",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "Reload",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "invalid JSON",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "main": "Could not load this page\n\nSnapshot data file is not valid JSON: /us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/5700.json\n\nSnapshot: 20260909T091429Z-c638aff167ea\n\nThis page will not switch to a different snapshot. Reload to try again.\n\nReload",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "Reload",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "wrong JSON shape",
+    "error": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('main')\u001b[22m\n",
+    "errors": [
+      "Cannot read properties of undefined (reading 'map')"
+    ]
+  },
+  {
+    "name": "header loses route context",
+    "url": "https://uncleolu.github.io/us-trade-partners/hub",
+    "main": "Loading...",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<a href=\"/us-trade-partners/hub\">Hub</a>",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "home control sizes and tab stops",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=2020",
+    "main": "US goods trade partners\nYear: 2020\nWorld total, 2020\n\nFrom the separately fetched Census world total (summary.world). Never a sum of partner rows.\n\nIMPORTS\n\n$2.33tn\n\nEXPORTS\n\n$1.43tn\n\nBALANCE\n\n-$901bn\n\nTOTAL TRADE VALUE\n\n$3.76tn\n\nDeficit over $100bn\nDeficit, $25bn to $100bn\nDeficit, $5bn to $25bn\nDeficit, $1bn to $5bn\nDeficit, up to $1bn\nWithin $100m of balanced\nSurplus, up to $1bn\nSurplus, $1bn to $5bn\nSurplus, $5bn to $25bn\nSurplus, $25bn to $100bn\nSurplus over $100bn\nNo data\nDownload all partners CSV\nSearch partners\nRank by\nTotal trade value\nBalance\nImports\nExports\n\nShowing 25 of 236 approved partners for 2020, ranked by total trade value. Show all 236\n\nRank\tPartner\tImports\tExports\tBalance\tTotal trade value\n1\tEuropean Union (EU) aggregate\t$420bn\t$239bn\t-$181bn\t$659bn\n2\tCHINA (5700)\t$433bn\t$125bn\t-$308bn\t$557bn\n3\tMEXICO (2010)\t$323bn\t$213bn\t-$111bn\t$536bn\n4\tCANADA (1220)\t$270bn\t$256bn\t-$13.8bn\t$526bn\n5\tJAPAN (5880)\t$120bn\t$64.0bn\t-$55.5bn\t$184bn\n6\tGERMANY (4280)\t$115bn\t$58.0bn\t-$56.9bn\t$173bn\n7\tKOREA, SOUTH (5800)\t$76.0bn\t$51.0bn\t-$25.0bn\t$127bn\n8\tUNITED KINGDOM (4120)\t$50.3bn\t$58.5bn\t$8.25bn\t$109bn\n9\tSWITZERLAND (4419)\t$74.9bn\t$18.1bn\t-$56.9bn\t$93.0bn\n10\tTAIWAN (5830)\t$60.4bn\t$30.2bn\t-$30.2bn\t$90.6bn\n11\tVIETNAM (5520)\t$79.6bn\t$9.92bn\t-$69.7bn\t$89.5bn\n12\tINDIA (5330)\t$51.3bn\t$27.1bn\t-$24.2bn\t$78.3bn\n13\tIRELAND (4190)\t$66.1bn\t$10.7bn\t-$55.4bn\t$76.7bn\n14\tNETHERLANDS (4210)\t$27.",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "rank": "total_trade_value",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "",
+          "height": 22
+        },
+        {
+          "text": "$2.33tn",
+          "height": 21
+        },
+        {
+          "text": "$1.43tn",
+          "height": 21
+        },
+        {
+          "text": "-$901bn",
+          "height": 21
+        },
+        {
+          "text": "$3.76tn",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 170
+    }
+  },
+  {
+    "name": "group refresh detail",
+    "before": "XVI",
+    "after": "I",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020"
+  },
+  {
+    "name": "partner group selection refresh",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "main": "CHINA\nKind\ncountry\nCode\n5700\nISO\nCHN\nYear\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\nShow exact USD in tables\nImports, exports, and balance by year\n2013\n2016\n2019\n2022\n2025\n-$600bn\n-$300bn\n$0\n$300bn\n$600bn\nimportsexportsbalance\nTrade by year\nDownload CSV\nYear\tImports\tExports\tBalance\tTotal trade value\n2013\t$440bn\t$122bn\t-$319bn\t$562bn\n2014\t$468bn\t$124bn\t-$345bn\t$592bn\n2015\t$483bn\t$116bn\t-$367bn\t$599bn\n2016\t$462bn\t$116bn\t-$347bn\t$578bn\n2017\t$505bn\t$130bn\t-$375bn\t$635bn\n2018\t$539bn\t$120bn\t-$418bn\t$659bn\n2019\t$449bn\t$106bn\t-$343bn\t$556bn\n2020\t$433bn\t$125bn\t-$308bn\t$557bn\n2021\t$504bn\t$151bn\t-$353bn\t$656bn\n2022\t$536bn\t$154bn\t-$382bn\t$690bn\n2023\t$427bn\t$148bn\t-$280bn\t$575bn\n2024\t$440bn\t$143bn\t-$297bn\t$584bn\n2025\t$309bn\t$106bn\t-$203bn\t$415bn\nHS sections, 2020\nDownload CSV\n\nClick a bar or a table row to see chapter detail for that group.\n\nI\nIII\nV\nVII\nIX\nXI\nXIV\nXVII\nSPECIAL\n$0\n$55.0bn\n$110bn\n$165bn\n$220bn\nimportsexports\nGroup\tImports\tExports\tTotal trade value\nI\t$1.54bn\t$4.48bn\t$6.02bn\nII\t$1.27bn\t$18.8bn\t$20.1bn\nIII\t$51.5m\t$71.3m\t$123m\nIV\t$2.30bn\t$1.28bn\t$3.57bn\nV\t$296m\t$10.9bn\t$11.1bn\nVI\t$16.2bn\t$14.0bn\t$30.2bn\nVII\t$22.8bn\t$5.91bn\t$28.7bn\nVIII\t$2.83bn\t$535m\t$3.37bn\nIX\t$2.69bn\t$1.58bn\t$4.27bn\nX\t$4.18bn\t$3.10bn\t$7.28bn\nXI\t$42.7bn\t$2.46bn\t$45.1bn\nXII\t$11.4bn\t$189m\t$11.6bn\nXIII\t$5.05bn\t$795m\t$5.85bn\nXIV\t$1.28bn\t$2.85bn\t$4.13bn\nXV\t$22.7bn\t$2.93bn\t$25.6bn\nXVI\t$207bn\t$30.9",
+    "errors": [],
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "yearSelect": "2020",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "2013201420152016201720182019202020212022",
+          "height": 19
+        },
+        {
+          "text": "",
+          "height": 13
+        },
+        {
+          "text": "Download CSV",
+          "height": 21
+        },
+        {
+          "text": "$440bn",
+          "height": 17
+        },
+        {
+          "text": "$122bn",
+          "height": 17
+        }
+      ],
+      "mapTabStops": 0
+    }
+  }
+]

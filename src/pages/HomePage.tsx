@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchMeta, fetchPartners, fetchSummary } from '../lib/dataClient';
 import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
@@ -7,121 +7,35 @@ import { DataError } from '../components/DataError';
 import { MoneyCell } from '../components/MoneyCell';
 import { TableScroll } from '../components/TableScroll';
 import { MapSlot } from '../components/MapSlot';
-import { BASE_PATH } from '../lib/config';
-import type { Summary } from '../types/generated';
+import { TradeTotals } from '../components/TradeTotals';
+import { UrlNotice } from '../components/UrlNotice';
+import { BASE_PATH, GLOBAL_LABEL } from '../lib/config';
+import { contextUrl, RANK_FIELDS, RANK_LABELS, useUrlState } from '../lib/urlState';
 import { toCsv, downloadCsv } from '../lib/csv';
 
-type RankField = 'balance' | 'imports' | 'exports' | 'total_trade_value';
-
-const RANK_FIELDS: RankField[] = ['total_trade_value', 'balance', 'imports', 'exports'];
-const DEFAULT_RANK: RankField = 'total_trade_value';
-const DEFAULT_PAGE_SIZE = 25;
-
-const RANK_LABELS: Record<RankField, string> = {
-  balance: 'Balance',
-  imports: 'Imports',
-  exports: 'Exports',
-  total_trade_value: 'Total trade value',
-};
-
-function parseRankField(raw: string | null): RankField {
-  return raw && (RANK_FIELDS as string[]).includes(raw) ? (raw as RankField) : DEFAULT_RANK;
-}
-
-function rankValue(row: Summary['partners'][number], field: RankField): number {
-  const v = row[field];
-  return v.status === 'observed' || v.status === 'confirmed_zero' ? v.value : -Infinity;
-}
-
-/**
- * Home route: year slider (URL-driven), rank field (URL-driven, ?rank=),
- * partner search, a ranked partner table below a full-width world map, and
- * summary cards from summary.world only (never a client-side sum across
- * partner rows).
- */
 export function HomePage(): JSX.Element {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
+  const [showExact, setShowExact] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-
-  const metaState = useAsyncData(() => fetchMeta(), []);
-
-  const yearParam = searchParams.get('year');
-  const rankField = parseRankField(searchParams.get('rank'));
-  const configuredYears = metaState.status === 'ready' ? metaState.data.configured_coverage.years : null;
-  const latestYear = configuredYears ? configuredYears[configuredYears.length - 1] : null;
-
-  useEffect(() => {
-    if (!yearParam && latestYear) {
-      const next = new URLSearchParams(searchParams);
-      next.set('year', String(latestYear));
-      setSearchParams(next, { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [yearParam, latestYear]);
-
-  const year = yearParam ? Number(yearParam) : latestYear;
-
-  const summaryState = useAsyncData(() => {
-    if (!year) return Promise.reject(new Error('no year selected yet'));
-    return fetchSummary(year);
-  }, [year]);
-
-  const partnersState = useAsyncData(() => fetchPartners(), []);
-
+  const metaState = useAsyncData(fetchMeta, []);
+  const configuredYears = metaState.status === 'ready' ? metaState.data.configured_coverage.years : undefined;
+  const { year, rank, params, notice, update } = useUrlState(configuredYears);
+  const summaryState = useAsyncData(() => year ? fetchSummary(year) : Promise.reject(new Error('Select a year')), [year]);
+  const partnersState = useAsyncData(fetchPartners, []);
   const ranked = useMemo(() => {
     if (summaryState.status !== 'ready') return [];
-    const list = [...summaryState.data.partners];
-    list.sort((a, b) => rankValue(b, rankField) - rankValue(a, rankField));
-    return list;
-  }, [summaryState, rankField]);
-
-  const hasQuery = query.trim().length > 0;
-
-  // Search always matches across every approved partner, regardless of the
-  // default top-25 cutoff below.
-  const searched = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return ranked;
-    return ranked.filter((p) => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q));
-  }, [ranked, query]);
-
-  const displayed = hasQuery || showAll ? searched : searched.slice(0, DEFAULT_PAGE_SIZE);
-
-  const rankByCode = useMemo(() => {
-    const map = new Map<string, number>();
-    ranked.forEach((p, i) => map.set(p.code, i + 1));
-    return map;
-  }, [ranked]);
-
-  const onYearIndexChange = (index: number) => {
-    if (!configuredYears) return;
-    const next = new URLSearchParams(searchParams);
-    next.set('year', String(configuredYears[index]));
-    setSearchParams(next);
-  };
-
-  const onRankChange = (field: RankField) => {
-    const next = new URLSearchParams(searchParams);
-    if (field === DEFAULT_RANK) {
-      next.delete('rank');
-    } else {
-      next.set('rank', field);
-    }
-    setSearchParams(next);
-  };
-
+    const value = (p: typeof summaryState.data.partners[number]) => p[rank].value ?? -Infinity;
+    return [...summaryState.data.partners].sort((a, b) => value(b) - value(a) || a.code.localeCompare(b.code));
+  }, [summaryState, rank]);
+  const normalizedQuery = query.trim().toLowerCase();
+  const matches = useMemo(() => ranked.filter((p) => !normalizedQuery || p.name.toLowerCase().includes(normalizedQuery) || p.code.toLowerCase().includes(normalizedQuery)), [ranked, normalizedQuery]);
+  const displayed = normalizedQuery || showAll ? matches : matches.slice(0, 25);
+  const ranks = useMemo(() => new Map(ranked.map((p, i) => [p.code, i + 1])), [ranked]);
   if (metaState.status === 'error') return <DataError error={metaState.error} />;
-  if (metaState.status === 'loading' || !year) return <Loading label="Loading" />;
-  if (summaryState.status === 'loading' || partnersState.status === 'loading') {
-    return <Loading label={`Loading ${year}`} />;
-  }
-  if (summaryState.status === 'error') return <DataError error={summaryState.error} />;
-  if (partnersState.status === 'error') return <DataError error={partnersState.error} />;
-
-  const summary = summaryState.data;
-  const yearIndex = configuredYears ? configuredYears.indexOf(year) : 0;
+  if (metaState.status === 'loading' || !year) return <Loading label="Loading trade data" />;
+  const summary = summaryState.status === 'ready' ? summaryState.data : null;
+  const partners = partnersState.status === 'ready' ? partnersState.data : null;
   const download = () => {
     const fields = ['imports', 'exports', 'balance', 'total_trade_value'] as const;
     downloadCsv(`partners_${year}.csv`, toCsv(
@@ -129,157 +43,57 @@ export function HomePage(): JSX.Element {
       ranked.map((p) => [p.code, p.name, p.kind, ...fields.flatMap((field) => [p[field].status, p[field].value ?? ''])]),
     ));
   };
-
-  return (
-    <div className="home-page">
-      <h1>US goods trade partners</h1>
-
-      <div className="controls-row">
-        <label htmlFor="year-slider">
-          Year: <strong>{year}</strong>
-        </label>
-        <input
-          id="year-slider"
-          type="range"
-          min={0}
-          max={(configuredYears?.length ?? 1) - 1}
-          value={Math.max(yearIndex, 0)}
-          onChange={(e) => onYearIndexChange(Number(e.target.value))}
-          list="year-slider-ticks"
-        />
-        <datalist id="year-slider-ticks">
-          {configuredYears?.map((y) => (
-            <option key={y} value={configuredYears.indexOf(y)} label={String(y)} />
-          ))}
-        </datalist>
+  return <div className="home-page">
+    <header className="page-intro"><p className="eyebrow">US trade with the world</p><h1>Explore goods trade</h1>
+      <p className="intro-text">Compare trading partners, see the balance, and explore what moves between countries.</p>
+      <p className="scope-label">{GLOBAL_LABEL}</p>
+    </header>
+    <UrlNotice message={notice} />
+    <section className="explore-controls panel" aria-label="Explore controls">
+      <div className="field year-field"><label htmlFor="home-year-select">Year</label>
+        <select id="home-year-select" value={year} onChange={(e) => update({ year: e.target.value })}>
+          {configuredYears?.map((y) => <option key={y}>{y}</option>)}
+        </select>
       </div>
-
-      <section aria-label="World total" className="world-total-card">
-        <h2>World total, {year}</h2>
-        <p>From the separately fetched Census world total (summary.world). Never a sum of partner rows.</p>
-        <div className="stat-cards">
-          <div className="stat-card">
-            <p className="stat-label">Imports</p>
-            <p className="stat-value">
-              <MoneyCell flow={summary.world.imports} showExact={false} />
-            </p>
-          </div>
-          <div className="stat-card">
-            <p className="stat-label">Exports</p>
-            <p className="stat-value">
-              <MoneyCell flow={summary.world.exports} showExact={false} />
-            </p>
-          </div>
-          <div className="stat-card">
-            <p className="stat-label">Balance</p>
-            <p className="stat-value">
-              <MoneyCell flow={summary.world.balance} showExact={false} />
-            </p>
-          </div>
-          <div className="stat-card">
-            <p className="stat-label">Total trade value</p>
-            <p className="stat-value">
-              <MoneyCell flow={summary.world.total_trade_value} showExact={false} />
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section aria-label="World map" className="home-map-pane">
-        <MapSlot
-          year={year}
-          summaryPartners={summary.partners}
-          partners={partnersState.data.partners}
-          selectedCode={null}
-          onSelect={(code) => navigate(`/partner/${code}?year=${year}`)}
-          basePath={BASE_PATH}
-        />
-      </section>
-
-      <section className="home-table-pane" aria-label="Ranked partners">
-        <div className="controls-row">
-          <button type="button" onClick={download}>Download all partners CSV</button>
-          <label htmlFor="partner-search">Search partners</label>
-          <input
-            id="partner-search"
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Name or code"
-          />
-          <label htmlFor="rank-field">Rank by</label>
-          <select id="rank-field" value={rankField} onChange={(e) => onRankChange(e.target.value as RankField)}>
-            {RANK_FIELDS.map((f) => (
-              <option key={f} value={f}>
-                {RANK_LABELS[f]}
-              </option>
-            ))}
-          </select>
-        </div>
-        <p>
-          Showing {displayed.length} of {summary.partners.length} approved partners for {year}, ranked by{' '}
-          {RANK_LABELS[rankField].toLowerCase()}.
-          {!hasQuery && !showAll && searched.length > DEFAULT_PAGE_SIZE && (
-            <>
-              {' '}
-              <button type="button" className="link-button" onClick={() => setShowAll(true)}>
-                Show all {searched.length}
-              </button>
-            </>
-          )}
-          {!hasQuery && showAll && (
-            <>
-              {' '}
-              <button type="button" className="link-button" onClick={() => setShowAll(false)}>
-                Show top {DEFAULT_PAGE_SIZE}
-              </button>
-            </>
-          )}
-        </p>
-
-        <TableScroll>
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Partner</th>
-                <th>Imports</th>
-                <th>Exports</th>
-                <th>Balance</th>
-                <th>Total trade value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayed.map((p) => (
-                <tr key={p.code}>
-                  <td>{rankByCode.get(p.code)}</td>
-                  <td>
-                    <Link to={`/partner/${p.code}?year=${year}`}>{p.name}</Link>{' '}
-                    <span className="partner-code">({p.code})</span>
-                    {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}
-                  </td>
-                  <td>
-                    <MoneyCell flow={p.imports} showExact={false} />
-                  </td>
-                  <td>
-                    <MoneyCell flow={p.exports} showExact={false} />
-                  </td>
-                  <td>
-                    <MoneyCell flow={p.balance} showExact={false} />
-                  </td>
-                  <td>
-                    <MoneyCell flow={p.total_trade_value} showExact={false} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </TableScroll>
-        <p className="chart-note">
-          Select a value to show its exact dollar amount.{' '}
-          Rows without an observed value for the chosen rank field sort last; absent is never shown as zero.
-        </p>
-      </section>
-    </div>
-  );
+      <div className="field search-field"><label htmlFor="partner-search">Find a partner</label>
+        <input id="partner-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search any partner by name or code" />
+      </div>
+      <div className="field rank-field"><label htmlFor="rank-field">Rank partner table by</label>
+        <select id="rank-field" value={rank} onChange={(e) => update({ rank: e.target.value })}>{RANK_FIELDS.map((f) => <option key={f} value={f}>{RANK_LABELS[f]}</option>)}</select>
+      </div>
+      <div className="year-range"><label htmlFor="year-slider">Move through years</label>
+        <span>{configuredYears?.[0]}</span><input id="year-slider" type="range" min={0} max={(configuredYears?.length ?? 1) - 1}
+          aria-valuetext={String(year)} value={configuredYears?.indexOf(year) ?? 0}
+          onChange={(e) => update({ year: String(configuredYears?.[Number(e.target.value)]) })} /><span>{configuredYears?.at(-1)}</span>
+      </div>
+      <div className="search-feedback"><span role="status">{summaryState.status === 'error' || partnersState.status === 'error' ? `Data for ${year} is unavailable` : !summary ? `Loading ${year} data` : normalizedQuery ? `${matches.length} matching partners` : `${ranked.length} partners available`}</span>
+        <a href="#partner-results">View results ↓</a>
+        {normalizedQuery && matches.length === 1 && <Link to={contextUrl(`/partner/${matches[0].code}`, params)}>Open {matches[0].name}</Link>}
+      </div>
+    </section>
+    {summaryState.status === 'error' ? <DataError error={summaryState.error} /> : partnersState.status === 'error' ? <DataError error={partnersState.error} /> : !summary || !partners ? <Loading label={`Loading ${year} results`} /> : <>
+    <section aria-label="World total" className="world-total-card">
+      <div className="section-heading-row"><h2>World total <span className="heading-year">{year}</span></h2><p>All partners. Unchanged by search or ranking.</p></div>
+      <TradeTotals values={summary.world} />
+    </section>
+    <section aria-label="World map" className="home-map-pane panel">
+      <div className="section-heading-row"><div><p className="eyebrow">Geographic view</p><h2>Trade balance by partner</h2></div><span className="year-badge">{year}</span></div>
+      <MapSlot year={year} summaryPartners={summary.partners} partners={partners.partners} selectedCode={null}
+        onSelect={(code) => navigate(contextUrl(`/partner/${code}`, params))} basePath={BASE_PATH} />
+    </section>
+    <section id="partner-results" tabIndex={-1} className="home-table-pane panel" aria-label="Ranked partners">
+      <div className="section-heading-row"><div><p className="eyebrow">Partner comparison</p><h2>Partners ranked by {RANK_LABELS[rank].toLowerCase()}</h2></div><button type="button" onClick={download}>Download all partners CSV</button></div>
+      <div className="results-toolbar"><label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label><p role="status">Showing <strong>{displayed.length}</strong> of {ranked.length} partners for {year}{normalizedQuery ? ` (${matches.length} match your search)` : ''}.</p>
+        {!normalizedQuery && <button type="button" className="secondary-button" onClick={() => setShowAll(!showAll)}>{showAll ? 'Show top 25' : `Show all ${ranked.length}`}</button>}
+        {normalizedQuery && <button type="button" onClick={() => setQuery('')}>Clear search</button>}
+      </div>
+      {matches.length === 0 ? <div className="empty-state"><h3>No partners match “{query}”</h3><p>Try another name or a Census partner code.</p></div> : <TableScroll label={`Partner ranking for ${year}`}>
+        <table><thead><tr><th scope="col">Rank</th><th scope="col">Partner</th><th scope="col">Imports</th><th scope="col">Exports</th><th scope="col">Balance</th><th scope="col">Total trade</th></tr></thead>
+          <tbody>{displayed.map((p) => <tr key={p.code}><td>{ranks.get(p.code)}</td><th scope="row"><Link to={contextUrl(`/partner/${p.code}`, params)}>{p.name}</Link> <span className="partner-code">{p.code}</span>{p.kind === 'aggregate' && <span className="aggregate-tag">aggregate</span>}</th>
+            <td><MoneyCell flow={p.imports} showExact={showExact} /></td><td><MoneyCell flow={p.exports} showExact={showExact} /></td><td><MoneyCell flow={p.balance} showExact={showExact} /></td><td><MoneyCell flow={p.total_trade_value} showExact={showExact} /></td></tr>)}</tbody>
+        </table></TableScroll>}
+      <p className="chart-note">Missing values sort last. The EU is an aggregate and overlaps its member countries. Do not add all displayed rows.</p>
+    </section>
+    </>}
+  </div>;
 }

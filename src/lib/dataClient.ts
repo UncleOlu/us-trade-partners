@@ -1,4 +1,5 @@
 import { dataUrl, SNAPSHOT_ID } from './config';
+import { validateData } from './validateData';
 import type {
   Meta,
   Partners,
@@ -14,10 +15,10 @@ import type {
 // missing file apart from a network or parse failure.
 export class SnapshotFileError extends Error {
   readonly url: string;
-  readonly kind: 'not_found' | 'network' | 'parse';
+  readonly kind: 'not_found' | 'network' | 'parse' | 'timeout';
   readonly snapshotId: string;
 
-  constructor(url: string, kind: 'not_found' | 'network' | 'parse', message: string) {
+  constructor(url: string, kind: 'not_found' | 'network' | 'parse' | 'timeout', message: string) {
     super(message);
     this.name = 'SnapshotFileError';
     this.url = url;
@@ -26,36 +27,34 @@ export class SnapshotFileError extends Error {
   }
 }
 
-async function fetchJson<T>(relativePath: string): Promise<T> {
+const cache = new Map<string, Promise<unknown>>();
+
+function fetchJson<T>(relativePath: string): Promise<T> {
+  const prior = cache.get(relativePath);
+  if (prior) return prior as Promise<T>;
+  const request = loadJson<T>(relativePath).catch((error) => { cache.delete(relativePath); throw error; });
+  cache.set(relativePath, request);
+  return request;
+}
+
+async function loadJson<T>(relativePath: string): Promise<T> {
   const url = dataUrl(relativePath);
-  let response: Response;
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), 30_000);
+  let received = false;
   try {
-    response = await fetch(url, { headers: { Accept: 'application/json' } });
-  } catch (err) {
-    throw new SnapshotFileError(
-      url,
-      'network',
-      `Could not reach the snapshot data file (network error): ${url}`,
-    );
-  }
-  if (response.status === 404) {
-    throw new SnapshotFileError(
-      url,
-      'not_found',
-      `Snapshot data file is missing: ${url}`,
-    );
-  }
-  if (!response.ok) {
-    throw new SnapshotFileError(
-      url,
-      'network',
-      `Snapshot data file request failed with status ${response.status}: ${url}`,
-    );
-  }
-  try {
-    return (await response.json()) as T;
-  } catch (err) {
-    throw new SnapshotFileError(url, 'parse', `Snapshot data file is not valid JSON: ${url}`);
+    const response = await fetch(url, { headers: { Accept: 'application/json' }, signal: controller.signal });
+    received = true;
+    if (!response.ok) throw new SnapshotFileError(url, response.status === 404 ? 'not_found' : 'network', `Data request failed (${response.status}): ${url}`);
+    const value: unknown = await response.json();
+    validateData(value, relativePath);
+    return value as T;
+  } catch (error) {
+    if (controller.signal.aborted) throw new SnapshotFileError(url, 'timeout', 'The data request took too long. Reload to try again.');
+    if (error instanceof SnapshotFileError) throw error;
+    throw new SnapshotFileError(url, received ? 'parse' : 'network', received ? `Snapshot data could not be verified: ${url}` : `Could not reach the data: ${url}`);
+  } finally {
+    window.clearTimeout(timer);
   }
 }
 

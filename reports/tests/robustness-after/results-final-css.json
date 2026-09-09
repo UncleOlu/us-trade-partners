@@ -1,0 +1,61 @@
+{
+  "build": {
+    "target": "local",
+    "expected_local_index_sha256": "4bed7d1bb619a035f073c1376e98cf7f6f5fc917059e4c8420e47bde7885852f",
+    "index_modified": "2026-09-09T20:13:22.662Z",
+    "snapshot": "20260909T091429Z-c638aff167ea"
+  },
+  "results": [
+    {
+      "name": "methodology normal and boundary recovery links keep context",
+      "status": "PASS",
+      "ms": 1793
+    },
+    {
+      "name": "exact KPI values fit the card and keep keyboard focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 320,
+          "left": 29,
+          "right": 230.171875,
+          "cardLeft": 16,
+          "cardRight": 304
+        },
+        {
+          "width": 390,
+          "left": 29,
+          "right": 230.171875,
+          "cardLeft": 16,
+          "cardRight": 374
+        },
+        {
+          "width": 640,
+          "left": 41,
+          "right": 231.65625,
+          "cardLeft": 24,
+          "cardRight": 616
+        },
+        {
+          "width": 1280,
+          "left": 89,
+          "right": 381.71875,
+          "cardLeft": 72,
+          "cardRight": 634
+        }
+      ],
+      "ms": 2344
+    },
+    {
+      "name": "product group max scroll reveals the full last numeric column",
+      "status": "PASS",
+      "ms": 1225
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 13164
+    }
+  ],
+  "pageErrors": []
+}

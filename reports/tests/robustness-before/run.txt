@@ -1,0 +1,382 @@
+[
+  {
+    "name": "home invalid year abc",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=abc",
+    "errors": [],
+    "main": "Loading...",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "home invalid year 0",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=0",
+    "errors": [],
+    "main": "Loading...",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "home invalid year 2099",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=2099",
+    "errors": [],
+    "main": "Could not load this page\n\nSnapshot data file is missing: /us-trade-partners/data/20260909T091429Z-c6",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "Reload",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "partner invalid year",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=abc",
+    "errors": [],
+    "main": "CHINA\nKind\ncountry\nCode\n5700\nISO\nCHN\nYear\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n202",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "yearSelect": "2025",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "2013201420152016201720182019202020212022",
+          "height": 19
+        },
+        {
+          "text": "",
+          "height": 13
+        },
+        {
+          "text": "Download CSV",
+          "height": 21
+        },
+        {
+          "text": "$440bn",
+          "height": 17
+        },
+        {
+          "text": "$122bn",
+          "height": 17
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "section invalid year and rank",
+    "url": "https://uncleolu.github.io/us-trade-partners/section/XVI/?year=2099&rank=oops",
+    "errors": [],
+    "main": "XVI: MACHINERY AND MECHANICAL APPLIANCES; ELECTRICAL EQUIPMENT; PARTS THEREOF; SOUND RECORDERS AND R",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "yearSelect": "2025",
+      "rank": "total_trade_value",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "2013201420152016201720182019202020212022",
+          "height": 19
+        },
+        {
+          "text": "Total trade valueImportsExportsBalance",
+          "height": 19
+        },
+        {
+          "text": "$1.16tn",
+          "height": 21
+        },
+        {
+          "text": "$511bn",
+          "height": 21
+        },
+        {
+          "text": "-$647bn",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "missing snapshot",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "errors": [],
+    "main": "Could not load this page\n\nSnapshot data file is missing: /us-trade-partners/data/20260909T091429Z-c6",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "Reload",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "invalid JSON",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "errors": [],
+    "main": "Could not load this page\n\nSnapshot data file is not valid JSON: /us-trade-partners/data/20260909T091",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "Reload",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "wrong JSON shape",
+    "errors": [
+      "Cannot read properties of undefined (reading 'map')"
+    ],
+    "error": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('main')\u001b[22m\n"
+  },
+  {
+    "name": "header loses route context",
+    "url": "https://uncleolu.github.io/us-trade-partners/hub",
+    "errors": [],
+    "main": "Loading...",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "focused": "<a href=\"/us-trade-partners/hub\">Hub</a>",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        }
+      ],
+      "mapTabStops": 0
+    }
+  },
+  {
+    "name": "home control sizes and tab stops",
+    "url": "https://uncleolu.github.io/us-trade-partners/?year=2020",
+    "errors": [],
+    "main": "US goods trade partners\nYear: 2020\nWorld total, 2020\n\nFrom the separately fetched Census world total",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "rank": "total_trade_value",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "",
+          "height": 22
+        },
+        {
+          "text": "$2.33tn",
+          "height": 21
+        },
+        {
+          "text": "$1.43tn",
+          "height": 21
+        },
+        {
+          "text": "-$901bn",
+          "height": 21
+        },
+        {
+          "text": "$3.76tn",
+          "height": 21
+        }
+      ],
+      "mapTabStops": 170
+    }
+  },
+  {
+    "name": "group refresh detail",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "before": "XVI",
+    "after": "I"
+  },
+  {
+    "name": "partner group selection refresh",
+    "url": "https://uncleolu.github.io/us-trade-partners/partner/5700/?year=2020",
+    "errors": [],
+    "main": "CHINA\nKind\ncountry\nCode\n5700\nISO\nCHN\nYear\n2013\n2014\n2015\n2016\n2017\n2018\n2019\n2020\n2021\n2022\n2023\n202",
+    "details": {
+      "scrollWidth": 390,
+      "width": 390,
+      "title": "US goods trade partners",
+      "yearSelect": "2020",
+      "focused": "<body>\n    <div id=\"root\"><div class=\"app-shell\"><header class=\"app-header\"><nav><a href=\"/us-trade-partners\">Home</a><a href=\"/us-trade-partners/hub\">Hub</a><a href=\"/us-trade-partners/methodology\">Methodology</a></nav></header><main><div ",
+      "smallControls": [
+        {
+          "text": "Home",
+          "height": 18
+        },
+        {
+          "text": "Hub",
+          "height": 18
+        },
+        {
+          "text": "Methodology",
+          "height": 18
+        },
+        {
+          "text": "2013201420152016201720182019202020212022",
+          "height": 19
+        },
+        {
+          "text": "",
+          "height": 13
+        },
+        {
+          "text": "Download CSV",
+          "height": 21
+        },
+        {
+          "text": "$440bn",
+          "height": 17
+        },
+        {
+          "text": "$122bn",
+          "height": 17
+        }
+      ],
+      "mapTabStops": 0
+    }
+  }
+]

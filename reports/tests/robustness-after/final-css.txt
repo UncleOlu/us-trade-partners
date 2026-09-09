@@ -1,0 +1,6 @@
+[PASS] methodology normal and boundary recovery links keep context (1793ms)
+[PASS] exact KPI values fit the card and keep keyboard focus (2344ms) detail=[{"width":320,"left":29,"right":230.171875,"cardLeft":16,"cardRight":304},{"width":390,"left":29,"right":230.171875,"cardLeft":16,"cardRight":374},{"width":640,"left":41,"right":231.65625,"cardLeft":24,"cardRight":616},{"width":1280,"left":89,"right":381.71875,"cardLeft":72,"cardRight":634}]
+[PASS] product group max scroll reveals the full last numeric column (1225ms)
+[PASS] responsive layouts, focus and keyboard table scroll (13164ms)
+
+collected=4 passed=4 failed=0 not_run=0

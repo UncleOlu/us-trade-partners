@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import {
   ResponsiveContainer,
   LineChart,
@@ -19,23 +19,11 @@ import { TableScroll } from '../components/TableScroll';
 import { isUsable } from '../lib/status';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
 import { toCsv, downloadCsv } from '../lib/csv';
+import { contextUrl, useUrlState, RANK_FIELDS, RANK_LABELS, type RankField } from '../lib/urlState';
+import { SECTION_LABELS } from '../lib/sectionLabels';
+import { UrlNotice } from '../components/UrlNotice';
+import { TradeTotals } from '../components/TradeTotals';
 import type { Section, FlowValue, DerivedValue } from '../types/generated';
-
-type RankField = 'imports' | 'exports' | 'balance' | 'total_trade_value';
-
-const RANK_FIELDS: RankField[] = ['total_trade_value', 'imports', 'exports', 'balance'];
-const DEFAULT_RANK: RankField = 'total_trade_value';
-
-const RANK_LABELS: Record<RankField, string> = {
-  imports: 'Imports',
-  exports: 'Exports',
-  balance: 'Balance',
-  total_trade_value: 'Total trade value',
-};
-
-function parseRankField(raw: string | null): RankField {
-  return raw && (RANK_FIELDS as string[]).includes(raw) ? (raw as RankField) : DEFAULT_RANK;
-}
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
   return isUsable(flow) ? flow.value : null;
@@ -47,16 +35,16 @@ function rankValue(row: Section['years'][number]['partners'][number], field: Ran
 }
 
 function SectionTrend({ section }: { section: Section }): JSX.Element {
-  const data = section.years.map((y) => ({
+  const data = section.years?.map((y) => ({
     year: y.year,
     imports: chartValue(y.universe.imports),
     exports: chartValue(y.universe.exports),
   }));
   return (
     <section aria-labelledby="section-trend-heading">
-      <h2 id="section-trend-heading">Universe imports and exports by year</h2>
+      <h2 id="section-trend-heading">Imports and exports over time</h2>
       <p>
-        Reconciliation-universe sums only (section.years[].universe), never a sum of the partner rows shown below.
+        Totals cover all individual partners. The EU aggregate is excluded to avoid counting its members twice.
       </p>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data} margin={{ top: 16, right: 24, left: 8, bottom: 8 }}>
@@ -86,24 +74,15 @@ function SectionTrend({ section }: { section: Section }): JSX.Element {
  */
 export function SectionPage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const rankField = parseRankField(searchParams.get('rank'));
+  const [showExact, setShowExact] = useState(false);
 
   const state = useAsyncData(() => {
     if (!id) return Promise.reject(new Error('missing section id'));
     return fetchSection(id);
   }, [id]);
 
-  // Every hook in this component must run on every render, in the same
-  // order, including while `state` is still loading or errored: compute
-  // derived values with safe fallbacks first, call useMemo unconditionally,
-  // and only branch into the loading/error early returns afterward. Calling
-  // useMemo after an early return crashed this page (React error #310,
-  // "rendered more hooks than during the previous render") because the first
-  // render (loading) skipped it while a later render (ready) reached it.
-  const years = state.status === 'ready' ? state.data.years.map((y) => y.year) : [];
-  const yearParam = searchParams.get('year');
-  const year = yearParam && years.includes(Number(yearParam)) ? Number(yearParam) : years[years.length - 1];
+  const years = state.status === 'ready' ? state.data.years?.map((y) => y.year) : undefined;
+  const { year, rank: rankField, params, notice, update } = useUrlState(years);
   const yearEntry = state.status === 'ready' ? state.data.years.find((y) => y.year === year) : undefined;
 
   const ranked = useMemo(() => {
@@ -117,22 +96,6 @@ export function SectionPage(): JSX.Element {
   if (state.status === 'error') return <DataError error={state.error} />;
 
   const section = state.data;
-
-  const onYearChange = (newYear: number) => {
-    const next = new URLSearchParams(searchParams);
-    next.set('year', String(newYear));
-    setSearchParams(next);
-  };
-
-  const onRankChange = (field: RankField) => {
-    const next = new URLSearchParams(searchParams);
-    if (field === DEFAULT_RANK) {
-      next.delete('rank');
-    } else {
-      next.set('rank', field);
-    }
-    setSearchParams(next);
-  };
 
   const download = () => {
     if (!yearEntry) return;
@@ -170,24 +133,22 @@ export function SectionPage(): JSX.Element {
 
   return (
     <div className="section-page">
-      <h1>
-        {section.section.id}: {section.section.name}
-      </h1>
-      <p>Chapters: {section.section.chapters.join(', ')}</p>
-
-      <SectionTrend section={section} />
-
+      <header className="page-intro"><p className="eyebrow">HS section {section.section.id}</p>
+        <h1>{SECTION_LABELS[section.section.id] ?? `Product group ${section.section.id}`}</h1>
+        <details className="official-name"><summary>Full official name and chapters</summary><p>{section.section.name}</p><p>Chapters: {section.section.chapters.join(', ')}</p></details>
+      </header>
+      <UrlNotice message={notice} />
       <div className="controls-row">
         <label htmlFor="section-year-select">Year</label>
-        <select id="section-year-select" value={year} onChange={(e) => onYearChange(Number(e.target.value))}>
-          {years.map((y) => (
+        <select id="section-year-select" value={year} onChange={(e) => update({ year: e.target.value })}>
+          {years?.map((y) => (
             <option key={y} value={y}>
               {y}
             </option>
           ))}
         </select>
         <label htmlFor="section-rank-field">Rank by</label>
-        <select id="section-rank-field" value={rankField} onChange={(e) => onRankChange(e.target.value as RankField)}>
+        <select id="section-rank-field" value={rankField} onChange={(e) => update({ rank: e.target.value })}>
           {RANK_FIELDS.map((f) => (
             <option key={f} value={f}>
               {RANK_LABELS[f]}
@@ -196,46 +157,20 @@ export function SectionPage(): JSX.Element {
         </select>
       </div>
 
-      {yearEntry && (
-        <section aria-label="Reconciliation universe totals">
-          <h2>Universe totals, {year}</h2>
-          <p>Sums over the reconciliation universe only, from section.years[].universe. Never a sum of displayed rows.</p>
-          <div className="stat-cards">
-            <div className="stat-card">
-              <p className="stat-label">Imports</p>
-              <p className="stat-value">
-                <MoneyCell flow={yearEntry.universe.imports} showExact={false} />
-              </p>
-            </div>
-            <div className="stat-card">
-              <p className="stat-label">Exports</p>
-              <p className="stat-value">
-                <MoneyCell flow={yearEntry.universe.exports} showExact={false} />
-              </p>
-            </div>
-            <div className="stat-card">
-              <p className="stat-label">Balance</p>
-              <p className="stat-value">
-                <MoneyCell flow={yearEntry.universe.balance} showExact={false} />
-              </p>
-            </div>
-            <div className="stat-card">
-              <p className="stat-label">Total trade value</p>
-              <p className="stat-value">
-                <MoneyCell flow={yearEntry.universe.total_trade_value} showExact={false} />
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
+      {yearEntry && <section aria-label="Reconciliation universe totals" className="world-total-card">
+        <div className="section-heading-row"><h2>All-partner totals <span className="heading-year">{year}</span></h2><p>EU aggregate excluded to avoid double counting.</p></div>
+        <TradeTotals values={yearEntry.universe} />
+      </section>}
+      <div className="panel"><SectionTrend section={section} /></div>
+      <section className="panel" aria-label="Section partner ranking">
       <div className="section-heading-row">
         <h2>Partners ranked by {RANK_LABELS[rankField].toLowerCase()}, {year}</h2>
         <button type="button" onClick={download}>
           Download CSV
         </button>
       </div>
-      <TableScroll>
+      <label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label>
+      <TableScroll label={`Partners in section ${section.section.id} for ${year}`}>
         <table>
           <thead>
             <tr>
@@ -253,27 +188,28 @@ export function SectionPage(): JSX.Element {
               <tr key={p.code}>
                 <td>{i + 1}</td>
                 <td>
-                  <Link to={`/partner/${p.code}?year=${year}`}>{p.name}</Link> ({p.code})
+                  <Link to={contextUrl(`/partner/${p.code}`, params, { section: section.section.id })}>{p.name}</Link> ({p.code})
                   {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}
                 </td>
                 <td>{p.kind}</td>
                 <td>
-                  <MoneyCell flow={p.imports} showExact={false} />
+                  <MoneyCell flow={p.imports} showExact={showExact} />
                 </td>
                 <td>
-                  <MoneyCell flow={p.exports} showExact={false} />
+                  <MoneyCell flow={p.exports} showExact={showExact} />
                 </td>
                 <td>
-                  <MoneyCell flow={p.balance} showExact={false} />
+                  <MoneyCell flow={p.balance} showExact={showExact} />
                 </td>
                 <td>
-                  <MoneyCell flow={p.total_trade_value} showExact={false} />
+                  <MoneyCell flow={p.total_trade_value} showExact={showExact} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </TableScroll>
+      </section>
     </div>
   );
 }

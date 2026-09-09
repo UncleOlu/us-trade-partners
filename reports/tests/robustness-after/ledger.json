@@ -1,0 +1,147 @@
+{
+  "cases": {
+    "atlas failure offers retry and keeps table usable": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "back and forward restore year with matching values": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "data failure 404: visible recovery restores pinned snapshot": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "data failure 500: visible recovery restores pinned snapshot": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "data failure invalid JSON: visible recovery restores pinned snapshot": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "data failure wrong shape: visible recovery restores pinned snapshot": {
+      "evidence": "results-final-affected.json",
+      "status": "PASS"
+    },
+    "data failure wrong snapshot: visible recovery restores pinned snapshot": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "data timeout is bounded and retry restores the page": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "exact KPI values fit the card and keep keyboard focus": {
+      "evidence": "results-final-css.json",
+      "status": "PASS"
+    },
+    "failed lazy page shows recovery rather than a blank app": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "home filtered search preserves totals and full-export scope": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "hub search keeps all partners and sections reachable": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "invalid year/rank query recovery agrees with visible state": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "map has one tab stop, arrow navigation, escape and keyboard selection": {
+      "evidence": "results-final-affected.json",
+      "status": "PASS"
+    },
+    "methodology body timeout is bounded and retry restores content": {
+      "evidence": "results-final-affected.json",
+      "status": "PASS"
+    },
+    "methodology headers timeout is bounded and retry restores content": {
+      "evidence": "results-final-affected.json",
+      "status": "PASS"
+    },
+    "methodology normal and boundary recovery links keep context": {
+      "evidence": "results-final-css.json",
+      "status": "PASS"
+    },
+    "missing reasons are available by tap and keyboard": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "product group max scroll reveals the full last numeric column": {
+      "evidence": "results-final-css.json",
+      "status": "PASS"
+    },
+    "responsive layouts, focus and keyboard table scroll": {
+      "evidence": "results-final-css.json",
+      "status": "PASS"
+    },
+    "section choice survives share/refresh and exact-value clicks are separate": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "select stays mounted and focused during rapid year changes; latest response wins": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "slider stays mounted and focused during rapid year changes; latest response wins": {
+      "evidence": "results.json",
+      "status": "PASS"
+    },
+    "valid year/rank, header and hub navigation keep context": {
+      "evidence": "results.json",
+      "status": "PASS"
+    }
+  },
+  "final_build": {
+    "expected_local_index_sha256": "4bed7d1bb619a035f073c1376e98cf7f6f5fc917059e4c8420e47bde7885852f",
+    "index_modified": "2026-09-09T20:13:22.662Z",
+    "snapshot": "20260909T091429Z-c638aff167ea",
+    "target": "local"
+  },
+  "latest_fail": 0,
+  "latest_pass": 24,
+  "runs": [
+    {
+      "build": "Not captured in this earlier run; timestamp and retained payload files identify phase.",
+      "collected": 19,
+      "completed_utc": "2026-09-09T20:05:37.406953+00:00",
+      "failed": 0,
+      "file": "results.json",
+      "page_errors": [],
+      "passed": 19,
+      "skipped": 0
+    },
+    {
+      "build": "Not captured in this earlier run; timestamp and retained payload files identify phase.",
+      "collected": 6,
+      "completed_utc": "2026-09-09T20:10:33.433779+00:00",
+      "failed": 1,
+      "file": "results-final-affected.json",
+      "page_errors": [],
+      "passed": 5,
+      "skipped": 0
+    },
+    {
+      "build": {
+        "expected_local_index_sha256": "4bed7d1bb619a035f073c1376e98cf7f6f5fc917059e4c8420e47bde7885852f",
+        "index_modified": "2026-09-09T20:13:22.662Z",
+        "snapshot": "20260909T091429Z-c638aff167ea",
+        "target": "local"
+      },
+      "collected": 4,
+      "completed_utc": "2026-09-09T20:14:23.859234+00:00",
+      "failed": 0,
+      "file": "results-final-css.json",
+      "page_errors": [],
+      "passed": 4,
+      "skipped": 0
+    }
+  ],
+  "source_base": "b19843c",
+  "unique_cases": 24
+}

@@ -114,11 +114,11 @@ Run validation on the complete required dataset. Any FAIL in checks 1 to 9 (exce
 
 ## UI RULES
 - Global label on every page: "US goods trade, Census basis. Excludes services. Values are nominal USD." Link to /methodology: customs value, FAS, re-exports, Census vs BOP basis, EU definition and month rules, snapshot_id and source dates.
-- Map: diverging scale, deficit red, surplus blue, zero white. Fixed dollar bands across all years. Distinct no-data style. Year slider. Click and keyboard select. Hover or focus shows name, imports, exports, balance.
-- A prominent full-width desktop map, followed by partner search and a ranked table. Show the top 25 by default, with access to all partners and displayed/total counts. Search covers all partners. Year and rank remain in the URL. Hover is never the only path to a value.
+- Map: diverging scale, deficit red, surplus blue, zero white. Fixed dollar bands across all years. Distinct no-data style. Year slider. Click and keyboard select. One map Tab stop with arrow-key movement, Home/End and Enter/Space selection. Hover or focus shows name, imports, exports, balance in a stable readout. Retry is available after an atlas load failure.
+- A prominent full-width desktop map with visible year, search, and ranking controls before the charts. A clear link moves to the ranked partner table. Search feedback stays beside the field. Show the top 25 by default, with access to all partners and displayed/total counts. Search covers all partners. Year, rank, and selected partner product section remain in the URL. Hover is never the only path to a value.
 - Units: auto-select $k, $m, $bn, $tn with three significant figures. Exact integer on hover. CSV download per table with exact integers and statuses.
 - Partner page: line chart of imports, exports, balance by year. Bar chart of sections by flow for the selected year. Chapter table sorted by total_trade_value. Status label for every non-observed value.
-- Load only the selected snapshot files for the current route.
+- Load only the selected snapshot files for the current route. Reject malformed data with a recoverable error. A changed query must never display prior-year data under the new year. Normalize unsupported URL choices with a visible notice. Navigation retains valid year and rank context.
 - Payload budgets, set by the owner on 2026-09-09: home route 250 KB gzip, partner route 300 KB gzip, both measured on the production build under the base path at the step 6 audit. The 110m world-atlas file loads only on the home route; a 50m file, if Agent C proposes one, loads lazily on zoom and its cost is reported separately. The agent never sets a budget from the measured value.
 
 ## FILE OWNERSHIP

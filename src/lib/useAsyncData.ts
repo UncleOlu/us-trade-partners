@@ -1,32 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type AsyncState<T> =
   | { status: 'loading' }
   | { status: 'error'; error: unknown }
   | { status: 'ready'; data: T };
 
-/**
- * Loads data for the current route. Deliberately does not fall back to any
- * other snapshot or cached value on failure: a missing snapshot file must
- * surface as a visible error with a reload prompt, never a silent switch.
- */
+/** Associate every result with its inputs, including the render before an effect runs. */
 export function useAsyncData<T>(loader: () => Promise<T>, deps: unknown[]): AsyncState<T> {
-  const [state, setState] = useState<AsyncState<T>>({ status: 'loading' });
-  const generation = useRef(0);
-
+  const [result, setResult] = useState<{ deps: unknown[]; state: AsyncState<T> }>({ deps: [], state: { status: 'loading' } });
   useEffect(() => {
-    const myGeneration = ++generation.current;
-    setState({ status: 'loading' });
-    loader().then(
-      (data) => {
-        if (generation.current === myGeneration) setState({ status: 'ready', data });
-      },
-      (error) => {
-        if (generation.current === myGeneration) setState({ status: 'error', error });
-      },
+    let active = true;
+    const inputs = [...deps];
+    setResult({ deps: inputs, state: { status: 'loading' } });
+    Promise.resolve().then(loader).then(
+      (data) => { if (active) setResult({ deps: inputs, state: { status: 'ready', data } }); },
+      (error) => { if (active) setResult({ deps: inputs, state: { status: 'error', error } }); },
     );
+    return () => { active = false; };
+    // The caller lists all inputs used by the loader.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
-
-  return state;
+  return deps.length === result.deps.length && deps.every((dep, i) => Object.is(dep, result.deps[i]))
+    ? result.state : { status: 'loading' };
 }

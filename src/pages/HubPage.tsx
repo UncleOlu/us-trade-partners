@@ -1,117 +1,46 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchMeta, fetchPartners, fetchHsSections } from '../lib/dataClient';
 import { useAsyncData } from '../lib/useAsyncData';
+import { contextUrl, useUrlState } from '../lib/urlState';
+import { SECTION_LABELS } from '../lib/sectionLabels';
 import { Loading } from '../components/Loading';
 import { DataError } from '../components/DataError';
-import type { Partners } from '../types/generated';
+import { UrlNotice } from '../components/UrlNotice';
 
-type PartnerRow = Partners['partners'][number];
-
-const KIND_ORDER = ['country', 'territory', 'special', 'aggregate'] as const;
-const KIND_LABELS: Record<(typeof KIND_ORDER)[number], string> = {
-  country: 'Countries',
-  territory: 'Territories',
-  special: 'Special codes',
-  aggregate: 'Aggregates',
-};
-
-/**
- * Hub route (map of content): links to every partner (grouped by kind), every
- * HS section, every year, and the methodology page. Every page links back to
- * the hub.
- */
 export function HubPage(): JSX.Element {
-  const metaState = useAsyncData(() => fetchMeta(), []);
-  const partnersState = useAsyncData(() => fetchPartners(), []);
-  const sectionsState = useAsyncData(() => fetchHsSections(), []);
-
-  const grouped = useMemo(() => {
-    if (partnersState.status !== 'ready') return null;
-    const approved = partnersState.data.partners.filter((p) => p.resolution === 'approved');
-    const byKind = new Map<string, PartnerRow[]>();
-    for (const kind of KIND_ORDER) byKind.set(kind, []);
-    for (const p of approved) {
-      const list = byKind.get(p.kind) ?? [];
-      list.push(p);
-      byKind.set(p.kind, list);
-    }
-    for (const list of byKind.values()) list.sort((a, b) => a.name.localeCompare(b.name));
-    return byKind;
-  }, [partnersState]);
-
-  if (metaState.status === 'loading' || partnersState.status === 'loading' || sectionsState.status === 'loading') {
-    return <Loading label="Loading hub" />;
-  }
-  if (metaState.status === 'error') return <DataError error={metaState.error} />;
-  if (partnersState.status === 'error') return <DataError error={partnersState.error} />;
-  if (sectionsState.status === 'error') return <DataError error={sectionsState.error} />;
-  if (!grouped) return <Loading label="Loading hub" />;
-
-  const years = metaState.data.configured_coverage.years;
-  const latestYear = years[years.length - 1];
-  const totalApproved = [...grouped.values()].reduce((sum, list) => sum + list.length, 0);
-
-  return (
-    <div className="hub-page">
-      <h1>Hub</h1>
-      <p>Every partner, HS section, year, and the methodology page, in snapshot {metaState.data.snapshot_id}.</p>
-
-      <section aria-labelledby="hub-methodology">
-        <h2 id="hub-methodology">Methodology</h2>
-        <p>
-          <Link to="/methodology">Methodology: definitions, EU rules, value status labels, snapshot and source dates</Link>
-        </p>
-      </section>
-
-      <section aria-labelledby="hub-years">
-        <h2 id="hub-years">Years</h2>
-        <ul className="hub-list-inline">
-          {years.map((y) => (
-            <li key={y}>
-              <Link to={`/?year=${y}`}>{y}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="hub-sections">
-        <h2 id="hub-sections">HS sections ({sectionsState.data.groups.length})</h2>
-        <ul className="hub-list-inline">
-          {sectionsState.data.groups.map((g) => (
-            <li key={g.id}>
-              <Link to={`/section/${g.id}?year=${latestYear}`}>
-                {g.id}: {g.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="hub-partners">
-        <h2 id="hub-partners">Partners ({totalApproved})</h2>
-        {KIND_ORDER.map((kind) => {
-          const list = grouped.get(kind) ?? [];
-          if (list.length === 0) return null;
-          return (
-            <div key={kind} className="hub-kind-group">
-              <h3>
-                {KIND_LABELS[kind]} ({list.length})
-              </h3>
-              <ul className="hub-list-columns">
-                {list.map((p) => (
-                  <li key={p.code}>
-                    <Link to={`/partner/${p.code}?year=${latestYear}`}>
-                      {p.name} ({p.code})
-                    </Link>
-                    {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })}
-      </section>
-    </div>
-  );
+  const [query, setQuery] = useState('');
+  const [sectionQuery, setSectionQuery] = useState('');
+  const meta = useAsyncData(fetchMeta, []);
+  const partners = useAsyncData(fetchPartners, []);
+  const sections = useAsyncData(fetchHsSections, []);
+  const years = meta.status === 'ready' ? meta.data.configured_coverage.years : undefined;
+  const { params, year, notice, update } = useUrlState(years);
+  const approved = useMemo(() => partners.status === 'ready' ? partners.data.partners.filter((p) => p.resolution === 'approved').sort((a, b) => a.name.localeCompare(b.name)) : [], [partners]);
+  const matches = approved.filter((p) => `${p.name} ${p.code}`.toLowerCase().includes(query.trim().toLowerCase()));
+  if (meta.status === 'error') return <DataError error={meta.error} />;
+  if (partners.status === 'error') return <DataError error={partners.error} />;
+  if (sections.status === 'error') return <DataError error={sections.error} />;
+  if (meta.status === 'loading' || partners.status === 'loading' || sections.status === 'loading' || !year) return <Loading label="Loading hub" />;
+  const matchingSections = sections.data.groups.filter((g) => `${g.id} ${SECTION_LABELS[g.id] ?? ''} ${g.name} ${g.chapters.join(' ')}`.toLowerCase().includes(sectionQuery.trim().toLowerCase()));
+  return <div className="hub-page">
+    <header className="page-intro"><p className="eyebrow">The data directory</p><h1>Browse partners and products</h1><p className="intro-text">A direct route to every partner, product group and year.</p></header>
+    <UrlNotice message={notice} />
+    <section className="panel hub-controls" aria-label="Browse controls"><div className="field"><label htmlFor="hub-year-select">Year for all links</label><select id="hub-year-select" value={year} onChange={(e) => update({ year: e.target.value })}>{years?.map((y) => <option key={y}>{y}</option>)}</select></div>
+      <nav className="jump-links" aria-label="Hub sections"><a href="#hub-partners">Partners</a><a href="#hub-sections">Product groups</a><a href="#hub-years">Years</a><Link to={contextUrl('/methodology', params)}>Methodology</Link></nav>
+    </section>
+    <section id="hub-partners" className="panel" aria-labelledby="hub-partner-title"><div className="section-heading-row"><div><p className="eyebrow">Choose a trading partner</p><h2 id="hub-partner-title">Partners</h2></div><span className="count-badge">{approved.length} in this snapshot</span></div>
+      <div className="field"><label htmlFor="hub-partner-search">Search partners</label><input id="hub-partner-search" type="search" placeholder="Name or Census code" value={query} onChange={(e) => setQuery(e.target.value)} /></div>
+      <p role="status" className="chart-note">Showing {matches.length} of {approved.length} partners.</p>
+      {!matches.length && <div className="empty-state"><h3>No matching partners</h3><button onClick={() => setQuery('')}>Clear search</button></div>}
+      <ul className="partner-directory">{matches.map((p) => <li key={p.code}><Link to={contextUrl(`/partner/${p.code}`, params)}><span>{p.name}</span><span className="partner-code">{p.code}</span></Link>{p.kind === 'aggregate' && <span className="aggregate-tag">aggregate</span>}</li>)}</ul>
+    </section>
+    <section id="hub-sections" aria-labelledby="hub-section-title"><div className="section-heading-row"><div><p className="eyebrow">Harmonized System categories</p><h2 id="hub-section-title">Product groups</h2></div><span className="count-badge">22 groups</span></div>
+      <div className="field"><label htmlFor="hub-section-search">Search product groups</label><input id="hub-section-search" type="search" value={sectionQuery} onChange={(e) => setSectionQuery(e.target.value)} placeholder="Product name, HS section or chapter code" /></div>
+      <p role="status" className="chart-note">Showing {matchingSections.length} of {sections.data.groups.length} product groups.</p>
+      {!matchingSections.length && <div className="empty-state"><h3>No matching product groups</h3><button onClick={() => setSectionQuery('')}>Clear product search</button></div>}
+      <div className="section-directory">{matchingSections.map((g) => <article className="section-card" key={g.id}><p className="eyebrow">HS {g.id}</p><h3><Link to={contextUrl(`/section/${g.id}`, params)}>{SECTION_LABELS[g.id] ?? g.name}</Link></h3><p className="chart-note">Chapters {g.chapters.join(', ')}</p><details><summary>Full official name</summary><p>{g.name}</p></details></article>)}</div>
+    </section>
+    <section id="hub-years" className="panel" aria-labelledby="hub-year-title"><h2 id="hub-year-title">Explore by year</h2><ul className="year-links">{years?.map((y) => <li key={y}><Link to={contextUrl('/', params, { year: String(y) })}>{y}</Link></li>)}</ul></section>
+  </div>;
 }

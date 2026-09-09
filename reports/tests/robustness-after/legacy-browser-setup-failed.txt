@@ -1,0 +1,41 @@
+Starting preview server (building dist/ first only if stale)...
+
+> us-trade-partners-app@0.1.0 build
+> tsc -b && vite build && node scripts/generate-routes.mjs && node scripts/check-methodology.mjs
+
+vite v5.4.21 building for production...
+transforming...
+✓ 937 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                            0.58 kB │ gzip:   0.34 kB
+dist/assets/index-Cjsik9ru.css            13.08 kB │ gzip:   3.53 kB
+dist/assets/NotFoundPage-BHcNXDGR.js       0.26 kB │ gzip:   0.21 kB
+dist/assets/sectionLabels-DNAnCw3g.js      0.67 kB │ gzip:   0.41 kB
+dist/assets/MethodologyPage-TCIrIL_Z.js    3.88 kB │ gzip:   1.63 kB
+dist/assets/HubPage-BerwkCZz.js            4.98 kB │ gzip:   1.57 kB
+dist/assets/SectionPage-BCin6Jnd.js        5.50 kB │ gzip:   2.08 kB
+dist/assets/PartnerPage-8VLERKon.js       11.19 kB │ gzip:   3.27 kB
+dist/assets/index-DX1wlV4R.js            220.02 kB │ gzip:  73.62 kB
+dist/assets/LineChart-CKEz4Bva.js        383.75 kB │ gzip: 105.65 kB
+✓ built in 933ms
+[methodology-content] copied docs/methodology-content.md to dist/methodology-content.md
+[world-atlas] copied countries-110m.json to dist/atlas/countries-110m.json
+[snapshot-data] copied 274 files from data/20260909T091429Z-c638aff167ea to dist/data/20260909T091429Z-c638aff167ea
+[generate-routes] 261 known routes (1 home + 1 hub + 1 methodology + 236 partners + 22 sections); wrote 260 index.html files plus dist/404.html
+[check-methodology] PASS: no unfilled {{ }} markers
+
+field                                | meta.json value                              | found on rendered page
+------------------------------------------------------------------------------------------------------------------------
+snapshot_id                           | 20260909T091429Z-c638aff167ea                 | yes
+fetched_at                            | 2026-09-09T09:14:29.094701+00:00              | yes
+latest_period                         | 2026-07                                       | yes
+configured_coverage.start_year        | 2013                                          | yes
+configured_coverage.end_year          | 2025                                          | yes
+verified_availability.from_year       | 2010                                          | yes
+verified_availability.to_year         | 2025                                          | yes
+documented_availability.from_year     | 2010                                          | yes
+code_commit                           | e15309d0cf6468d4b4d64d00555aa33711221b89      | yes
+
+[check-methodology] PASS: rendered methodology page matches meta.json
+Setup failed: could not start the preview server: dist/ still not fresh for the current snapshot after npm run build

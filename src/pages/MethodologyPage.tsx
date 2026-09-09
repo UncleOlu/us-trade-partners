@@ -1,5 +1,6 @@
-import { fetchMeta } from '../lib/dataClient';
-import { Link } from 'react-router-dom';
+import { fetchMeta, SnapshotFileError } from '../lib/dataClient';
+import { Link, useSearchParams } from 'react-router-dom';
+import { contextUrl } from '../lib/urlState';
 import { BASE_PATH, SNAPSHOT_ID } from '../lib/config';
 import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
@@ -10,11 +11,19 @@ import type { Meta } from '../types/generated';
 
 async function loadMethodologyMarkdown(): Promise<string> {
   const url = `${BASE_PATH}methodology-content.md`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Could not load methodology content (status ${response.status}): ${url}`);
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), 30_000);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) throw new SnapshotFileError(url, response.status === 404 ? 'not_found' : 'network', `Could not load methodology content (status ${response.status}): ${url}`);
+    return await response.text();
+  } catch (error) {
+    if (controller.signal.aborted) throw new SnapshotFileError(url, 'timeout', 'The methodology request took too long. Reload to try again.');
+    if (error instanceof SnapshotFileError) throw error;
+    throw new SnapshotFileError(url, 'network', `Could not reach the methodology content: ${url}`);
+  } finally {
+    window.clearTimeout(timer);
   }
-  return response.text();
 }
 
 function buildTemplateValues(meta: Meta): Record<string, string> {
@@ -36,13 +45,14 @@ function buildTemplateValues(meta: Meta): Record<string, string> {
 
 function MapDiagnosticsSection(): JSX.Element {
   const diagnostics = useMapDiagnostics();
+  const [params] = useSearchParams();
 
   return (
     <section aria-labelledby="map-diagnostics-heading">
       <h2 id="map-diagnostics-heading">Map diagnostics</h2>
       {!diagnostics && (
         <p>
-          Not yet available in this session: visit the <Link to="/">home page</Link> first so the map can
+          Not yet available in this session: visit the <Link to={contextUrl('/', params)}>home page</Link> first so the map can
           report which feature ids and partner codes it could not match.
         </p>
       )}

@@ -62,20 +62,16 @@ no-data) that the component renders under the map.
 
 ## Interaction
 
-- Every feature with a matched, approved partner that has flow data for the selected year is keyboard focusable
-  (`tabIndex={0}`, `role="button"`), with an `aria-label` naming the partner and its imports, exports, and balance
-  (using `src/lib/units.ts` and `src/lib/status.ts`, so status labels appear for non-observed values). Click, Enter,
-  and Space all call `onSelect(code)`.
-- Hovering or focusing a feature shows a tooltip with the same name, imports, exports, and balance. The aria-label
-  carries the same information, so hover is never the only path to a value.
-- The selected feature gets a visibly heavier, dark outline stroke.
-- Features with no matched partner, or a matched partner with no data for the selected year, are not focusable or
-  clickable (there is no code to select) and render in the no-data style.
+- The SVG is a named group. One matched country is in the Tab order. Arrow keys move focus in country-name order; Home and End reach the first and last. Tab leaves the map. Click, tap, Enter and Space call `onSelect(code)`.
+- Country button labels include imports, exports and balance. Hover or focus fills a reserved readout with both compact and exact values. Escape clears the readout. It stays visible after the pointer leaves so users have time to read it.
+- A strong country outline and focus ring show keyboard focus.
+- Unmatched features remain non-interactive. The coverage note links to the complete partner results, including small territories and aggregates.
+- The legend uses exact signed intervals matching the fixed [min, max) color scale. The hatched style means no usable balance or no mapped partner.
+- Map loading errors offer a retry button. Fetch cleanup aborts stale requests; retry and StrictMode effect replay start a new request.
 
 ## Performance
 
-- The atlas fetch and TopoJSON-to-GeoJSON conversion happen once per `basePath` (`useAtlas.ts`), never on a `year`,
-  `selectedCode`, `partners`, or `summaryPartners` change.
+- Atlas loading starts on `basePath` changes, explicit retry, or StrictMode effect replay (`useAtlas.ts`). It does not restart on `year`, `selectedCode`, `partners`, or `summaryPartners` changes.
 - The D3 projection, path generator, and every feature's `d` path string are memoized on feature geometry and
   container size only (`WorldMap.tsx`), so changing the year recolors paths without recomputing any geometry.
 

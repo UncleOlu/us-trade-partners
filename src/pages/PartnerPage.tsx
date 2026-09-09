@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   ResponsiveContainer,
   LineChart,
@@ -22,6 +22,10 @@ import { TableScroll } from '../components/TableScroll';
 import { isUsable } from '../lib/status';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
 import { toCsv, downloadCsv } from '../lib/csv';
+import { SECTION_LABELS } from '../lib/sectionLabels';
+import { useUrlState } from '../lib/urlState';
+import { UrlNotice } from '../components/UrlNotice';
+import { TradeTotals } from '../components/TradeTotals';
 import type { PartnerFile, FlowValue, DerivedValue } from '../types/generated';
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
@@ -36,7 +40,7 @@ function YearsTable({
   showExact: boolean;
 }): JSX.Element {
   const download = () => {
-    const rows = partner.years.map((y) => [
+    const rows = partner.years?.map((y) => [
       y.year,
       y.imports.status,
       y.imports.status === 'observed' || y.imports.status === 'confirmed_zero' ? y.imports.value : '',
@@ -67,14 +71,14 @@ function YearsTable({
   };
 
   return (
-    <section aria-labelledby="years-table-heading">
+    <section className="panel" aria-labelledby="years-table-heading">
       <div className="section-heading-row">
         <h2 id="years-table-heading">Trade by year</h2>
         <button type="button" onClick={download}>
           Download CSV
         </button>
       </div>
-      <TableScroll>
+      <TableScroll label="Trade by year">
         <table>
           <thead>
             <tr>
@@ -86,7 +90,7 @@ function YearsTable({
             </tr>
           </thead>
           <tbody>
-            {partner.years.map((y) => (
+            {partner.years?.map((y) => (
               <tr key={y.year}>
                 <td>
                   {y.year}
@@ -117,7 +121,7 @@ function YearsTable({
 }
 
 function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
-  const data = partner.years.map((y) => ({
+  const data = partner.years?.map((y) => ({
     year: y.year,
     imports: chartValue(y.imports),
     exports: chartValue(y.exports),
@@ -127,7 +131,7 @@ function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
   const noteYears = isEu ? partner.years.filter((y) => (y.year === 2013 || y.year === 2020) && y.note) : [];
 
   return (
-    <section aria-labelledby="trend-chart-heading">
+    <section className="panel" aria-labelledby="trend-chart-heading">
       <h2 id="trend-chart-heading">Imports, exports, and balance by year</h2>
       {isEu && (
         <p className="chart-note">
@@ -257,14 +261,14 @@ function GroupsSection({
   }));
 
   return (
-    <section aria-labelledby="groups-heading">
+    <section className="panel" aria-labelledby="groups-heading">
       <div className="section-heading-row">
         <h2 id="groups-heading">HS sections, {year}</h2>
         <button type="button" onClick={download}>
           Download CSV
         </button>
       </div>
-      <p>Click a bar or a table row to see chapter detail for that group.</p>
+      <p>Select a chart bar or a product-group button to see its chapters below. <a href="#chapters-heading">View selected chapters ↓</a></p>
       <ResponsiveContainer width="100%" height={320}>
         <BarChart
           data={chartData}
@@ -288,7 +292,7 @@ function GroupsSection({
           <Bar dataKey="exports" fill="#2980b9" cursor="pointer" />
         </BarChart>
       </ResponsiveContainer>
-      <TableScroll>
+      <TableScroll label="Product groups">
         <table>
           <thead>
             <tr>
@@ -303,10 +307,8 @@ function GroupsSection({
               <tr
                 key={g.section_id}
                 className={g.section_id === selectedGroup ? 'selected-row' : undefined}
-                onClick={() => onSelectGroup(g.section_id)}
-                style={{ cursor: 'pointer' }}
               >
-                <td>{g.section_id}</td>
+                <td><button type="button" className="group-button" aria-label={`View chapters in section ${g.section_id}: ${SECTION_LABELS[g.section_id] ?? g.section_id}`} aria-pressed={g.section_id === selectedGroup} onClick={() => onSelectGroup(g.section_id)}>{g.section_id}: {SECTION_LABELS[g.section_id] ?? g.section_id}</button></td>
                 <td>
                   <MoneyCell flow={g.imports} showExact={showExact} />
                 </td>
@@ -389,7 +391,7 @@ function ChapterTable({
   }
 
   return (
-    <section aria-labelledby="chapters-heading">
+    <section className="panel" aria-labelledby="chapters-heading">
       <div className="section-heading-row">
         <h2 id="chapters-heading">
           Chapters in group {groupId}, {year}
@@ -399,7 +401,7 @@ function ChapterTable({
         </button>
       </div>
       <p>Sorted by total trade value, highest first. Rows without an observed total sort after, by chapter.</p>
-      <TableScroll>
+      <TableScroll label="Chapter details">
         <table>
           <thead>
             <tr>
@@ -435,8 +437,6 @@ function ChapterTable({
 
 export function PartnerPage(): JSX.Element {
   const { code } = useParams<{ code: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [showExact, setShowExact] = useState(false);
 
   const state = useAsyncData(() => {
@@ -444,21 +444,16 @@ export function PartnerPage(): JSX.Element {
     return fetchPartner(code);
   }, [code]);
 
-  if (state.status === 'loading') return <Loading label={`Loading ${code}`} />;
+  const years = state.status === 'ready' ? state.data.years?.map((y) => y.year) : undefined;
+  const groups = state.status === 'ready' ? state.data.sections[0]?.groups.map((g) => g.section_id) : undefined;
+  const { year, group: effectiveGroup, notice, update } = useUrlState(years, groups);
+  useEffect(() => {
+    if (state.status === 'ready') document.title = `${state.data.partner.name} | US goods trade`;
+  }, [state]);
   if (state.status === 'error') return <DataError error={state.error} />;
-
+  if (state.status === 'loading' || !year) return <Loading label={`Loading ${code}`} />;
   const partner = state.data;
-  const years = partner.years.map((y) => y.year);
-  const latestYear = years[years.length - 1];
-  const yearParam = searchParams.get('year');
-  const year = yearParam && years.includes(Number(yearParam)) ? Number(yearParam) : latestYear;
-  const effectiveGroup = selectedGroup ?? partner.sections.find((s) => s.year === year)?.groups[0]?.section_id ?? null;
-
-  const onYearChange = (newYear: number) => {
-    const next = new URLSearchParams(searchParams);
-    next.set('year', String(newYear));
-    setSearchParams(next);
-  };
+  const yearEntry = partner.years.find((y) => y.year === year);
 
   const { partner: info } = partner;
 
@@ -469,24 +464,15 @@ export function PartnerPage(): JSX.Element {
           {info.name}
           {info.kind === 'aggregate' && <span className="aggregate-tag"> (aggregate)</span>}
         </h1>
-        <dl className="partner-meta">
-          <dt>Kind</dt>
-          <dd>{info.kind}</dd>
-          <dt>Code</dt>
-          <dd>{info.code}</dd>
-          {info.iso3 && (
-            <>
-              <dt>ISO</dt>
-              <dd>{info.iso3}</dd>
-            </>
-          )}
-        </dl>
+        <p className="partner-meta">{info.kind} <span aria-hidden="true">·</span> Census code {info.code}{info.iso3 ? ` · ${info.iso3}` : ''}</p>
       </header>
+      <UrlNotice message={notice} />
+      <nav className="jump-links" aria-label="Partner page sections"><a href="#trend-chart-heading">Trend</a><a href="#years-table-heading">Yearly values</a><a href="#groups-heading">Product groups</a><a href="#chapters-heading">Chapters</a></nav>
 
       <div className="controls-row">
         <label htmlFor="year-select">Year</label>
-        <select id="year-select" value={year} onChange={(e) => onYearChange(Number(e.target.value))}>
-          {years.map((y) => (
+        <select id="year-select" value={year} onChange={(e) => update({ year: e.target.value })}>
+          {years?.map((y) => (
             <option key={y} value={y}>
               {y}
             </option>
@@ -498,13 +484,14 @@ export function PartnerPage(): JSX.Element {
         </label>
       </div>
 
+      {yearEntry && <section aria-label="Partner totals" className="world-total-card"><h2>Trade in {year}</h2><TradeTotals values={yearEntry} /></section>}
       <TrendChart partner={partner} />
       <YearsTable partner={partner} showExact={showExact} />
       <GroupsSection
         partner={partner}
         year={year}
         selectedGroup={effectiveGroup}
-        onSelectGroup={setSelectedGroup}
+        onSelectGroup={(section) => update({ section })}
         showExact={showExact}
       />
       {effectiveGroup && (

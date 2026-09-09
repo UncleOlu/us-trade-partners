@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "encoding": "identity",
+      "gzip_bytes": 340,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 825,
+      "url": "http://127.0.0.1:55704/us-trade-partners/?year=2013"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 73571,
+      "raw_bytes": 219735,
+      "status": 200,
+      "transferred_bytes": 73994,
+      "url": "http://127.0.0.1:55704/us-trade-partners/assets/index-BRStPDmu.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3494,
+      "raw_bytes": 12935,
+      "status": 200,
+      "transferred_bytes": 3859,
+      "url": "http://127.0.0.1:55704/us-trade-partners/assets/index-C7LRW71r.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 38423,
+      "raw_bytes": 107761,
+      "status": 200,
+      "transferred_bytes": 38769,
+      "url": "http://127.0.0.1:55704/us-trade-partners/atlas/countries-110m.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 1730,
+      "raw_bytes": 3561,
+      "status": 200,
+      "transferred_bytes": 2049,
+      "url": "http://127.0.0.1:55704/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 7098,
+      "raw_bytes": 88097,
+      "status": 200,
+      "transferred_bytes": 7419,
+      "url": "http://127.0.0.1:55704/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 10797,
+      "raw_bytes": 138117,
+      "status": 200,
+      "transferred_bytes": 11119,
+      "url": "http://127.0.0.1:55704/us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2013.json"
+    }
+  ],
+  "budget_bytes": 250000,
+  "budget_pass": true,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "local preview",
+  "totals": {
+    "gzip_bytes": 135453,
+    "raw_bytes": 570781,
+    "transferred_bytes": 138034
+  },
+  "url": "/?year=2013"
+}

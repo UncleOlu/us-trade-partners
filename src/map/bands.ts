@@ -50,7 +50,7 @@ const ZERO_COLOR = '#ffffff';
 export const NO_DATA_FILL = '#d9d9d9';
 export const NO_DATA_HATCH_ID = 'map-no-data-hatch';
 export const NO_DATA_HATCH_STROKE = '#9e9e9e';
-export const NO_DATA_LABEL = 'No data';
+export const NO_DATA_LABEL = 'No balance or no mapped partner';
 
 export interface Band {
   id: string;
@@ -176,8 +176,16 @@ export interface LegendEntry {
   isNoData?: boolean;
 }
 
+// Signed intervals match the [min, max) scale exactly, including boundaries.
+function exactBandLabel(band: Band): string {
+  const signed = (value: number) => `${value < 0 ? '-' : '+'}${formatThreshold(Math.abs(value))}`;
+  if (band.min === -Infinity) return `Below ${signed(band.max)}`;
+  if (band.max === Infinity) return `${signed(band.min)} or more`;
+  return `${signed(band.min)} to below ${signed(band.max)}`;
+}
+
 /** Legend entries in display order: extreme deficit to extreme surplus, then no-data last. */
 export const LEGEND: LegendEntry[] = [
-  ...BANDS.map((b) => ({ id: b.id, label: b.label, color: b.color })),
+  ...BANDS.map((b) => ({ id: b.id, label: exactBandLabel(b), color: b.color })),
   { id: 'no-data', label: NO_DATA_LABEL, color: NO_DATA_FILL, isNoData: true },
 ];
