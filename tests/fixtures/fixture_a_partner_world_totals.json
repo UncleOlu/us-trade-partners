@@ -1,0 +1,56 @@
+{
+  "citation": "Computed from raw/source_test/*.response.json partner_total and world_total files, 2023-12",
+  "cross_checks": {
+    "world_total_exports_equals_separate_world_endpoint": {
+      "partner_total_endpoint": 2021939261609,
+      "world_total_endpoint": 2021939261609
+    },
+    "world_total_imports_equals_separate_world_endpoint": {
+      "partner_total_endpoint": 3076552305624,
+      "world_total_endpoint": 3076552305624
+    }
+  },
+  "period": "2023-12",
+  "values": {
+    "china_5700": {
+      "exports": {
+        "source_file": "raw/source_test/partner_total_exports_large.response.json",
+        "value": 147626505741
+      },
+      "imports": {
+        "source_file": "raw/source_test/partner_total_imports_large.response.json",
+        "value": 427234312263
+      }
+    },
+    "eu_aggregate_0003": {
+      "exports": {
+        "source_file": "raw/source_test/partner_total_exports_special.response.json",
+        "value": 368319152177
+      },
+      "imports": {
+        "source_file": "raw/source_test/partner_total_imports_special.response.json",
+        "value": 576004187056
+      }
+    },
+    "st_pierre_and_miquelon_1610": {
+      "exports": {
+        "source_file": "raw/source_test/partner_total_exports_small.response.json",
+        "value": 139877
+      },
+      "imports": {
+        "source_file": "raw/source_test/partner_total_imports_small.response.json",
+        "value": 52359
+      }
+    },
+    "world_dash": {
+      "exports": {
+        "source_file": "raw/source_test/partner_total_exports_world.response.json",
+        "value": 2021939261609
+      },
+      "imports": {
+        "source_file": "raw/source_test/partner_total_imports_world.response.json",
+        "value": 3076552305624
+      }
+    }
+  }
+}

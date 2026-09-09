@@ -1,0 +1,82 @@
+{
+  "citation": "Computed from raw/source_test/availability.csv",
+  "combinations_checked": [
+    [
+      "exports",
+      "hs2_detail"
+    ],
+    [
+      "exports",
+      "partner_total"
+    ],
+    [
+      "imports",
+      "hs2_detail"
+    ],
+    [
+      "imports",
+      "partner_total"
+    ]
+  ],
+  "period_2026_12_has_data": false,
+  "period_2026_12_rows": [
+    {
+      "flow": "imports",
+      "has_data": "False",
+      "http_status": "204",
+      "level": "partner_total",
+      "note": "unavailable: HTTP 204 no content (period not yet published)",
+      "period": "2026-12",
+      "rows": "0",
+      "year": "2026"
+    },
+    {
+      "flow": "imports",
+      "has_data": "False",
+      "http_status": "204",
+      "level": "hs2_detail",
+      "note": "unavailable: HTTP 204 no content (period not yet published)",
+      "period": "2026-12",
+      "rows": "0",
+      "year": "2026"
+    },
+    {
+      "flow": "exports",
+      "has_data": "False",
+      "http_status": "204",
+      "level": "partner_total",
+      "note": "unavailable: HTTP 204 no content (period not yet published)",
+      "period": "2026-12",
+      "rows": "0",
+      "year": "2026"
+    },
+    {
+      "flow": "exports",
+      "has_data": "False",
+      "http_status": "204",
+      "level": "hs2_detail",
+      "note": "unavailable: HTTP 204 no content (period not yet published)",
+      "period": "2026-12",
+      "rows": "0",
+      "year": "2026"
+    }
+  ],
+  "years_with_data_all_four_combinations": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ]
+}

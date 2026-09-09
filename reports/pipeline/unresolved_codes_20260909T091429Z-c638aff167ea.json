@@ -1,0 +1,15 @@
+{
+  "snapshot_id": "20260909T091429Z-c638aff167ea",
+  "unresolved_codes": [
+    {
+      "code": "8220",
+      "kind_kept_in_partners_json": "special",
+      "resolution_kept_in_partners_json": "approved",
+      "resolved": true,
+      "resolved_on": "2026-09-09",
+      "resolution": "Owner approved on 2026-09-09: code 8220 is kind special, name exactly \"Unidentified partner (Census code 8220)\", include_in_world_reconciliation true, iso3 null, map_feature_id null, resolution approved. This file record is kept (not deleted) as the audit trail of that decision; the resolved:true flag here means this entry is informational only and does not block publication. pipeline/country_map.json and pipeline/build.py were updated to carry this name, kind, and resolution note directly into partners.json; publication no longer needs to consult this file.",
+      "evidence": "Observed live with SUMMARY_LVL=DET (like a real detail-level partner, not a country grouping) in exports partner_totals for 2013-12, 2014-12, and 2016-12 only; absent from imports in every year and from exports in every other configured year. CTY_NAME is null in every occurrence. Code 8220 does not appear in raw/reference/schedule_c_country.txt (U.S. Census Bureau Schedule C Country List) or in the API guide (raw/source_test/api_guide/guide.txt). This is the same finding as in the prior snapshot (20260909T013644Z-46e5a70d2c45); the fresh acquisition reconfirmed it.",
+      "blocks_publication": false
+    }
+  ]
+}

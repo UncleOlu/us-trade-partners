@@ -1,0 +1,65 @@
+..sssss...............................ssss.......sssssss..ss...s..ss.s.. [ 81%]
+.ss.ss...s.sssss                                                         [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_determinism.py::test_det01u_find_float_leaves_detects_float
+PASSED tests/test_determinism.py::test_det01u_find_float_leaves_clean_for_ints
+PASSED tests/test_fixture_self_checks.py::test_fxchk01_fixture_a_partner_world_totals_match_raw
+PASSED tests/test_fixture_self_checks.py::test_fxchk02_fixture_b_eu_boundary_matches_raw
+PASSED tests/test_fixture_self_checks.py::test_fxchk03_fixture_c_df_proof_matches_raw
+PASSED tests/test_fixture_self_checks.py::test_fxchk04_fixture_d_observed_partner_codes_match_raw
+PASSED tests/test_fixture_self_checks.py::test_fxchk05_fixture_e_chapter_sets_match_raw
+PASSED tests/test_fixture_self_checks.py::test_fxchk06_fixture_g_availability_matches_raw_csv
+PASSED tests/test_fixture_self_checks.py::test_fxchk07_hs_sections_fixture_covers_every_chapter_once_except_77
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv01_observed_with_integer_and_null_reason_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv02_observed_with_negative_integer_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv03_confirmed_zero_with_reason_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv04_absent_with_reason_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv05_not_applicable_with_reason_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv06_observed_with_null_value_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv07_observed_with_non_null_reason_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv08_confirmed_zero_with_nonzero_value_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv09_confirmed_zero_with_empty_reason_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv10_confirmed_zero_with_null_reason_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv11_absent_with_integer_value_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv12_absent_with_null_reason_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv13_not_applicable_with_zero_value_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv14_fetch_failed_status_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv15_extra_property_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv16_missing_required_field_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv17_float_value_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv18_derived_observed_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv19_derived_absent_with_reason_is_valid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv20_derived_confirmed_zero_status_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv21_derived_observed_with_null_value_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv22_derived_absent_with_null_reason_is_invalid
+PASSED tests/test_flowvalue_derivedvalue.py::test_fv23_derived_float_value_is_invalid
+PASSED tests/test_meta_json.py::test_meta01u_residual_gap_marker_words_are_meaningful
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[common.schema.json]
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[hs_sections.schema.json]
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[meta.schema.json]
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[partner.schema.json]
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[partners.schema.json]
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[section.schema.json]
+PASSED tests/test_schema_validity.py::test_sch01_schema_is_valid_draft_2020_12[summary.schema.json]
+PASSED tests/test_validation_checks.py::test_c01u_duplicate_chapter_detected
+PASSED tests/test_validation_checks.py::test_c01u_no_duplicates_returns_empty
+PASSED tests/test_validation_checks.py::test_c02u_group_sum_blocks_on_absent_chapter
+PASSED tests/test_validation_checks.py::test_c02u_group_sum_skips_not_applicable_chapter
+PASSED tests/test_validation_checks.py::test_c02u_group_sum_includes_confirmed_zero
+PASSED tests/test_validation_checks.py::test_c03u_universe_sum_blocks_on_missing_partner
+PASSED tests/test_validation_checks.py::test_c03u_universe_sum_excludes_eu_aggregate_by_construction
+PASSED tests/test_validation_checks.py::test_c04u_group_level_matches_recomputed_sum
+PASSED tests/test_validation_checks.py::test_c05u_balance_observed_when_both_inputs_observed
+PASSED tests/test_validation_checks.py::test_c05u_balance_absent_when_export_absent
+PASSED tests/test_validation_checks.py::test_c05u_total_trade_value_observed
+PASSED tests/test_validation_checks.py::test_c07a_eu_calculation_recomputed_from_boundary_fixture
+PASSED tests/test_validation_checks.py::test_c08u_flowvalue_integrity_errors_detects_bad_observed
+PASSED tests/test_validation_checks.py::test_c08u_flowvalue_integrity_errors_clean_for_valid_absent
+PASSED tests/test_validation_checks.py::test_c08u_flowvalue_integrity_errors_flags_fetch_failed
+PASSED tests/test_validation_checks.py::test_c09u_resolution_enum_is_approved_or_excluded
+SKIPPED [24] tests/conftest.py:102: not run: data/ directory does not exist yet (step 3 not run)
+SKIPPED [1] tests/test_determinism.py:97: not run: DATA_A and DATA_B environment variables are unset
+SKIPPED [1] tests/test_typescript_types_placeholder.py:28: not run: src/ does not exist yet (step 4 not run)
+SKIPPED [6] tests/conftest.py:109: not run: reports/pipeline/validation.csv does not exist yet (step 3 not run)
+56 passed, 32 skipped in 0.05s

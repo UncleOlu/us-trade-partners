@@ -1,0 +1,29 @@
+Acquisition attempt raw/_acquiring_20260909T012046Z invalidated (renamed to
+raw/_acquiring_20260909T012046Z.invalid) at 20260909T013432Z.
+
+Reason: this was a deliberate ACQUIRE_SMOKE_YEARS=1 smoke test of the
+acquisition mechanics (started while developing pipeline/acquire.py), not a
+production run. It was launched via shell backgrounding (nohup ... &) and a
+Monitor-tool wait; the background process did not survive, so the run never
+progressed past the availability-probe stage: availability/ holds 137 files
+(68 probes x 2 files each, essentially complete, last written ~01:32Z) but
+fingerprint/, variables/, partner_totals/, world_totals/, hs2/, and
+eu_members/ are all empty. No fingerprint-before reading was ever taken, so
+there is no risk of a stale fingerprint being reused.
+
+Decision: invalidate and start clean rather than resume, because (a) this
+was a 1-year smoke test, not the real START_YEAR..END_YEAR configured run,
+so its availability probes cover the right years but its (absent) archive
+data would not have been usable anyway, and (b) resuming would require
+parsing 137 scattered request/response files back into the exact in-memory
+probe_rows structure the running script expects, which is more engineering
+risk than simply re-running the (relatively cheap, ~10-15 minute)
+availability-probe stage fresh as part of a real, fully foreground,
+checkpointed acquisition run.
+
+Operational change starting now: acquisition is restructured into
+resumable stages (probe, fingerprint_before, archive year-by-year,
+fingerprint_after, finalize) driven by a state.json checkpoint file inside
+the working _acquiring_<ts> directory, invoked in the foreground with long
+Bash timeouts, chained across multiple tool calls. No shell backgrounding
+and no Monitor-tool waits are used for the rest of this task.

@@ -1,0 +1,14 @@
+{
+  "snapshot_id": "20260909T013644Z-46e5a70d2c45",
+  "unresolved_codes": [
+    {
+      "code": "8220",
+      "kind_kept_in_partners_json": "special",
+      "resolution_kept_in_partners_json": "approved",
+      "note": "partners.json cannot express a resolution value other than approved or excluded (partners.schema.json enum), so 8220 is kept as resolution=approved with kind=special there so the build can proceed. Its true status is unresolved: no official Census documentation (Schedule C country list, API guide) identifies this code, and CTY_NAME is null in every live occurrence. This file is the authoritative, separate record of that unresolved status per orchestrator decision.",
+      "evidence": "Observed live with SUMMARY_LVL=DET (like a real detail-level partner, not a country grouping) in exports partner_totals for 2013-12 (179871109), 2014-12 (101833), and 2016-12 (1771484) only; absent from imports in every year and from exports in every other configured year. CTY_NAME is null in every occurrence (raw/20260909T013644Z-46e5a70d2c45/partner_totals/exports_{2013,2014,2016}-12.response.json). Code 8220 does not appear in raw/reference/schedule_c_country.txt (U.S. Census Bureau Schedule C Country List) or in the API guide (raw/source_test/api_guide/guide.txt).",
+      "blocks_publication": true,
+      "decision_needed": "Owner decision required: accept kind=special classification and formally approve 8220, or direct a different treatment (e.g. exclude, or further research). Publication is blocked on this decision per orchestrator instruction."
+    }
+  ]
+}

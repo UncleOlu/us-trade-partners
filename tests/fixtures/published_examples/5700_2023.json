@@ -1,0 +1,21 @@
+{
+  "code": "5700",
+  "name": "China",
+  "year": 2023,
+  "url": "https://www.census.gov/foreign-trade/balance/c5700.html",
+  "table": "Trade in Goods with China -- 2023 : U.S. trade in goods with China, TOTAL 2023 row",
+  "revision_date": "Not stated inline on this page for the 2023 data row itself. The page's shared site footer HTML comment reads exactly: 'Last Revised: 10/04/2022' (this is boilerplate shared across all census.gov foreign-trade pages, not a per-page or per-year data revision date). A <meta name=\"DC.date.reviewed\" ...> tag reads exactly: '2019-04-15T15:38:26.310-04:00', also apparently template boilerplate predating the displayed 2023-2026 data. Neither is treated as the data's revision date; recorded verbatim for the record. Not verified as the data revision date.",
+  "rounding_unit": 100000,
+  "accessed": "2026-09-08",
+  "basis": "Not stated verbatim on this page. Page NOTE states exactly: 'All figures are in millions of U.S. dollars on a nominal basis, not seasonally adjusted unless otherwise specified. Details may not equal totals due to rounding. Table reflects only those months for which there was trade.' The page links to https://www.census.gov/foreign-trade/reference/definitions/index.html and https://www.census.gov/foreign-trade/reference/guides/tradestatsinfo.html, which define 'General Imports' and 'Free Along Ship (F.A.S.) Export Value' as Census's standard foreign-trade concepts, matching the pipeline's stated definitions (SPEC DATA SOURCE: GEN_VAL_YR general imports customs value; ALL_VAL_YR total exports FAS including re-exports). Neither linked page explicitly states that this specific bilateral balance table uses General Imports rather than Imports for Consumption. Treated as comparable based on Census's standard total-goods-trade-balance methodology for this series, not verified inline on this page.",
+  "comparable": true,
+  "comparable_reason": "No evidence of a differing basis was found; the basis match is inferred from Census's documented general/foreign-trade definitions linked from this page, not from an inline statement on the page itself. Flagged as an open question for the orchestrator rather than asserted as proven.",
+  "values": {
+    "exports_usd": 147626500000,
+    "exports_displayed": "147,626.5",
+    "imports_usd": 427234300000,
+    "imports_displayed": "427,234.3",
+    "balance_displayed": "-279,607.8"
+  },
+  "revision_note": "None found stating the 2023 figures for China are subject to a specific later revision beyond the general page note that details may not equal totals due to rounding."
+}

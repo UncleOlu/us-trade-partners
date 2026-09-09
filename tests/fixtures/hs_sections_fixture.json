@@ -1,0 +1,241 @@
+{
+  "_citation": "computed by Agent D from official source in test source, not from pipeline output",
+  "groups": [
+    {
+      "chapters": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ],
+      "id": "I",
+      "name": "Live animals; animal products"
+    },
+    {
+      "chapters": [
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "id": "II",
+      "name": "Vegetable products"
+    },
+    {
+      "chapters": [
+        "15"
+      ],
+      "id": "III",
+      "name": "Animal, vegetable or microbial fats and oils and their cleavage products; prepared edible fats; animal or vegetable waxes"
+    },
+    {
+      "chapters": [
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24"
+      ],
+      "id": "IV",
+      "name": "Prepared foodstuffs; beverages, spirits and vinegar; tobacco and manufactured tobacco substitutes; products, whether or not containing nicotine, intended for inhalation without combustion; other nicotine containing products intended for the intake of nicotine into the human body"
+    },
+    {
+      "chapters": [
+        "25",
+        "26",
+        "27"
+      ],
+      "id": "V",
+      "name": "Mineral products"
+    },
+    {
+      "chapters": [
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38"
+      ],
+      "id": "VI",
+      "name": "Products of the chemical or allied industries"
+    },
+    {
+      "chapters": [
+        "39",
+        "40"
+      ],
+      "id": "VII",
+      "name": "Plastics and articles thereof; rubber and articles thereof"
+    },
+    {
+      "chapters": [
+        "41",
+        "42",
+        "43"
+      ],
+      "id": "VIII",
+      "name": "Raw hides and skins, leather, furskins and articles thereof; saddlery and harness; travel goods, handbags and similar containers; articles of animal gut (other than silk-worm gut)"
+    },
+    {
+      "chapters": [
+        "44",
+        "45",
+        "46"
+      ],
+      "id": "IX",
+      "name": "Wood and articles of wood; wood charcoal; cork and articles of cork; manufactures of straw, of esparto or of other plaiting materials; basketware and wickerwork"
+    },
+    {
+      "chapters": [
+        "47",
+        "48",
+        "49"
+      ],
+      "id": "X",
+      "name": "Pulp of wood or of other fibrous cellulosic material; recovered (waste and scrap) paper or paperboard; paper and paperboard and articles thereof"
+    },
+    {
+      "chapters": [
+        "50",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+        "59",
+        "60",
+        "61",
+        "62",
+        "63"
+      ],
+      "id": "XI",
+      "name": "Textiles and textile articles"
+    },
+    {
+      "chapters": [
+        "64",
+        "65",
+        "66",
+        "67"
+      ],
+      "id": "XII",
+      "name": "Footwear, headgear, umbrellas, sun umbrellas, walking-sticks, seat-sticks, whips, riding-crops and parts thereof; prepared feathers and articles made therewith; artificial flowers; articles of human hair"
+    },
+    {
+      "chapters": [
+        "68",
+        "69",
+        "70"
+      ],
+      "id": "XIII",
+      "name": "Articles of stone, plaster, cement, asbestos, mica or similar materials; ceramic products; glass and glassware"
+    },
+    {
+      "chapters": [
+        "71"
+      ],
+      "id": "XIV",
+      "name": "Natural or cultured pearls, precious or semi-precious stones, precious metals, metals clad with precious metal and articles thereof; imitation jewellery; coin"
+    },
+    {
+      "chapters": [
+        "72",
+        "73",
+        "74",
+        "75",
+        "76",
+        "78",
+        "79",
+        "80",
+        "81",
+        "82",
+        "83"
+      ],
+      "id": "XV",
+      "name": "Base metals and articles of base metal"
+    },
+    {
+      "chapters": [
+        "84",
+        "85"
+      ],
+      "id": "XVI",
+      "name": "Machinery and mechanical appliances; electrical equipment; parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles"
+    },
+    {
+      "chapters": [
+        "86",
+        "87",
+        "88",
+        "89"
+      ],
+      "id": "XVII",
+      "name": "Vehicles, aircraft, vessels and associated transport equipment"
+    },
+    {
+      "chapters": [
+        "90",
+        "91",
+        "92"
+      ],
+      "id": "XVIII",
+      "name": "Optical, photographic, cinematographic, measuring, checking, precision, medical or surgical instruments and apparatus; clocks and watches; musical instruments; parts and accessories thereof"
+    },
+    {
+      "chapters": [
+        "93"
+      ],
+      "id": "XIX",
+      "name": "Arms and ammunition; parts and accessories thereof"
+    },
+    {
+      "chapters": [
+        "94",
+        "95",
+        "96"
+      ],
+      "id": "XX",
+      "name": "Miscellaneous manufactured articles"
+    },
+    {
+      "chapters": [
+        "97"
+      ],
+      "id": "XXI",
+      "name": "Works of art, collectors' pieces and antiques"
+    },
+    {
+      "chapters": [
+        "98",
+        "99"
+      ],
+      "id": "SPECIAL",
+      "name": "Special classification provisions"
+    }
+  ],
+  "source": {
+    "accessed": "2026-09-08",
+    "saved_copy": "tests/fixtures/sources/wco_hs_nomenclature_2022_edition.html",
+    "title": "WCO Harmonized System Nomenclature 2022 Edition, Section list",
+    "url": "http://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx"
+  }
+}

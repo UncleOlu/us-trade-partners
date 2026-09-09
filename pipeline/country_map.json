@@ -1,0 +1,2232 @@
+{
+  "notes": [
+    "Never joined by name: matching is census_code (Schedule C) -> iso2 (Schedule C, same row) -> iso3/numeric (pycountry, by iso2) -> map_feature_id (world-atlas id set, by numeric).",
+    "kind_hint is a starting point only; the build step's Partner.kind is set from evidence (this file plus observed SUMMARY_LVL/CTY_NAME) per SPEC PARTNERS, and every code actually observed in acquired data gets a resolution of approved or excluded, recorded in partners.json.",
+    "3 codes have no ISO 3166-1 alpha-2 entry in pycountry: 4803, 5082, 5083. These are reported as unmapped per SPEC PARTNERS 'Report every unmapped code' if and only if they are observed live in acquired data; iso3 and map_feature_id are null for them regardless."
+  ],
+  "partners": [
+    {
+      "census_code": "1000",
+      "census_name": "United States of America",
+      "iso2": "US",
+      "iso3": "USA",
+      "kind_hint": "country",
+      "map_feature_id": 840,
+      "note": null
+    },
+    {
+      "census_code": "1010",
+      "census_name": "Greenland",
+      "iso2": "GL",
+      "iso3": "GRL",
+      "kind_hint": "territory",
+      "map_feature_id": 304,
+      "note": null
+    },
+    {
+      "census_code": "1220",
+      "census_name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN",
+      "kind_hint": "country",
+      "map_feature_id": 124,
+      "note": null
+    },
+    {
+      "census_code": "1610",
+      "census_name": "Saint Pierre and Miquelon",
+      "iso2": "PM",
+      "iso3": "SPM",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2010",
+      "census_name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX",
+      "kind_hint": "country",
+      "map_feature_id": 484,
+      "note": null
+    },
+    {
+      "census_code": "2050",
+      "census_name": "Guatemala",
+      "iso2": "GT",
+      "iso3": "GTM",
+      "kind_hint": "country",
+      "map_feature_id": 320,
+      "note": null
+    },
+    {
+      "census_code": "2080",
+      "census_name": "Belize",
+      "iso2": "BZ",
+      "iso3": "BLZ",
+      "kind_hint": "country",
+      "map_feature_id": 84,
+      "note": null
+    },
+    {
+      "census_code": "2110",
+      "census_name": "El Salvador",
+      "iso2": "SV",
+      "iso3": "SLV",
+      "kind_hint": "country",
+      "map_feature_id": 222,
+      "note": null
+    },
+    {
+      "census_code": "2150",
+      "census_name": "Honduras",
+      "iso2": "HN",
+      "iso3": "HND",
+      "kind_hint": "country",
+      "map_feature_id": 340,
+      "note": null
+    },
+    {
+      "census_code": "2190",
+      "census_name": "Nicaragua",
+      "iso2": "NI",
+      "iso3": "NIC",
+      "kind_hint": "country",
+      "map_feature_id": 558,
+      "note": null
+    },
+    {
+      "census_code": "2230",
+      "census_name": "Costa Rica",
+      "iso2": "CR",
+      "iso3": "CRI",
+      "kind_hint": "country",
+      "map_feature_id": 188,
+      "note": null
+    },
+    {
+      "census_code": "2250",
+      "census_name": "Panama",
+      "iso2": "PA",
+      "iso3": "PAN",
+      "kind_hint": "country",
+      "map_feature_id": 591,
+      "note": null
+    },
+    {
+      "census_code": "2320",
+      "census_name": "Bermuda",
+      "iso2": "BM",
+      "iso3": "BMU",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2360",
+      "census_name": "Bahamas",
+      "iso2": "BS",
+      "iso3": "BHS",
+      "kind_hint": "country",
+      "map_feature_id": 44,
+      "note": null
+    },
+    {
+      "census_code": "2390",
+      "census_name": "Cuba",
+      "iso2": "CU",
+      "iso3": "CUB",
+      "kind_hint": "country",
+      "map_feature_id": 192,
+      "note": null
+    },
+    {
+      "census_code": "2410",
+      "census_name": "Jamaica",
+      "iso2": "JM",
+      "iso3": "JAM",
+      "kind_hint": "country",
+      "map_feature_id": 388,
+      "note": null
+    },
+    {
+      "census_code": "2430",
+      "census_name": "Turks and Caicos Islands",
+      "iso2": "TC",
+      "iso3": "TCA",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2440",
+      "census_name": "Cayman Islands",
+      "iso2": "KY",
+      "iso3": "CYM",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2450",
+      "census_name": "Haiti",
+      "iso2": "HT",
+      "iso3": "HTI",
+      "kind_hint": "country",
+      "map_feature_id": 332,
+      "note": null
+    },
+    {
+      "census_code": "2470",
+      "census_name": "Dominican Republic",
+      "iso2": "DO",
+      "iso3": "DOM",
+      "kind_hint": "country",
+      "map_feature_id": 214,
+      "note": null
+    },
+    {
+      "census_code": "2481",
+      "census_name": "Anguilla",
+      "iso2": "AI",
+      "iso3": "AIA",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2482",
+      "census_name": "British Virgin Islands",
+      "iso2": "VG",
+      "iso3": "VGB",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2483",
+      "census_name": "Saint Kitts and Nevis",
+      "iso2": "KN",
+      "iso3": "KNA",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2484",
+      "census_name": "Antigua and Barbuda",
+      "iso2": "AG",
+      "iso3": "ATG",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2485",
+      "census_name": "Montserrat",
+      "iso2": "MS",
+      "iso3": "MSR",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2486",
+      "census_name": "Dominica",
+      "iso2": "DM",
+      "iso3": "DMA",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2487",
+      "census_name": "Saint Lucia",
+      "iso2": "LC",
+      "iso3": "LCA",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2488",
+      "census_name": "Saint Vincent and the Grenadines",
+      "iso2": "VC",
+      "iso3": "VCT",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2489",
+      "census_name": "Grenada",
+      "iso2": "GD",
+      "iso3": "GRD",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2720",
+      "census_name": "Barbados",
+      "iso2": "BB",
+      "iso3": "BRB",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2740",
+      "census_name": "Trinidad and Tobago",
+      "iso2": "TT",
+      "iso3": "TTO",
+      "kind_hint": "country",
+      "map_feature_id": 780,
+      "note": null
+    },
+    {
+      "census_code": "2774",
+      "census_name": "Sint Maarten",
+      "iso2": "SX",
+      "iso3": "SXM",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2777",
+      "census_name": "Curacao",
+      "iso2": "CW",
+      "iso3": "CUW",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2779",
+      "census_name": "Aruba",
+      "iso2": "AW",
+      "iso3": "ABW",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2831",
+      "census_name": "Guadeloupe",
+      "iso2": "GP",
+      "iso3": "GLP",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "2839",
+      "census_name": "Martinique",
+      "iso2": "MQ",
+      "iso3": "MTQ",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "3010",
+      "census_name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL",
+      "kind_hint": "country",
+      "map_feature_id": 170,
+      "note": null
+    },
+    {
+      "census_code": "3070",
+      "census_name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN",
+      "kind_hint": "country",
+      "map_feature_id": 862,
+      "note": null
+    },
+    {
+      "census_code": "3120",
+      "census_name": "Guyana",
+      "iso2": "GY",
+      "iso3": "GUY",
+      "kind_hint": "country",
+      "map_feature_id": 328,
+      "note": null
+    },
+    {
+      "census_code": "3150",
+      "census_name": "Suriname",
+      "iso2": "SR",
+      "iso3": "SUR",
+      "kind_hint": "country",
+      "map_feature_id": 740,
+      "note": null
+    },
+    {
+      "census_code": "3170",
+      "census_name": "French Guiana",
+      "iso2": "GF",
+      "iso3": "GUF",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "3310",
+      "census_name": "Ecuador",
+      "iso2": "EC",
+      "iso3": "ECU",
+      "kind_hint": "country",
+      "map_feature_id": 218,
+      "note": null
+    },
+    {
+      "census_code": "3330",
+      "census_name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER",
+      "kind_hint": "country",
+      "map_feature_id": 604,
+      "note": null
+    },
+    {
+      "census_code": "3350",
+      "census_name": "Bolivia",
+      "iso2": "BO",
+      "iso3": "BOL",
+      "kind_hint": "country",
+      "map_feature_id": 68,
+      "note": null
+    },
+    {
+      "census_code": "3370",
+      "census_name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL",
+      "kind_hint": "country",
+      "map_feature_id": 152,
+      "note": null
+    },
+    {
+      "census_code": "3510",
+      "census_name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "kind_hint": "country",
+      "map_feature_id": 76,
+      "note": null
+    },
+    {
+      "census_code": "3530",
+      "census_name": "Paraguay",
+      "iso2": "PY",
+      "iso3": "PRY",
+      "kind_hint": "country",
+      "map_feature_id": 600,
+      "note": null
+    },
+    {
+      "census_code": "3550",
+      "census_name": "Uruguay",
+      "iso2": "UY",
+      "iso3": "URY",
+      "kind_hint": "country",
+      "map_feature_id": 858,
+      "note": null
+    },
+    {
+      "census_code": "3570",
+      "census_name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG",
+      "kind_hint": "country",
+      "map_feature_id": 32,
+      "note": null
+    },
+    {
+      "census_code": "3720",
+      "census_name": "Falkland Islands (Islas Malvinas)",
+      "iso2": "FK",
+      "iso3": "FLK",
+      "kind_hint": "territory",
+      "map_feature_id": 238,
+      "note": null
+    },
+    {
+      "census_code": "4000",
+      "census_name": "Iceland",
+      "iso2": "IS",
+      "iso3": "ISL",
+      "kind_hint": "country",
+      "map_feature_id": 352,
+      "note": null
+    },
+    {
+      "census_code": "4010",
+      "census_name": "Sweden",
+      "iso2": "SE",
+      "iso3": "SWE",
+      "kind_hint": "country",
+      "map_feature_id": 752,
+      "note": null
+    },
+    {
+      "census_code": "4031",
+      "census_name": "Svalbard and Jan Mayen",
+      "iso2": "SJ",
+      "iso3": "SJM",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4039",
+      "census_name": "Norway",
+      "iso2": "NO",
+      "iso3": "NOR",
+      "kind_hint": "country",
+      "map_feature_id": 578,
+      "note": null
+    },
+    {
+      "census_code": "4050",
+      "census_name": "Finland",
+      "iso2": "FI",
+      "iso3": "FIN",
+      "kind_hint": "country",
+      "map_feature_id": 246,
+      "note": null
+    },
+    {
+      "census_code": "4091",
+      "census_name": "Faroe Islands",
+      "iso2": "FO",
+      "iso3": "FRO",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4099",
+      "census_name": "Denmark, except Greenland",
+      "iso2": "DK",
+      "iso3": "DNK",
+      "kind_hint": "country",
+      "map_feature_id": 208,
+      "note": null
+    },
+    {
+      "census_code": "4120",
+      "census_name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR",
+      "kind_hint": "country",
+      "map_feature_id": 826,
+      "note": null
+    },
+    {
+      "census_code": "4190",
+      "census_name": "Ireland",
+      "iso2": "IE",
+      "iso3": "IRL",
+      "kind_hint": "country",
+      "map_feature_id": 372,
+      "note": null
+    },
+    {
+      "census_code": "4210",
+      "census_name": "Netherlands",
+      "iso2": "NL",
+      "iso3": "NLD",
+      "kind_hint": "country",
+      "map_feature_id": 528,
+      "note": null
+    },
+    {
+      "census_code": "4231",
+      "census_name": "Belgium",
+      "iso2": "BE",
+      "iso3": "BEL",
+      "kind_hint": "country",
+      "map_feature_id": 56,
+      "note": null
+    },
+    {
+      "census_code": "4239",
+      "census_name": "Luxembourg",
+      "iso2": "LU",
+      "iso3": "LUX",
+      "kind_hint": "country",
+      "map_feature_id": 442,
+      "note": null
+    },
+    {
+      "census_code": "4271",
+      "census_name": "Andorra",
+      "iso2": "AD",
+      "iso3": "AND",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4272",
+      "census_name": "Monaco",
+      "iso2": "MC",
+      "iso3": "MCO",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4279",
+      "census_name": "France",
+      "iso2": "FR",
+      "iso3": "FRA",
+      "kind_hint": "country",
+      "map_feature_id": 250,
+      "note": null
+    },
+    {
+      "census_code": "4280",
+      "census_name": "Germany (Federal Republic of Germany)",
+      "iso2": "DE",
+      "iso3": "DEU",
+      "kind_hint": "country",
+      "map_feature_id": 276,
+      "note": null
+    },
+    {
+      "census_code": "4330",
+      "census_name": "Austria",
+      "iso2": "AT",
+      "iso3": "AUT",
+      "kind_hint": "country",
+      "map_feature_id": 40,
+      "note": null
+    },
+    {
+      "census_code": "4351",
+      "census_name": "Czech Republic",
+      "iso2": "CZ",
+      "iso3": "CZE",
+      "kind_hint": "country",
+      "map_feature_id": 203,
+      "note": null
+    },
+    {
+      "census_code": "4359",
+      "census_name": "Slovakia",
+      "iso2": "SK",
+      "iso3": "SVK",
+      "kind_hint": "country",
+      "map_feature_id": 703,
+      "note": null
+    },
+    {
+      "census_code": "4370",
+      "census_name": "Hungary",
+      "iso2": "HU",
+      "iso3": "HUN",
+      "kind_hint": "country",
+      "map_feature_id": 348,
+      "note": null
+    },
+    {
+      "census_code": "4411",
+      "census_name": "Liechtenstein",
+      "iso2": "LI",
+      "iso3": "LIE",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4419",
+      "census_name": "Switzerland",
+      "iso2": "CH",
+      "iso3": "CHE",
+      "kind_hint": "country",
+      "map_feature_id": 756,
+      "note": null
+    },
+    {
+      "census_code": "4470",
+      "census_name": "Estonia",
+      "iso2": "EE",
+      "iso3": "EST",
+      "kind_hint": "country",
+      "map_feature_id": 233,
+      "note": null
+    },
+    {
+      "census_code": "4490",
+      "census_name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA",
+      "kind_hint": "country",
+      "map_feature_id": 428,
+      "note": null
+    },
+    {
+      "census_code": "4510",
+      "census_name": "Lithuania",
+      "iso2": "LT",
+      "iso3": "LTU",
+      "kind_hint": "country",
+      "map_feature_id": 440,
+      "note": null
+    },
+    {
+      "census_code": "4550",
+      "census_name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL",
+      "kind_hint": "country",
+      "map_feature_id": 616,
+      "note": null
+    },
+    {
+      "census_code": "4621",
+      "census_name": "Russia",
+      "iso2": "RU",
+      "iso3": "RUS",
+      "kind_hint": "country",
+      "map_feature_id": 643,
+      "note": null
+    },
+    {
+      "census_code": "4622",
+      "census_name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR",
+      "kind_hint": "country",
+      "map_feature_id": 112,
+      "note": null
+    },
+    {
+      "census_code": "4623",
+      "census_name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR",
+      "kind_hint": "country",
+      "map_feature_id": 804,
+      "note": null
+    },
+    {
+      "census_code": "4631",
+      "census_name": "Armenia",
+      "iso2": "AM",
+      "iso3": "ARM",
+      "kind_hint": "country",
+      "map_feature_id": 51,
+      "note": null
+    },
+    {
+      "census_code": "4632",
+      "census_name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE",
+      "kind_hint": "country",
+      "map_feature_id": 31,
+      "note": null
+    },
+    {
+      "census_code": "4633",
+      "census_name": "Georgia",
+      "iso2": "GE",
+      "iso3": "GEO",
+      "kind_hint": "country",
+      "map_feature_id": 268,
+      "note": null
+    },
+    {
+      "census_code": "4634",
+      "census_name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ",
+      "kind_hint": "country",
+      "map_feature_id": 398,
+      "note": null
+    },
+    {
+      "census_code": "4635",
+      "census_name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ",
+      "kind_hint": "country",
+      "map_feature_id": 417,
+      "note": null
+    },
+    {
+      "census_code": "4641",
+      "census_name": "Moldova (Republic of Moldova)",
+      "iso2": "MD",
+      "iso3": "MDA",
+      "kind_hint": "country",
+      "map_feature_id": 498,
+      "note": null
+    },
+    {
+      "census_code": "4642",
+      "census_name": "Tajikistan",
+      "iso2": "TJ",
+      "iso3": "TJK",
+      "kind_hint": "country",
+      "map_feature_id": 762,
+      "note": null
+    },
+    {
+      "census_code": "4643",
+      "census_name": "Turkmenistan",
+      "iso2": "TM",
+      "iso3": "TKM",
+      "kind_hint": "country",
+      "map_feature_id": 795,
+      "note": null
+    },
+    {
+      "census_code": "4644",
+      "census_name": "Uzbekistan",
+      "iso2": "UZ",
+      "iso3": "UZB",
+      "kind_hint": "country",
+      "map_feature_id": 860,
+      "note": null
+    },
+    {
+      "census_code": "4700",
+      "census_name": "Spain",
+      "iso2": "ES",
+      "iso3": "ESP",
+      "kind_hint": "country",
+      "map_feature_id": 724,
+      "note": null
+    },
+    {
+      "census_code": "4710",
+      "census_name": "Portugal",
+      "iso2": "PT",
+      "iso3": "PRT",
+      "kind_hint": "country",
+      "map_feature_id": 620,
+      "note": null
+    },
+    {
+      "census_code": "4720",
+      "census_name": "Gibraltar",
+      "iso2": "GI",
+      "iso3": "GIB",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4730",
+      "census_name": "Malta",
+      "iso2": "MT",
+      "iso3": "MLT",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4751",
+      "census_name": "San Marino",
+      "iso2": "SM",
+      "iso3": "SMR",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4752",
+      "census_name": "Holy See (Vatican City)",
+      "iso2": "VA",
+      "iso3": "VAT",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "4759",
+      "census_name": "Italy",
+      "iso2": "IT",
+      "iso3": "ITA",
+      "kind_hint": "country",
+      "map_feature_id": 380,
+      "note": null
+    },
+    {
+      "census_code": "4791",
+      "census_name": "Croatia",
+      "iso2": "HR",
+      "iso3": "HRV",
+      "kind_hint": "country",
+      "map_feature_id": 191,
+      "note": null
+    },
+    {
+      "census_code": "4792",
+      "census_name": "Slovenia",
+      "iso2": "SI",
+      "iso3": "SVN",
+      "kind_hint": "country",
+      "map_feature_id": 705,
+      "note": null
+    },
+    {
+      "census_code": "4793",
+      "census_name": "Bosnia and Herzegovina",
+      "iso2": "BA",
+      "iso3": "BIH",
+      "kind_hint": "country",
+      "map_feature_id": 70,
+      "note": null
+    },
+    {
+      "census_code": "4794",
+      "census_name": "North Macedonia",
+      "iso2": "MK",
+      "iso3": "MKD",
+      "kind_hint": "country",
+      "map_feature_id": 807,
+      "note": null
+    },
+    {
+      "census_code": "4801",
+      "census_name": "Serbia",
+      "iso2": "RS",
+      "iso3": "SRB",
+      "kind_hint": "country",
+      "map_feature_id": 688,
+      "note": null
+    },
+    {
+      "census_code": "4803",
+      "census_name": "Kosovo",
+      "iso2": "KV",
+      "iso3": null,
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "No ISO 3166-1 entry for this iso2 in pycountry's official ISO 3166 database; not a UN member state or has no assigned alpha-2 in the standard, so iso3 stays null. kind is country, not special: per CONTRACT.md Published examples (amended), 'kind special is reserved for non-geographic codes; a geographic partner without an ISO 3166-1 code (Kosovo 4803) is kind country with iso3 null.' map_feature_id: checked raw/reference/countries-110m.json (world-atlas countries-110m, pinned npm version, cited in this file's sources) directly for a Kosovo feature; found one entry with properties.name == 'Kosovo' but NO 'id' field at all (verified: this geometry object has only 'type', 'arcs', and 'properties', unlike every ISO-coded country entry which also carries a numeric 'id'). Matching by name alone is not sufficient to set map_feature_id, and no id-bearing property exists to match on instead, so map_feature_id stays null. (Two other geometries in the same file are missing 'id' the same way: 'N. Cyprus' and 'Somaliland', both similarly non-ISO-coded.)"
+    },
+    {
+      "census_code": "4804",
+      "census_name": "Montenegro",
+      "iso2": "ME",
+      "iso3": "MNE",
+      "kind_hint": "country",
+      "map_feature_id": 499,
+      "note": null
+    },
+    {
+      "census_code": "4810",
+      "census_name": "Albania",
+      "iso2": "AL",
+      "iso3": "ALB",
+      "kind_hint": "country",
+      "map_feature_id": 8,
+      "note": null
+    },
+    {
+      "census_code": "4840",
+      "census_name": "Greece",
+      "iso2": "GR",
+      "iso3": "GRC",
+      "kind_hint": "country",
+      "map_feature_id": 300,
+      "note": null
+    },
+    {
+      "census_code": "4850",
+      "census_name": "Romania",
+      "iso2": "RO",
+      "iso3": "ROU",
+      "kind_hint": "country",
+      "map_feature_id": 642,
+      "note": null
+    },
+    {
+      "census_code": "4870",
+      "census_name": "Bulgaria",
+      "iso2": "BG",
+      "iso3": "BGR",
+      "kind_hint": "country",
+      "map_feature_id": 100,
+      "note": null
+    },
+    {
+      "census_code": "4890",
+      "census_name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR",
+      "kind_hint": "country",
+      "map_feature_id": 792,
+      "note": null
+    },
+    {
+      "census_code": "4910",
+      "census_name": "Cyprus",
+      "iso2": "CY",
+      "iso3": "CYP",
+      "kind_hint": "country",
+      "map_feature_id": 196,
+      "note": null
+    },
+    {
+      "census_code": "5020",
+      "census_name": "Syria (Syrian Arab Republic)",
+      "iso2": "SY",
+      "iso3": "SYR",
+      "kind_hint": "country",
+      "map_feature_id": 760,
+      "note": null
+    },
+    {
+      "census_code": "5040",
+      "census_name": "Lebanon",
+      "iso2": "LB",
+      "iso3": "LBN",
+      "kind_hint": "country",
+      "map_feature_id": 422,
+      "note": null
+    },
+    {
+      "census_code": "5050",
+      "census_name": "Iraq",
+      "iso2": "IQ",
+      "iso3": "IRQ",
+      "kind_hint": "country",
+      "map_feature_id": 368,
+      "note": null
+    },
+    {
+      "census_code": "5070",
+      "census_name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN",
+      "kind_hint": "country",
+      "map_feature_id": 364,
+      "note": null
+    },
+    {
+      "census_code": "5081",
+      "census_name": "Israel",
+      "iso2": "IL",
+      "iso3": "ISR",
+      "kind_hint": "country",
+      "map_feature_id": 376,
+      "note": null
+    },
+    {
+      "census_code": "5082",
+      "census_name": "Gaza Strip administered by Israel",
+      "iso2": "GZ",
+      "iso3": null,
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "no ISO 3166-1 entry for this iso2 in pycountry's official ISO 3166 database; not a UN member state or has no assigned alpha-2 in the standard"
+    },
+    {
+      "census_code": "5083",
+      "census_name": "West Bank administered by Israel",
+      "iso2": "WE",
+      "iso3": null,
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "no ISO 3166-1 entry for this iso2 in pycountry's official ISO 3166 database; not a UN member state or has no assigned alpha-2 in the standard"
+    },
+    {
+      "census_code": "5110",
+      "census_name": "Jordan",
+      "iso2": "JO",
+      "iso3": "JOR",
+      "kind_hint": "country",
+      "map_feature_id": 400,
+      "note": null
+    },
+    {
+      "census_code": "5130",
+      "census_name": "Kuwait",
+      "iso2": "KW",
+      "iso3": "KWT",
+      "kind_hint": "country",
+      "map_feature_id": 414,
+      "note": null
+    },
+    {
+      "census_code": "5170",
+      "census_name": "Saudi Arabia",
+      "iso2": "SA",
+      "iso3": "SAU",
+      "kind_hint": "country",
+      "map_feature_id": 682,
+      "note": null
+    },
+    {
+      "census_code": "5180",
+      "census_name": "Qatar",
+      "iso2": "QA",
+      "iso3": "QAT",
+      "kind_hint": "country",
+      "map_feature_id": 634,
+      "note": null
+    },
+    {
+      "census_code": "5200",
+      "census_name": "United Arab Emirates",
+      "iso2": "AE",
+      "iso3": "ARE",
+      "kind_hint": "country",
+      "map_feature_id": 784,
+      "note": null
+    },
+    {
+      "census_code": "5210",
+      "census_name": "Yemen (Republic of Yemen)",
+      "iso2": "YE",
+      "iso3": "YEM",
+      "kind_hint": "country",
+      "map_feature_id": 887,
+      "note": null
+    },
+    {
+      "census_code": "5230",
+      "census_name": "Oman",
+      "iso2": "OM",
+      "iso3": "OMN",
+      "kind_hint": "country",
+      "map_feature_id": 512,
+      "note": null
+    },
+    {
+      "census_code": "5250",
+      "census_name": "Bahrain",
+      "iso2": "BH",
+      "iso3": "BHR",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "5310",
+      "census_name": "Afghanistan",
+      "iso2": "AF",
+      "iso3": "AFG",
+      "kind_hint": "country",
+      "map_feature_id": 4,
+      "note": null
+    },
+    {
+      "census_code": "5330",
+      "census_name": "India",
+      "iso2": "IN",
+      "iso3": "IND",
+      "kind_hint": "country",
+      "map_feature_id": 356,
+      "note": null
+    },
+    {
+      "census_code": "5350",
+      "census_name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK",
+      "kind_hint": "country",
+      "map_feature_id": 586,
+      "note": null
+    },
+    {
+      "census_code": "5360",
+      "census_name": "Nepal",
+      "iso2": "NP",
+      "iso3": "NPL",
+      "kind_hint": "country",
+      "map_feature_id": 524,
+      "note": null
+    },
+    {
+      "census_code": "5380",
+      "census_name": "Bangladesh",
+      "iso2": "BD",
+      "iso3": "BGD",
+      "kind_hint": "country",
+      "map_feature_id": 50,
+      "note": null
+    },
+    {
+      "census_code": "5420",
+      "census_name": "Sri Lanka",
+      "iso2": "LK",
+      "iso3": "LKA",
+      "kind_hint": "country",
+      "map_feature_id": 144,
+      "note": null
+    },
+    {
+      "census_code": "5460",
+      "census_name": "Burma (Myanmar)",
+      "iso2": "MM",
+      "iso3": "MMR",
+      "kind_hint": "country",
+      "map_feature_id": 104,
+      "note": null
+    },
+    {
+      "census_code": "5490",
+      "census_name": "Thailand",
+      "iso2": "TH",
+      "iso3": "THA",
+      "kind_hint": "country",
+      "map_feature_id": 764,
+      "note": null
+    },
+    {
+      "census_code": "5520",
+      "census_name": "Vietnam",
+      "iso2": "VN",
+      "iso3": "VNM",
+      "kind_hint": "country",
+      "map_feature_id": 704,
+      "note": null
+    },
+    {
+      "census_code": "5530",
+      "census_name": "Laos (Lao People's Democratic Republic)",
+      "iso2": "LA",
+      "iso3": "LAO",
+      "kind_hint": "country",
+      "map_feature_id": 418,
+      "note": null
+    },
+    {
+      "census_code": "5550",
+      "census_name": "Cambodia",
+      "iso2": "KH",
+      "iso3": "KHM",
+      "kind_hint": "country",
+      "map_feature_id": 116,
+      "note": null
+    },
+    {
+      "census_code": "5570",
+      "census_name": "Malaysia",
+      "iso2": "MY",
+      "iso3": "MYS",
+      "kind_hint": "country",
+      "map_feature_id": 458,
+      "note": null
+    },
+    {
+      "census_code": "5590",
+      "census_name": "Singapore",
+      "iso2": "SG",
+      "iso3": "SGP",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "5600",
+      "census_name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN",
+      "kind_hint": "country",
+      "map_feature_id": 360,
+      "note": null
+    },
+    {
+      "census_code": "5601",
+      "census_name": "Timor-Leste",
+      "iso2": "TL",
+      "iso3": "TLS",
+      "kind_hint": "country",
+      "map_feature_id": 626,
+      "note": null
+    },
+    {
+      "census_code": "5610",
+      "census_name": "Brunei",
+      "iso2": "BN",
+      "iso3": "BRN",
+      "kind_hint": "country",
+      "map_feature_id": 96,
+      "note": null
+    },
+    {
+      "census_code": "5650",
+      "census_name": "Philippines",
+      "iso2": "PH",
+      "iso3": "PHL",
+      "kind_hint": "country",
+      "map_feature_id": 608,
+      "note": null
+    },
+    {
+      "census_code": "5660",
+      "census_name": "Macao",
+      "iso2": "MO",
+      "iso3": "MAC",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "5682",
+      "census_name": "Bhutan",
+      "iso2": "BT",
+      "iso3": "BTN",
+      "kind_hint": "country",
+      "map_feature_id": 64,
+      "note": null
+    },
+    {
+      "census_code": "5683",
+      "census_name": "Maldives",
+      "iso2": "MV",
+      "iso3": "MDV",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "5700",
+      "census_name": "China",
+      "iso2": "CN",
+      "iso3": "CHN",
+      "kind_hint": "country",
+      "map_feature_id": 156,
+      "note": null
+    },
+    {
+      "census_code": "5740",
+      "census_name": "Mongolia",
+      "iso2": "MN",
+      "iso3": "MNG",
+      "kind_hint": "country",
+      "map_feature_id": 496,
+      "note": null
+    },
+    {
+      "census_code": "5790",
+      "census_name": "North Korea (Democratic People's Republic of Korea)",
+      "iso2": "KP",
+      "iso3": "PRK",
+      "kind_hint": "country",
+      "map_feature_id": 408,
+      "note": null
+    },
+    {
+      "census_code": "5800",
+      "census_name": "South Korea (Republic of Korea)",
+      "iso2": "KR",
+      "iso3": "KOR",
+      "kind_hint": "country",
+      "map_feature_id": 410,
+      "note": null
+    },
+    {
+      "census_code": "5820",
+      "census_name": "Hong Kong",
+      "iso2": "HK",
+      "iso3": "HKG",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "5830",
+      "census_name": "Taiwan",
+      "iso2": "TW",
+      "iso3": "TWN",
+      "kind_hint": "country",
+      "map_feature_id": 158,
+      "note": null
+    },
+    {
+      "census_code": "5880",
+      "census_name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN",
+      "kind_hint": "country",
+      "map_feature_id": 392,
+      "note": null
+    },
+    {
+      "census_code": "6021",
+      "census_name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS",
+      "kind_hint": "country",
+      "map_feature_id": 36,
+      "note": null
+    },
+    {
+      "census_code": "6022",
+      "census_name": "Norfolk Island",
+      "iso2": "NF",
+      "iso3": "NFK",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6023",
+      "census_name": "Cocos (Keeling) Islands",
+      "iso2": "CC",
+      "iso3": "CCK",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6024",
+      "census_name": "Christmas Island (in the Indian Ocean)",
+      "iso2": "CX",
+      "iso3": "CXR",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6029",
+      "census_name": "Heard Island and McDonald Islands",
+      "iso2": "HM",
+      "iso3": "HMD",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6040",
+      "census_name": "Papua New Guinea",
+      "iso2": "PG",
+      "iso3": "PNG",
+      "kind_hint": "country",
+      "map_feature_id": 598,
+      "note": null
+    },
+    {
+      "census_code": "6141",
+      "census_name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL",
+      "kind_hint": "country",
+      "map_feature_id": 554,
+      "note": null
+    },
+    {
+      "census_code": "6142",
+      "census_name": "Cook Islands",
+      "iso2": "CK",
+      "iso3": "COK",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6143",
+      "census_name": "Tokelau",
+      "iso2": "TK",
+      "iso3": "TKL",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6144",
+      "census_name": "Niue",
+      "iso2": "NU",
+      "iso3": "NIU",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6150",
+      "census_name": "Samoa (Western Samoa)",
+      "iso2": "WS",
+      "iso3": "WSM",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6223",
+      "census_name": "Solomon Islands",
+      "iso2": "SB",
+      "iso3": "SLB",
+      "kind_hint": "country",
+      "map_feature_id": 90,
+      "note": null
+    },
+    {
+      "census_code": "6224",
+      "census_name": "Vanuatu",
+      "iso2": "VU",
+      "iso3": "VUT",
+      "kind_hint": "country",
+      "map_feature_id": 548,
+      "note": null
+    },
+    {
+      "census_code": "6225",
+      "census_name": "Pitcairn Islands",
+      "iso2": "PN",
+      "iso3": "PCN",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6226",
+      "census_name": "Kiribati",
+      "iso2": "KI",
+      "iso3": "KIR",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6227",
+      "census_name": "Tuvalu",
+      "iso2": "TV",
+      "iso3": "TUV",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6412",
+      "census_name": "New Caledonia",
+      "iso2": "NC",
+      "iso3": "NCL",
+      "kind_hint": "territory",
+      "map_feature_id": 540,
+      "note": null
+    },
+    {
+      "census_code": "6413",
+      "census_name": "Wallis and Futuna",
+      "iso2": "WF",
+      "iso3": "WLF",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6414",
+      "census_name": "French Polynesia",
+      "iso2": "PF",
+      "iso3": "PYF",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6810",
+      "census_name": "Marshall Islands",
+      "iso2": "MH",
+      "iso3": "MHL",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6820",
+      "census_name": "Micronesia, Federated States of",
+      "iso2": "FM",
+      "iso3": "FSM",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6830",
+      "census_name": "Palau",
+      "iso2": "PW",
+      "iso3": "PLW",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6862",
+      "census_name": "Naoero",
+      "iso2": "NR",
+      "iso3": "NRU",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "6863",
+      "census_name": "Fiji",
+      "iso2": "FJ",
+      "iso3": "FJI",
+      "kind_hint": "country",
+      "map_feature_id": 242,
+      "note": null
+    },
+    {
+      "census_code": "6864",
+      "census_name": "Tonga",
+      "iso2": "TO",
+      "iso3": "TON",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7140",
+      "census_name": "Morocco",
+      "iso2": "MA",
+      "iso3": "MAR",
+      "kind_hint": "country",
+      "map_feature_id": 504,
+      "note": null
+    },
+    {
+      "census_code": "7210",
+      "census_name": "Algeria",
+      "iso2": "DZ",
+      "iso3": "DZA",
+      "kind_hint": "country",
+      "map_feature_id": 12,
+      "note": null
+    },
+    {
+      "census_code": "7230",
+      "census_name": "Tunisia",
+      "iso2": "TN",
+      "iso3": "TUN",
+      "kind_hint": "country",
+      "map_feature_id": 788,
+      "note": null
+    },
+    {
+      "census_code": "7250",
+      "census_name": "Libya",
+      "iso2": "LY",
+      "iso3": "LBY",
+      "kind_hint": "country",
+      "map_feature_id": 434,
+      "note": null
+    },
+    {
+      "census_code": "7290",
+      "census_name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY",
+      "kind_hint": "country",
+      "map_feature_id": 818,
+      "note": null
+    },
+    {
+      "census_code": "7321",
+      "census_name": "Sudan",
+      "iso2": "SD",
+      "iso3": "SDN",
+      "kind_hint": "country",
+      "map_feature_id": 729,
+      "note": null
+    },
+    {
+      "census_code": "7323",
+      "census_name": "South Sudan",
+      "iso2": "SS",
+      "iso3": "SSD",
+      "kind_hint": "country",
+      "map_feature_id": 728,
+      "note": null
+    },
+    {
+      "census_code": "7370",
+      "census_name": "Western Sahara",
+      "iso2": "EH",
+      "iso3": "ESH",
+      "kind_hint": "territory",
+      "map_feature_id": 732,
+      "note": null
+    },
+    {
+      "census_code": "7380",
+      "census_name": "Equatorial Guinea",
+      "iso2": "GQ",
+      "iso3": "GNQ",
+      "kind_hint": "country",
+      "map_feature_id": 226,
+      "note": null
+    },
+    {
+      "census_code": "7410",
+      "census_name": "Mauritania",
+      "iso2": "MR",
+      "iso3": "MRT",
+      "kind_hint": "country",
+      "map_feature_id": 478,
+      "note": null
+    },
+    {
+      "census_code": "7420",
+      "census_name": "Cameroon",
+      "iso2": "CM",
+      "iso3": "CMR",
+      "kind_hint": "country",
+      "map_feature_id": 120,
+      "note": null
+    },
+    {
+      "census_code": "7440",
+      "census_name": "Senegal",
+      "iso2": "SN",
+      "iso3": "SEN",
+      "kind_hint": "country",
+      "map_feature_id": 686,
+      "note": null
+    },
+    {
+      "census_code": "7450",
+      "census_name": "Mali",
+      "iso2": "ML",
+      "iso3": "MLI",
+      "kind_hint": "country",
+      "map_feature_id": 466,
+      "note": null
+    },
+    {
+      "census_code": "7460",
+      "census_name": "Guinea",
+      "iso2": "GN",
+      "iso3": "GIN",
+      "kind_hint": "country",
+      "map_feature_id": 324,
+      "note": null
+    },
+    {
+      "census_code": "7470",
+      "census_name": "Sierra Leone",
+      "iso2": "SL",
+      "iso3": "SLE",
+      "kind_hint": "country",
+      "map_feature_id": 694,
+      "note": null
+    },
+    {
+      "census_code": "7480",
+      "census_name": "Cote d'Ivoire",
+      "iso2": "CI",
+      "iso3": "CIV",
+      "kind_hint": "country",
+      "map_feature_id": 384,
+      "note": null
+    },
+    {
+      "census_code": "7490",
+      "census_name": "Ghana",
+      "iso2": "GH",
+      "iso3": "GHA",
+      "kind_hint": "country",
+      "map_feature_id": 288,
+      "note": null
+    },
+    {
+      "census_code": "7500",
+      "census_name": "Gambia",
+      "iso2": "GM",
+      "iso3": "GMB",
+      "kind_hint": "country",
+      "map_feature_id": 270,
+      "note": null
+    },
+    {
+      "census_code": "7510",
+      "census_name": "Niger",
+      "iso2": "NE",
+      "iso3": "NER",
+      "kind_hint": "country",
+      "map_feature_id": 562,
+      "note": null
+    },
+    {
+      "census_code": "7520",
+      "census_name": "Togo",
+      "iso2": "TG",
+      "iso3": "TGO",
+      "kind_hint": "country",
+      "map_feature_id": 768,
+      "note": null
+    },
+    {
+      "census_code": "7530",
+      "census_name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA",
+      "kind_hint": "country",
+      "map_feature_id": 566,
+      "note": null
+    },
+    {
+      "census_code": "7540",
+      "census_name": "Central African Republic",
+      "iso2": "CF",
+      "iso3": "CAF",
+      "kind_hint": "country",
+      "map_feature_id": 140,
+      "note": null
+    },
+    {
+      "census_code": "7550",
+      "census_name": "Gabon",
+      "iso2": "GA",
+      "iso3": "GAB",
+      "kind_hint": "country",
+      "map_feature_id": 266,
+      "note": null
+    },
+    {
+      "census_code": "7560",
+      "census_name": "Chad",
+      "iso2": "TD",
+      "iso3": "TCD",
+      "kind_hint": "country",
+      "map_feature_id": 148,
+      "note": null
+    },
+    {
+      "census_code": "7580",
+      "census_name": "Saint Helena",
+      "iso2": "SH",
+      "iso3": "SHN",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7600",
+      "census_name": "Burkina Faso",
+      "iso2": "BF",
+      "iso3": "BFA",
+      "kind_hint": "country",
+      "map_feature_id": 854,
+      "note": null
+    },
+    {
+      "census_code": "7610",
+      "census_name": "Benin",
+      "iso2": "BJ",
+      "iso3": "BEN",
+      "kind_hint": "country",
+      "map_feature_id": 204,
+      "note": null
+    },
+    {
+      "census_code": "7620",
+      "census_name": "Angola",
+      "iso2": "AO",
+      "iso3": "AGO",
+      "kind_hint": "country",
+      "map_feature_id": 24,
+      "note": null
+    },
+    {
+      "census_code": "7630",
+      "census_name": "Congo, Republic of the Congo",
+      "iso2": "CG",
+      "iso3": "COG",
+      "kind_hint": "country",
+      "map_feature_id": 178,
+      "note": null
+    },
+    {
+      "census_code": "7642",
+      "census_name": "Guinea-Bissau",
+      "iso2": "GW",
+      "iso3": "GNB",
+      "kind_hint": "country",
+      "map_feature_id": 624,
+      "note": null
+    },
+    {
+      "census_code": "7643",
+      "census_name": "Cabo Verde",
+      "iso2": "CV",
+      "iso3": "CPV",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7644",
+      "census_name": "Sao Tome and Principe",
+      "iso2": "ST",
+      "iso3": "STP",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7650",
+      "census_name": "Liberia",
+      "iso2": "LR",
+      "iso3": "LBR",
+      "kind_hint": "country",
+      "map_feature_id": 430,
+      "note": null
+    },
+    {
+      "census_code": "7660",
+      "census_name": "Congo, Democratic Republic of the Congo (formerly Za",
+      "iso2": "CD",
+      "iso3": "COD",
+      "kind_hint": "country",
+      "map_feature_id": 180,
+      "note": null
+    },
+    {
+      "census_code": "7670",
+      "census_name": "Burundi",
+      "iso2": "BI",
+      "iso3": "BDI",
+      "kind_hint": "country",
+      "map_feature_id": 108,
+      "note": null
+    },
+    {
+      "census_code": "7690",
+      "census_name": "Rwanda",
+      "iso2": "RW",
+      "iso3": "RWA",
+      "kind_hint": "country",
+      "map_feature_id": 646,
+      "note": null
+    },
+    {
+      "census_code": "7700",
+      "census_name": "Somalia",
+      "iso2": "SO",
+      "iso3": "SOM",
+      "kind_hint": "country",
+      "map_feature_id": 706,
+      "note": null
+    },
+    {
+      "census_code": "7741",
+      "census_name": "Eritrea",
+      "iso2": "ER",
+      "iso3": "ERI",
+      "kind_hint": "country",
+      "map_feature_id": 232,
+      "note": null
+    },
+    {
+      "census_code": "7749",
+      "census_name": "Ethiopia",
+      "iso2": "ET",
+      "iso3": "ETH",
+      "kind_hint": "country",
+      "map_feature_id": 231,
+      "note": null
+    },
+    {
+      "census_code": "7770",
+      "census_name": "Djibouti",
+      "iso2": "DJ",
+      "iso3": "DJI",
+      "kind_hint": "country",
+      "map_feature_id": 262,
+      "note": null
+    },
+    {
+      "census_code": "7780",
+      "census_name": "Uganda",
+      "iso2": "UG",
+      "iso3": "UGA",
+      "kind_hint": "country",
+      "map_feature_id": 800,
+      "note": null
+    },
+    {
+      "census_code": "7790",
+      "census_name": "Kenya",
+      "iso2": "KE",
+      "iso3": "KEN",
+      "kind_hint": "country",
+      "map_feature_id": 404,
+      "note": null
+    },
+    {
+      "census_code": "7800",
+      "census_name": "Seychelles",
+      "iso2": "SC",
+      "iso3": "SYC",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7810",
+      "census_name": "British Indian Ocean Territory",
+      "iso2": "IO",
+      "iso3": "IOT",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7830",
+      "census_name": "Tanzania (United Republic of Tanzania)",
+      "iso2": "TZ",
+      "iso3": "TZA",
+      "kind_hint": "country",
+      "map_feature_id": 834,
+      "note": null
+    },
+    {
+      "census_code": "7850",
+      "census_name": "Mauritius",
+      "iso2": "MU",
+      "iso3": "MUS",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7870",
+      "census_name": "Mozambique",
+      "iso2": "MZ",
+      "iso3": "MOZ",
+      "kind_hint": "country",
+      "map_feature_id": 508,
+      "note": null
+    },
+    {
+      "census_code": "7880",
+      "census_name": "Madagascar",
+      "iso2": "MG",
+      "iso3": "MDG",
+      "kind_hint": "country",
+      "map_feature_id": 450,
+      "note": null
+    },
+    {
+      "census_code": "7881",
+      "census_name": "Mayotte",
+      "iso2": "YT",
+      "iso3": "MYT",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7890",
+      "census_name": "Comoros",
+      "iso2": "KM",
+      "iso3": "COM",
+      "kind_hint": "country",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7904",
+      "census_name": "Reunion",
+      "iso2": "RE",
+      "iso3": "REU",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "7905",
+      "census_name": "French Southern and Antarctic Lands",
+      "iso2": "TF",
+      "iso3": "ATF",
+      "kind_hint": "territory",
+      "map_feature_id": 260,
+      "note": null
+    },
+    {
+      "census_code": "7910",
+      "census_name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF",
+      "kind_hint": "country",
+      "map_feature_id": 710,
+      "note": null
+    },
+    {
+      "census_code": "7920",
+      "census_name": "Namibia",
+      "iso2": "NA",
+      "iso3": "NAM",
+      "kind_hint": "country",
+      "map_feature_id": 516,
+      "note": null
+    },
+    {
+      "census_code": "7930",
+      "census_name": "Botswana",
+      "iso2": "BW",
+      "iso3": "BWA",
+      "kind_hint": "country",
+      "map_feature_id": 72,
+      "note": null
+    },
+    {
+      "census_code": "7940",
+      "census_name": "Zambia",
+      "iso2": "ZM",
+      "iso3": "ZMB",
+      "kind_hint": "country",
+      "map_feature_id": 894,
+      "note": null
+    },
+    {
+      "census_code": "7950",
+      "census_name": "Eswatini",
+      "iso2": "SZ",
+      "iso3": "SWZ",
+      "kind_hint": "country",
+      "map_feature_id": 748,
+      "note": null
+    },
+    {
+      "census_code": "7960",
+      "census_name": "Zimbabwe",
+      "iso2": "ZW",
+      "iso3": "ZWE",
+      "kind_hint": "country",
+      "map_feature_id": 716,
+      "note": null
+    },
+    {
+      "census_code": "7970",
+      "census_name": "Malawi",
+      "iso2": "MW",
+      "iso3": "MWI",
+      "kind_hint": "country",
+      "map_feature_id": 454,
+      "note": null
+    },
+    {
+      "census_code": "7990",
+      "census_name": "Lesotho",
+      "iso2": "LS",
+      "iso3": "LSO",
+      "kind_hint": "country",
+      "map_feature_id": 426,
+      "note": null
+    },
+    {
+      "census_code": "9030",
+      "census_name": "Puerto Rico",
+      "iso2": "PR",
+      "iso3": "PRI",
+      "kind_hint": "territory",
+      "map_feature_id": 630,
+      "note": null
+    },
+    {
+      "census_code": "9110",
+      "census_name": "Virgin Islands of the United States",
+      "iso2": "VI",
+      "iso3": "VIR",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "9350",
+      "census_name": "Guam",
+      "iso2": "GU",
+      "iso3": "GUM",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "9510",
+      "census_name": "American Samoa",
+      "iso2": "AS",
+      "iso3": "ASM",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "9610",
+      "census_name": "Northern Mariana Islands",
+      "iso2": "MP",
+      "iso3": "MNP",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "9800",
+      "census_name": "United States Minor Outlying Islands",
+      "iso2": "UM",
+      "iso3": "UMI",
+      "kind_hint": "territory",
+      "map_feature_id": null,
+      "note": "not present in world-atlas countries-110m (low-resolution topojson omits this small territory/microstate); map_feature_id null, partner still published per SPEC PARTNERS"
+    },
+    {
+      "census_code": "8220",
+      "census_name": "Unidentified partner (Census code 8220)",
+      "iso2": null,
+      "iso3": null,
+      "kind_hint": "special",
+      "map_feature_id": null,
+      "note": "Observed live with SUMMARY_LVL=DET (like a real detail-level partner, not a country grouping) in exports partner_totals for 2013-12 (179871109), 2014-12 (101833), and 2016-12 (1771484) only; absent from imports in every year and from exports in every other configured year. The API returns a null CTY_NAME in every occurrence (raw/<snapshot_id>/partner_totals/exports_{2013,2014,2016}-12.response.json). Code 8220 is absent from raw/reference/schedule_c_country.txt (U.S. Census Bureau Schedule C Country List) and from the API guide (raw/source_test/api_guide/guide.txt). Census does publish a page for this code: https://www.census.gov/foreign-trade/balance/c8220.html (HTTP 200), titled 'Trade in Goods with Unidentified Countries', showing 179.9 million USD of exports for 2013, consistent with the API value 179871109; saved copy at tests/fixtures/published_examples/sources/8220_attempt.txt. Classified kind=special with iso3 and map_feature_id null, consistent with SPEC PARTNERS kind enum. Owner approved on 2026-09-09 under the display name 'Unidentified partner (Census code 8220)': the API gives no name for this code, and the published page gives 'Unidentified Countries'."
+    }
+  ],
+  "sources": [
+    {
+      "accessed": "2026-09-09",
+      "saved": "raw/reference/schedule_c_country.txt",
+      "title": "U.S. Census Bureau, Foreign Trade Division, Schedule C Country List (by code)",
+      "url": "https://www.census.gov/foreign-trade/schedules/c/country.txt",
+      "used_for": "census_code, census_name, iso2 (quoted verbatim, 241 rows)"
+    },
+    {
+      "accessed": "2026-09-09",
+      "title": "pycountry 26.2.16 (ISO 3166-1 alpha-2/alpha-3/numeric country database, derived from the official ISO 3166 Maintenance Agency / Debian iso-codes dataset)",
+      "url": "https://pypi.org/project/pycountry/",
+      "used_for": "iso2 -> iso3 and iso2 -> ISO 3166-1 numeric id"
+    },
+    {
+      "accessed": "2026-09-09",
+      "saved": "raw/reference/countries-110m.json",
+      "title": "world-atlas countries-110m.json, npm package world-atlas@2.0.2",
+      "url": "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json",
+      "used_for": "map_feature_id: confirms which ISO 3166-1 numeric ids have a renderable shape at this topojson resolution (174 of 177 geometries carry an id; 3 lack one: N. Cyprus, Somaliland, Kosovo, which are not officially coded and are excluded from this id set)"
+    }
+  ],
+  "unmapped": [
+    {
+      "census_code": "4803",
+      "census_name": "Kosovo",
+      "iso2": "KV"
+    },
+    {
+      "census_code": "5082",
+      "census_name": "Gaza Strip administered by Israel",
+      "iso2": "GZ"
+    },
+    {
+      "census_code": "5083",
+      "census_name": "West Bank administered by Israel",
+      "iso2": "WE"
+    },
+    {
+      "census_code": "8220",
+      "census_name": null,
+      "iso2": null
+    }
+  ],
+  "version": "1.0.0"
+}

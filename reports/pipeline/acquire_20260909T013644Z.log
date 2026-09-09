@@ -1,0 +1,93 @@
+2026-09-09T01:36:44.043228+00:00 [acquire] init: tmp_dir=./raw/_acquiring_20260909T013644Z
+2026-09-09T01:43:25.035354+00:00 [acquire] probe done: verified 2010..2025, configured 2013..2025, 68 probes
+2026-09-09T01:48:49.450740+00:00 [acquire] fingerprint_before done
+2026-09-09T01:49:11.470862+00:00 [acquire] variables done
+2026-09-09T01:49:22.129389+00:00 [acquire] archive chunk starting: years [2013, 2014]
+Evidence: hs2 batches of 25 chapters, which worked for China-2023 test
+queries (18-53s), are unreliable for at least one other year/flow: exports
+2013-12 batch 1 (chapters 01-25) and batch 2 (chapters 26-50) each timed
+out after 60s x 3 internal retries (ReadTimeout), then correctly fell back
+to per-chapter requests, each of which succeeded in 1-12s. To reduce wasted
+retry time (each failed 25-chapter batch costs about 180s before falling
+back), HS2_BATCH_SIZE is reduced from 25 to 10 chapters per request for the
+rest of this acquisition. This does not change correctness, only request
+count and expected wall-clock time; the per-chapter fallback path is
+unchanged and already proven.
+2026-09-09T02:11:22.865399+00:00 [acquire] hs2 incomplete for exports 2013: missing 0 codes
+2026-09-09T02:11:22.865864+00:00 [acquire] archive year 2013 done (1/13)
+2026-09-09T02:25:39.768101+00:00 [acquire] archive chunk starting: years [2014]
+2026-09-09T02:25:58.626229+00:00 [acquire] archive chunk starting: years [2014]
+2026-09-09T03:09:57.576946+00:00 [acquire] hs2 incomplete for exports 2014: missing 0 codes
+2026-09-09T03:09:57.577584+00:00 [acquire] archive year 2014 done (2/13)
+2026-09-09T03:09:57.577652+00:00 [acquire] archive chunk done. Remaining years: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+2026-09-09T03:10:21.945998+00:00 [acquire] archive chunk starting: years [2015]
+2026-09-09T03:58:43.115796+00:00 [acquire] hs2 incomplete for exports 2015: missing 0 codes
+2026-09-09T03:58:43.116685+00:00 [acquire] archive year 2015 done (3/13)
+2026-09-09T03:58:43.116771+00:00 [acquire] archive chunk done. Remaining years: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+Orchestrator-directed change (observed 03:49Z): years 2013 and 2014 archived
+using per-chapter singles (HS2_BATCH_SIZE effectively 1) after batches of
+25/20/10 chapters proved unreliable at the default 60s timeout; imports
+2013 in fact succeeded cleanly with 4 clean 25-chapter batches, and the
+"failures" were ReadTimeouts on large-but-legitimate responses (one batch
+observed to succeed at 53.6s, another at 59.8s, both near the old 60s
+ceiling), not rejections. Per orchestrator instruction: pipeline/acquire.py
+now retries HS2_BATCH_SIZE=25 chapter batches with a raised
+HS2_BATCH_TIMEOUT_SECONDS=180 (same 3 bounded retries), falling back to
+per-chapter (60s each) only on a batch that still fails at 180s. If two
+25-chapter batches in a row fail even at 180s, HS2 batching is disabled for
+the remainder of this acquisition (state['hs2_batches_disabled']) and every
+subsequent chapter, year, and flow is fetched one at a time; this is a
+one-way switch, logged here if it triggers. census_client.py's
+CensusClient.fetch() gained an optional timeout_seconds parameter
+(default unchanged at 60s) to support this without touching any other
+caller's behavior. Years 2015 and earlier are unaffected (already archived
+under the per-chapter strategy); this change applies from year 2016
+onward. The fingerprint-before reading and the completed availability
+probes are untouched; only the fingerprint-after read (at the very end of
+acquisition, after all configured years are archived) remains pending.
+2026-09-09T04:00:44.162285+00:00 [acquire] archive chunk starting: years [2016]
+2026-09-09T04:34:26.583581+00:00 [acquire] hs2 incomplete for exports 2016: missing 0 codes
+2026-09-09T04:34:26.584553+00:00 [acquire] archive year 2016 done (4/13)
+2026-09-09T04:34:26.584648+00:00 [acquire] archive chunk done. Remaining years: [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+2016: imports succeeded via 4 clean 25-chapter batches (43.1s, 29.7s, 15.2s,
+25.2s). exports batch 1 failed with a 500 server error after 152.9s
+(not a timeout); exports batch 2 also failed at the 180s ceiling
+(second consecutive batch failure), so hs2_batches_disabled flipped to
+true partway through 2016 exports, per-chapter for the remainder of that
+batch and every chapter after. Year 2016 total archive time: about 12.6
+minutes (faster than 2014/2015's ~30+ minutes each, since imports got the
+fast batched path). From year 2017 onward, HS2 batching stays disabled
+(one-way switch, state.json hs2_batches_disabled=true) and every chapter,
+both flows, is fetched one at a time (proven reliable throughout).
+Increasing archive chunk-size to 3 years per invocation from here since
+per-year behavior is now uniform and predictable.
+2026-09-09T04:35:10.031070+00:00 [acquire] archive chunk starting: years [2017, 2018, 2019]
+2026-09-09T04:59:00.597411+00:00 [acquire] hs2 incomplete for exports 2017: missing 0 codes
+2026-09-09T04:59:00.598417+00:00 [acquire] archive year 2017 done (5/13)
+2026-09-09T05:15:28.765991+00:00 [acquire] hs2 incomplete for exports 2018: missing 0 codes
+2026-09-09T05:15:28.767014+00:00 [acquire] archive year 2018 done (6/13)
+2026-09-09T05:35:11.818003+00:00 [acquire] hs2 incomplete for exports 2019: missing 0 codes
+2026-09-09T05:35:11.818764+00:00 [acquire] archive year 2019 done (7/13)
+2026-09-09T05:35:11.818849+00:00 [acquire] archive chunk done. Remaining years: [2020, 2021, 2022, 2023, 2024, 2025]
+2026-09-09T05:35:26.039961+00:00 [acquire] archive chunk starting: years [2020, 2021, 2022]
+2026-09-09T06:01:44.384275+00:00 [acquire] hs2 incomplete for exports 2020: missing 0 codes
+2026-09-09T06:01:44.385408+00:00 [acquire] archive year 2020 done (8/13)
+2026-09-09T06:30:21.402907+00:00 [acquire] hs2 incomplete for exports 2021: missing 0 codes
+2026-09-09T06:30:21.403867+00:00 [acquire] archive year 2021 done (9/13)
+2026-09-09T07:20:11.703431+00:00 [acquire] hs2 incomplete for exports 2022: missing 0 codes
+2026-09-09T07:20:11.704894+00:00 [acquire] archive year 2022 done (10/13)
+2026-09-09T07:20:11.704991+00:00 [acquire] archive chunk done. Remaining years: [2023, 2024, 2025]
+2026-09-09T07:20:24.394509+00:00 [acquire] archive chunk starting: years [2023, 2024, 2025]
+2026-09-09T07:43:40.752764+00:00 [acquire] hs2 incomplete for exports 2023: missing 0 codes
+2026-09-09T07:43:40.754135+00:00 [acquire] archive year 2023 done (11/13)
+2026-09-09T08:11:46.949861+00:00 [acquire] hs2 incomplete for imports 2024: missing 0 codes
+2026-09-09T08:19:26.467355+00:00 [acquire] hs2 incomplete for exports 2024: missing 0 codes
+2026-09-09T08:19:26.468541+00:00 [acquire] archive year 2024 done (12/13)
+2026-09-09T08:29:15.147098+00:00 [acquire] hs2 incomplete for exports 2025: missing 0 codes
+2026-09-09T08:29:15.148302+00:00 [acquire] archive year 2025 done (13/13)
+2026-09-09T08:29:15.148404+00:00 [acquire] archive chunk done. Remaining years: []
+2026-09-09T08:30:46.645197+00:00 [acquire] eu_members done
+2026-09-09T08:35:36.688955+00:00 [acquire] fingerprint_after done
+2026-09-09T08:35:41.579102+00:00 [acquire] snapshot_id=20260909T013644Z-1908cb2662ee
+2026-09-09T08:35:41.579152+00:00 [acquire] requests: 2494 total, failures: 2
+2026-09-09T08:35:41.579186+00:00 [acquire] wrote ./raw/20260909T013644Z-1908cb2662ee

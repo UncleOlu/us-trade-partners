@@ -1,0 +1,16 @@
+.venv/
+node_modules/
+dist/
+.env
+*.env
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+# raw archives are published as zipped GitHub Release artifacts with their manifest, not committed
+raw/
+# staged and rebuild-check builds are transient; the published snapshot lives under data/
+reports/pipeline/staging/
+reports/pipeline/rebuild_check/
+.venv-tests/
+tests/.pytest_cache/

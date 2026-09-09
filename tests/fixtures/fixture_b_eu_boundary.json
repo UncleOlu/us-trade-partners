@@ -1,0 +1,183 @@
+{
+  "citation": "Computed from raw/source_test/eu_boundary_*.response.json (16 files, CTY_CODE 4791 Croatia and 4120 United Kingdom)",
+  "codes": {
+    "croatia": "4791",
+    "united_kingdom": "4120"
+  },
+  "derived_checks": [
+    {
+      "actual_july_mo": 34382506,
+      "check": "july_yr_minus_june_yr_equals_july_mo",
+      "country": "croatia",
+      "expected_july_mo": 34382506,
+      "flow": "imports",
+      "july_yr": 254710433,
+      "june_yr": 220327927,
+      "passes": true
+    },
+    {
+      "check": "january_yr_equals_january_mo",
+      "country": "croatia",
+      "flow": "imports",
+      "january_mo": 37239937,
+      "january_yr": 37239937,
+      "passes": true
+    },
+    {
+      "actual_july_mo": 40724466,
+      "check": "july_yr_minus_june_yr_equals_july_mo",
+      "country": "croatia",
+      "expected_july_mo": 40724466,
+      "flow": "exports",
+      "july_yr": 181092336,
+      "june_yr": 140367870,
+      "passes": true
+    },
+    {
+      "check": "january_yr_equals_january_mo",
+      "country": "croatia",
+      "flow": "exports",
+      "january_mo": 47760857,
+      "january_yr": 47760857,
+      "passes": true
+    },
+    {
+      "actual_july_mo": 4997574418,
+      "check": "july_yr_minus_june_yr_equals_july_mo",
+      "country": "united_kingdom",
+      "expected_july_mo": 4997574418,
+      "flow": "imports",
+      "july_yr": 30797024483,
+      "june_yr": 25799450065,
+      "passes": true
+    },
+    {
+      "check": "january_yr_equals_january_mo",
+      "country": "united_kingdom",
+      "flow": "imports",
+      "january_mo": 4602430446,
+      "january_yr": 4602430446,
+      "passes": true
+    },
+    {
+      "actual_july_mo": 3522046028,
+      "check": "july_yr_minus_june_yr_equals_july_mo",
+      "country": "united_kingdom",
+      "expected_july_mo": 3522046028,
+      "flow": "exports",
+      "july_yr": 27969995316,
+      "june_yr": 24447949288,
+      "passes": true
+    },
+    {
+      "check": "january_yr_equals_january_mo",
+      "country": "united_kingdom",
+      "flow": "exports",
+      "january_mo": 5830208879,
+      "january_yr": 5830208879,
+      "passes": true
+    }
+  ],
+  "values": {
+    "croatia": {
+      "2013-06": {
+        "exports": {
+          "mo": 12383145,
+          "source_file": "raw/source_test/eu_boundary_exports_croatia_2013-06.response.json",
+          "yr": 140367870
+        },
+        "imports": {
+          "mo": 32857224,
+          "source_file": "raw/source_test/eu_boundary_imports_croatia_2013-06.response.json",
+          "yr": 220327927
+        }
+      },
+      "2013-07": {
+        "exports": {
+          "mo": 40724466,
+          "source_file": "raw/source_test/eu_boundary_exports_croatia_2013-07.response.json",
+          "yr": 181092336
+        },
+        "imports": {
+          "mo": 34382506,
+          "source_file": "raw/source_test/eu_boundary_imports_croatia_2013-07.response.json",
+          "yr": 254710433
+        }
+      },
+      "2020-01": {
+        "exports": {
+          "mo": 47760857,
+          "source_file": "raw/source_test/eu_boundary_exports_croatia_2020-01.response.json",
+          "yr": 47760857
+        },
+        "imports": {
+          "mo": 37239937,
+          "source_file": "raw/source_test/eu_boundary_imports_croatia_2020-01.response.json",
+          "yr": 37239937
+        }
+      },
+      "2020-02": {
+        "exports": {
+          "mo": 18979747,
+          "source_file": "raw/source_test/eu_boundary_exports_croatia_2020-02.response.json",
+          "yr": 66740604
+        },
+        "imports": {
+          "mo": 33741299,
+          "source_file": "raw/source_test/eu_boundary_imports_croatia_2020-02.response.json",
+          "yr": 70981236
+        }
+      }
+    },
+    "united_kingdom": {
+      "2013-06": {
+        "exports": {
+          "mo": 4514521052,
+          "source_file": "raw/source_test/eu_boundary_exports_united_kingdom_2013-06.response.json",
+          "yr": 24447949288
+        },
+        "imports": {
+          "mo": 4373398048,
+          "source_file": "raw/source_test/eu_boundary_imports_united_kingdom_2013-06.response.json",
+          "yr": 25799450065
+        }
+      },
+      "2013-07": {
+        "exports": {
+          "mo": 3522046028,
+          "source_file": "raw/source_test/eu_boundary_exports_united_kingdom_2013-07.response.json",
+          "yr": 27969995316
+        },
+        "imports": {
+          "mo": 4997574418,
+          "source_file": "raw/source_test/eu_boundary_imports_united_kingdom_2013-07.response.json",
+          "yr": 30797024483
+        }
+      },
+      "2020-01": {
+        "exports": {
+          "mo": 5830208879,
+          "source_file": "raw/source_test/eu_boundary_exports_united_kingdom_2020-01.response.json",
+          "yr": 5830208879
+        },
+        "imports": {
+          "mo": 4602430446,
+          "source_file": "raw/source_test/eu_boundary_imports_united_kingdom_2020-01.response.json",
+          "yr": 4602430446
+        }
+      },
+      "2020-02": {
+        "exports": {
+          "mo": 6387116675,
+          "source_file": "raw/source_test/eu_boundary_exports_united_kingdom_2020-02.response.json",
+          "yr": 12217325554
+        },
+        "imports": {
+          "mo": 4522604380,
+          "source_file": "raw/source_test/eu_boundary_imports_united_kingdom_2020-02.response.json",
+          "yr": 9125034826
+        }
+      }
+    }
+  }
+}

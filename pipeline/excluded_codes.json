@@ -1,0 +1,114 @@
+{
+  "country_groupings": [
+    {
+      "code": "0001",
+      "name": "OPEC",
+      "reason": "documented in API guide Appendix E (guide.txt lines 1129-1148) but not observed live in the 2023-12 all-partner response for either flow; excluded per SPEC PARTNERS explicit instruction (0001 OPEC)."
+    },
+    {
+      "code": "0003",
+      "name": "EUROPEAN UNION",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in raw/source_test/all_partners_imports.response.json and all_partners_exports.response.json (item 3); this is the Census EU aggregate code, used only for the eu_comparability check (validation check 7b), never as a partner in the dataset. The pipeline's own EU aggregate is computed independently under partner code 'EU'."
+    },
+    {
+      "code": "0014",
+      "name": "PACIFIC RIM COUNTRIES",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0017",
+      "name": "CAFTA-DR",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0020",
+      "name": "USMCA (NAFTA)",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0021",
+      "name": "TWENTY LATIN AMERICAN REPUBLICS",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0022",
+      "name": "OECD",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0023",
+      "name": "NATO",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0024",
+      "name": "LAFTA",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0025",
+      "name": "EURO AREA",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0026",
+      "name": "APEC",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0027",
+      "name": "ASEAN",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "0028",
+      "name": "CACM",
+      "reason": "country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "1XXX",
+      "name": "NORTH AMERICA",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "2XXX",
+      "name": "CENTRAL AMERICA",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "3XXX",
+      "name": "SOUTH AMERICA",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "4XXX",
+      "name": "EUROPE",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "5XXX",
+      "name": "ASIA",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "6XXX",
+      "name": "AUSTRALIA AND OCEANIA",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    },
+    {
+      "code": "7XXX",
+      "name": "AFRICA",
+      "reason": "regional country-grouping (SUMMARY_LVL=CGP), observed in item 3."
+    }
+  ],
+  "notes": [
+    "This list is fixed evidence from the 2023-12 source test (raw/source_test/all_partners_imports.response.json, all_partners_exports.response.json, stage3_analysis.json). Acquisition re-derives the excluded set per year by scanning every partner_totals response's SUMMARY_LVL and CTY_CODE fields; any new CGP code or the reappearance of 0001 observed live in any acquired year must be added here and reported, never silently dropped nor silently new-partnered.",
+    "SUMMARY_LVL is never relied on alone (the world row's SUMMARY_LVL is DET, not CGP, per source test item 3); exclusion is by these explicit code lists."
+  ],
+  "version": "1.0.0",
+  "world_row": {
+    "code": "-",
+    "name": "TOTAL FOR ALL COUNTRIES",
+    "reason": "world total row, SUMMARY_LVL=DET but CTY_CODE=-; excluded per SPEC PARTNERS and CONTRACT Identifiers (never a partner)."
+  }
+}

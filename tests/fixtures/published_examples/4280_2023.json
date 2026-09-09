@@ -1,0 +1,21 @@
+{
+  "code": "4280",
+  "name": "Germany",
+  "year": 2023,
+  "url": "https://www.census.gov/foreign-trade/balance/c4280.html",
+  "table": "Trade in Goods with Germany -- 2023 : U.S. trade in goods with Germany, TOTAL 2023 row",
+  "revision_date": "Not stated inline on this page for the 2023 data row itself. The page's shared site footer HTML comment reads exactly: 'Last Revised: 10/04/2022' (site-wide boilerplate, not data-specific). Not verified as the data revision date.",
+  "rounding_unit": 100000,
+  "accessed": "2026-09-08",
+  "basis": "Same as recorded for 5700_2023.json: not stated verbatim on this page; page NOTE states figures are nominal USD millions, not seasonally adjusted, and 'Details may not equal totals due to rounding.' Basis match with the pipeline's general-imports/FAS-exports definition is inferred from Census's linked general definitions pages, not proven inline. Not verified.",
+  "comparable": true,
+  "comparable_reason": "No evidence of a differing basis found. Chosen as the fifth partner-year because Germany is the United States' largest trading partner in the EU and a well-known, high-volume, low-noise page (unlike the near-zero small partners) where a chapter-sum-versus-partner-total or partner-total-versus-published mismatch beyond the 100000 rounding unit would be a meaningful signal, and the displayed TOTAL 2023 balance (-82,303.1) is internally consistent with exports minus imports (76,865.9 - 159,169.0 = -82,303.1), unlike the very small partners where rounding makes that check meaningless.",
+  "values": {
+    "exports_usd": 76865900000,
+    "exports_displayed": "76,865.9",
+    "imports_usd": 159169000000,
+    "imports_displayed": "159,169.0",
+    "balance_displayed": "-82,303.1"
+  },
+  "revision_note": "None found beyond the general rounding disclaimer."
+}

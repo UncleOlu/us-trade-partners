@@ -1,0 +1,20 @@
+{
+  "check": {
+    "df1_plus_df2": 147626505741,
+    "df_total_dash": 147626505741,
+    "passes": true
+  },
+  "citation": "Computed from raw/source_test/contrast_exports_DF_1.response.json, contrast_exports_DF_2.response.json, and partner_total_exports_large.response.json (China CTY_CODE 5700, exports, 2023-12)",
+  "df_1": {
+    "source_file": "raw/source_test/contrast_exports_DF_1.response.json",
+    "value": 125650187271
+  },
+  "df_2": {
+    "source_file": "raw/source_test/contrast_exports_DF_2.response.json",
+    "value": 21976318470
+  },
+  "df_total_dash": {
+    "source_file": "raw/source_test/partner_total_exports_large.response.json",
+    "value": 147626505741
+  }
+}

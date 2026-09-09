@@ -1,0 +1,8 @@
+{
+  "END_YEAR": null,
+  "START_YEAR": 2013,
+  "notes": [
+    "END_YEAR is null in this file: SPEC AVAILABILITY defines end year as the latest year where December data exists for both flows at both levels, and instructs deriving it from THIS run's availability probes, not from a fixed config value or the source test's 2025 finding. pipeline/acquire.py computes it fresh from raw/<snapshot_id>/availability/probes.csv on every acquisition and records it in meta.json configured_coverage.end_year; it is never read from this file.",
+    "START_YEAR is a config value per SPEC AVAILABILITY ('START_YEAR is a config value, default 2013')."
+  ]
+}

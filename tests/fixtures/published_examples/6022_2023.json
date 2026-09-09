@@ -1,0 +1,21 @@
+{
+  "code": "6022",
+  "name": "Norfolk Island",
+  "year": 2023,
+  "url": "https://www.census.gov/foreign-trade/balance/c6022.html",
+  "table": "Trade in Goods with Norfolk Island -- 2023 : U.S. trade in goods with Norfolk Island, TOTAL 2023 row",
+  "revision_date": "Not stated inline on this page for the 2023 data row itself. The page's shared site footer HTML comment reads exactly: 'Last Revised: 10/04/2022' (site-wide boilerplate, not data-specific). Not verified as the data revision date.",
+  "rounding_unit": 100000,
+  "accessed": "2026-09-08",
+  "basis": "Same as recorded for 5700_2023.json: not stated verbatim on this page; page NOTE states figures are nominal USD millions, not seasonally adjusted, and 'Details may not equal totals due to rounding.' Basis match with the pipeline's general-imports/FAS-exports definition is inferred from Census's linked general definitions pages, not proven inline. Not verified.",
+  "comparable": true,
+  "comparable_reason": "No evidence of a differing basis found. Values here round to 0.0 at the page's one-decimal-million display precision, meaning the true underlying values are each below 50000 USD in absolute value (fixture_d confirms 6022 is imports-only in the observed sample: 'codes_only_in_imports': ['6022']). A pipeline value that is either absent, confirmed_zero, or a small observed integer under 50000 in absolute value is all consistent with this published display; comparable stays true but the practical check-6 tolerance is wide relative to the value itself.",
+  "values": {
+    "exports_usd": 0,
+    "exports_displayed": "0.0",
+    "imports_usd": 0,
+    "imports_displayed": "0.0",
+    "balance_displayed": "-0.0"
+  },
+  "revision_note": "None found beyond the general rounding disclaimer. Only one month of 2023 trade is shown on the page (March 2023, all figures 0.0/0.0/-0.0), consistent with 'Table reflects only those months for which there was trade.'"
+}

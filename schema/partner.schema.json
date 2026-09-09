@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://us-trade-partners.local/schema/partner.schema.json",
+  "title": "data/<snapshot_id>/partner/<code>.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "partner",
+    "years",
+    "sections"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/SchemaVersion"
+    },
+    "snapshot_id": {
+      "$ref": "common.schema.json#/$defs/SnapshotId"
+    },
+    "partner": {
+      "$ref": "common.schema.json#/$defs/Partner"
+    },
+    "years": {
+      "type": "array",
+      "description": "one entry per configured year, sorted by year",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "year",
+          "imports",
+          "exports",
+          "balance",
+          "total_trade_value",
+          "note"
+        ],
+        "properties": {
+          "year": {
+            "type": "integer",
+            "minimum": 2010,
+            "maximum": 2100
+          },
+          "imports": {
+            "$ref": "common.schema.json#/$defs/FlowValue"
+          },
+          "exports": {
+            "$ref": "common.schema.json#/$defs/FlowValue"
+          },
+          "balance": {
+            "$ref": "common.schema.json#/$defs/DerivedValue"
+          },
+          "total_trade_value": {
+            "$ref": "common.schema.json#/$defs/DerivedValue"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "EU membership-change note on 2013 and 2020 for EU; null otherwise"
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "description": "one entry per configured year, sorted by year",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "year",
+          "groups"
+        ],
+        "properties": {
+          "year": {
+            "type": "integer",
+            "minimum": 2010,
+            "maximum": 2100
+          },
+          "groups": {
+            "type": "array",
+            "description": "every group in hs_sections, sorted by group order",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "section_id",
+                "imports",
+                "exports",
+                "total_trade_value",
+                "chapters"
+              ],
+              "properties": {
+                "section_id": {
+                  "type": "string",
+                  "enum": [
+                    "I",
+                    "II",
+                    "III",
+                    "IV",
+                    "V",
+                    "VI",
+                    "VII",
+                    "VIII",
+                    "IX",
+                    "X",
+                    "XI",
+                    "XII",
+                    "XIII",
+                    "XIV",
+                    "XV",
+                    "XVI",
+                    "XVII",
+                    "XVIII",
+                    "XIX",
+                    "XX",
+                    "XXI",
+                    "SPECIAL"
+                  ]
+                },
+                "imports": {
+                  "$ref": "common.schema.json#/$defs/FlowValue"
+                },
+                "exports": {
+                  "$ref": "common.schema.json#/$defs/FlowValue"
+                },
+                "total_trade_value": {
+                  "$ref": "common.schema.json#/$defs/DerivedValue"
+                },
+                "chapters": {
+                  "type": "array",
+                  "description": "every chapter in the valid chapter set for that flow and year, sorted by chapter",
+                  "items": {
+                    "$ref": "common.schema.json#/$defs/Chapter2"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

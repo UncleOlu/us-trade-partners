@@ -1,0 +1,266 @@
+{
+  "members": [
+    {
+      "census_cty_code": "4010",
+      "iso2": "SE",
+      "member_from": "1995-01-01",
+      "member_to": null,
+      "name": "Sweden",
+      "source_quote": "EU Member State: since 1 January 1995"
+    },
+    {
+      "census_cty_code": "4050",
+      "iso2": "FI",
+      "member_from": "1995-01-01",
+      "member_to": null,
+      "name": "Finland",
+      "source_quote": "EU Member State: since 1 January 1995"
+    },
+    {
+      "census_cty_code": "4099",
+      "iso2": "DK",
+      "member_from": "1973-01-01",
+      "member_to": null,
+      "name": "Denmark",
+      "source_quote": "EU Member State: since 1 January 1973"
+    },
+    {
+      "census_cty_code": "4120",
+      "iso2": "GB",
+      "member_from": "1973-01-01",
+      "member_to": "2020-01-31",
+      "name": "United Kingdom",
+      "source_quote": "31 January 2020 - United Kingdom leaves the EU"
+    },
+    {
+      "census_cty_code": "4190",
+      "iso2": "IE",
+      "member_from": "1973-01-01",
+      "member_to": null,
+      "name": "Ireland",
+      "source_quote": "EU Member State: since 1 January 1973"
+    },
+    {
+      "census_cty_code": "4210",
+      "iso2": "NL",
+      "member_from": "1958-01-01",
+      "member_to": null,
+      "name": "Netherlands",
+      "source_quote": "EU Member State: since 1 January 1958"
+    },
+    {
+      "census_cty_code": "4231",
+      "iso2": "BE",
+      "member_from": "1958-01-01",
+      "member_to": null,
+      "name": "Belgium",
+      "source_quote": "EU Member State: since 1 January 1958"
+    },
+    {
+      "census_cty_code": "4239",
+      "iso2": "LU",
+      "member_from": "1958-01-01",
+      "member_to": null,
+      "name": "Luxembourg",
+      "source_quote": "EU Member State: since 1 January 1958"
+    },
+    {
+      "census_cty_code": "4279",
+      "iso2": "FR",
+      "member_from": "1958-01-01",
+      "member_to": null,
+      "name": "France",
+      "source_quote": "EU Member State: since 1 January 1958"
+    },
+    {
+      "census_cty_code": "4280",
+      "iso2": "DE",
+      "member_from": "1958-01-01",
+      "member_to": null,
+      "name": "Germany",
+      "source_quote": "EU Member State: since 1 January 1958"
+    },
+    {
+      "census_cty_code": "4330",
+      "iso2": "AT",
+      "member_from": "1995-01-01",
+      "member_to": null,
+      "name": "Austria",
+      "source_quote": "EU Member State: since 1 January 1995"
+    },
+    {
+      "census_cty_code": "4351",
+      "iso2": "CZ",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Czechia",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4359",
+      "iso2": "SK",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Slovakia",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4370",
+      "iso2": "HU",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Hungary",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4470",
+      "iso2": "EE",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Estonia",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4490",
+      "iso2": "LV",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Latvia",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4510",
+      "iso2": "LT",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Lithuania",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4550",
+      "iso2": "PL",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Poland",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4700",
+      "iso2": "ES",
+      "member_from": "1986-01-01",
+      "member_to": null,
+      "name": "Spain",
+      "source_quote": "EU Member State: since 1 January 1986"
+    },
+    {
+      "census_cty_code": "4710",
+      "iso2": "PT",
+      "member_from": "1986-01-01",
+      "member_to": null,
+      "name": "Portugal",
+      "source_quote": "EU Member State: since 1 January 1986"
+    },
+    {
+      "census_cty_code": "4730",
+      "iso2": "MT",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Malta",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4759",
+      "iso2": "IT",
+      "member_from": "1958-01-01",
+      "member_to": null,
+      "name": "Italy",
+      "source_quote": "EU Member State: since 1 January 1958"
+    },
+    {
+      "census_cty_code": "4791",
+      "iso2": "HR",
+      "member_from": "2013-07-01",
+      "member_to": null,
+      "name": "Croatia",
+      "source_quote": "EU Member State: since 1 July 2013"
+    },
+    {
+      "census_cty_code": "4792",
+      "iso2": "SI",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Slovenia",
+      "source_quote": "EU Member State: since 1 May 2004"
+    },
+    {
+      "census_cty_code": "4840",
+      "iso2": "GR",
+      "member_from": "1981-01-01",
+      "member_to": null,
+      "name": "Greece",
+      "source_quote": "EU Member State: since 1 January 1981"
+    },
+    {
+      "census_cty_code": "4850",
+      "iso2": "RO",
+      "member_from": "2007-01-01",
+      "member_to": null,
+      "name": "Romania",
+      "source_quote": "EU Member State: since 1 January 2007"
+    },
+    {
+      "census_cty_code": "4870",
+      "iso2": "BG",
+      "member_from": "2007-01-01",
+      "member_to": null,
+      "name": "Bulgaria",
+      "source_quote": "EU Member State: since 1 January 2007"
+    },
+    {
+      "census_cty_code": "4910",
+      "iso2": "CY",
+      "member_from": "2004-05-01",
+      "member_to": null,
+      "name": "Cyprus",
+      "source_quote": "EU Member State: since 1 May 2004"
+    }
+  ],
+  "source": {
+    "accessed": "2026-09-09",
+    "supplementary_urls": [
+      "https://european-union.europa.eu/principles-countries-history/eu-enlargement_en",
+      "https://european-union.europa.eu/principles-countries-history/history-eu/2020-today_en"
+    ],
+    "title": "European Union, country profiles and EU history (official EU institutional website)",
+    "url": "https://european-union.europa.eu/principles-countries-history/eu-countries_en"
+  },
+  "transition_rules": {
+    "description": "Full member-years use the December _YR row from partner_totals. A member whose first or last calendar year of membership is partial uses _MO for member months only, per SPEC EU RULES.",
+    "transition_members": [
+      {
+        "census_cty_code": "4791",
+        "member_months": [
+          "2013-07",
+          "2013-08",
+          "2013-09",
+          "2013-10",
+          "2013-11",
+          "2013-12"
+        ],
+        "name": "Croatia",
+        "reason": "Croatia's member_from is 2013-07-01, so calendar year 2013 is a transition year; per SPEC EU RULES 'Croatia 2013 = July through December.'",
+        "year": 2013
+      },
+      {
+        "census_cty_code": "4120",
+        "member_months": [
+          "2020-01"
+        ],
+        "name": "United Kingdom",
+        "reason": "United Kingdom's member_to is 2020-01-31, so calendar year 2020 is a transition year; per SPEC EU RULES 'UK 2020 = January only.'",
+        "year": 2020
+      }
+    ]
+  },
+  "version": "1.0.0"
+}

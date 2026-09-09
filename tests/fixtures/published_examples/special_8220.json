@@ -1,0 +1,28 @@
+{
+  "code": "8220",
+  "name": "Unidentified Countries",
+  "name_note": "Census's own page title for this code is 'Unidentified Countries' (recorded here as published evidence). The owner-approved data/<snapshot_id>/partners.json display name for this roster entry is the distinct string 'Unidentified partner (Census code 8220)', per the orchestrator's owner decision; that name is not Census's page title and is asserted separately by tests/test_validation_checks.py's partners.json tests, not by this published-examples fixture.",
+  "year": 2013,
+  "url_tried": "https://www.census.gov/foreign-trade/balance/c8220.html",
+  "url": "https://www.census.gov/foreign-trade/balance/c8220.html",
+  "http_status": 200,
+  "first_300_bytes_of_body": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\r\n    <head>\r\n        <title>International Trade</title>\t\r\n        <meta http-equiv=\"Content-Type\" content=\"text/html; c",
+  "response_saved_at": "tests/fixtures/published_examples/sources/8220_attempt.txt",
+  "outcome": "captured_values",
+  "outcome_note": "A real Census 'Trade in Goods with Unidentified Countries' page exists and resolved HTTP 200 (verified by curl in the same tool call that saved the response). Available years on the page: 2016, 2014, 2013, 2012, 2011, ... 1992 (2015 and every year after 2016 are absent from the page's own year list; the series appears to have stopped being published after 2016). Since a real page with 2013-2016 data exists, this fixture records captured values in the same shape as the other four published-examples fixtures, not NOT_APPLICABLE. 2013 was chosen because it is SPEC's default START_YEAR and the earliest year most likely to be in configured_coverage for this pipeline.",
+  "table": "Trade in Goods with Unidentified Countries -- 2013 : U.S. trade in goods with Unidentified Countries, TOTAL 2013 row",
+  "revision_date": "Not stated inline on this page for the 2013 data row itself. The page's shared site footer HTML comment reads exactly: 'Last Revised: 10/04/2022' (site-wide boilerplate, identical to the other five captured pages, not data-specific). Not verified as the data revision date.",
+  "rounding_unit": 100000,
+  "accessed": "2026-09-09",
+  "basis": "Same as recorded for 5700_2023.json: not stated verbatim on this page; page NOTE states figures are nominal USD millions, not seasonally adjusted, and 'Details may not equal totals due to rounding.' Basis match with the pipeline's general-imports/FAS-exports definition is inferred from Census's linked general definitions pages, not proven inline. Not verified.",
+  "comparable": true,
+  "comparable_reason": "No evidence of a differing basis found. This is the owner-approved kind special partner 8220 (Census code 8220, 'Unidentified partner'), in the reconciliation universe per the orchestrator's owner decision. The page uses the same Exports/Imports/Balance table format as every geographic partner page.",
+  "values": {
+    "exports_usd": 179900000,
+    "exports_displayed": "179.9",
+    "imports_usd": 0,
+    "imports_displayed": "0.0",
+    "balance_displayed": "179.9"
+  },
+  "revision_note": "None found beyond the general rounding disclaimer. Only July, October, November, December 2013 show trade in the monthly breakdown; imports are 0.0 in every shown month."
+}

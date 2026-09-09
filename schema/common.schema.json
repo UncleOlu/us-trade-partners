@@ -1,0 +1,430 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://us-trade-partners.local/schema/common.schema.json",
+  "title": "Common definitions",
+  "$defs": {
+    "FlowValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "value",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "observed",
+            "confirmed_zero",
+            "absent",
+            "not_applicable"
+          ]
+        },
+        "value": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Integer USD or null"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "status": {
+              "const": "observed"
+            },
+            "value": {
+              "type": "integer"
+            },
+            "reason": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "confirmed_zero"
+            },
+            "value": {
+              "const": 0
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "absent"
+            },
+            "value": {
+              "type": "null"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "not_applicable"
+            },
+            "value": {
+              "type": "null"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ],
+      "description": "observed requires an integer and null reason. confirmed_zero requires 0 and a reason citing the source evidence. absent and not_applicable require null and a reason. fetch_failed never appears in published data."
+    },
+    "DerivedValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "value",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "observed",
+            "absent"
+          ]
+        },
+        "value": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "status": {
+              "const": "observed"
+            },
+            "value": {
+              "type": "integer"
+            },
+            "reason": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "absent"
+            },
+            "value": {
+              "type": "null"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ],
+      "description": "balance and total_trade_value. observed only when both inputs are observed or confirmed_zero; otherwise absent with a reason naming the missing input."
+    },
+    "Year": {
+      "type": "integer",
+      "minimum": 2010,
+      "maximum": 2100
+    },
+    "PartnerCode": {
+      "type": "string",
+      "pattern": "^([0-9]{4}|EU)$",
+      "description": "Census CTY_CODE (4 digits) or EU for the computed aggregate. The world row - is never a partner."
+    },
+    "Chapter": {
+      "type": "string",
+      "pattern": "^[0-9]{2}$"
+    },
+    "SectionId": {
+      "type": "string",
+      "enum": [
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI",
+        "VII",
+        "VIII",
+        "IX",
+        "X",
+        "XI",
+        "XII",
+        "XIII",
+        "XIV",
+        "XV",
+        "XVI",
+        "XVII",
+        "XVIII",
+        "XIX",
+        "XX",
+        "XXI",
+        "SPECIAL"
+      ]
+    },
+    "SnapshotId": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{12}$",
+      "description": "UTC acquisition start compact timestamp, then the first 12 hex chars of the raw manifest sha256. Deterministic under rebuild."
+    },
+    "SchemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "Kind": {
+      "enum": [
+        "country",
+        "territory",
+        "special",
+        "aggregate"
+      ]
+    },
+    "Flows": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "imports",
+        "exports"
+      ],
+      "properties": {
+        "imports": {
+          "$ref": "common.schema.json#/$defs/FlowValue"
+        },
+        "exports": {
+          "$ref": "common.schema.json#/$defs/FlowValue"
+        }
+      }
+    },
+    "FlowsWithDerived": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "imports",
+        "exports",
+        "balance",
+        "total_trade_value"
+      ],
+      "properties": {
+        "imports": {
+          "$ref": "common.schema.json#/$defs/FlowValue"
+        },
+        "exports": {
+          "$ref": "common.schema.json#/$defs/FlowValue"
+        },
+        "balance": {
+          "$ref": "common.schema.json#/$defs/DerivedValue"
+        },
+        "total_trade_value": {
+          "$ref": "common.schema.json#/$defs/DerivedValue"
+        }
+      }
+    },
+    "Partner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name",
+        "kind",
+        "iso3",
+        "map_feature_id",
+        "include_in_world_reconciliation",
+        "valid_from",
+        "valid_to",
+        "resolution",
+        "resolution_note"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^([0-9]{4}|EU)$",
+          "description": "Census CTY_CODE (4 digits) or EU for the computed aggregate. Only kind aggregate may use a non-numeric id. The world row - is never a partner."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "$ref": "common.schema.json#/$defs/Kind"
+        },
+        "iso3": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]{3}$"
+        },
+        "map_feature_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "world-atlas numeric ISO 3166-1 id"
+        },
+        "include_in_world_reconciliation": {
+          "type": "boolean"
+        },
+        "valid_from": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "first year observed in any flow"
+        },
+        "valid_to": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "last year observed in any flow"
+        },
+        "resolution": {
+          "enum": [
+            "approved",
+            "excluded"
+          ],
+          "description": "unresolved never appears in published data"
+        },
+        "resolution_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "aggregate"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "include_in_world_reconciliation": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "excluded"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "include_in_world_reconciliation": {
+                "const": false
+              },
+              "resolution_note": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "pattern": "^[0-9]{4}$"
+              }
+            }
+          },
+          "then": {},
+          "else": {
+            "properties": {
+              "kind": {
+                "const": "aggregate"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Chapter2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter",
+        "description",
+        "imports",
+        "exports",
+        "total_trade_value"
+      ],
+      "properties": {
+        "chapter": {
+          "type": "string",
+          "pattern": "^[0-9]{2}$"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "imports": {
+          "$ref": "common.schema.json#/$defs/FlowValue"
+        },
+        "exports": {
+          "$ref": "common.schema.json#/$defs/FlowValue"
+        },
+        "total_trade_value": {
+          "$ref": "common.schema.json#/$defs/DerivedValue"
+        }
+      }
+    },
+    "Envelope": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "snapshot_id"
+      ],
+      "properties": {
+        "schema_version": {
+          "$ref": "common.schema.json#/$defs/SchemaVersion"
+        },
+        "snapshot_id": {
+          "$ref": "common.schema.json#/$defs/SnapshotId"
+        }
+      }
+    }
+  }
+}

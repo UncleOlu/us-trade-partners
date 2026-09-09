@@ -1,0 +1,22 @@
+{
+  "code": "4803",
+  "name": "Kosovo",
+  "year": 2023,
+  "url": "https://www.census.gov/foreign-trade/balance/c4803.html",
+  "table": "Trade in Goods with Kosovo -- 2023 : U.S. trade in goods with Kosovo, TOTAL 2023 row",
+  "revision_date": "Not stated inline on this page for the 2023 data row itself. The page's shared site footer HTML comment reads exactly: 'Last Revised: 10/04/2022' (site-wide boilerplate, not data-specific, identical to the other four captured pages). Not verified as the data revision date.",
+  "rounding_unit": 100000,
+  "accessed": "2026-09-09",
+  "basis": "Same as recorded for 5700_2023.json: not stated verbatim on this page; page NOTE states figures are nominal USD millions, not seasonally adjusted, and 'Details may not equal totals due to rounding.' Basis match with the pipeline's general-imports/FAS-exports definition is inferred from Census's linked general definitions pages, not proven inline. Not verified.",
+  "comparable": true,
+  "comparable_reason": "No evidence of a differing basis found. Kosovo is the kind special partner-year identifier for check 6, replacing the prior NOT_APPLICABLE row now that the full 2013-2025 archive (per the orchestrator) shows Kosovo, Census code 4803, present every year. Kosovo has no ISO 3166-1 alpha code (it is not universally recognized and is not assigned an official ISO 3166-1 code; some registries use the user-assigned code XK, which is not part of the ISO 3166-1 standard), consistent with schema Partner.iso3 being nullable and with kind special rather than kind country.",
+  "values": {
+    "exports_usd": 50000000,
+    "exports_displayed": "50.0",
+    "imports_usd": 102500000,
+    "imports_displayed": "102.5",
+    "balance_displayed": "-52.5"
+  },
+  "revision_note": "None found beyond the general rounding disclaimer.",
+  "independent_code_verification": "CTY_CODE 4803 for CTY_NAME KOSOVO confirmed independently in both raw/source_test/all_partners_imports.response.json and raw/source_test/all_partners_exports.response.json, matching the code the orchestrator named."
+}

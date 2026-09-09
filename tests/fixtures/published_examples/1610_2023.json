@@ -1,0 +1,21 @@
+{
+  "code": "1610",
+  "name": "St Pierre and Miquelon",
+  "year": 2023,
+  "url": "https://www.census.gov/foreign-trade/balance/c1610.html",
+  "table": "Trade in Goods with St Pierre and Miquelon -- 2023 : U.S. trade in goods with St Pierre and Miquelon, TOTAL 2023 row",
+  "revision_date": "Not stated inline on this page for the 2023 data row itself. The page's shared site footer HTML comment reads exactly: 'Last Revised: 10/04/2022' (site-wide boilerplate, not data-specific). Not verified as the data revision date.",
+  "rounding_unit": 100000,
+  "accessed": "2026-09-08",
+  "basis": "Same as recorded for 5700_2023.json: not stated verbatim on this page; page NOTE states figures are nominal USD millions, not seasonally adjusted, and 'Details may not equal totals due to rounding.' Basis match with the pipeline's general-imports/FAS-exports definition is inferred from Census's linked general definitions pages, not proven inline. Not verified.",
+  "comparable": true,
+  "comparable_reason": "No evidence of a differing basis found. Separately, at this partner's trade volume the displayed one-decimal-million rounding is coarse relative to the underlying dollar values (the displayed TOTAL 2023 balance of 0.1 does not equal exports 0.1 minus imports 0.1, which is a rounding artifact the page itself warns about: 'Details may not equal totals due to rounding'). This affects precision, not comparability of basis, so comparable stays true; the rounding_unit of 100000 is the tolerance the pipeline check should apply.",
+  "values": {
+    "exports_usd": 100000,
+    "exports_displayed": "0.1",
+    "imports_usd": 100000,
+    "imports_displayed": "0.1",
+    "balance_displayed": "0.1"
+  },
+  "revision_note": "None found beyond the general rounding disclaimer. Monthly rows for 2023 show trade only in January, February, March, April, August, September, November, December (per the page); May, June, July, October show no row, consistent with 'Table reflects only those months for which there was trade.'"
+}

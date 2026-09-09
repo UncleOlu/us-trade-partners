@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://us-trade-partners.local/schema/summary.schema.json",
+  "title": "data/<snapshot_id>/summary/<year>.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "year",
+    "world",
+    "partners"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/SchemaVersion"
+    },
+    "snapshot_id": {
+      "$ref": "common.schema.json#/$defs/SnapshotId"
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 2010,
+      "maximum": 2100
+    },
+    "world": {
+      "$ref": "common.schema.json#/$defs/FlowsWithDerived"
+    },
+    "partners": {
+      "type": "array",
+      "description": "approved partners only, sorted by code; includes EU with kind aggregate",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "name",
+          "kind",
+          "include_in_world_reconciliation",
+          "imports",
+          "exports",
+          "balance",
+          "total_trade_value"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^([0-9]{4}|EU)$",
+            "description": "Census CTY_CODE (4 digits) or EU for the computed aggregate. The world row - is never a partner."
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "common.schema.json#/$defs/Kind"
+          },
+          "include_in_world_reconciliation": {
+            "type": "boolean"
+          },
+          "imports": {
+            "$ref": "common.schema.json#/$defs/FlowValue"
+          },
+          "exports": {
+            "$ref": "common.schema.json#/$defs/FlowValue"
+          },
+          "balance": {
+            "$ref": "common.schema.json#/$defs/DerivedValue"
+          },
+          "total_trade_value": {
+            "$ref": "common.schema.json#/$defs/DerivedValue"
+          }
+        }
+      }
+    }
+  },
+  "description": "world holds the separately fetched world totals, not a sum of rows"
+}

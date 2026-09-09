@@ -1,0 +1,184 @@
+2026-09-09T09:14:29.095222+00:00 [acquire] init: tmp_dir=./raw/_acquiring_20260909T091429Z
+2026-09-09T09:27:55.482311+00:00 [acquire] probe done: verified 2010..2025, configured 2013..2025, 68 probes
+2026-09-09T09:35:20.426772+00:00 [acquire] fingerprint_before done
+2026-09-09T09:35:25.529534+00:00 [acquire] variables done
+2026-09-09T09:35:35.661162+00:00 [acquire] archive chunk starting: years [2013, 2014, 2015]
+2026-09-09T10:08:10.527643+00:00 [acquire] hs2 incomplete for exports 2013: missing 0 codes
+2026-09-09T10:08:10.528123+00:00 [acquire] archive year 2013 done (1/13)
+2026-09-09T10:29:41.527985+00:00 [acquire] hs2 incomplete for exports 2014: missing 0 codes
+2026-09-09T10:29:41.528842+00:00 [acquire] archive year 2014 done (2/13)
+2026-09-09T10:50:04.078827+00:00 [acquire] hs2 incomplete for exports 2015: missing 0 codes
+2026-09-09T10:50:04.079448+00:00 [acquire] archive year 2015 done (3/13)
+2026-09-09T10:50:04.079503+00:00 [acquire] archive chunk done. Remaining years: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+2026-09-09T10:50:14.730763+00:00 [acquire] archive chunk starting: years [2016, 2017, 2018, 2019, 2020]
+2026-09-09T10:52:24.953523+00:00 [acquire] hs2 imports 2016 done: 4 requests, strategy=batched
+2026-09-09T11:00:51.859175+00:00 [acquire] hs2 batch exports 2016 part1 chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=1; falling back to per-chapter for this batch
+2026-09-09T11:10:38.000731+00:00 [acquire] hs2 batch exports 2016 part27 chapters=['26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=2; falling back to per-chapter for this batch
+Orchestrator-directed fixes applied to pipeline/acquire.py, effective at the
+next chunk boundary (this chunk, years 2016-2020, is already running with
+the previous flow-year-scoped-revert code in memory and will finish under
+it; do not touch 2013-2015 raw files, already valid evidence):
+1. Three-level cascade per flow-year: 25-chapter batches (180s) first;
+   on the FIRST failure, escalate to 10-chapter batches (180s) for the
+   rest of that flow-year (not two failures at 25, since exports has
+   shown consistent, not intermittent, failure at size 25); at size 10,
+   a single failure gets immediate per-chapter fill without abandoning
+   size 10, and two CONSECUTIVE size-10 failures abandon size 10 for the
+   remainder, going straight to per-chapter (60s). Every flow-year starts
+   fresh at level 1.
+2. hs2_completeness now reports complete based solely on the partner-code
+   set matching partner_totals (CONTRACT's own completeness proof), not
+   on every individual request returning 200 (a legitimate 204 for a
+   chapter with no data, e.g. chapter 99 on exports, is not an
+   incompleteness). Log lines changed from "hs2 incomplete ... missing 0
+   codes" (misleading; the removed all_batches_ok check was counting
+   normal 204 responses in the per-chapter fallback as failures) to
+   "hs2 complete for <flow> <year>: strategy=<...>, rows=<...>,
+   partner_codes=<...>" when the code sets match, "hs2 INCOMPLETE ..."
+   only when they genuinely do not.
+2026-09-09T11:13:26.789136+00:00 [acquire] two consecutive 25-chapter batches timed out at 180s for exports 2016; reverting to per-chapter for the REST OF THIS FLOW-YEAR ONLY (batching resumes fresh for the next flow-year)
+2026-09-09T11:19:26.883882+00:00 [acquire] hs2 chapter exports 2016 99 failed (status=204 error=None)
+2026-09-09T11:19:26.884364+00:00 [acquire] hs2 exports 2016 done: 100 requests, strategy=per-chapter (reverted)
+2026-09-09T11:19:26.904774+00:00 [acquire] hs2 incomplete for exports 2016: missing 0 codes
+2026-09-09T11:19:26.905259+00:00 [acquire] archive year 2016 done (4/13)
+2026-09-09T11:20:39.416854+00:00 [acquire] hs2 imports 2017 done: 4 requests, strategy=batched
+2026-09-09T11:29:27.338222+00:00 [acquire] hs2 batch exports 2017 part1 chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=1; falling back to per-chapter for this batch
+2026-09-09T11:42:48.430594+00:00 [acquire] hs2 batch exports 2017 part27 chapters=['26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=2; falling back to per-chapter for this batch
+2026-09-09T11:46:44.017686+00:00 [acquire] two consecutive 25-chapter batches timed out at 180s for exports 2017; reverting to per-chapter for the REST OF THIS FLOW-YEAR ONLY (batching resumes fresh for the next flow-year)
+2026-09-09T11:57:11.423053+00:00 [acquire] hs2 chapter exports 2017 99 failed (status=204 error=None)
+2026-09-09T11:57:11.423187+00:00 [acquire] hs2 exports 2017 done: 100 requests, strategy=per-chapter (reverted)
+2026-09-09T11:57:11.443591+00:00 [acquire] hs2 incomplete for exports 2017: missing 0 codes
+2026-09-09T11:57:11.444030+00:00 [acquire] archive year 2017 done (5/13)
+2026-09-09T11:59:08.024442+00:00 [acquire] hs2 imports 2018 done: 4 requests, strategy=batched
+2026-09-09T12:07:55.112175+00:00 [acquire] hs2 batch exports 2018 part1 chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=1; falling back to per-chapter for this batch
+Second orchestrator-directed fix, effective at the next chunk boundary
+(years 2021-2025; the current chunk, 2016-2020, keeps running under the
+25/10/per-chapter ladder code already in memory, sequential per-chapter,
+no concurrency): once level 2 (10-chapter batches) has failed at least
+once for a flow-year, subsequent per-chapter (level 3) requests for that
+SAME flow-year run with concurrency 2 (two in flight, each its own
+independently 0.5s-paced CensusClient instance writing to the same
+raw/<id>/hs2/ directory, same 180s timeout, same bounded retries, never
+more than two). Any HTTP 429 or 5xx observed under concurrency is logged
+as a concurrent failure; after two such failures in a flow-year,
+concurrency drops back to 1 (sequential, 60s timeout) for the rest of
+that flow-year. File names and part numbering are unchanged (each chapter
+still gets its own sequential part number, assigned before dispatch so
+there is no race). hs2_completeness and file evidence for already-saved
+years are untouched.
+2026-09-09T12:19:04.498068+00:00 [acquire] hs2 batch exports 2018 part27 chapters=['26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=2; falling back to per-chapter for this batch
+2026-09-09T12:23:16.408163+00:00 [acquire] two consecutive 25-chapter batches timed out at 180s for exports 2018; reverting to per-chapter for the REST OF THIS FLOW-YEAR ONLY (batching resumes fresh for the next flow-year)
+2026-09-09T12:33:07.081397+00:00 [acquire] hs2 chapter exports 2018 99 failed (status=204 error=None)
+2026-09-09T12:33:07.081835+00:00 [acquire] hs2 exports 2018 done: 100 requests, strategy=per-chapter (reverted)
+2026-09-09T12:33:07.103441+00:00 [acquire] hs2 incomplete for exports 2018: missing 0 codes
+2026-09-09T12:33:07.103999+00:00 [acquire] archive year 2018 done (6/13)
+2026-09-09T12:36:33.381114+00:00 [acquire] hs2 imports 2019 done: 4 requests, strategy=batched
+2026-09-09T12:43:06.854952+00:00 [acquire] hs2 batch exports 2019 part1 chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=1; falling back to per-chapter for this batch
+2026-09-09T12:53:50.137285+00:00 [acquire] hs2 batch exports 2019 part27 chapters=['26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=2; falling back to per-chapter for this batch
+2026-09-09T12:58:20.495639+00:00 [acquire] two consecutive 25-chapter batches timed out at 180s for exports 2019; reverting to per-chapter for the REST OF THIS FLOW-YEAR ONLY (batching resumes fresh for the next flow-year)
+2026-09-09T13:05:52.048018+00:00 [acquire] hs2 chapter exports 2019 99 failed (status=204 error=None)
+2026-09-09T13:05:52.048213+00:00 [acquire] hs2 exports 2019 done: 100 requests, strategy=per-chapter (reverted)
+2026-09-09T13:05:52.070336+00:00 [acquire] hs2 incomplete for exports 2019: missing 0 codes
+2026-09-09T13:05:52.071097+00:00 [acquire] archive year 2019 done (7/13)
+2026-09-09T13:08:06.760493+00:00 [acquire] hs2 imports 2020 done: 4 requests, strategy=batched
+2026-09-09T13:16:44.602063+00:00 [acquire] hs2 batch exports 2020 part1 chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=1; falling back to per-chapter for this batch
+2026-09-09T13:28:26.669794+00:00 [acquire] hs2 batch exports 2020 part27 chapters=['26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'] FAILED at 180s (status=500 error=server error status=500); consecutive batch timeouts this flow-year=2; falling back to per-chapter for this batch
+2026-09-09T13:31:47.069385+00:00 [acquire] two consecutive 25-chapter batches timed out at 180s for exports 2020; reverting to per-chapter for the REST OF THIS FLOW-YEAR ONLY (batching resumes fresh for the next flow-year)
+2026-09-09T13:41:05.564636+00:00 [acquire] hs2 chapter exports 2020 99 failed (status=204 error=None)
+2026-09-09T13:41:05.565473+00:00 [acquire] hs2 exports 2020 done: 100 requests, strategy=per-chapter (reverted)
+2026-09-09T13:41:05.587801+00:00 [acquire] hs2 incomplete for exports 2020: missing 0 codes
+2026-09-09T13:41:05.588630+00:00 [acquire] archive year 2020 done (8/13)
+2026-09-09T13:41:05.588702+00:00 [acquire] archive chunk done. Remaining years: [2021, 2022, 2023, 2024, 2025]
+2026-09-09T13:41:11.198589+00:00 [acquire] archive chunk starting: years [2021, 2022, 2023, 2024, 2025]
+2026-09-09T13:42:54.981307+00:00 [acquire] hs2 imports 2021 done: 4 requests, strategy=batched-25
+2026-09-09T13:42:54.994803+00:00 [acquire] hs2 complete for imports 2021: strategy=batched-25, rows=13089, partner_codes=232
+2026-09-09T13:51:31.349179+00:00 [acquire] hs2 batch exports 2021 part1 (25-chapter) chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'] FAILED at 180s (status=500 error=server error status=500); escalating to 10-chapter batches for the rest of exports 2021
+2026-09-09T13:59:23.337926+00:00 [acquire] hs2 batch exports 2021 part2 (10-chapter) chapters=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'] FAILED at 180s (status=500 error=server error status=500); consecutive 10-chapter failures=1; filling this batch per-chapter
+2026-09-09T13:59:23.338281+00:00 [acquire] hs2 exports 2021: running 10 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:08:05.964192+00:00 [acquire] hs2 batch exports 2021 part13 (10-chapter) chapters=['11', '12', '13', '14', '15', '16', '17', '18', '19', '20'] FAILED at 180s (status=500 error=server error status=500); consecutive 10-chapter failures=2; filling this batch per-chapter
+2026-09-09T14:08:05.964403+00:00 [acquire] hs2 exports 2021: running 10 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:08:44.097762+00:00 [acquire] two consecutive 10-chapter batches timed out at 180s for exports 2021; abandoning 10-chapter batching for the rest of this flow-year (78 chapters remaining, per-chapter)
+2026-09-09T14:08:44.097972+00:00 [acquire] hs2 exports 2021: running 78 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:11:49.247204+00:00 [acquire] hs2 exports 2021 done: 101 requests, strategy=per-chapter+concurrency2, concurrent_failures=0
+2026-09-09T14:11:49.267046+00:00 [acquire] hs2 complete for exports 2021: strategy=per-chapter+concurrency2, rows=16991, partner_codes=232
+2026-09-09T14:11:49.267929+00:00 [acquire] archive year 2021 done (9/13)
+Third orchestrator-directed fix: for exports 2022-2025, skip both batch
+levels entirely and start directly with per-chapter at concurrency 2
+(strategy=per-chapter-direct), based on cumulative evidence that exports
+batches (both size 25 and size 10) failed for every year 2013-2021 in this
+acquisition while imports batches succeeded every time. Applied by killing
+the in-flight archive process (pid 43840) right after year 2021 finished
+and saved (years_done through 2021 confirmed on disk before the kill; no
+partial-year files were left for any year beyond 2021, so nothing already
+saved was touched) and restarting the archive stage fresh for years
+2022-2025 with the updated code.
+2026-09-09T14:12:13.070151+00:00 [acquire] archive chunk starting: years [2022, 2023, 2024, 2025]
+2026-09-09T14:12:47.485595+00:00 [acquire] hs2 imports 2022 done: 4 requests, strategy=batched-25
+2026-09-09T14:12:47.499179+00:00 [acquire] hs2 complete for imports 2022: strategy=batched-25, rows=13315, partner_codes=233
+2026-09-09T14:13:08.991972+00:00 [acquire] hs2 exports 2022: skipping batch levels (evidence: exports batches failed every year 2013-2021 in this acquisition); starting directly with per-chapter at concurrency 2
+2026-09-09T14:13:08.992113+00:00 [acquire] hs2 exports 2022: running 98 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:15:13.127306+00:00 [acquire] hs2 exports 2022 done: 98 requests, strategy=per-chapter-direct+concurrency2, concurrent_failures=0
+2026-09-09T14:15:13.146591+00:00 [acquire] hs2 complete for exports 2022: strategy=per-chapter-direct+concurrency2, rows=17098, partner_codes=232
+2026-09-09T14:15:13.147362+00:00 [acquire] archive year 2022 done (10/13)
+2026-09-09T14:16:01.283315+00:00 [acquire] hs2 imports 2023 done: 4 requests, strategy=batched-25
+2026-09-09T14:16:01.297015+00:00 [acquire] hs2 complete for imports 2023: strategy=batched-25, rows=13153, partner_codes=231
+2026-09-09T14:16:18.417373+00:00 [acquire] hs2 exports 2023: skipping batch levels (evidence: exports batches failed every year 2013-2021 in this acquisition); starting directly with per-chapter at concurrency 2
+2026-09-09T14:16:18.417489+00:00 [acquire] hs2 exports 2023: running 98 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:18:01.263903+00:00 [acquire] hs2 exports 2023 done: 98 requests, strategy=per-chapter-direct+concurrency2, concurrent_failures=0
+2026-09-09T14:18:01.283800+00:00 [acquire] hs2 complete for exports 2023: strategy=per-chapter-direct+concurrency2, rows=17079, partner_codes=231
+2026-09-09T14:18:01.284486+00:00 [acquire] archive year 2023 done (11/13)
+2026-09-09T14:18:41.489977+00:00 [acquire] hs2 imports 2024 done: 4 requests, strategy=batched-25
+2026-09-09T14:18:41.504034+00:00 [acquire] hs2 complete for imports 2024: strategy=batched-25, rows=13172, partner_codes=232
+2026-09-09T14:19:09.524014+00:00 [acquire] hs2 exports 2024: skipping batch levels (evidence: exports batches failed every year 2013-2021 in this acquisition); starting directly with per-chapter at concurrency 2
+2026-09-09T14:19:09.524271+00:00 [acquire] hs2 exports 2024: running 98 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:20:47.758072+00:00 [acquire] hs2 exports 2024 done: 98 requests, strategy=per-chapter-direct+concurrency2, concurrent_failures=0
+2026-09-09T14:20:47.779254+00:00 [acquire] hs2 complete for exports 2024: strategy=per-chapter-direct+concurrency2, rows=16998, partner_codes=231
+2026-09-09T14:20:47.779994+00:00 [acquire] archive year 2024 done (12/13)
+2026-09-09T14:21:34.586087+00:00 [acquire] hs2 imports 2025 done: 4 requests, strategy=batched-25
+2026-09-09T14:21:34.599445+00:00 [acquire] hs2 complete for imports 2025: strategy=batched-25, rows=12920, partner_codes=231
+2026-09-09T14:21:42.305393+00:00 [acquire] hs2 exports 2025: skipping batch levels (evidence: exports batches failed every year 2013-2021 in this acquisition); starting directly with per-chapter at concurrency 2
+2026-09-09T14:21:42.305581+00:00 [acquire] hs2 exports 2025: running 98 per-chapter requests with concurrency=2 (level 2 already failed this flow-year)
+2026-09-09T14:23:47.689993+00:00 [acquire] hs2 exports 2025 done: 98 requests, strategy=per-chapter-direct+concurrency2, concurrent_failures=0
+2026-09-09T14:23:47.711642+00:00 [acquire] hs2 complete for exports 2025: strategy=per-chapter-direct+concurrency2, rows=16873, partner_codes=231
+2026-09-09T14:23:47.712342+00:00 [acquire] archive year 2025 done (13/13)
+2026-09-09T14:23:47.712409+00:00 [acquire] archive chunk done. Remaining years: []
+2026-09-09T14:24:53.490898+00:00 [acquire] eu_members done
+2026-09-09T14:26:56.268771+00:00 [acquire] eu_members_hs2 imports 4791 2013-07: 62/98 chapters returned data
+2026-09-09T14:29:06.934956+00:00 [acquire] eu_members_hs2 exports 4791 2013-07: 75/98 chapters returned data
+2026-09-09T14:43:40.919922+00:00 [acquire] eu_members_hs2 imports 4791 2013-08: 51/98 chapters returned data
+2026-09-09T15:07:24.765106+00:00 [acquire] eu_members_hs2 exports 4791 2013-08: 45/98 chapters returned data
+Orchestrator-directed fix for eu_members_hs2: switched from one request per
+chapter (98 requests per member-month-flow, about 14 min each, projected
+about 3 hours for all 14 month-flows) to one request per member-month-flow
+with CTY_CODE pinned to the single member code, COMM_LVL=HS2, and no
+commodity predicate, which returns every chapter for that partner in one
+response (the same shape proven in source test item 5 for China, 98 rows
+in one call). Killed the in-flight per-chapter run (pid 45117) after 4
+month-flows had already completed fully per-chapter (exports 4791
+2013-07, exports 4791 2013-08, imports 4791 2013-07, imports 4791
+2013-08, all 98/98 files) and one was partial (imports 4791 2013-09, 43
+files, discarded and refetched fresh); those 4 completed month-flows are
+kept as valid per-chapter evidence, unchanged. pipeline/build.py's
+RawArchive.eu_member_month_hs2 reads either form (single consolidated
+file or per-chapter parts), cached per month-flow. Remaining month-flows
+use the single-request form, falling back to per-chapter only if the
+single request fails.
+2026-09-09T15:15:53.684464+00:00 [acquire] eu_members_hs2 imports 4791 2013-07: single request returned 62 chapter rows
+2026-09-09T15:16:07.069014+00:00 [acquire] eu_members_hs2 exports 4791 2013-07: single request returned 75 chapter rows
+2026-09-09T15:16:11.496384+00:00 [acquire] eu_members_hs2 imports 4791 2013-08: single request returned 64 chapter rows
+2026-09-09T15:16:25.121062+00:00 [acquire] eu_members_hs2 exports 4791 2013-08: single request returned 77 chapter rows
+2026-09-09T15:16:30.944702+00:00 [acquire] eu_members_hs2 imports 4791 2013-09: single request returned 67 chapter rows
+2026-09-09T15:16:43.538202+00:00 [acquire] eu_members_hs2 exports 4791 2013-09: single request returned 77 chapter rows
+2026-09-09T15:16:50.638392+00:00 [acquire] eu_members_hs2 imports 4791 2013-10: single request returned 69 chapter rows
+2026-09-09T15:17:03.823981+00:00 [acquire] eu_members_hs2 exports 4791 2013-10: single request returned 78 chapter rows
+2026-09-09T15:17:12.637030+00:00 [acquire] eu_members_hs2 imports 4791 2013-11: single request returned 69 chapter rows
+2026-09-09T15:17:24.646706+00:00 [acquire] eu_members_hs2 exports 4791 2013-11: single request returned 78 chapter rows
+2026-09-09T15:17:34.236707+00:00 [acquire] eu_members_hs2 imports 4791 2013-12: single request returned 69 chapter rows
+2026-09-09T15:17:45.707092+00:00 [acquire] eu_members_hs2 exports 4791 2013-12: single request returned 78 chapter rows
+2026-09-09T15:17:56.605717+00:00 [acquire] eu_members_hs2 imports 4120 2020-01: single request returned 96 chapter rows
+2026-09-09T15:18:13.349925+00:00 [acquire] eu_members_hs2 exports 4120 2020-01: single request returned 95 chapter rows
+2026-09-09T15:18:13.351054+00:00 [acquire] eu_members_hs2 done
+2026-09-09T15:24:33.469633+00:00 [acquire] fingerprint_after done
+2026-09-09T15:24:37.938072+00:00 [acquire] snapshot_id=20260909T091429Z-c638aff167ea
+2026-09-09T15:24:37.938123+00:00 [acquire] requests: 1662 total, failures: 0
+2026-09-09T15:24:37.938151+00:00 [acquire] wrote ./raw/20260909T091429Z-c638aff167ea

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://us-trade-partners.local/schema/partners.schema.json",
+  "title": "data/<snapshot_id>/partners.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "partners"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/SchemaVersion"
+    },
+    "snapshot_id": {
+      "$ref": "common.schema.json#/$defs/SnapshotId"
+    },
+    "partners": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/Partner"
+      },
+      "description": "every code observed in any year or flow plus EU, sorted by code, each approved or excluded"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "citation": "Accession years for the 27 current EU member states: https://european-union.europa.eu/principles-countries-history/eu-countries_en (pages 1 and 2, 'EU Member State since <year>' per country), saved as tests/fixtures/sources/europa_eu_countries_list_page1.html and page2.html, accessed 2026-09-08. Denmark, Ireland, United Kingdom exact join date 1 January 1973: https://european-union.europa.eu/principles-countries-history/history-eu/1970-79_en, saved as tests/fixtures/sources/europa_eu_history_1970-79.html. Croatia exact join date 1 July 2013: https://european-union.europa.eu/principles-countries-history/history-eu/2010-19_en ('1 July 2013 - Croatia becomes the 28th EU member'), saved as tests/fixtures/sources/europa_eu_history_2010-19.html. United Kingdom exact exit date 31 January 2020: https://european-union.europa.eu/principles-countries-history/history-eu/2020-today_en ('31 January 2020 - United Kingdom leaves the EU'), saved as tests/fixtures/sources/europa_eu_history_2020-today.html. Census CTY_CODE per country name is read independently from raw/source_test/all_partners_imports.response.json (CTY_CODE, CTY_NAME columns), never from pipeline/ code.",
+  "note": "This fixture is Agent D's independent membership source for the EU calculation test (SPEC EU RULES, schema/CONTRACT.md 'EU rules in data'). It is not read from pipeline/eu_members.json. Census CTY_CODE 4791 for Croatia and 4120 for the United Kingdom, obtained here from raw/source_test/all_partners_imports.response.json, match the codes named directly in schema/CONTRACT.md's Raw archive layout section ('Croatia 4791 for 2013-07 to 2013-12, United Kingdom 4120 for 2020-01'), which is independent cross-confirmation.",
+  "members": [
+    {"name": "Austria", "cty_code": "4330", "accession_date": "1995-01-01", "exit_date": null},
+    {"name": "Belgium", "cty_code": "4231", "accession_date": "1958-01-01", "exit_date": null},
+    {"name": "Bulgaria", "cty_code": "4870", "accession_date": "2007-01-01", "exit_date": null},
+    {"name": "Croatia", "cty_code": "4791", "accession_date": "2013-07-01", "exit_date": null},
+    {"name": "Cyprus", "cty_code": "4910", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Czechia", "cty_code": "4351", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Denmark", "cty_code": "4099", "accession_date": "1973-01-01", "exit_date": null},
+    {"name": "Estonia", "cty_code": "4470", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Finland", "cty_code": "4050", "accession_date": "1995-01-01", "exit_date": null},
+    {"name": "France", "cty_code": "4279", "accession_date": "1958-01-01", "exit_date": null},
+    {"name": "Germany", "cty_code": "4280", "accession_date": "1958-01-01", "exit_date": null},
+    {"name": "Greece", "cty_code": "4840", "accession_date": "1981-01-01", "exit_date": null},
+    {"name": "Hungary", "cty_code": "4370", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Ireland", "cty_code": "4190", "accession_date": "1973-01-01", "exit_date": null},
+    {"name": "Italy", "cty_code": "4759", "accession_date": "1958-01-01", "exit_date": null},
+    {"name": "Latvia", "cty_code": "4490", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Lithuania", "cty_code": "4510", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Luxembourg", "cty_code": "4239", "accession_date": "1958-01-01", "exit_date": null},
+    {"name": "Malta", "cty_code": "4730", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Netherlands", "cty_code": "4210", "accession_date": "1958-01-01", "exit_date": null},
+    {"name": "Poland", "cty_code": "4550", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Portugal", "cty_code": "4710", "accession_date": "1986-01-01", "exit_date": null},
+    {"name": "Romania", "cty_code": "4850", "accession_date": "2007-01-01", "exit_date": null},
+    {"name": "Slovakia", "cty_code": "4359", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Slovenia", "cty_code": "4792", "accession_date": "2004-01-01", "exit_date": null},
+    {"name": "Spain", "cty_code": "4700", "accession_date": "1986-01-01", "exit_date": null},
+    {"name": "Sweden", "cty_code": "4010", "accession_date": "1995-01-01", "exit_date": null},
+    {"name": "United Kingdom", "cty_code": "4120", "accession_date": "1973-01-01", "exit_date": "2020-01-31"}
+  ],
+  "transition_years": {
+    "2013": {
+      "full_year_members": "every member above with accession_date on or before 2013-01-01 and (exit_date null or exit_date after 2013-12-31), excluding Croatia",
+      "transition_members": [
+        {"name": "Croatia", "cty_code": "4791", "months": ["2013-07", "2013-08", "2013-09", "2013-10", "2013-11", "2013-12"], "reason": "acceded 2013-07-01, per SPEC EU RULES 'Croatia 2013 = July through December'"}
+      ]
+    },
+    "2020": {
+      "full_year_members": "every member above with accession_date on or before 2020-01-01 and (exit_date null or exit_date after 2020-12-31), excluding the United Kingdom",
+      "transition_members": [
+        {"name": "United Kingdom", "cty_code": "4120", "months": ["2020-01"], "reason": "exited 2020-01-31, per SPEC EU RULES 'UK 2020 = January only'"}
+      ]
+    }
+  },
+  "derivation_rule": "For a given year Y: a member with accession_date <= Y-01-01 and (exit_date is null or exit_date > Y-12-31) is a full-year member, contributing its December _YR row (raw/<snapshot_id>/partner_totals/<flow>_<Y>-12.json). A member whose accession_date or exit_date falls within year Y is a transition member for that year, contributing only its member months via _MO rows (raw/<snapshot_id>/eu_members/<flow>_<cty_code>_<YYYY-MM>.json), summed month by month. A member with accession_date after Y-12-31 or exit_date <= Y-01-01 is not a member in year Y and contributes nothing. Applying this rule to the accession/exit dates above for years 2013 and 2020 reproduces exactly the transition_years entries listed."
+}

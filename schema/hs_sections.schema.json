@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://us-trade-partners.local/schema/hs_sections.schema.json",
+  "title": "data/<snapshot_id>/hs_sections.json and pipeline/hs_sections.json (groups and source only)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "source",
+    "groups",
+    "chapter_sets"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "url",
+        "accessed"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "accessed": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 22,
+      "maxItems": 22,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "chapters"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "I",
+              "II",
+              "III",
+              "IV",
+              "V",
+              "VI",
+              "VII",
+              "VIII",
+              "IX",
+              "X",
+              "XI",
+              "XII",
+              "XIII",
+              "XIV",
+              "XV",
+              "XVI",
+              "XVII",
+              "XVIII",
+              "XIX",
+              "XX",
+              "XXI",
+              "SPECIAL"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "chapters": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[0-9]{2}$"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "chapter_sets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "imports",
+        "exports"
+      ],
+      "description": "valid chapter set observed per flow and year; derived from data, never hard-coded",
+      "properties": {
+        "imports": {
+          "type": "object",
+          "patternProperties": {
+            "^[0-9]{4}$": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[0-9]{2}$"
+              },
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "exports": {
+          "type": "object",
+          "patternProperties": {
+            "^[0-9]{4}$": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[0-9]{2}$"
+              },
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}
