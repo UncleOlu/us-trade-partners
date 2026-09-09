@@ -1,0 +1,67 @@
+{
+  "annual_affected_cases": 6,
+  "annual_passed": 6,
+  "browser_latest": {
+    "all period survives Hub partner section refresh navigation and browser Back": {
+      "file": "local/results-control-fit.json",
+      "status": "PASS"
+    },
+    "all-years Hub partner section and methodology screenshots show period context": {
+      "file": "local/results-control-fit.json",
+      "status": "PASS"
+    },
+    "all-years home uses derived summary, fixed world totals and complete CSV scope": {
+      "file": "local/results.json",
+      "status": "PASS"
+    },
+    "all-years map shows summed country values and preserves period on selection": {
+      "file": "local/results.json",
+      "status": "PASS"
+    },
+    "all-years partner totals and group chapter CSVs match independent sums; annual trend retained": {
+      "file": "local/results.json",
+      "status": "PASS"
+    },
+    "all-years period control text fits home and Hub at desktop and mobile widths": {
+      "file": "local/results-control-fit.json",
+      "status": "PASS"
+    },
+    "all-years section retains annual trend and one table with exact period CSV": {
+      "file": "local/results.json",
+      "status": "PASS"
+    },
+    "home rank and money align centrally; partner names align left and mobile table scrolls": {
+      "file": "local/results-control-fit.json",
+      "status": "PASS"
+    },
+    "missing whole annual record retains configured range and marks aggregate incomplete": {
+      "file": "local/results.json",
+      "status": "PASS"
+    }
+  },
+  "browser_unique_cases": 9,
+  "built_derived_flow_checks": 948,
+  "final_index_sha256": "8d7f822291346420a31451c58c64ba9b1c3ffa2bfebcab03c6a76e1ea28bd328",
+  "independent_flow_values": 3832,
+  "initial_failures": {
+    "cleanup_error": 1,
+    "real": 1,
+    "selector": 2
+  },
+  "production": "pending",
+  "runs": [
+    {
+      "collected": 8,
+      "file": "local/results.json",
+      "passed": 8
+    },
+    {
+      "collected": 4,
+      "file": "local/results-control-fit.json",
+      "passed": 4
+    }
+  ],
+  "skipped": 0,
+  "unit_cases": 8,
+  "unit_passed": 8
+}
