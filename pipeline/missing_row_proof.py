@@ -9,11 +9,12 @@ Usage: .venv/bin/python3 pipeline/missing_row_proof.py <snapshot_id> --data-dir 
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import sys
 from pathlib import Path
 
-ROOT = Path(".")
+ROOT = Path(os.environ.get("US_TRADE_ROOT", str(Path(__file__).resolve().parents[1])))
 REPORTS_DIR = ROOT / "reports" / "pipeline"
 CODE = "1610"
 YEAR = 2023
@@ -85,7 +86,7 @@ def main() -> int:
 
     out_path = REPORTS_DIR / "missing_row_proof.md"
     out_path.write_text("\n".join(lines) + "\n")
-    print(f"[missing_row_proof] wrote {out_path}")
+    print(f"[missing_row_proof] wrote {out_path.relative_to(ROOT)}")
     return 0
 
 

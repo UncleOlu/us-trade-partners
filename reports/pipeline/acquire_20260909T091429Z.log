@@ -1,4 +1,4 @@
-2026-09-09T09:14:29.095222+00:00 [acquire] init: tmp_dir=./raw/_acquiring_20260909T091429Z
+2026-09-09T09:14:29.095222+00:00 [acquire] init: tmp_dir=<project>/raw/_acquiring_20260909T091429Z
 2026-09-09T09:27:55.482311+00:00 [acquire] probe done: verified 2010..2025, configured 2013..2025, 68 probes
 2026-09-09T09:35:20.426772+00:00 [acquire] fingerprint_before done
 2026-09-09T09:35:25.529534+00:00 [acquire] variables done
@@ -181,4 +181,4 @@ single request fails.
 2026-09-09T15:24:33.469633+00:00 [acquire] fingerprint_after done
 2026-09-09T15:24:37.938072+00:00 [acquire] snapshot_id=20260909T091429Z-c638aff167ea
 2026-09-09T15:24:37.938123+00:00 [acquire] requests: 1662 total, failures: 0
-2026-09-09T15:24:37.938151+00:00 [acquire] wrote ./raw/20260909T091429Z-c638aff167ea
+2026-09-09T15:24:37.938151+00:00 [acquire] wrote <project>/raw/20260909T091429Z-c638aff167ea

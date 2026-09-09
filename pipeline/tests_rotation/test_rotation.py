@@ -11,6 +11,8 @@ Run: .venv/bin/python3 -m pytest pipeline/tests_rotation/ -v
 from __future__ import annotations
 
 import csv
+import hashlib
+import zipfile
 import json
 import os
 import stat
@@ -42,7 +44,11 @@ def make_fake_snapshot(root: Path, snapshot_id: str, acquisition_start: str, n_f
     data_dir = root / "data" / snapshot_id
     for i in range(n_files):
         _write_json(data_dir / f"file{i}.json", {"snapshot_id": snapshot_id, "n": i})
+    _write_json(data_dir / "meta.json", {"code_commit": "a" * 40, "snapshot_id": snapshot_id})
+    response = root / "raw" / snapshot_id / "sample.response.json"
+    _write_json(response, [["value"], ["1"]])
     _write_json(root / "raw" / snapshot_id / "manifest.json", {
+        "files": [{"path": response.name, "sha256": hashlib.sha256(response.read_bytes()).hexdigest()}],
         "acquisition_start": acquisition_start,
         "acquisition_end": acquisition_start,
         "fingerprint_match": True,
@@ -272,3 +278,59 @@ def test_release_no_remote_still_builds_locally(tmp_path):
     zip_path = root / "reports" / "pipeline" / "releases" / "REL2.zip"
     assert zip_path.exists()
     assert (root / "data" / "REL2").is_dir()
+
+
+def test_zip_bytes_ignore_file_times_and_raw_restore(tmp_path):
+    root = tmp_path / "proj"
+    make_fake_snapshot(root, "STABLE", "2026-01-01T00:00:00+00:00")
+    paths = publish_rotate.Paths(root)
+    first = publish_rotate.build_release_zip(paths, "STABLE")
+    checksum = publish_rotate.sha256_of_file(first)
+    for file in (root / "data").rglob("*.json"):
+        os.utime(file, (1800000000, 1800000000))
+    second = publish_rotate.build_release_zip(paths, "STABLE")
+    assert publish_rotate.sha256_of_file(second) == checksum
+    with zipfile.ZipFile(publish_rotate.raw_zip_path(paths, "STABLE")) as archive:
+        restored = archive.read("raw/STABLE/sample.response.json")
+    assert restored == (root / "raw/STABLE/sample.response.json").read_bytes()
+
+
+def test_raw_manifest_mismatch_preserves(tmp_path, env_with_fake_gh):
+    root = tmp_path / "proj"
+    init_fake_git_remote(root)
+    make_fake_snapshot(root, "OLD", "2026-01-01T00:00:00+00:00")
+    make_fake_snapshot(root, "NEW", "2026-02-01T00:00:00+00:00")
+    (root / "raw/OLD/sample.response.json").write_text("corrupted")
+    assert publish_rotate.cmd_rotate(root, "NEW") == 1
+    assert (root / "data/OLD").is_dir()
+    assert read_publish_log(root)[-1]["status"] == "preserved"
+
+
+def test_existing_release_reused_without_overwrite(tmp_path, env_with_fake_gh, monkeypatch):
+    root = tmp_path / "proj"
+    init_fake_git_remote(root)
+    make_fake_snapshot(root, "SAME", "2026-01-01T00:00:00+00:00")
+    assert publish_rotate.cmd_release(root, "SAME") == 0
+    monkeypatch.setenv("FAKE_GH_UPLOAD_FAIL", "1")
+    assert publish_rotate.cmd_release(root, "SAME") == 0
+
+
+def test_raw_download_failure_preserves(tmp_path, env_with_fake_gh, monkeypatch):
+    root = tmp_path / "proj"
+    init_fake_git_remote(root)
+    make_fake_snapshot(root, "OLD", "2026-01-01T00:00:00+00:00")
+    make_fake_snapshot(root, "NEW", "2026-02-01T00:00:00+00:00")
+    monkeypatch.setenv("FAKE_GH_RAW_DOWNLOAD_FAIL", "1")
+    assert publish_rotate.cmd_rotate(root, "NEW") == 1
+    assert (root / "data/OLD").is_dir()
+
+
+def test_other_snapshot_validation_is_not_archived(tmp_path):
+    root = tmp_path / "proj"
+    make_fake_snapshot(root, "OLD", "2026-01-01T00:00:00+00:00")
+    paths = publish_rotate.Paths(root)
+    paths.reports_dir.mkdir(parents=True)
+    paths.validation_csv.write_text("snapshot_id,status\nNEW,PASS\n")
+    archive_path = publish_rotate.build_release_zip(paths, "OLD")
+    with zipfile.ZipFile(archive_path) as archive:
+        assert "validation.csv" not in archive.namelist()

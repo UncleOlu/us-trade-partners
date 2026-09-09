@@ -1,4 +1,4 @@
-2026-09-09T01:36:44.043228+00:00 [acquire] init: tmp_dir=./raw/_acquiring_20260909T013644Z
+2026-09-09T01:36:44.043228+00:00 [acquire] init: tmp_dir=<project>/raw/_acquiring_20260909T013644Z
 2026-09-09T01:43:25.035354+00:00 [acquire] probe done: verified 2010..2025, configured 2013..2025, 68 probes
 2026-09-09T01:48:49.450740+00:00 [acquire] fingerprint_before done
 2026-09-09T01:49:11.470862+00:00 [acquire] variables done
@@ -90,4 +90,4 @@ per-year behavior is now uniform and predictable.
 2026-09-09T08:35:36.688955+00:00 [acquire] fingerprint_after done
 2026-09-09T08:35:41.579102+00:00 [acquire] snapshot_id=20260909T013644Z-1908cb2662ee
 2026-09-09T08:35:41.579152+00:00 [acquire] requests: 2494 total, failures: 2
-2026-09-09T08:35:41.579186+00:00 [acquire] wrote ./raw/20260909T013644Z-1908cb2662ee
+2026-09-09T08:35:41.579186+00:00 [acquire] wrote <project>/raw/20260909T013644Z-1908cb2662ee

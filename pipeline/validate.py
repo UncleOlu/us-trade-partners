@@ -17,6 +17,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import csv
 import json
 import sys
@@ -29,7 +30,7 @@ from build import (  # noqa: E402
     eu_membership_for_year, WORLD_CODE,
 )
 
-ROOT = Path(".")
+ROOT = Path(os.environ.get("US_TRADE_ROOT", str(Path(__file__).resolve().parents[1])))
 PIPELINE_DIR = ROOT / "pipeline"
 REPORTS_DIR = ROOT / "reports" / "pipeline"
 FIXTURES_DIR = ROOT / "tests" / "fixtures" / "published_examples"

@@ -46,7 +46,10 @@ def main() -> int:
         if os.environ.get("FAKE_GH_UPLOAD_FAIL") == "1":
             print("fake_gh: simulated upload failure", file=sys.stderr)
             return 1
-        shutil.copyfile(zip_arg, storage_dir / f"{tag}__{Path(zip_arg).name}")
+        for asset in args[3:]:
+            if asset.startswith("--"):
+                break
+            shutil.copyfile(asset, storage_dir / f"{tag}__{Path(asset).name}")
         (storage_dir / f"{tag}.marker").touch()
         return 0
 
@@ -78,6 +81,8 @@ def main() -> int:
                 i += 1
         if os.environ.get("FAKE_GH_DOWNLOAD_FAIL") == "1":
             print("fake_gh: simulated download failure", file=sys.stderr)
+            return 1
+        if os.environ.get("FAKE_GH_RAW_DOWNLOAD_FAIL") == "1" and pattern.endswith(".raw.zip"):
             return 1
         src = storage_dir / f"{tag}__{pattern}"
         if not src.exists():

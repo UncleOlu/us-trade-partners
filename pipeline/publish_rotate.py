@@ -4,30 +4,16 @@ instruction, hardened). Every function takes an explicit `root: Path` so
 tests can point the whole module at a temporary directory and never touch
 the real data/ or raw/.
 
-Two independent operations:
+Release archives have fixed ZIP timestamps and sorted names. The built
+ZIP holds data at its root, the raw manifest, and validation rows only
+when they belong to this snapshot. A separate raw ZIP holds every saved
+request and response under raw/<snapshot_id>/. Both get SHA256 sidecars.
 
-- `cmd_release(root, snapshot_id)`: build and verify a release zip for one
-  snapshot (published files, raw manifest.json, validation.csv when
-  present), write a sha256 sidecar, verify it locally by unzipping to a
-  temp dir and comparing every file's sha256 against its source, and (when
-  a git remote named origin exists and `gh auth status` succeeds) upload
-  it to a GitHub Release tagged snapshot-<id> and verify by downloading
-  the asset back and comparing its sha256 against the sidecar. Never
-  removes anything. This is `make release SNAPSHOT=<id>`.
-
-- `cmd_rotate(root, new_id)`: after new_id has already been promoted to
-  data/<new_id>/, find the one other snapshot under data/ (old_id) and
-  retire it. Before removing data/<old_id>/, it must pass BOTH
-  verifications above (local zip verification, and the upload plus
-  download-back verification). If the zip verification, the upload, or
-  the download-back fails, or if there is no remote at all, the previous
-  snapshot is preserved, the reason is written to publish_log.csv, and
-  the command exits non-zero (the newly published snapshot is unaffected
-  either way). Only after both verifications pass is data/<old_id>/
-  removed and the rotation logged as removed.
-
-Nothing here ever writes to data/<new_id>/ or to any raw/ directory
-(raw/<old_id>/manifest.json is read only, never written).
+The snapshot id identifies raw acquisition. The immutable release tag
+adds the pipeline commit and built ZIP checksum. Existing remote assets
+are never overwritten. Rotation removes only the prior built snapshot,
+and only after both archives pass local and remote download checks.
+Raw directories and the new snapshot remain unchanged.
 
 Usage:
     .venv/bin/python3 pipeline/publish_rotate.py <new_id> [--dry-run]
@@ -37,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import csv
 import hashlib
 import json
@@ -48,7 +35,7 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 
-DEFAULT_ROOT = Path(".")
+DEFAULT_ROOT = Path(os.environ.get("US_TRADE_ROOT", str(Path(__file__).resolve().parents[1])))
 
 PUBLISH_LOG_COLUMNS = ["published_id", "removed_id", "timestamp_from_manifest", "status", "reason"]
 
@@ -115,78 +102,105 @@ def sha256_of_bytes(data: bytes) -> str:
 # Build and verify a release zip for one snapshot
 # ---------------------------------------------------------------------------
 
+def release_sources(paths: Paths, snapshot_id: str) -> dict[str, Path]:
+    snapshot = paths.snapshot_dir(snapshot_id)
+    if not snapshot.is_dir() or not paths.raw_manifest(snapshot_id).is_file():
+        raise RuntimeError(f"snapshot or raw manifest missing for {snapshot_id}")
+    sources = {p.relative_to(snapshot).as_posix(): p
+               for p in snapshot.rglob("*") if p.is_file()}
+    sources["raw_manifest.json"] = paths.raw_manifest(snapshot_id)
+    # The current validation report can belong to a newer snapshot during
+    # rotation. Never label that report as evidence for the old snapshot.
+    if paths.validation_csv.exists():
+        with paths.validation_csv.open(newline="") as f:
+            ids = {row["snapshot_id"] for row in csv.DictReader(f)}
+        if ids == {snapshot_id}:
+            sources["validation.csv"] = paths.validation_csv
+    return sources
+
+
+def raw_sources(paths: Paths, snapshot_id: str) -> dict[str, Path]:
+    base = paths.raw_dir / snapshot_id
+    manifest = json.loads(paths.raw_manifest(snapshot_id).read_text())
+    if not manifest.get("files"):
+        raise RuntimeError("raw manifest has no file entries")
+    # Validate every manifest entry before claiming full raw preservation.
+    for entry in manifest.get("files", []):
+        rel = Path(entry["path"])
+        if rel.is_absolute() or ".." in rel.parts:
+            raise RuntimeError("unsafe raw manifest path")
+        source = base / rel
+        if not source.is_file() or sha256_of_file(source) != entry["sha256"]:
+            raise RuntimeError(f"raw manifest checksum mismatch: {rel.as_posix()}")
+    return {p.relative_to(paths.root).as_posix(): p
+            for p in base.rglob("*") if p.is_file()}
+
+
+def write_archive(destination: Path, sources: dict[str, Path]) -> None:
+    temporary = destination.with_suffix(destination.suffix + ".tmp")
+    try:
+        with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED) as zf:
+            for name, source in sorted(sources.items()):
+                info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.external_attr = 0o100644 << 16
+                zf.writestr(info, source.read_bytes())
+        temporary.replace(destination)
+    finally:
+        temporary.unlink(missing_ok=True)
+    destination.with_suffix(destination.suffix + ".sha256").write_text(
+        sha256_of_file(destination) + "  " + destination.name + "\n")
+
+
+def raw_zip_path(paths: Paths, snapshot_id: str) -> Path:
+    return paths.releases_dir / f"{snapshot_id}.raw.zip"
+
+
+def release_descriptor(paths: Paths, snapshot_id: str, zip_path: Path) -> dict:
+    meta_path = paths.snapshot_dir(snapshot_id) / "meta.json"
+    commit = json.loads(meta_path.read_text())["code_commit"]
+    checksum = sha256_of_file(zip_path)
+    raw_path = raw_zip_path(paths, snapshot_id)
+    return {"snapshot_id": snapshot_id, "pipeline_commit": commit,
+            "tag": f"build-{snapshot_id}-{commit[:12]}-{checksum[:12]}",
+            "asset": zip_path.name, "sha256": checksum,
+            "raw_asset": raw_path.name, "raw_sha256": sha256_of_file(raw_path),
+            "archive_scope": "built data plus separate complete raw acquisition"}
+
+
 def build_release_zip(paths: Paths, snapshot_id: str) -> Path:
-    """Zip published files (data/<id>/) plus raw/<id>/manifest.json (as
-    raw_manifest.json) plus reports/pipeline/validation.csv (as
-    validation.csv) when present. Deterministic: files sorted by relative
-    path. Writes the sha256 sidecar alongside the zip."""
-    snapshot_dir = paths.snapshot_dir(snapshot_id)
-    if not snapshot_dir.is_dir():
-        raise RuntimeError(f"published snapshot not found: {snapshot_dir}")
-    manifest_path = paths.raw_manifest(snapshot_id)
-    if not manifest_path.exists():
-        raise RuntimeError(f"raw manifest not found: {manifest_path}")
-
     paths.releases_dir.mkdir(parents=True, exist_ok=True)
+    built = release_sources(paths, snapshot_id)
+    raw = raw_sources(paths, snapshot_id)
     zip_path = paths.zip_path(snapshot_id)
-    if zip_path.exists():
-        zip_path.unlink()
-
-    file_list = sorted(p for p in snapshot_dir.rglob("*") if p.is_file())
-    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        for p in file_list:
-            zf.write(p, arcname=str(p.relative_to(snapshot_dir)))
-        zf.write(manifest_path, arcname="raw_manifest.json")
-        if paths.validation_csv.exists():
-            zf.write(paths.validation_csv, arcname="validation.csv")
-
-    sidecar_path = paths.sidecar_path(snapshot_id)
-    sidecar_path.write_text(sha256_of_file(zip_path) + "  " + zip_path.name + "\n")
+    write_archive(zip_path, built)
+    write_archive(raw_zip_path(paths, snapshot_id), raw)
+    descriptor = release_descriptor(paths, snapshot_id, zip_path)
+    (paths.releases_dir / f"{snapshot_id}.release.json").write_text(
+        json.dumps(descriptor, sort_keys=True, indent=2) + "\n")
     return zip_path
 
 
+def verify_archive(zip_path: Path, sources: dict[str, Path]) -> tuple[bool, str]:
+    try:
+        with zipfile.ZipFile(zip_path) as zf:
+            if len(zf.namelist()) != len(sources) or set(zf.namelist()) != set(sources):
+                return False, "zip member list differs from source files"
+            for name, source in sorted(sources.items()):
+                if sha256_of_bytes(zf.read(name)) != sha256_of_file(source):
+                    return False, f"zip checksum mismatch: {name}"
+    except (zipfile.BadZipFile, OSError) as exc:
+        return False, f"zip verification failed: {type(exc).__name__}"
+    return True, f"zip verified: {len(sources)} files"
+
+
 def verify_zip_locally(paths: Paths, snapshot_id: str, zip_path: Path) -> tuple[bool, str]:
-    """Unzip to a temp dir and compare every file's sha256 against its
-    source: published files against data/<id>/, raw_manifest.json against
-    raw/<id>/manifest.json, validation.csv against
-    reports/pipeline/validation.csv when the zip has one."""
-    snapshot_dir = paths.snapshot_dir(snapshot_id)
-    manifest_path = paths.raw_manifest(snapshot_id)
-    with tempfile.TemporaryDirectory(prefix="us-trade-verify-") as tmp:
-        tmp_path = Path(tmp)
-        try:
-            with zipfile.ZipFile(zip_path) as zf:
-                zf.extractall(tmp_path)
-        except (zipfile.BadZipFile, OSError) as exc:
-            return False, f"zip could not be opened/extracted: {exc}"
-
-        mismatches = []
-        published_files = sorted(p for p in snapshot_dir.rglob("*") if p.is_file())
-        for src in published_files:
-            rel = src.relative_to(snapshot_dir)
-            extracted = tmp_path / rel
-            if not extracted.exists():
-                mismatches.append(f"missing from zip: {rel}")
-                continue
-            if sha256_of_file(src) != sha256_of_file(extracted):
-                mismatches.append(f"sha256 mismatch: {rel}")
-
-        extracted_manifest = tmp_path / "raw_manifest.json"
-        if not extracted_manifest.exists():
-            mismatches.append("missing from zip: raw_manifest.json")
-        elif sha256_of_file(extracted_manifest) != sha256_of_file(manifest_path):
-            mismatches.append("sha256 mismatch: raw_manifest.json")
-
-        extracted_validation = tmp_path / "validation.csv"
-        if paths.validation_csv.exists():
-            if not extracted_validation.exists():
-                mismatches.append("missing from zip: validation.csv")
-            elif sha256_of_file(extracted_validation) != sha256_of_file(paths.validation_csv):
-                mismatches.append("sha256 mismatch: validation.csv")
-
-        if mismatches:
-            return False, "local zip verification failed: " + "; ".join(mismatches)
-        return True, f"local zip verification passed ({len(published_files)} published files + raw_manifest.json)"
+    for archive, sources in [(zip_path, release_sources(paths, snapshot_id)),
+                             (raw_zip_path(paths, snapshot_id), raw_sources(paths, snapshot_id))]:
+        ok, reason = verify_archive(archive, sources)
+        if not ok:
+            return ok, reason
+    return True, "local built and complete raw zip verification passed"
 
 
 # ---------------------------------------------------------------------------
@@ -206,42 +220,45 @@ def gh_available(paths: Paths) -> bool:
 
 
 def gh_create_command(snapshot_id: str, zip_path: Path) -> list[str]:
-    return ["gh", "release", "create", f"snapshot-{snapshot_id}", str(zip_path),
-            "--title", f"snapshot-{snapshot_id}",
-            "--notes", f"US goods trade partner visualization, snapshot {snapshot_id}."]
-
-
-def gh_upload_command(snapshot_id: str, zip_path: Path) -> list[str]:
-    return ["gh", "release", "upload", f"snapshot-{snapshot_id}", str(zip_path), "--clobber"]
+    descriptor = json.loads((zip_path.parent / f"{snapshot_id}.release.json").read_text())
+    assets = [zip_path, zip_path.with_suffix(".zip.sha256"),
+              zip_path.parent / descriptor["raw_asset"],
+              zip_path.parent / (descriptor["raw_asset"] + ".sha256"),
+              zip_path.parent / f"{snapshot_id}.release.json"]
+    return ["gh", "release", "create", descriptor["tag"], *map(str, assets),
+            "--target", descriptor["pipeline_commit"], "--title", descriptor["tag"],
+            "--notes", "Built data and complete raw responses. SHA256 sidecars included."]
 
 
 def upload_release(paths: Paths, snapshot_id: str, zip_path: Path) -> tuple[bool, str]:
-    exists = subprocess.run(["gh", "release", "view", f"snapshot-{snapshot_id}"],
-                             capture_output=True, text=True)
-    cmd = gh_create_command(snapshot_id, zip_path) if exists.returncode != 0 else gh_upload_command(snapshot_id, zip_path)
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    descriptor = release_descriptor(paths, snapshot_id, zip_path)
+    exists = subprocess.run(["gh", "release", "view", descriptor["tag"]],
+                            cwd=paths.root, capture_output=True, text=True, timeout=60)
+    if exists.returncode == 0:
+        # Immutable releases are reused only after every downloaded asset
+        # matches. Never overwrite any previously published release asset.
+        return download_and_verify(paths, snapshot_id, zip_path, paths.sidecar_path(snapshot_id))
+    result = subprocess.run(gh_create_command(snapshot_id, zip_path), cwd=paths.root,
+                            capture_output=True, text=True, timeout=300)
     if result.returncode != 0:
-        return False, f"gh upload failed (exit {result.returncode}): {result.stderr.strip() or result.stdout.strip()}"
-    return True, f"uploaded to release snapshot-{snapshot_id}"
+        return False, f"gh upload failed (exit {result.returncode})"
+    return True, f"uploaded to release {descriptor['tag']}"
 
 
 def download_and_verify(paths: Paths, snapshot_id: str, zip_path: Path, sidecar_path: Path) -> tuple[bool, str]:
-    expected_sha = sidecar_path.read_text().split()[0]
+    descriptor = release_descriptor(paths, snapshot_id, zip_path)
     with tempfile.TemporaryDirectory(prefix="us-trade-download-") as tmp:
-        tmp_path = Path(tmp)
-        result = subprocess.run(
-            ["gh", "release", "download", f"snapshot-{snapshot_id}",
-             "--pattern", zip_path.name, "--dir", str(tmp_path), "--clobber"],
-            capture_output=True, text=True)
-        if result.returncode != 0:
-            return False, f"gh download failed (exit {result.returncode}): {result.stderr.strip() or result.stdout.strip()}"
-        downloaded = tmp_path / zip_path.name
-        if not downloaded.exists():
-            return False, f"downloaded asset not found at {downloaded}"
-        actual_sha = sha256_of_file(downloaded)
-        if actual_sha != expected_sha:
-            return False, f"downloaded asset sha256 mismatch: expected {expected_sha}, got {actual_sha}"
-        return True, "download-back verification passed"
+        for local in [zip_path, raw_zip_path(paths, snapshot_id)]:
+            result = subprocess.run(
+                ["gh", "release", "download", descriptor["tag"],
+                 "--pattern", local.name, "--dir", tmp], cwd=paths.root,
+                capture_output=True, text=True, timeout=300)
+            if result.returncode != 0:
+                return False, f"gh download failed (exit {result.returncode})"
+            downloaded = Path(tmp) / local.name
+            if not downloaded.is_file() or sha256_of_file(downloaded) != sha256_of_file(local):
+                return False, f"downloaded asset sha256 mismatch: {local.name}"
+    return True, "built and raw download-back verification passed"
 
 
 # ---------------------------------------------------------------------------
@@ -282,7 +299,7 @@ def find_previous_snapshot(paths: Paths, new_id: str) -> str | None:
 # make release SNAPSHOT=<id>: build and verify only, never removes
 # ---------------------------------------------------------------------------
 
-def cmd_release(root: Path, snapshot_id: str) -> int:
+def cmd_release(root: Path, snapshot_id: str, local_only: bool = False) -> int:
     paths = Paths(root)
     print(f"[release] building release zip for {snapshot_id}")
     zip_path = build_release_zip(paths, snapshot_id)
@@ -293,11 +310,14 @@ def cmd_release(root: Path, snapshot_id: str) -> int:
         print(f"[release] FAILED: {reason}")
         return 1
 
+    if local_only:
+        return 0
+
     if not gh_available(paths):
         print(f"[release] no git remote named origin, or gh is not authenticated; "
-              f"the zip is left at {zip_path}. Run this command later once a remote "
+              f"the zip is left at {zip_path.name}. Run this command later once a remote "
               "and gh auth are set up:")
-        print("  " + " ".join(gh_create_command(snapshot_id, zip_path)))
+        print(f"  make release SNAPSHOT={snapshot_id}")
         return 0
 
     up_ok, up_reason = upload_release(paths, snapshot_id, zip_path)
@@ -327,7 +347,7 @@ def cmd_rotate(root: Path, new_id: str, dry_run: bool = False) -> int:
         msg = f"no previous snapshot found under data/ other than the current one ({new_id})"
         print(f"[publish_rotate] {msg}; nothing to remove, zip, or release")
         if dry_run:
-            print(f"[publish_rotate] DRY RUN would append to {paths.publish_log}: "
+            print(f"[publish_rotate] DRY RUN would append to {paths.publish_log.relative_to(paths.root)}: "
                   f"published_id={new_id}, removed_id=, timestamp_from_manifest=, "
                   f"status=none, reason={msg!r}")
         else:
@@ -342,13 +362,13 @@ def cmd_rotate(root: Path, new_id: str, dry_run: bool = False) -> int:
         old_dir = paths.snapshot_dir(old_id)
         file_count = sum(1 for p in old_dir.rglob("*") if p.is_file()) if old_dir.is_dir() else 0
         print(f"[publish_rotate] DRY RUN would zip {file_count} published files from "
-              f"data/{old_id}/ plus raw/{old_id}/manifest.json"
+              f"data/{old_id}/ and a separate full raw/{old_id}/ archive"
               + (" plus reports/pipeline/validation.csv" if paths.validation_csv.exists() else "")
-              + f" into {zip_path}, with a sha256 sidecar at {sidecar_path}")
+              + f" into {zip_path.name}, with a sha256 sidecar at {sidecar_path.name}")
         print(f"[publish_rotate] DRY RUN would verify the zip locally (unzip + sha256 compare "
               f"against data/{old_id}/, raw_manifest.json, and validation.csv)")
         print(f"[publish_rotate] DRY RUN would check for a git remote named origin and "
-              f"`gh auth status`; if both succeed, would upload to release snapshot-{old_id} "
+              f"`gh auth status`; if both succeed, would upload both archives to an immutable build release "
               f"and verify by downloading the asset back and comparing its sha256 against the "
               f"sidecar; otherwise removal would NOT proceed (no remote is now a blocking "
               f"condition, not a soft skip)")
@@ -359,7 +379,13 @@ def cmd_rotate(root: Path, new_id: str, dry_run: bool = False) -> int:
 
     timestamp = manifest_timestamp(paths, old_id)
 
-    zip_path = build_release_zip(paths, old_id)
+    try:
+        zip_path = build_release_zip(paths, old_id)
+    except (OSError, RuntimeError, ValueError, KeyError) as exc:
+        reason = f"archive build failed: {type(exc).__name__}"
+        append_publish_log(paths, new_id, old_id, timestamp, "preserved", reason)
+        print(f"[publish_rotate] {reason}; previous snapshot preserved")
+        return 1
     sidecar_path = paths.sidecar_path(old_id)
 
     local_ok, local_reason = verify_zip_locally(paths, old_id, zip_path)
@@ -373,9 +399,9 @@ def cmd_rotate(root: Path, new_id: str, dry_run: bool = False) -> int:
         reason = "no git remote named origin, or gh is not authenticated"
         append_publish_log(paths, new_id, old_id, timestamp, "preserved", reason)
         print(f"[publish_rotate] FAILED: {reason}. data/{old_id}/ is preserved. "
-              f"The verified zip is left at {zip_path}; run this command later once a "
+              f"The verified zip is left at {zip_path.name}; run this command later once a "
               "remote and gh auth are set up, then re-run rotation:")
-        print("  " + " ".join(gh_create_command(old_id, zip_path)))
+        print(f"  make release SNAPSHOT={old_id}")
         return 1
 
     up_ok, up_reason = upload_release(paths, old_id, zip_path)
@@ -403,6 +429,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("new_id", nargs="?")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--local-only", action="store_true", help="build and verify release files without upload")
     parser.add_argument("--release", metavar="SNAPSHOT_ID",
                          help="build and verify a release zip for one snapshot, no removal")
     parser.add_argument("--root", default=str(DEFAULT_ROOT),
@@ -411,7 +438,7 @@ def main() -> int:
     root = Path(args.root)
 
     if args.release:
-        return cmd_release(root, args.release)
+        return cmd_release(root, args.release, local_only=args.local_only)
     if not args.new_id:
         raise SystemExit("usage: publish_rotate.py <new_id> [--dry-run] | --release SNAPSHOT_ID")
     return cmd_rotate(root, args.new_id, dry_run=args.dry_run)

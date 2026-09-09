@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -29,10 +30,21 @@ from model import (  # noqa: E402
     sum_flowvalues, write_json_sorted, sha256_hex,
 )
 
-ROOT = Path(".")
+# Project root: this file lives at <root>/pipeline/build.py. US_TRADE_ROOT
+# overrides for tests or an alternate checkout location.
+ROOT = Path(os.environ.get("US_TRADE_ROOT", str(Path(__file__).resolve().parents[1])))
 PIPELINE_DIR = ROOT / "pipeline"
 RAW_DIR = ROOT / "raw"
 REPORTS_DIR = ROOT / "reports" / "pipeline"
+
+
+def rel(path: Path) -> str:
+    """path formatted relative to ROOT for printing in reports, proofs,
+    logs, and manifests, never as an absolute filesystem path."""
+    try:
+        return str(Path(path).resolve().relative_to(ROOT.resolve()))
+    except ValueError:
+        return "<external>/" + Path(path).name
 
 SCHEMA_VERSION = "1.0.0"
 WORLD_CODE = "-"
@@ -68,7 +80,7 @@ class RawArchive:
         self.snapshot_id = snapshot_id
         self.dir = RAW_DIR / snapshot_id
         if not self.dir.is_dir():
-            raise FileNotFoundError(f"raw archive not found: {self.dir}")
+            raise FileNotFoundError(f"raw archive not found: {rel(self.dir)}")
         self.manifest = load_json(self.dir / "manifest.json")
         self.years = self.manifest["configured_coverage"]["years"]
         self.start_year = self.manifest["configured_coverage"]["start_year"]
@@ -584,7 +596,7 @@ def build(snapshot_id: str, out_dir: Path, publish: bool) -> Path:
         write_json_sorted(report_path, {"snapshot_id": snapshot_id, "unresolved_codes": sorted(unresolved)})
         raise RuntimeError(
             f"{len(unresolved)} unresolved partner code(s), publication blocked: "
-            f"{sorted(unresolved)}. See {report_path}")
+            f"{sorted(unresolved)}. See {rel(report_path)}")
 
     partner_records = {code: build_partner_record(archive, code, country_map) for code in approved_codes}
 
@@ -935,7 +947,7 @@ def build(snapshot_id: str, out_dir: Path, publish: bool) -> Path:
         "schema_version": SCHEMA_VERSION,
         "snapshot_id": snapshot_id,
         "code_commit": code_commit,
-        "model_ids": {"orchestrator": "claude-fable-5-1", "subagents": "claude-sonnet-5"},
+        "model_ids": {"orchestrator": "Codex (exact model ID unavailable)", "subagents": "Codex (exact model ID unavailable)"},
         "raw_manifest_hash": sha256_hex((archive.dir / "manifest.json").read_text()),
         "fetched_at": fetched_at,
         "source_last_update": {
@@ -975,7 +987,7 @@ def build(snapshot_id: str, out_dir: Path, publish: bool) -> Path:
 
     if publish:
         if out_dir.exists():
-            raise RuntimeError(f"refusing to overwrite existing snapshot directory {out_dir}")
+            raise RuntimeError(f"refusing to overwrite existing snapshot directory {rel(out_dir)}")
         build_root.rename(out_dir)
         return out_dir
     return build_root
@@ -1001,7 +1013,7 @@ def main() -> int:
     parser.add_argument("--publish", action="store_true")
     args = parser.parse_args()
     result = build(args.snapshot_id, Path(args.out), args.publish)
-    print(f"[build] wrote {result}")
+    print(f"[build] wrote {rel(result)}")
     return 0
 
 

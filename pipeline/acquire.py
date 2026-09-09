@@ -26,6 +26,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import shutil
 import sys
 import tempfile
@@ -36,10 +37,22 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from census_client import CensusClient, load_api_key, sha256_of_file  # noqa: E402
 
-ROOT = Path(".")
+# Project root: this file lives at <root>/pipeline/acquire.py. US_TRADE_ROOT
+# overrides for tests or an alternate checkout location.
+ROOT = Path(os.environ.get("US_TRADE_ROOT", str(Path(__file__).resolve().parents[1])))
 PIPELINE_DIR = ROOT / "pipeline"
 RAW_DIR = ROOT / "raw"
 REPORTS_DIR = ROOT / "reports" / "pipeline"
+
+
+def rel(path: Path) -> str:
+    """path formatted relative to ROOT for printing in reports, proofs,
+    logs, and manifests, never as an absolute filesystem path."""
+    try:
+        return str(Path(path).resolve().relative_to(ROOT.resolve()))
+    except ValueError:
+        return "<external>/" + Path(path).name
+
 
 IMPORTS_URL = "https://api.census.gov/data/timeseries/intltrade/imports/hs"
 EXPORTS_URL = "https://api.census.gov/data/timeseries/intltrade/exports/hs"
@@ -607,7 +620,7 @@ def stage_init(args) -> None:
         "stage_done": {"init": True},
     }
     save_state(tmp_dir, state)
-    log_line(ts, f"[acquire] init: tmp_dir={tmp_dir}")
+    log_line(ts, f"[acquire] init: tmp_dir={rel(tmp_dir)}")
     print(f"TS={ts}")
 
 
@@ -902,10 +915,10 @@ def stage_finalize(args) -> int:
                 "Acquisition INVALID: source fingerprint changed during acquisition.\n"
                 f"before: {json.dumps(fingerprint_before, sort_keys=True)}\n"
                 f"after: {json.dumps(fingerprint_after, sort_keys=True)}\n"
-                f"Raw directory preserved at: {invalid_dir}\n"
+                f"Raw directory preserved at: {rel(invalid_dir)}\n"
                 "data/ left untouched.\n"
             )
-        print(f"[acquire] INVALID: fingerprint changed. See {log_path} and {invalid_dir}")
+        print(f"[acquire] INVALID: fingerprint changed. See {rel(log_path)} and {rel(invalid_dir)}")
         return 1
 
     snapshot_id = f"{args.ts}-{manifest_hash[:12]}"
@@ -914,7 +927,7 @@ def stage_finalize(args) -> int:
     log_line(args.ts, f"[acquire] snapshot_id={snapshot_id}")
     log_line(args.ts, f"[acquire] requests: {state['request_counts']['total']} total, "
                        f"failures: {len(state['failures'])}")
-    log_line(args.ts, f"[acquire] wrote {final_dir}")
+    log_line(args.ts, f"[acquire] wrote {rel(final_dir)}")
     (REPORTS_DIR / "last_snapshot_id.txt").write_text(snapshot_id + "\n")
     return 0
 

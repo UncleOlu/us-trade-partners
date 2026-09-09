@@ -1,7 +1,7 @@
 ============================= test session starts ==============================
-platform darwin -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- ./.venv/bin/python3
+platform darwin -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- <project>/.venv/bin/python3
 cachedir: .pytest_cache
-rootdir: .
+rootdir: <project>
 configfile: pyproject.toml
 collecting ... collected 9 items
 

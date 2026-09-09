@@ -26,12 +26,13 @@ from __future__ import annotations
 import csv
 import json
 import sys
+import os
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from census_client import CensusClient, load_api_key, sha256_of_file  # noqa: E402
 
-ROOT = Path(".")
+ROOT = Path(os.environ.get("US_TRADE_ROOT", str(Path(__file__).resolve().parents[1])))
 OUT = ROOT / "raw" / "source_test"
 REPORT_DIR = ROOT / "reports" / "pipeline"
 
@@ -526,7 +527,7 @@ def stage8():
         w.writeheader()
         for row in rows:
             w.writerow(row)
-    print(f"wrote {OUT / 'availability.csv'} with {len(rows)} rows")
+    print(f"wrote {(OUT / 'availability.csv').relative_to(ROOT)} with {len(rows)} rows")
 
 
 # ---------------------------------------------------------------------------
