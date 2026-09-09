@@ -9,7 +9,7 @@
 | flowvalue_integrity | 1 | 1 | 0 | 0 | 0 |
 | partner_resolution | 1 | 1 | 0 | 0 | 0 |
 | partner_totals | 6043 | 6043 | 0 | 0 | 0 |
-| published_examples | 10 | 9 | 0 | 1 | 0 |
+| published_examples | 12 | 10 | 0 | 2 | 0 |
 | record_counts | 26 | 26 | 0 | 0 | 0 |
 | unique_records | 1 | 1 | 0 | 0 | 0 |
 | world_totals | 26 | 26 | 0 | 0 | 0 |

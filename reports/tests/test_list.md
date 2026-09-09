@@ -1,6 +1,6 @@
 # Test list
 
-122 tests, grouped by file. "Runs now" means the test executes to a real
+127 tests, grouped by file. "Runs now" means the test executes to a real
 pass/fail today. "Waits for step 3" means the test body checks for
 `data/<snapshot_id>/`, `raw/<snapshot_id>/`, or
 `reports/pipeline/validation.csv` at run time and calls `pytest.skip(...)`
@@ -107,9 +107,10 @@ the same logic against the real snapshot and waits for step 3.
 | test_c05u_balance_absent_when_export_absent | balance helper returns absent naming the missing input | in-memory FlowValues | runs now |
 | test_c05u_total_trade_value_observed | total_trade_value helper sums imports+exports, confirmed_zero counts as 0 | in-memory FlowValues | runs now |
 | test_c05_derived_figures_exact | check 5: balance and total_trade_value status and value match independent recomputation exactly; amended Value rules: for an absent derived value only the presence of the word imports/exports for each missing input in the reason is checked, not the full reason string | data/<snapshot_id>/partner/*.json | waits for step 3 |
-| test_c06_published_examples_include_required_identifiers | check 6: validation.csv published_examples rows include Norfolk Island 6022 and Kosovo 4803 (the kind special identifier, replacing the earlier NOT_APPLICABLE row) | reports/pipeline/validation.csv | waits for step 3 |
-| test_c06_validation_csv_lists_all_five_published_example_identifiers | check 6: validation.csv has a published_examples row for each of 5700, 1610, 4803, 6022, 4280 | reports/pipeline/validation.csv | waits for step 3 |
-| test_c06_partner_data_matches_published_examples_within_rounding | check 6: for 5700_2023, 1610_2023, 4803_2023, 6022_2023, 4280_2023, when the pipeline value is observed/confirmed_zero it must be within rounding_unit of the published fixture; when absent, the validation.csv published_examples row for that code/year/flow must be NOT_COMPARABLE and mention the published display value (per amended Check scope notes), not an observed value | data/<snapshot_id>/partner/*.json, tests/fixtures/published_examples/*.json, reports/pipeline/validation.csv | waits for step 3 |
+| test_c06_published_examples_include_required_identifiers | check 6: validation.csv published_examples rows include Norfolk Island 6022 and the kind special partner 8220 (Census code 8220, 'Unidentified partner'); Kosovo 4803 is kind country now, not the special-code row | reports/pipeline/validation.csv | waits for step 3 |
+| test_c06_validation_csv_lists_all_five_published_example_identifiers | check 6: validation.csv has a published_examples row for each of 5700, 1610, 6022, 4280, 8220 | reports/pipeline/validation.csv | waits for step 3 |
+| test_c06_special_row_8220_matches_fixture_outcome | check 6: the validation.csv published_examples row(s) for 8220 match tests/fixtures/published_examples/special_8220.json's own outcome field (NOT_COMPARABLE with the URL tried in the reason if not_applicable, else a normal comparable row, never NOT_APPLICABLE when a real Census page exists) | reports/pipeline/validation.csv, tests/fixtures/published_examples/special_8220.json | waits for step 3 |
+| test_c06_partner_data_matches_published_examples_within_rounding | check 6: for 5700_2023, 1610_2023, 6022_2023, 4280_2023, special_8220 (the five required identifiers) plus 4803_2023 (kept as an additional comparable example), when the pipeline value is observed/confirmed_zero it must be within rounding_unit of the published fixture; when absent, the validation.csv published_examples row for that code/year/flow must be NOT_COMPARABLE and mention the published display value (per amended Check scope notes), not an observed value; a fixture whose own outcome is not_applicable is skipped here (checked instead by test_c06_special_row_8220_matches_fixture_outcome) | data/<snapshot_id>/partner/*.json, tests/fixtures/published_examples/*.json, reports/pipeline/validation.csv | waits for step 3 |
 | test_c07a_eu_calculation_recomputed_from_boundary_fixture | check 7a arithmetic (YTD month-boundary rule) recomputed and verified against fixture_b | tests/fixtures/fixture_b_eu_boundary.json | runs now |
 | test_eu01u_parse_census_rows_dedupes_duplicate_header_keys | raw Census API list-of-lists response parser keeps the first occurrence of a duplicated header key (the API echoes predicate columns) | in-memory list-of-lists | runs now |
 | test_eu02u_census_row_value_reads_matching_code_as_int | row-value lookup returns the named field as int for a matching CTY_CODE | in-memory rows | runs now |
@@ -135,6 +136,10 @@ the same logic against the real snapshot and waits for step 3.
 | test_mrr02_confirmed_zero_reasons_cite_reconciliation_and_sums_are_exact | missing-row rule (schema/CONTRACT.md): every confirmed_zero chapter's reason cites the reconciliation, and present chapters (observed + confirmed_zero) sum exactly to the partner-year total for that flow | data/<snapshot_id>/partner/*.json | waits for step 3 |
 | test_kind01u_partner_code_pattern_permits_only_EU_as_non_numeric | the PartnerCode regex ^([0-9]{4}\|EU)$ only ever admits EU as a non-4-digit code | in-memory regex | runs now |
 | test_kind02_only_EU_has_a_non_numeric_code_in_partners_json | only kind aggregate partners have a non-numeric code, and EU is the only such code observed in partners.json | data/<snapshot_id>/partners.json | waits for step 3 |
+| test_partner_8220_matches_owner_approved_record | owner decision: 8220 is kind special, name exactly 'Unidentified partner (Census code 8220)', include_in_world_reconciliation true, iso3 null, map_feature_id null, resolution approved, resolution_note contains '2026-09-09' and not 'pending' | data/<snapshot_id>/partners.json | waits for step 3 |
+| test_partner_4803_is_kind_country_with_null_iso3 | owner decision / amended CONTRACT.md: Kosovo 4803 is kind country with iso3 null, not kind special | data/<snapshot_id>/partners.json | waits for step 3 |
+| test_every_kind_special_partner_has_null_iso3_and_map_feature_id | kind special is reserved for non-geographic codes: every kind special partner has iso3 null and map_feature_id null | data/<snapshot_id>/partners.json | waits for step 3 |
+| test_8220_is_the_only_kind_special_partner | owner decision: 8220 is the only kind special partner (Kosovo 4803 moved to kind country) | data/<snapshot_id>/partners.json | waits for step 3 |
 
 ## tests/test_determinism.py
 
@@ -182,7 +187,7 @@ file, so a stale fixture fails. All 9 run now.
 | test_fxchk05_fixture_e_chapter_sets_match_raw | fixture_e's chapter lists match hs2_*_large.response.json, and the 77/98/99 assertions hold | raw/source_test/hs2_imports_large.response.json, hs2_exports_large.response.json |
 | test_fxchk06_fixture_g_availability_matches_raw_csv | fixture_g's years-with-data list and the 2026-12 has_data=False claim match availability.csv | raw/source_test/availability.csv |
 | test_fxchk07_hs_sections_fixture_covers_every_chapter_once_except_77 | hs_sections_fixture.json has 22 groups and every chapter 01-99 except 77 maps to exactly one group | tests/fixtures/hs_sections_fixture.json |
-| test_fxchk08_published_examples_match_saved_source_html | the 5 published_examples/<code>_2023.json fixtures' displayed and converted exports/imports figures match the TOTAL 2023 row parsed fresh from the saved census.gov page HTML | tests/fixtures/published_examples/sources/{5700,1610,4803,6022,4280}_2023.html |
+| test_fxchk08_published_examples_match_saved_source_html | the published_examples/<code>_<year>.json fixtures' (5700, 1610, 4803, 6022, 4280 for 2023; special_8220 for 2013) displayed and converted exports/imports figures match the TOTAL <year> row parsed fresh from the saved census.gov page HTML/response text; a not_applicable-outcome fixture is skipped | tests/fixtures/published_examples/sources/{5700,1610,4803,6022,4280}_2023.html, tests/fixtures/published_examples/sources/8220_attempt.txt |
 | test_fxchk09_eu_members_fixture_matches_saved_europa_sources | eu_members_fixture.json's accession/exit dates match the saved europa.eu current-members and history pages, and its Census CTY_CODE per member matches all_partners_imports.response.json | tests/fixtures/sources/europa_eu_*.html, raw/source_test/all_partners_imports.response.json |
 
 ## tests/test_config_overrides.py
