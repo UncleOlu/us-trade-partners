@@ -24,6 +24,9 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px 48px;
+  /* A long unbroken token (a URL, a commit hash, a snapshot id) must never
+     push the page wider than the viewport on mobile. */
+  overflow-wrap: anywhere;
 }
 
 .app-header nav {
@@ -52,10 +55,19 @@ body {
   font-size: 0.85rem;
 }
 
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin: 12px 0 24px;
+  /* momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
 table {
   width: 100%;
+  min-width: 480px;
   border-collapse: collapse;
-  margin: 12px 0 24px;
+  margin: 0;
   font-size: 0.9rem;
 }
 
@@ -130,6 +142,75 @@ tr.selected-row {
   font-weight: 600;
 }
 
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.stat-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #fff;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.stat-value {
+  margin: 2px 0 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.home-map-pane,
+.home-table-pane {
+  /* Grid items default to min-width: auto, which lets a child with an
+     intrinsic/measured width (the map SVG, sized before its own
+     ResizeObserver settles) blow out the track and the page's horizontal
+     scroll on mobile. min-width: 0 lets these panes actually shrink to the
+     grid track's width; overflow hidden is a second guard against any
+     child that briefly renders wider than its container. */
+  min-width: 0;
+  overflow: hidden;
+}
+
+.map-placeholder {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+  .stat-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .world-total-card {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -198,9 +279,5 @@ tr.selected-row {
 @media (max-width: 640px) {
   .hub-list-columns {
     columns: 1;
-  }
-  table {
-    display: block;
-    overflow-x: auto;
   }
 }

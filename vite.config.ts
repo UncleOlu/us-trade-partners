@@ -91,17 +91,48 @@ function snapshotDataPlugin(): Plugin {
       const count = await copyDir(snapshotDir, outDir);
       // eslint-disable-next-line no-console
       console.log(`[snapshot-data] copied ${count} files from data/${snapshotId} to dist/data/${snapshotId}`);
+      // Per-route index.html generation and the 404.html SPA fallback copy
+      // happen after this, in scripts/generate-routes.mjs (npm run build).
+    },
+  };
+}
 
-      // GitHub Pages SPA fallback: 404.html is a copy of index.html, used only
-      // so a direct load of a client-side route (e.g. /partner/5700) that GitHub
-      // Pages cannot resolve as a real file still serves the app shell. It is
-      // never a substitute for a real per-route index.html and never a valid
-      // route on its own.
-      const indexHtml = path.join(rootDir, 'dist', 'index.html');
-      const notFoundHtml = path.join(rootDir, 'dist', '404.html');
-      await fsp.copyFile(indexHtml, notFoundHtml);
+// Serves the pinned world-atlas 110m TopoJSON under the base path (dev) and
+// copies it into dist/ (build). Only the home route (WorldMap) loads it.
+function worldAtlasPlugin(): Plugin {
+  const urlPath = `${basePath}atlas/countries-110m.json`;
+  const sourceFile = path.join(rootDir, 'node_modules', 'world-atlas', 'countries-110m.json');
+
+  return {
+    name: 'world-atlas',
+    configureServer(server) {
+      const middleware: Connect.NextHandleFunction = (req, res, next) => {
+        if (!req.url) return next();
+        const reqPath = req.url.split('?')[0];
+        if (reqPath !== urlPath) return next();
+        fs.readFile(sourceFile, (err, data) => {
+          if (err) {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: 'countries-110m.json not found' }));
+            return;
+          }
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(data);
+        });
+      };
+      server.middlewares.use(middleware);
+    },
+    async closeBundle() {
+      if (!fs.existsSync(sourceFile)) {
+        throw new Error('node_modules/world-atlas/countries-110m.json missing at build time; run npm install');
+      }
+      const outFile = path.join(rootDir, 'dist', 'atlas', 'countries-110m.json');
+      await fsp.mkdir(path.dirname(outFile), { recursive: true });
+      await fsp.copyFile(sourceFile, outFile);
       // eslint-disable-next-line no-console
-      console.log('[snapshot-data] copied dist/index.html to dist/404.html (SPA fallback)');
+      console.log('[world-atlas] copied countries-110m.json to dist/atlas/countries-110m.json');
     },
   };
 }
@@ -151,7 +182,7 @@ export default defineConfig({
     __SNAPSHOT_ID__: JSON.stringify(snapshotId),
     __BASE_PATH__: JSON.stringify(basePath),
   },
-  plugins: [react(), snapshotDataPlugin(), methodologyContentPlugin()],
+  plugins: [react(), snapshotDataPlugin(), methodologyContentPlugin(), worldAtlasPlugin()],
   build: {
     outDir: 'dist',
     emptyOutDir: true,

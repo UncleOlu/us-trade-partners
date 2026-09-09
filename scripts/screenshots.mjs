@@ -41,6 +41,9 @@ async function waitForServer(url, timeoutMs) {
 }
 
 const targets = [
+  { route: '/?year=2025', name: 'home_2025' },
+  { route: '/hub', name: 'hub' },
+  { route: '/section/XVI?year=2025', name: 'section_XVI_2025' },
   { route: '/partner/5700?year=2025', name: 'china_5700' },
   { route: '/partner/EU?year=2013', name: 'eu_2013' },
 ];
@@ -71,7 +74,7 @@ async function main() {
       for (const t of targets) {
         const url = baseUrl.replace(/\/$/, '') + t.route;
         await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(900);
         const filePath = path.join(outDir, `${t.name}_${vp.name}.png`);
         await page.screenshot({ path: filePath, fullPage: true });
         written.push(filePath);

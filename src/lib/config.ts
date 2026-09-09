@@ -13,4 +13,8 @@ export function dataUrl(relativePath: string): string {
   return `${BASE_PATH}data/${SNAPSHOT_ID}/${clean}`;
 }
 
+/** The pinned world-atlas 110m TopoJSON, served under the base path. Only the
+ * home route (WorldMap) loads it. */
+export const ATLAS_URL = `${BASE_PATH}atlas/countries-110m.json`;
+
 export const GLOBAL_LABEL = 'US goods trade, Census basis. Excludes services. Values are nominal USD.';

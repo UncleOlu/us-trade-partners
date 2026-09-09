@@ -18,6 +18,7 @@ import { useAsyncData } from '../lib/useAsyncData';
 import { Loading } from '../components/Loading';
 import { DataError } from '../components/DataError';
 import { MoneyCell } from '../components/MoneyCell';
+import { TableScroll } from '../components/TableScroll';
 import { isUsable } from '../lib/status';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
 import { toCsv, downloadCsv } from '../lib/csv';
@@ -73,39 +74,41 @@ function YearsTable({
           Download CSV
         </button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Imports</th>
-            <th>Exports</th>
-            <th>Balance</th>
-            <th>Total trade value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {partner.years.map((y) => (
-            <tr key={y.year}>
-              <td>
-                {y.year}
-                {y.note && <span title={y.note}> *</span>}
-              </td>
-              <td>
-                <MoneyCell flow={y.imports} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={y.exports} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={y.balance} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={y.total_trade_value} showExact={showExact} />
-              </td>
+      <TableScroll>
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Imports</th>
+              <th>Exports</th>
+              <th>Balance</th>
+              <th>Total trade value</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {partner.years.map((y) => (
+              <tr key={y.year}>
+                <td>
+                  {y.year}
+                  {y.note && <span title={y.note}> *</span>}
+                </td>
+                <td>
+                  <MoneyCell flow={y.imports} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={y.exports} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={y.balance} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={y.total_trade_value} showExact={showExact} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableScroll>
       {partner.years.some((y) => y.note) && (
         <p className="chart-note">* See the membership-change notes above the chart.</p>
       )}
@@ -132,10 +135,10 @@ function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
           year, not zero.
         </p>
       )}
-      <ResponsiveContainer width="100%" height={340}>
-        <LineChart data={data} margin={{ top: 8, right: 24, left: 8, bottom: 8 }}>
+      <ResponsiveContainer width="100%" height={360}>
+        <LineChart data={data} margin={{ top: 36, right: 32, left: 8, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" />
+          <XAxis dataKey="year" padding={{ left: 12, right: 12 }} />
           <YAxis tickFormatter={(v: number) => formatAutoUsd(v).display} width={80} />
           <Tooltip
             formatter={(value: number | string | Array<number | string>, name: string) => [
@@ -150,12 +153,46 @@ function TrendChart({ partner }: { partner: PartnerFile }): JSX.Element {
               x={y.year}
               stroke="#888"
               strokeDasharray="4 4"
-              label={{ value: 'membership change', position: 'top', fontSize: 10 }}
+              label={{
+                value: 'membership change',
+                position: 'insideTopRight',
+                offset: 8,
+                fontSize: 9,
+                fill: '#666',
+              }}
             />
           ))}
-          <Line type="monotone" dataKey="imports" stroke="#c0392b" connectNulls={false} />
-          <Line type="monotone" dataKey="exports" stroke="#2980b9" connectNulls={false} />
-          <Line type="monotone" dataKey="balance" stroke="#27ae60" connectNulls={false} />
+          {/* Explicit dot markers prove every observed year renders a point,
+              including the last one (chartValue returns null only for a
+              non-usable status, and connectNulls=false only breaks the line
+              at those points; it never drops a real trailing point). */}
+          <Line
+            type="monotone"
+            dataKey="imports"
+            stroke="#c0392b"
+            connectNulls={false}
+            dot={{ r: 3 }}
+            activeDot={{ r: 5 }}
+            isAnimationActive={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="exports"
+            stroke="#2980b9"
+            connectNulls={false}
+            dot={{ r: 3 }}
+            activeDot={{ r: 5 }}
+            isAnimationActive={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="balance"
+            stroke="#27ae60"
+            connectNulls={false}
+            dot={{ r: 3 }}
+            activeDot={{ r: 5 }}
+            isAnimationActive={false}
+          />
         </LineChart>
       </ResponsiveContainer>
       {isEu && noteYears.length > 0 && (
@@ -251,37 +288,39 @@ function GroupsSection({
           <Bar dataKey="exports" fill="#2980b9" cursor="pointer" />
         </BarChart>
       </ResponsiveContainer>
-      <table>
-        <thead>
-          <tr>
-            <th>Group</th>
-            <th>Imports</th>
-            <th>Exports</th>
-            <th>Total trade value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {yearSections.groups.map((g) => (
-            <tr
-              key={g.section_id}
-              className={g.section_id === selectedGroup ? 'selected-row' : undefined}
-              onClick={() => onSelectGroup(g.section_id)}
-              style={{ cursor: 'pointer' }}
-            >
-              <td>{g.section_id}</td>
-              <td>
-                <MoneyCell flow={g.imports} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={g.exports} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={g.total_trade_value} showExact={showExact} />
-              </td>
+      <TableScroll>
+        <table>
+          <thead>
+            <tr>
+              <th>Group</th>
+              <th>Imports</th>
+              <th>Exports</th>
+              <th>Total trade value</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {yearSections.groups.map((g) => (
+              <tr
+                key={g.section_id}
+                className={g.section_id === selectedGroup ? 'selected-row' : undefined}
+                onClick={() => onSelectGroup(g.section_id)}
+                style={{ cursor: 'pointer' }}
+              >
+                <td>{g.section_id}</td>
+                <td>
+                  <MoneyCell flow={g.imports} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={g.exports} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={g.total_trade_value} showExact={showExact} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableScroll>
     </section>
   );
 }
@@ -360,34 +399,36 @@ function ChapterTable({
         </button>
       </div>
       <p>Sorted by total trade value, highest first. Rows without an observed total sort after, by chapter.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Chapter</th>
-            <th>Description</th>
-            <th>Imports</th>
-            <th>Exports</th>
-            <th>Total trade value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((c) => (
-            <tr key={c.chapter}>
-              <td>{c.chapter}</td>
-              <td>{c.description ?? ''}</td>
-              <td>
-                <MoneyCell flow={c.imports} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={c.exports} showExact={showExact} />
-              </td>
-              <td>
-                <MoneyCell flow={c.total_trade_value} showExact={showExact} />
-              </td>
+      <TableScroll>
+        <table>
+          <thead>
+            <tr>
+              <th>Chapter</th>
+              <th>Description</th>
+              <th>Imports</th>
+              <th>Exports</th>
+              <th>Total trade value</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sorted.map((c) => (
+              <tr key={c.chapter}>
+                <td>{c.chapter}</td>
+                <td>{c.description ?? ''}</td>
+                <td>
+                  <MoneyCell flow={c.imports} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={c.exports} showExact={showExact} />
+                </td>
+                <td>
+                  <MoneyCell flow={c.total_trade_value} showExact={showExact} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableScroll>
     </section>
   );
 }
