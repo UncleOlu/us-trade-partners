@@ -1,6 +1,7 @@
 import type { FlowValue, DerivedValue, Summary, PartnerFile, Section } from '../types/generated';
+import type { Period } from './period';
 
-export type Period = number | 'all';
+export type { Period } from './period';
 export type AllSummary = Omit<Summary, 'year'> & { year: 'all'; years: number[]; view_version: '1' };
 export type SummaryView = Summary | AllSummary;
 type PartnerSections = PartnerFile['sections'][number];

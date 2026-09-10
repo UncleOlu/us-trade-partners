@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
-import { SORT_TABLES, type SortDirection, type SortTable } from './sorting';
+import { SORT_TABLES, type SortDirection, type SortTable, type SortKey } from './sorting';
 
-export function useTableSort(table: SortTable, defaultKey: string, defaultDirection: SortDirection) {
+export function useTableSort<T extends SortTable>(table: T, defaultKey: SortKey<T>, defaultDirection: SortDirection) {
   const [params, setParams] = useSearchParams();
   const rawKey = params.get(`${table}_sort`);
-  const key = rawKey && (SORT_TABLES[table].keys as readonly string[]).includes(rawKey) ? rawKey : defaultKey;
+  const key = (rawKey && (SORT_TABLES[table].keys as readonly string[]).includes(rawKey) ? rawKey : defaultKey) as SortKey<T>;
   const rawDirection = params.get(`${table}_dir`);
   const direction = rawDirection === 'asc' || rawDirection === 'desc' ? rawDirection : defaultDirection;
   const set = (nextKey: string, nextDirection: SortDirection) => {

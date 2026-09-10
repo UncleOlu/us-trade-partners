@@ -1,0 +1,80 @@
+{
+  "assets": [
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3925,
+      "raw_bytes": 15141,
+      "status": 200,
+      "transferred_bytes": 4290,
+      "url": "http://127.0.0.1:51989/us-trade-partners/assets/index-BvXhNnPD.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 77120,
+      "raw_bytes": 230217,
+      "status": 200,
+      "transferred_bytes": 77543,
+      "url": "http://127.0.0.1:51989/us-trade-partners/assets/index-DhoNsQox.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 105650,
+      "raw_bytes": 383752,
+      "status": 200,
+      "transferred_bytes": 106097,
+      "url": "http://127.0.0.1:51989/us-trade-partners/assets/LineChart-BGZ2ShP5.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3596,
+      "raw_bytes": 11613,
+      "status": 200,
+      "transferred_bytes": 3968,
+      "url": "http://127.0.0.1:51989/us-trade-partners/assets/PartnerPage-C9pKs6Zc.js"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 414,
+      "raw_bytes": 673,
+      "status": 200,
+      "transferred_bytes": 995,
+      "url": "http://127.0.0.1:51989/us-trade-partners/assets/sectionLabels-DNAnCw3g.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 1730,
+      "raw_bytes": 3561,
+      "status": 200,
+      "transferred_bytes": 2049,
+      "url": "http://127.0.0.1:51989/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 76559,
+      "raw_bytes": 900513,
+      "status": 200,
+      "transferred_bytes": 76936,
+      "url": "http://127.0.0.1:51989/us-trade-partners/data/20260909T091429Z-c638aff167ea/partner/1220.json"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 338,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 825,
+      "url": "http://127.0.0.1:51989/us-trade-partners/partner/1220?year=all"
+    }
+  ],
+  "budget_bytes": 300000,
+  "budget_pass": true,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "local preview",
+  "totals": {
+    "gzip_bytes": 269332,
+    "raw_bytes": 1546045,
+    "transferred_bytes": 272703
+  },
+  "url": "/partner/1220?year=all"
+}
