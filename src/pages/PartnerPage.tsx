@@ -81,7 +81,7 @@ function YearsTable({
         </button>
       </div>
       <TableScroll label="Trade by year">
-        <table>
+        <table className="partner-years-table">
           <thead>
             <tr>
               <th>Year</th>
@@ -298,7 +298,7 @@ function GroupsSection({
         </BarChart>
       </ResponsiveContainer>
       <TableScroll label="Product groups">
-        <table>
+        <table className="partner-groups-table">
           <thead>
             <tr>
               <th>Group</th>
@@ -409,7 +409,7 @@ function ChapterTable({
       </div>
       <p>Sorted by total trade value, highest first. Rows without an observed total sort after, by chapter.</p>
       <TableScroll label="Chapter details">
-        <table>
+        <table className="partner-chapters-table">
           <thead>
             <tr>
               <th>Chapter</th>

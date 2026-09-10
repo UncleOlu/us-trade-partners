@@ -1,0 +1,955 @@
+{
+  "target": "local",
+  "index_sha256": "40e99aff033b03dd43524e8c330ca8aca70e6058be39e62c35f2b56785cec028",
+  "results": [
+    {
+      "code": "7530",
+      "width": 320,
+      "mode": "compact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$11.7bn"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$6.39bn"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "-$5.34bn"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$18.1bn"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 252,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "7530",
+      "width": 320,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$11,723,857,816"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$6,388,352,516"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "-$5,335,505,300"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$18,112,210,332"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 252,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "7530",
+      "width": 390,
+      "mode": "compact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$11.7bn"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$6.39bn"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "-$5.34bn"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$18.1bn"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "7530",
+      "width": 390,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$11,723,857,816"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$6,388,352,516"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "-$5,335,505,300"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$18,112,210,332"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "1220",
+      "width": 320,
+      "mode": "compact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$333bn"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$301bn"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$31.7bn"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$633bn"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 252,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "1220",
+      "width": 320,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$332,503,645,324"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$300,754,868,974"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$31,748,776,350"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$633,258,514,298"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 252,
+        "scrollWidth": 601
+      }
+    },
+    {
+      "code": "1220",
+      "width": 390,
+      "mode": "compact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$333bn"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$301bn"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$31.7bn"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$633bn"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "1220",
+      "width": 390,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$332,503,645,324"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$300,754,868,974"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$31,748,776,350"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$633,258,514,298"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 601
+      }
+    },
+    {
+      "code": "EU",
+      "width": 320,
+      "mode": "compact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013 *"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$387bn"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$262bn"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$125bn"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$649bn"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 252,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "EU",
+      "width": 320,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013 *"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$387,290,041,959"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$261,954,965,224"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$125,335,076,735"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$649,245,007,183"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 252,
+        "scrollWidth": 631
+      }
+    },
+    {
+      "code": "EU",
+      "width": 390,
+      "mode": "compact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013 *"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$387bn"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$262bn"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$125bn"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$649bn"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "EU",
+      "width": 390,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013 *"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$387,290,041,959"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$261,954,965,224"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$125,335,076,735"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$649,245,007,183"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 631
+      }
+    }
+  ],
+  "errors": []
+}

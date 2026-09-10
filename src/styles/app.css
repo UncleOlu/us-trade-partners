@@ -181,3 +181,17 @@ details p { margin-top: 8px; }
 .home-ranking-table tbody th { text-align: left; }
 .slider-note { grid-column: 1 / -1; margin: 0; }
 .period-note { padding: 12px 16px; background: #eaf3f5; border-radius: 7px; }
+
+/* Country detail: match numeric headings to centered values. */
+.partner-years-table thead th,
+.partner-years-table tbody td,
+.partner-groups-table thead th:nth-child(n + 2),
+.partner-groups-table tbody td:nth-child(n + 2),
+.partner-chapters-table thead th:nth-child(n + 3),
+.partner-chapters-table tbody td:nth-child(n + 3) { text-align: center; }
+.partner-years-table thead th:first-child,
+.partner-years-table tbody td:first-child { white-space: nowrap; }
+.partner-groups-table thead th:first-child,
+.partner-groups-table tbody td:first-child,
+.partner-chapters-table thead th:nth-child(-n + 2),
+.partner-chapters-table tbody td:nth-child(-n + 2) { text-align: left; }

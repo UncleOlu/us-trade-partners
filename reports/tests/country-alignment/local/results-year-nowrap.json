@@ -1,0 +1,405 @@
+{
+  "target": "local",
+  "index_sha256": "40e99aff033b03dd43524e8c330ca8aca70e6058be39e62c35f2b56785cec028",
+  "results": [
+    {
+      "code": "7530",
+      "width": 390,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$11,723,857,816"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$6,388,352,516"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "-$5,335,505,300"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$18,112,210,332"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "7530",
+      "width": 390,
+      "mode": "exact",
+      "table": "groups",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "left",
+          "headerAlign": "left",
+          "bodyAlign": "left",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "I: Animals and animal products"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$62,924,793"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$237,772,480"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$300,697,273"
+        }
+      ],
+      "yearLines": [],
+      "rows": 22,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "7530",
+      "width": 390,
+      "mode": "exact",
+      "table": "chapters",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "left",
+          "headerAlign": "left",
+          "bodyAlign": "left",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "84"
+        },
+        {
+          "column": 1,
+          "expected": "left",
+          "headerAlign": "left",
+          "bodyAlign": "left",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "NUCLEAR REACTORS, BOILERS, MACHINERY ETC.; PARTS"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$17,476,273"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$5,817,296,096"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$5,834,772,369"
+        }
+      ],
+      "yearLines": [],
+      "rows": 2,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "1220",
+      "width": 390,
+      "mode": "exact",
+      "table": "years",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "2013"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$332,503,645,324"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$300,754,868,974"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "-$31,748,776,350"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$633,258,514,298"
+        }
+      ],
+      "yearLines": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows": 13,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 601
+      }
+    },
+    {
+      "code": "1220",
+      "width": 390,
+      "mode": "exact",
+      "table": "groups",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "left",
+          "headerAlign": "left",
+          "bodyAlign": "left",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "I: Animals and animal products"
+        },
+        {
+          "column": 1,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$107,088,812,389"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0.0078125,
+          "nowrap": "nowrap",
+          "text": "$47,011,905,598"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$154,100,717,987"
+        }
+      ],
+      "yearLines": [],
+      "rows": 22,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    },
+    {
+      "code": "1220",
+      "width": 390,
+      "mode": "exact",
+      "table": "chapters",
+      "status": "PASS",
+      "columns": [
+        {
+          "column": 0,
+          "expected": "left",
+          "headerAlign": "left",
+          "bodyAlign": "left",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "84"
+        },
+        {
+          "column": 1,
+          "expected": "left",
+          "headerAlign": "left",
+          "bodyAlign": "left",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": null,
+          "nowrap": null,
+          "text": "NUCLEAR REACTORS, BOILERS, MACHINERY ETC.; PARTS"
+        },
+        {
+          "column": 2,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$309,696,648,715"
+        },
+        {
+          "column": 3,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$600,757,559,993"
+        },
+        {
+          "column": 4,
+          "expected": "center",
+          "headerAlign": "center",
+          "bodyAlign": "center",
+          "columnCenterDelta": 0,
+          "moneyCenterDelta": 0,
+          "nowrap": "nowrap",
+          "text": "$910,454,208,708"
+        }
+      ],
+      "yearLines": [],
+      "rows": 2,
+      "scroll": {
+        "width": 322,
+        "scrollWidth": 580
+      }
+    }
+  ],
+  "errors": []
+}
