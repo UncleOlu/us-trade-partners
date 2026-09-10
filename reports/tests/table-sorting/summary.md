@@ -28,7 +28,7 @@ Final local index SHA256: `9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a
 | Home all years | 139,042 | 250,000 | PASS |
 | Partner 1220 all years | 269,082 | 300,000 | PASS |
 
-Budget uses response bodies compressed locally with Node zlib gzip level 6. Local payload reports list assets and separate local transfer counts. Deployed transfer remains pending. Build.txt records the final successful build supplied by the app agent. No app source was edited by the test agent.
+Budget uses response bodies compressed locally with Node zlib gzip level 6. Local payload reports list assets and separate local transfer counts. Production checks now pass ten of ten cases; measured deployed transfer is in live/summary.md. Build.txt records the final successful build supplied by the app agent. No app source was edited by the test agent.
 
 Wider, accessible headers require more horizontal scrolling on narrow screens. Text names and descriptions can wrap into taller rows; numeric values remain single line. These are the main layout trade-offs.
 

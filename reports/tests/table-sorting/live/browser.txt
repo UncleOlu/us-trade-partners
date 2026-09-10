@@ -1,0 +1,12 @@
+[PASS] home: every column both directions matches exact input and CSV order (2236ms) detail={"directions":12,"rows":236}
+[PASS] section: every column both directions matches exact input and CSV order (2590ms) detail={"directions":14,"rows":236}
+[PASS] years: every column both directions matches exact input and CSV order (1763ms) detail={"directions":10,"rows":13}
+[PASS] groups: every column both directions matches exact input and CSV order (1619ms) detail={"directions":8,"rows":22}
+[PASS] chapters: every column both directions matches exact input and CSV order (1609ms) detail={"directions":10,"rows":5}
+[PASS] sort keyboard state survives refresh Back and year changes; charts and group selection stay stable (1985ms)
+[PASS] home sorting preserves financial rank and full export under search and visible limit (1034ms)
+[PASS] rank dropdown changes selected sort; independent table choices survive Hub navigation (2346ms)
+[PASS] invalid sort keys and directions normalize with visible explanation (743ms)
+[PASS] sort controls preserve centered figures, nowrap years and contained mobile scrolling (7289ms) detail={"tables":5,"widths":2,"extra320YearCheck":true}
+
+collected=10 passed=10 failed=0 not_run=0

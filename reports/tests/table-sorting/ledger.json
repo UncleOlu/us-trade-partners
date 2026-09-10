@@ -46,7 +46,12 @@
       "status": "PASS"
     }
   },
-  "production": "pending",
+  "production": {
+    "failed": 0,
+    "passed": 10,
+    "report": "live/ledger.json",
+    "source_commit": "f2c6ea0bfbe447f7c9f2a803d8a519129a4480cc"
+  },
   "runs": [
     {
       "collected": 10,

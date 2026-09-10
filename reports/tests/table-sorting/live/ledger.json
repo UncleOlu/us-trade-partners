@@ -1,0 +1,26 @@
+{
+  "collected": 10,
+  "column_direction_comparisons": 54,
+  "deployment_run": 34428869583,
+  "errors": [],
+  "failed": 0,
+  "images_inspected": 10,
+  "index_match": true,
+  "index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+  "passed": 10,
+  "payloads": {
+    "home-all": {
+      "gzip_bytes": 139042,
+      "raw_bytes": 532321,
+      "transferred_bytes": 143391
+    },
+    "partner": {
+      "gzip_bytes": 269082,
+      "raw_bytes": 1545161,
+      "transferred_bytes": 277862
+    }
+  },
+  "row_positions_compared": 6492,
+  "skipped": 0,
+  "source_commit": "f2c6ea0bfbe447f7c9f2a803d8a519129a4480cc"
+}

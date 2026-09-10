@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 340,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 753,
+      "url": "https://uncleolu.github.io/us-trade-partners/?year=all"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 76866,
+      "raw_bytes": 229333,
+      "status": 200,
+      "transferred_bytes": 77577,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/index-BvQjJCp3.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3925,
+      "raw_bytes": 15141,
+      "status": 200,
+      "transferred_bytes": 4129,
+      "url": "https://uncleolu.github.io/us-trade-partners/assets/index-BvXhNnPD.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 38423,
+      "raw_bytes": 107761,
+      "status": 200,
+      "transferred_bytes": 39935,
+      "url": "https://uncleolu.github.io/us-trade-partners/atlas/countries-110m.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 1730,
+      "raw_bytes": 3561,
+      "status": 200,
+      "transferred_bytes": 2065,
+      "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 7098,
+      "raw_bytes": 88097,
+      "status": 200,
+      "transferred_bytes": 7362,
+      "url": "https://uncleolu.github.io/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 10660,
+      "raw_bytes": 87853,
+      "status": 200,
+      "transferred_bytes": 11570,
+      "url": "https://uncleolu.github.io/us-trade-partners/derived/20260909T091429Z-c638aff167ea/summary-all.json"
+    }
+  ],
+  "budget_bytes": 250000,
+  "budget_pass": true,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "deployed",
+  "totals": {
+    "gzip_bytes": 139042,
+    "raw_bytes": 532321,
+    "transferred_bytes": 143391
+  },
+  "url": "https://uncleolu.github.io/us-trade-partners/?year=all"
+}
