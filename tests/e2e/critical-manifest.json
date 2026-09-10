@@ -1,0 +1,76 @@
+[
+  {
+    "id": "all-years-unit",
+    "script": "tests/e2e/all-years-unit.mjs",
+    "receipt": "unit-results.json",
+    "expectedNames": [
+      "summary world and every partner match independent annual sums",
+      "Canada China EU Norfolk totals, every group and chapter match independent sums",
+      "section XVI universe and every partner match independent annual sums",
+      "strict missing year and absent flow never produce partial totals",
+      "structural NA and confirmed zero preserve distinct status semantics",
+      "missing partner group and chapter records do not become partial aggregates",
+      "unsafe source sums and derived sums fail instead of rounding",
+      "duplicate years mixed snapshots and invalid coverage reject aggregation"
+    ],
+    "metrics": {
+      "comparedFlowValues": 3832
+    },
+    "timeoutMs": 60000
+  },
+  {
+    "id": "derived-integrity",
+    "script": "tests/e2e/check-all-years-derived.mjs",
+    "receipt": "derived-integrity.json",
+    "kind": "integrity",
+    "expectedChecks": 948,
+    "timeoutMs": 60000
+  },
+  {
+    "id": "sorting-unit",
+    "script": "tests/e2e/table-sorting-unit.mjs",
+    "receipt": "unit-results.json",
+    "expectedNames": [
+      "negative zero exact large integers and missing values sort correctly both ways",
+      "numeric ties keep stable identity order in both directions without mutation",
+      "mixed-case text compares without case and blank descriptions stay last",
+      "group sort follows independent canonical HS metadata",
+      "observed zero and confirmed zero stay numeric; absent and NA stay missing"
+    ],
+    "timeoutMs": 60000
+  },
+  {
+    "id": "sorting-browser",
+    "script": "tests/e2e/table-sorting.mjs",
+    "receipt": "results.json",
+    "expectedNames": [
+      "home: every column both directions matches exact input and CSV order",
+      "section: every column both directions matches exact input and CSV order",
+      "years: every column both directions matches exact input and CSV order",
+      "groups: every column both directions matches exact input and CSV order",
+      "chapters: every column both directions matches exact input and CSV order",
+      "sort keyboard state survives refresh Back and year changes; charts and group selection stay stable",
+      "home sorting preserves financial rank and full export under search and visible limit",
+      "rank dropdown changes selected sort; independent table choices survive Hub navigation",
+      "invalid sort keys and directions normalize with visible explanation",
+      "sort controls preserve centered figures, nowrap years and contained mobile scrolling"
+    ],
+    "browser": true,
+    "expectedComparisons": 54,
+    "timeoutMs": 180000
+  },
+  {
+    "id": "all-years-browser",
+    "script": "tests/e2e/all-years.mjs",
+    "receipt": "results.json",
+    "expectedNames": [
+      "all-years home uses derived summary, fixed world totals and complete CSV scope",
+      "all period survives Hub partner section refresh navigation and browser Back",
+      "all-years partner totals and group chapter CSVs match independent sums; annual trend retained",
+      "all-years section retains annual trend and one table with exact period CSV",
+      "missing whole annual record retains configured range and marks aggregate incomplete"
+    ],
+    "browser": true,
+    "timeoutMs": 180000
+  }
+]

@@ -151,6 +151,8 @@ No agent edits outside its ownership. The orchestrator merges.
 - Preserve required desktop, mobile, and final visual checks. Limit repeated diagnosis without new evidence, not required QA.
 
 ## BUILD ORDER
+Deployment CI must run the critical regression gate after the production build and before uploading the Pages artifact. It checks cumulative totals and missing-value rules, built derived data, sorting and CSV order, and URL state against the local production build. Failed tests, skips, empty or incomplete results, invalid receipts, and timeouts block publication. Save bounded test diagnostics as a short-lived CI artifact. No live Census acquisition forms part of this gate.
+
 1. Source test (orchestrator plus A). Save real requests and responses for: partner total and world total for both flows with the commodity dimension omitted; HS2 detail for one large partner, one small partner, one special code; the DF total setting on exports; DISTRICT, RP, CTY_SUBCODE total settings on imports; monthly EU boundary months 2013-06, 2013-07, 2020-01, 2020-02 for Croatia and the UK; availability probes from 2010 forward. Quote exact field names and values. STOP. Show me.
    Approval condition: separate partner-total and world-total queries work for both flows, unused dimensions are proven at total, both sides of each EU boundary are shown.
 2. Contract (orchestrator) and independent tests (D) from the approved contract and saved samples. STOP. Show me the schema and D's test list.

@@ -174,3 +174,7 @@ export async function startPreviewServer({ forceBuild = false } = {}) {
     },
   };
 }
+
+export function assertFreshBuild() {
+  if (!distIsFreshFor(currentSnapshotId())) throw new Error('Critical checks require a fresh local production build. Run npm run build first.');
+}

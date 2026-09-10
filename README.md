@@ -38,6 +38,17 @@ The rebuild uses saved data and makes no Census request. New acquisition require
 
 ## Checks
 
+The Pages workflow runs `npm run test:critical` after building and before uploading the site. The gate reuses 28 tests for totals, missing values, sorting, CSV order and URL state, plus 948 built-data checks. Failures, skips, missing results and timeouts block deployment. CI saves logs and results for seven days; the current live site stays in place if the gate fails.
+
+To run the same gate locally, restore the pinned snapshot and build as above, then run:
+
+```sh
+npx playwright install chromium
+npm run test:critical
+```
+
+Results go to `reports/tests/ci/`. This focused gate does not replace the broader data, archive or visual audits. It gates deployment, not direct commits to main.
+
 ```sh
 npm run gen:types
 npm run build

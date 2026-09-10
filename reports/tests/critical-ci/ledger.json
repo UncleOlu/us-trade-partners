@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "command": "npm run build && npm run test:critical",
+  "local_full_runs": 1,
+  "gate": {
+    "status": "PASS",
+    "results": [
+      {
+        "suite": "all-years-unit",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "duration_ms": 295,
+        "status": "PASS",
+        "receipt_sha256": "c4a54f893767d465e4aa35bb1b5299ff999c2e75e67ccfcba22f29c288842095",
+        "tests": 8,
+        "integrity_checks": 0
+      },
+      {
+        "suite": "derived-integrity",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "duration_ms": 30,
+        "status": "PASS",
+        "receipt_sha256": "8d7f0d759b0678cee0442b3f39eb691e4292f393fb4cad39577f737f47929481",
+        "tests": 0,
+        "integrity_checks": 948
+      },
+      {
+        "suite": "sorting-unit",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "duration_ms": 224,
+        "status": "PASS",
+        "receipt_sha256": "377e4b0ecab45b8fd2824ab120a534e1becd18891958bf7503eebe4d3224b617",
+        "tests": 5,
+        "integrity_checks": 0
+      },
+      {
+        "suite": "sorting-browser",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "duration_ms": 20995,
+        "status": "PASS",
+        "receipt_sha256": "5527d1af4b2198822fca4d5fd22e5669a17f8d60800abf843569bce8b4f7d469",
+        "tests": 10,
+        "integrity_checks": 0
+      },
+      {
+        "suite": "all-years-browser",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "duration_ms": 10101,
+        "status": "PASS",
+        "receipt_sha256": "2b8955fdea66d25a6530996994807cac4824da3e537f95cd899b2efec3d9d639",
+        "tests": 5,
+        "integrity_checks": 0
+      }
+    ],
+    "expected_suites": 5,
+    "completed_suites": 5,
+    "passed_tests": 28,
+    "error": null
+  },
+  "build": {
+    "index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+    "tests": 28,
+    "derived_checks": 948
+  },
+  "selftests": 17,
+  "skips": 0,
+  "compared_flow_values": 3832,
+  "sort_column_direction_checks": 54,
+  "diagnostics": "reports/tests/ci/run-2026-09-10T03-36-32-925Z-92936",
+  "usage": "Unknown"
+}

@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,11 +49,27 @@ jobs:
           fi
 
       - name: Build
+        timeout-minutes: 5
         run: npm run build
         env:
           VITE_BASE_PATH: /us-trade-partners/
 
+      - name: Run critical regression checks
+        timeout-minutes: 12
+        run: npm run test:critical
+
+      - name: Upload critical test diagnostics
+        if: always()
+        timeout-minutes: 5
+        uses: actions/upload-artifact@v4
+        with:
+          name: critical-test-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/tests/ci/
+          retention-days: 7
+          if-no-files-found: warn
+
       - name: Upload Pages artifact
+        if: success()
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist

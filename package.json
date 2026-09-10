@@ -9,6 +9,7 @@
     "build": "tsc -b && vite build && node scripts/generate-routes.mjs && node scripts/check-methodology.mjs",
     "preview": "vite preview",
     "gen:types": "node scripts/gen-types.mjs",
+    "test:critical": "node tests/e2e/critical-ci.mjs",
     "screenshots": "node scripts/screenshots.mjs",
     "payload": "node scripts/measure-payload.mjs"
   },

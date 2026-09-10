@@ -1,0 +1,109 @@
+{
+  "cases": 17,
+  "passed": 17,
+  "failed": 0,
+  "results": [
+    {
+      "case": "success",
+      "status": "PASS",
+      "actual_exit": 0,
+      "expected_exit": 0
+    },
+    {
+      "case": "child-exit",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "zero",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "skip",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "mismatch",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "count",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "missing",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "malformed",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "timeout",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "descendant-timeout",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "stale",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "browser",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "integrity",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "override-BASE_URL",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "override-ALL_FILTER",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "override-TABLE_FILTER",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    },
+    {
+      "case": "override-TEST_REPORT_DIR",
+      "status": "PASS",
+      "actual_exit": 1,
+      "expected_exit": 1
+    }
+  ]
+}

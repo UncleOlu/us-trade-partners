@@ -11,7 +11,7 @@ const filter=process.env.ALL_FILTER?new RegExp(process.env.ALL_FILTER):null;
 function test(name,fn){if(!filter||filter.test(name))registerTest(name,fn);}
 const server=live?null:await startStaticServer();
 const base=live?live.replace(/\/?$/,'/'):server.baseUrl;
-const report=`reports/tests/all-years/${live?'live':'local'}`;fs.mkdirSync(report,{recursive:true});
+const report=process.env.TEST_REPORT_DIR??`reports/tests/all-years/${live?'live':'local'}`;fs.mkdirSync(report,{recursive:true});
 const browser=await chromium.launch();
 const errors=[];
 async function pageTest(fn,viewport={width:1280,height:900}){const context=await browser.newContext({viewport,acceptDownloads:true});const page=await context.newPage();page.setDefaultTimeout(10000);const own=[];page.on('pageerror',e=>own.push(e.message));page.on('console',m=>{if(m.type()==='error')own.push(m.text());});try{const out=await fn(page);assert.deepEqual(own,[]);return out;}finally{errors.push(...own);await context.close();}}

@@ -9,7 +9,7 @@ import {annualRows,expectedOrder,flowValue,groupIndex,hashes} from './lib/sortin
 const filter=process.env.TABLE_FILTER?new RegExp(process.env.TABLE_FILTER):null;
 function test(name,fn){if(!filter||filter.test(name))registerTest(name,fn);}
 const live=process.env.BASE_URL,server=live?null:await startStaticServer(),base=live?live.replace(/\/?$/,'/'):server.baseUrl;
-const output=`reports/tests/table-sorting/${live?'live':'local'}`;fs.mkdirSync(output,{recursive:true});
+const output=process.env.TEST_REPORT_DIR??`reports/tests/table-sorting/${live?'live':'local'}`;fs.mkdirSync(output,{recursive:true});
 const browser=await chromium.launch(),errors=[],checks=[];
 const configs=[
  {kind:'home',route:'?year=2013',selector:'.home-ranking-table',id:'code',columns:{Rank:'rank',Partner:'name',Imports:'imports',Exports:'exports',Balance:'balance','Total trade value':'total_trade_value'},csv:'home'},
