@@ -70,3 +70,7 @@ The owner asked for every decision to be judged against what the best expert in 
 3. Styling a library internal class. The legend size now goes through the chart component's style prop, and the series names are defined once. Trade-off disclosed: the single source is the sort label table in `src/lib/sorting.ts`, with `src/lib/labels.ts` deriving the chart names from it, because two unit suites load the sorting module standalone and cannot follow a runtime import. The reverse direction was asked for and is not possible without changing those suites.
 
 Smaller findings left as they are, for a later release: no emphasized zero line on the balance chart, the media query hook uses state plus an effect rather than a store subscription, and the empty-state heading echoes the full query without a length cap. The P2 suite now also asserts non-overlapping, unrotated labels of at least 12px on both axes at both widths, and that selecting a bar at 390px selects its group. Every check in the table above was rerun on the reworked tree, including the 25-case robustness suite.
+
+## Deployment, 2026-09-10
+
+Pull request 2 merged into main as 6ba9504. Pages run [34501462385](https://github.com/UncleOlu/us-trade-partners/actions/runs/34501462385) built, passed the critical gate, and deployed. The live index returns HTTP 200 and its SHA256 matches the tested build hash above. No snapshot, dependency, or pipeline change.
