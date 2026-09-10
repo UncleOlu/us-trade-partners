@@ -1,0 +1,200 @@
+{
+  "build": {
+    "target": "local",
+    "expected_local_index_sha256": "0631c7ecdd49cabaa53c1c8960449377c323f84559173e42f39ddf87db8c15fa",
+    "index_modified": "2026-09-10T16:58:38.948Z",
+    "snapshot": "20260909T091429Z-c638aff167ea"
+  },
+  "results": [
+    {
+      "name": "invalid year/rank query recovery agrees with visible state",
+      "status": "PASS",
+      "ms": 2897
+    },
+    {
+      "name": "valid year/rank, header and hub navigation keep context",
+      "status": "PASS",
+      "ms": 1306
+    },
+    {
+      "name": "back and forward restore year with matching values",
+      "status": "PASS",
+      "ms": 719
+    },
+    {
+      "name": "section choice survives share/refresh and exact-value clicks are separate",
+      "status": "PASS",
+      "ms": 1792
+    },
+    {
+      "name": "data failure 404: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 777
+    },
+    {
+      "name": "data failure 500: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 757
+    },
+    {
+      "name": "data failure invalid JSON: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 710
+    },
+    {
+      "name": "data failure wrong shape: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 716
+    },
+    {
+      "name": "data failure wrong snapshot: visible recovery restores pinned snapshot",
+      "status": "PASS",
+      "ms": 733
+    },
+    {
+      "name": "data timeout is bounded and retry restores the page",
+      "status": "PASS",
+      "ms": 198
+    },
+    {
+      "name": "methodology headers timeout is bounded and retry restores content",
+      "status": "PASS",
+      "ms": 148
+    },
+    {
+      "name": "methodology body timeout is bounded and retry restores content",
+      "status": "PASS",
+      "ms": 153
+    },
+    {
+      "name": "methodology normal and boundary recovery links keep context",
+      "status": "PASS",
+      "ms": 1729
+    },
+    {
+      "name": "failed lazy page shows recovery rather than a blank app",
+      "status": "PASS",
+      "ms": 674
+    },
+    {
+      "name": "select stays mounted and focused during rapid year changes; latest response wins",
+      "status": "PASS",
+      "ms": 651
+    },
+    {
+      "name": "slider stays mounted and focused during rapid year changes; latest response wins",
+      "status": "PASS",
+      "ms": 677
+    },
+    {
+      "name": "missing reasons are available by tap and keyboard",
+      "status": "PASS",
+      "ms": 619
+    },
+    {
+      "name": "hub search keeps all partners and sections reachable",
+      "status": "PASS",
+      "ms": 715
+    },
+    {
+      "name": "home filtered search preserves totals and full-export scope",
+      "status": "PASS",
+      "ms": 666
+    },
+    {
+      "name": "map has one tab stop, arrow navigation, escape and keyboard selection",
+      "status": "PASS",
+      "ms": 648
+    },
+    {
+      "name": "atlas failure offers retry and keeps table usable",
+      "status": "PASS",
+      "ms": 733
+    },
+    {
+      "name": "exact KPI values fit the card and keep keyboard focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 320,
+          "left": 29,
+          "right": 230.171875,
+          "cardLeft": 16,
+          "cardRight": 304
+        },
+        {
+          "width": 390,
+          "left": 29,
+          "right": 230.171875,
+          "cardLeft": 16,
+          "cardRight": 374
+        },
+        {
+          "width": 640,
+          "left": 41,
+          "right": 231.65625,
+          "cardLeft": 24,
+          "cardRight": 616
+        },
+        {
+          "width": 1280,
+          "left": 89,
+          "right": 381.71875,
+          "cardLeft": 72,
+          "cardRight": 634
+        }
+      ],
+      "ms": 2402
+    },
+    {
+      "name": "table headers align with fixed year cells and scroll with product names",
+      "status": "PASS",
+      "detail": [
+        {
+          "width": 320,
+          "label": "Trade by year",
+          "headerLeft": 34,
+          "bodyLeft": 34,
+          "regionLeft": 33,
+          "scrollLeft": 328
+        },
+        {
+          "width": 320,
+          "label": "Product groups",
+          "headerLeft": -294,
+          "bodyLeft": -294,
+          "regionLeft": 33,
+          "scrollLeft": 328
+        },
+        {
+          "width": 390,
+          "label": "Trade by year",
+          "headerLeft": 34,
+          "bodyLeft": 34,
+          "regionLeft": 33,
+          "scrollLeft": 258
+        },
+        {
+          "width": 390,
+          "label": "Product groups",
+          "headerLeft": -224,
+          "bodyLeft": -224,
+          "regionLeft": 33,
+          "scrollLeft": 258
+        }
+      ],
+      "ms": 1452
+    },
+    {
+      "name": "product group max scroll reveals the full last numeric column",
+      "status": "PASS",
+      "ms": 1247
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 13132
+    }
+  ],
+  "pageErrors": []
+}

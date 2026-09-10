@@ -24,11 +24,14 @@ import { useTableSort } from '../lib/useTableSort';
 import { sortRows, fieldValue } from '../lib/sorting';
 import { SortableHeading, SortStatus } from '../components/SortableHeading';
 import { toCsv, downloadCsv } from '../lib/csv';
+import { filteredCsvHeaders, filteredCsvRowPrefix } from '../lib/partnerCsv';
 import { contextUrl, useUrlState, RANK_FIELDS, RANK_LABELS } from '../lib/urlState';
 import { SECTION_LABELS } from '../lib/sectionLabels';
 import { UrlNotice } from '../components/UrlNotice';
 import { TradeTotals } from '../components/TradeTotals';
 import { FLOW_LABELS } from '../lib/labels';
+import { usePartnerList } from '../lib/usePartnerList';
+import { PartnerSearchField, SearchFeedback, ResultsToolbar, PartnerEmptyState } from '../components/PartnerListControls';
 import type { Section, FlowValue, DerivedValue } from '../types/generated';
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
@@ -92,6 +95,8 @@ export function SectionPage(): JSX.Element {
   const ranked = useMemo(() => sortRows(yearEntry?.partners ?? [], (p) => fieldValue(p, rankField), 'desc', (p) => p.code), [yearEntry, rankField]);
   const ranks = useMemo(() => new Map(ranked.filter((p) => p[rankField].value !== null).map((p, i) => [p.code, i + 1])), [ranked, rankField]);
   const sorted = useMemo(() => sortRows(ranked, (p) => sort.key === 'rank' ? ranks.get(p.code) : fieldValue(p, sort.key), sort.direction, (p) => p.code), [ranked, ranks, sort.key, sort.direction]);
+  const list = usePartnerList({ paramKey: 'section_q', sorted });
+  const { query, search, normalizedQuery, matches, displayed, showAll, setShowAll, inputRef, resetSearch } = list;
 
   if (meta.status === 'error') return <DataError error={meta.error} />;
   if (state.status === 'error') return <DataError error={state.error} />;
@@ -101,38 +106,46 @@ export function SectionPage(): JSX.Element {
   const label = periodLabel(year, years);
   const csvPeriod = periodCsv(year, years);
 
+  const partnerCells = (p: (typeof sorted)[number]) => [
+    p.code,
+    p.name,
+    p.kind,
+    p.imports.status,
+    p.imports.status === 'observed' || p.imports.status === 'confirmed_zero' ? p.imports.value : '',
+    p.exports.status,
+    p.exports.status === 'observed' || p.exports.status === 'confirmed_zero' ? p.exports.value : '',
+    p.balance.status,
+    p.balance.status === 'observed' ? p.balance.value : '',
+    p.total_trade_value.status,
+    p.total_trade_value.status === 'observed' ? p.total_trade_value.value : '',
+  ];
+  const partnerHeaders = [
+    'code',
+    'name',
+    'kind',
+    'imports_status',
+    'imports_usd',
+    'exports_status',
+    'exports_usd',
+    'balance_status',
+    'balance_usd',
+    'total_trade_value_status',
+    'total_trade_value_usd',
+  ];
   const download = () => {
     if (!yearEntry) return;
-    const rows = sorted.map((p) => [
-      ...csvPeriod.cells, p.code,
-      p.name,
-      p.kind,
-      p.imports.status,
-      p.imports.status === 'observed' || p.imports.status === 'confirmed_zero' ? p.imports.value : '',
-      p.exports.status,
-      p.exports.status === 'observed' || p.exports.status === 'confirmed_zero' ? p.exports.value : '',
-      p.balance.status,
-      p.balance.status === 'observed' ? p.balance.value : '',
-      p.total_trade_value.status,
-      p.total_trade_value.status === 'observed' ? p.total_trade_value.value : '',
-    ]);
-    const csv = toCsv(
-      [
-        ...csvPeriod.headers, 'code',
-        'name',
-        'kind',
-        'imports_status',
-        'imports_usd',
-        'exports_status',
-        'exports_usd',
-        'balance_status',
-        'balance_usd',
-        'total_trade_value_status',
-        'total_trade_value_usd',
-      ],
-      rows,
-    );
+    const rows = sorted.map((p) => [...csvPeriod.cells, ...partnerCells(p)]);
+    const csv = toCsv([...csvPeriod.headers, ...partnerHeaders], rows);
     downloadCsv(`section_${section.section.id}_${year}.csv`, csv);
+  };
+  const downloadFiltered = () => {
+    if (!yearEntry) return;
+    const rows = matches.map((p) => [
+      ...filteredCsvRowPrefix(csvPeriod.cells, query.trim(), sort.key, sort.direction, rankField, ranks.get(p.code) ?? ''),
+      ...partnerCells(p),
+    ]);
+    const csv = toCsv(filteredCsvHeaders(csvPeriod.headers, partnerHeaders), rows);
+    downloadCsv(`section_${section.section.id}_${year}_filtered.csv`, csv);
   };
 
   return (
@@ -163,7 +176,9 @@ export function SectionPage(): JSX.Element {
           ))}
         </select>
         </div>
+        <PartnerSearchField id="section-search" value={query} onChange={search.setValue} inputRef={inputRef} />
       </div>
+      <SearchFeedback text={normalizedQuery ? `${matches.length} matching partners` : `${ranked.length} partners available`} />
 
       {year === 'all' && <PeriodNote />}
       {yearEntry && <section aria-label="Reconciliation universe totals" className="world-total-card">
@@ -177,11 +192,13 @@ export function SectionPage(): JSX.Element {
         <button type="button" onClick={download}>
           Download CSV
         </button>
+        {normalizedQuery && <button type="button" onClick={downloadFiltered}>Download filtered results CSV</button>}
       </div>
-      <label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label>
+      <ResultsToolbar showExact={showExact} onToggleExact={setShowExact} displayedCount={displayed.length} totalCount={ranked.length}
+        periodLabel={label} matchCount={matches.length} hasQuery={!!normalizedQuery} showAll={showAll} onToggleShowAll={() => setShowAll(!showAll)} onClearSearch={resetSearch} />
       <SortStatus sort={sort} />
-      <p className="chart-note">Rank 1 has the largest {RANK_LABELS[rankField].toLowerCase()}, regardless of row order.</p>
-      <TableScroll label={`Partners in section ${section.section.id} for ${label}`}>
+      <p className="chart-note">Rank 1 has the largest {RANK_LABELS[rankField].toLowerCase()} across all {ranked.length} partners, regardless of row order or visible limit.</p>
+      {matches.length === 0 ? <PartnerEmptyState query={query} onClear={resetSearch} /> : <TableScroll label={`Partners in section ${section.section.id} for ${label}`}>
         <table className="section-ranking-table">
           <thead>
             <tr>
@@ -189,7 +206,7 @@ export function SectionPage(): JSX.Element {
             </tr>
           </thead>
           <tbody>
-            {sorted.map((p) => (
+            {displayed.map((p) => (
               <tr key={p.code}>
                 <td>{ranks.get(p.code) ?? 'Not ranked'}</td>
                 <td>
@@ -213,7 +230,7 @@ export function SectionPage(): JSX.Element {
             ))}
           </tbody>
         </table>
-      </TableScroll>
+      </TableScroll>}
       </section>
     </div>
   );

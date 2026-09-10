@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "name": "section default view shows 25 of M rows, Show all reveals the independent default order, Show first 25 returns and keeps focus",
+      "status": "PASS",
+      "ms": 782
+    },
+    {
+      "name": "section search filters to the independent match set, reports feedback and status counts, hides the toggle, and section_q survives refresh, Back, a partner link and a Hub round trip",
+      "status": "PASS",
+      "ms": 1344
+    },
+    {
+      "name": "both CSV scopes stay correct with an active section search and sort on 2013",
+      "status": "PASS",
+      "ms": 1269
+    },
+    {
+      "name": "filtered CSV for year=all uses independent all-years section sums for CANADA (1220)",
+      "status": "PASS",
+      "ms": 647
+    },
+    {
+      "name": "section empty state names the query, has guidance, and its Clear search returns focus and the default 25 rows",
+      "status": "PASS",
+      "ms": 666
+    },
+    {
+      "name": "section page at 390px stays under 6,000px tall with no horizontal document overflow and an internally scrolling table region",
+      "status": "PASS",
+      "ms": 700
+    },
+    {
+      "name": "partner trend chart draws a .recharts-reference-line at the value-axis $0 tick",
+      "status": "PASS",
+      "ms": 619
+    },
+    {
+      "name": "empty-state headings on home and section cap the query at 60 characters plus an ellipsis while the field and URL keep the full query",
+      "status": "PASS",
+      "ms": 2242
+    }
+  ]
+}

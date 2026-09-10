@@ -39,7 +39,7 @@ const chartPaths=async page=>{await page.mouse.move(0,0);return page.evaluate(as
  });};
 function assertCharts(actual,expected){assert.equal(actual.length,expected.length);for(let i=0;i<actual.length;i++){const tokenize=s=>s.match(/[a-zA-Z]|[-+]?(?:\d*\.)?\d+(?:e[-+]?\d+)?/g);const a=tokenize(actual[i]),b=tokenize(expected[i]);assert.equal(a.length,b.length);for(let j=0;j<a.length;j++){if(Number.isNaN(Number(a[j]))||Number.isNaN(Number(b[j])))assert.equal(a[j],b[j]);else assert.ok(Math.abs(Number(a[j])-Number(b[j]))<=1e-8,`Chart coordinate ${i}/${j} changed: actual=${a[j]} expected=${b[j]} delta=${Math.abs(Number(a[j])-Number(b[j]))}`);}}}
 for(const config of configs)test(`${config.kind}: every column both directions matches exact input and CSV order`,()=>withPage(async page=>{
- await go(page,config.route);const table=page.locator(config.selector),rows=annualRows(config.kind,config.code,2013,'I');if(config.kind==='home')await page.getByRole('button',{name:/Show all/}).click();
+ await go(page,config.route);const table=page.locator(config.selector),rows=annualRows(config.kind,config.code,2013,'I');if(config.kind==='home'||config.kind==='section')await page.getByRole('button',{name:/Show all/}).click();
  const initialCharts=await chartPaths(page),totals=await page.locator('.world-total-card').allTextContents();
  assert.equal(await table.locator('thead button').count(),Object.keys(config.columns).length);
  for(const [label,key]of Object.entries(config.columns))for(const direction of ['asc','desc']){
