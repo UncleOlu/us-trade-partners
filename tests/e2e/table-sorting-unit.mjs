@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import ts from 'typescript';
+import {test,runAll,formatResults} from './lib/harness.mjs';
+import {groupIndex,read} from './lib/sorting-expected.mjs';
+const js=ts.transpileModule(fs.readFileSync('src/lib/sorting.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const {sortRows,groupOrder,fieldValue}=await import('data:text/javascript;base64,'+Buffer.from(js).toString('base64'));
+const ids=rows=>rows.map(r=>r.id);
+test('negative zero exact large integers and missing values sort correctly both ways',()=>{const rows=[{id:'missing',v:null},{id:'positive',v:2},{id:'zero',v:0},{id:'negative',v:-9},{id:'big-b',v:9007199254740991},{id:'big-a',v:9007199254740990},{id:'undefined',v:undefined}];assert.deepEqual(ids(sortRows(rows,r=>r.v,'asc',r=>r.id)),['negative','zero','positive','big-a','big-b','missing','undefined']);assert.deepEqual(ids(sortRows(rows,r=>r.v,'desc',r=>r.id)),['big-b','big-a','positive','zero','negative','missing','undefined']);});
+test('numeric ties keep stable identity order in both directions without mutation',()=>{const rows=[{id:'b',v:0},{id:'a',v:0},{id:'d',v:null},{id:'c',v:null}];const copy=structuredClone(rows);for(const d of ['asc','desc'])assert.deepEqual(ids(sortRows(rows,r=>r.v,d,r=>r.id)),['a','b','c','d']);assert.deepEqual(rows,copy);});
+test('mixed-case text compares without case and blank descriptions stay last',()=>{const rows=[{id:'b',v:'ALPHA'},{id:'a',v:'alpha'},{id:'c',v:'Beta'},{id:'f',v:' '},{id:'e',v:null},{id:'d',v:''}];assert.deepEqual(ids(sortRows(rows,r=>r.v,'asc',r=>r.id)),['a','b','c','d','e','f']);assert.deepEqual(ids(sortRows(rows,r=>r.v,'desc',r=>r.id)),['c','a','b','d','e','f']);});
+test('group sort follows independent canonical HS metadata',()=>{const groups=read('hs_sections.json').groups;for(const g of groups){const id=g.id??g.section_id;assert.equal(groupOrder(id),groupIndex(id));}assert.equal(groupOrder('INVALID'),null);});
+test('observed zero and confirmed zero stay numeric; absent and NA stay missing',()=>{for(const status of ['observed','confirmed_zero'])assert.equal(fieldValue({imports:{status,value:0}},'imports'),0);for(const status of ['absent','not_applicable'])assert.equal(fieldValue({imports:{status,value:null}},'imports'),null);});
+const results=await runAll();console.log(formatResults(results));fs.mkdirSync('reports/tests/table-sorting',{recursive:true});fs.writeFileSync('reports/tests/table-sorting/unit-results.json',JSON.stringify({results},null,2)+'\n');if(results.some(r=>r.status!=='PASS'))process.exitCode=1;

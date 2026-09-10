@@ -20,8 +20,11 @@ import { isUsable } from '../lib/status';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
 import { aggregateSection, periodLabel, periodCsv } from '../lib/aggregate';
 import { PeriodNote } from '../components/PeriodNote';
+import { useTableSort } from '../lib/useTableSort';
+import { sortRows, fieldValue } from '../lib/sorting';
+import { SortableHeading, SortStatus } from '../components/SortableHeading';
 import { toCsv, downloadCsv } from '../lib/csv';
-import { contextUrl, useUrlState, RANK_FIELDS, RANK_LABELS, type RankField } from '../lib/urlState';
+import { contextUrl, useUrlState, RANK_FIELDS, RANK_LABELS } from '../lib/urlState';
 import { SECTION_LABELS } from '../lib/sectionLabels';
 import { UrlNotice } from '../components/UrlNotice';
 import { TradeTotals } from '../components/TradeTotals';
@@ -29,11 +32,6 @@ import type { Section, FlowValue, DerivedValue } from '../types/generated';
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
   return isUsable(flow) ? flow.value : null;
-}
-
-function rankValue(row: Section['years'][number]['partners'][number], field: RankField): number {
-  const v = row[field];
-  return v.status === 'observed' || v.status === 'confirmed_zero' ? v.value : -Infinity;
 }
 
 function SectionTrend({ section }: { section: Section }): JSX.Element {
@@ -87,14 +85,12 @@ export function SectionPage(): JSX.Element {
 
   const years = meta.status === 'ready' ? meta.data.configured_coverage.years : undefined;
   const { year, rank: rankField, params, notice, update } = useUrlState(years);
+  const sort = useTableSort('section', rankField, 'desc');
   const yearEntry = useMemo(() => state.status === 'ready' && years ? year === 'all' ? aggregateSection(state.data, years) : state.data.years.find((y) => y.year === year) : undefined, [state, years, year]);
 
-  const ranked = useMemo(() => {
-    if (!yearEntry) return [];
-    const list = [...yearEntry.partners];
-    list.sort((a, b) => rankValue(b, rankField) - rankValue(a, rankField));
-    return list;
-  }, [yearEntry, rankField]);
+  const ranked = useMemo(() => sortRows(yearEntry?.partners ?? [], (p) => fieldValue(p, rankField), 'desc', (p) => p.code), [yearEntry, rankField]);
+  const ranks = useMemo(() => new Map(ranked.filter((p) => p[rankField].value !== null).map((p, i) => [p.code, i + 1])), [ranked, rankField]);
+  const sorted = useMemo(() => sortRows(ranked, (p) => sort.key === 'rank' ? ranks.get(p.code) : fieldValue(p, sort.key), sort.direction, (p) => p.code), [ranked, ranks, sort.key, sort.direction]);
 
   if (meta.status === 'error') return <DataError error={meta.error} />;
   if (state.status === 'error') return <DataError error={state.error} />;
@@ -106,7 +102,7 @@ export function SectionPage(): JSX.Element {
 
   const download = () => {
     if (!yearEntry) return;
-    const rows = ranked.map((p) => [
+    const rows = sorted.map((p) => [
       ...csvPeriod.cells, p.code,
       p.name,
       p.kind,
@@ -158,7 +154,7 @@ export function SectionPage(): JSX.Element {
         </div>
         <div className="field control-field">
         <label htmlFor="section-rank-field">Rank by</label>
-        <select id="section-rank-field" value={rankField} onChange={(e) => update({ rank: e.target.value })}>
+        <select id="section-rank-field" value={rankField} onChange={(e) => sort.set(e.target.value, 'desc')}>
           {RANK_FIELDS.map((f) => (
             <option key={f} value={f}>
               {RANK_LABELS[f]}
@@ -176,29 +172,25 @@ export function SectionPage(): JSX.Element {
       <div className="panel"><SectionTrend section={section} /></div>
       <section className="panel" aria-label="Section partner ranking">
       <div className="section-heading-row">
-        <h2>Partners ranked by {RANK_LABELS[rankField].toLowerCase()}, {label}</h2>
+        <h2>Partners, {label}</h2>
         <button type="button" onClick={download}>
           Download CSV
         </button>
       </div>
       <label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label>
+      <SortStatus sort={sort} />
+      <p className="chart-note">Rank 1 has the largest {RANK_LABELS[rankField].toLowerCase()}, regardless of row order.</p>
       <TableScroll label={`Partners in section ${section.section.id} for ${label}`}>
-        <table>
+        <table className="section-ranking-table">
           <thead>
             <tr>
-              <th>Rank</th>
-              <th>Partner</th>
-              <th>Kind</th>
-              <th>Imports</th>
-              <th>Exports</th>
-              <th>Balance</th>
-              <th>Total trade value</th>
+              {['rank', 'name', 'kind', 'imports', 'exports', 'balance', 'total_trade_value'].map((column) => <SortableHeading key={column} column={column} sort={sort} />)}
             </tr>
           </thead>
           <tbody>
-            {ranked.map((p, i) => (
+            {sorted.map((p) => (
               <tr key={p.code}>
-                <td>{year === 'all' && p[rankField].value === null ? 'Not ranked' : i + 1}</td>
+                <td>{ranks.get(p.code) ?? 'Not ranked'}</td>
                 <td>
                   <Link to={contextUrl(`/partner/${p.code}`, params, { section: section.section.id })}>{p.name}</Link> ({p.code})
                   {p.kind === 'aggregate' && <span className="aggregate-tag"> aggregate</span>}

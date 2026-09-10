@@ -21,6 +21,9 @@ import { MoneyCell } from '../components/MoneyCell';
 import { TableScroll } from '../components/TableScroll';
 import { isUsable } from '../lib/status';
 import { formatAutoUsd, formatExactUsd } from '../lib/units';
+import { useTableSort } from '../lib/useTableSort';
+import { sortRows, fieldValue, groupOrder } from '../lib/sorting';
+import { SortableHeading, SortStatus } from '../components/SortableHeading';
 import { toCsv, downloadCsv } from '../lib/csv';
 import { SECTION_LABELS } from '../lib/sectionLabels';
 import { useUrlState } from '../lib/urlState';
@@ -41,8 +44,10 @@ function YearsTable({
   partner: PartnerView;
   showExact: boolean;
 }): JSX.Element {
+  const sort = useTableSort('years', 'year', 'asc');
+  const sorted = useMemo(() => sortRows(partner.years, (row) => fieldValue(row, sort.key), sort.direction, (row) => String(row.year)), [partner.years, sort.key, sort.direction]);
   const download = () => {
-    const rows = partner.years?.map((y) => [
+    const rows = sorted.map((y) => [
       y.year,
       y.imports.status,
       y.imports.status === 'observed' || y.imports.status === 'confirmed_zero' ? y.imports.value : '',
@@ -80,19 +85,16 @@ function YearsTable({
           Download CSV
         </button>
       </div>
+      <SortStatus sort={sort} />
       <TableScroll label="Trade by year">
         <table className="partner-years-table">
           <thead>
             <tr>
-              <th>Year</th>
-              <th>Imports</th>
-              <th>Exports</th>
-              <th>Balance</th>
-              <th>Total trade value</th>
+              {['year', 'imports', 'exports', 'balance', 'total_trade_value'].map((column) => <SortableHeading key={column} column={column} sort={sort} />)}
             </tr>
           </thead>
           <tbody>
-            {partner.years?.map((y) => (
+            {sorted.map((y) => (
               <tr key={y.year}>
                 <td>
                   {y.year}
@@ -228,13 +230,15 @@ function GroupsSection({
   onSelectGroup: (id: string) => void;
   showExact: boolean;
 }): JSX.Element {
+  const sort = useTableSort('groups', 'group', 'asc');
   const yearSections = partner.sections.find((s) => s.year === year);
+  const sorted = useMemo(() => sortRows(yearSections?.groups ?? [], (row) => sort.key === 'group' ? groupOrder(row.section_id) : fieldValue(row, sort.key), sort.direction, (row) => row.section_id), [yearSections, sort.key, sort.direction]);
   const label = periodLabel(year, partner.periodYears);
   const csvPeriod = periodCsv(year, partner.periodYears);
 
   const download = () => {
     if (!yearSections) return;
-    const rows = yearSections.groups.map((g) => [
+    const rows = sorted.map((g) => [
       ...csvPeriod.cells, g.section_id,
       g.imports.status,
       g.imports.status === 'observed' || g.imports.status === 'confirmed_zero' ? g.imports.value : '',
@@ -297,18 +301,16 @@ function GroupsSection({
           <Bar dataKey="exports" fill="#2980b9" cursor="pointer" />
         </BarChart>
       </ResponsiveContainer>
+      <SortStatus sort={sort} />
       <TableScroll label="Product groups">
         <table className="partner-groups-table">
           <thead>
             <tr>
-              <th>Group</th>
-              <th>Imports</th>
-              <th>Exports</th>
-              <th>Total trade value</th>
+              {['group', 'imports', 'exports', 'total_trade_value'].map((column) => <SortableHeading key={column} column={column} sort={sort} />)}
             </tr>
           </thead>
           <tbody>
-            {yearSections.groups.map((g) => (
+            {sorted.map((g) => (
               <tr
                 key={g.section_id}
                 className={g.section_id === selectedGroup ? 'selected-row' : undefined}
@@ -343,23 +345,13 @@ function ChapterTable({
   groupId: string;
   showExact: boolean;
 }): JSX.Element {
+  const sort = useTableSort('chapters', 'total_trade_value', 'desc');
   const yearSections = partner.sections.find((s) => s.year === year);
   const label = periodLabel(year, partner.periodYears);
   const csvPeriod = periodCsv(year, partner.periodYears);
   const group = yearSections?.groups.find((g) => g.section_id === groupId);
 
-  const sorted = useMemo(() => {
-    if (!group) return [];
-    const usable = group.chapters.filter((c) => c.total_trade_value.status === 'observed');
-    const rest = group.chapters.filter((c) => c.total_trade_value.status !== 'observed');
-    usable.sort((a, b) => {
-      const av = a.total_trade_value.status === 'observed' ? a.total_trade_value.value : 0;
-      const bv = b.total_trade_value.status === 'observed' ? b.total_trade_value.value : 0;
-      return bv - av;
-    });
-    rest.sort((a, b) => a.chapter.localeCompare(b.chapter));
-    return [...usable, ...rest];
-  }, [group]);
+  const sorted = useMemo(() => sortRows(group?.chapters ?? [], (row) => fieldValue(row, sort.key), sort.direction, (row) => row.chapter), [group, sort.key, sort.direction]);
 
   const download = () => {
     const rows = sorted.map((c) => [
@@ -407,16 +399,12 @@ function ChapterTable({
           Download CSV
         </button>
       </div>
-      <p>Sorted by total trade value, highest first. Rows without an observed total sort after, by chapter.</p>
+      <SortStatus sort={sort} />
       <TableScroll label="Chapter details">
         <table className="partner-chapters-table">
           <thead>
             <tr>
-              <th>Chapter</th>
-              <th>Description</th>
-              <th>Imports</th>
-              <th>Exports</th>
-              <th>Total trade value</th>
+              {['chapter', 'description', 'imports', 'exports', 'total_trade_value'].map((column) => <SortableHeading key={column} column={column} sort={sort} />)}
             </tr>
           </thead>
           <tbody>

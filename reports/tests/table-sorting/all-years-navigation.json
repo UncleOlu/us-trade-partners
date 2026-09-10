@@ -1,0 +1,12 @@
+{
+  "sourceIndexSHA256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+  "target": "local",
+  "results": [
+    {
+      "name": "all period survives Hub partner section refresh navigation and browser Back",
+      "status": "PASS",
+      "ms": 1869
+    }
+  ],
+  "errors": []
+}

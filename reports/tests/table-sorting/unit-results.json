@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "name": "negative zero exact large integers and missing values sort correctly both ways",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "numeric ties keep stable identity order in both directions without mutation",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "mixed-case text compares without case and blank descriptions stay last",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "group sort follows independent canonical HS metadata",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "observed zero and confirmed zero stay numeric; absent and NA stay missing",
+      "status": "PASS",
+      "ms": 0
+    }
+  ]
+}

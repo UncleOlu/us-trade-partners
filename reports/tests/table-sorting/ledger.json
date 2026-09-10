@@ -1,0 +1,76 @@
+{
+  "all_years_navigation_cases": 1,
+  "annual_regression_cases": 6,
+  "column_direction_comparisons": 54,
+  "complete_order_rows_compared": 6492,
+  "final_index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+  "latest": {
+    "chapters: every column both directions matches exact input and CSV order": {
+      "file": "local/results-final-affected.json",
+      "status": "PASS"
+    },
+    "groups: every column both directions matches exact input and CSV order": {
+      "file": "local/results-final-affected.json",
+      "status": "PASS"
+    },
+    "home sorting preserves financial rank and full export under search and visible limit": {
+      "file": "local/results-chart-check.json",
+      "status": "PASS"
+    },
+    "home: every column both directions matches exact input and CSV order": {
+      "file": "local/results-initial.json",
+      "status": "PASS"
+    },
+    "invalid sort keys and directions normalize with visible explanation": {
+      "file": "local/results-initial.json",
+      "status": "PASS"
+    },
+    "rank dropdown changes selected sort; independent table choices survive Hub navigation": {
+      "file": "local/results-initial.json",
+      "status": "PASS"
+    },
+    "section: every column both directions matches exact input and CSV order": {
+      "file": "local/results-initial.json",
+      "status": "PASS"
+    },
+    "sort controls preserve centered figures, nowrap years and contained mobile scrolling": {
+      "file": "local/results-final-affected.json",
+      "status": "PASS"
+    },
+    "sort keyboard state survives refresh Back and year changes; charts and group selection stay stable": {
+      "file": "local/results-initial.json",
+      "status": "PASS"
+    },
+    "years: every column both directions matches exact input and CSV order": {
+      "file": "local/results-final-affected.json",
+      "status": "PASS"
+    }
+  },
+  "production": "pending",
+  "runs": [
+    {
+      "collected": 10,
+      "failed": 5,
+      "file": "local/results-initial.json",
+      "index_sha256": "d50a993246baf8540eca94704c66709260a779dcf66ad3831966f0ed3d3ad4dd",
+      "passed": 5
+    },
+    {
+      "collected": 4,
+      "failed": 3,
+      "file": "local/results-chart-check.json",
+      "index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+      "passed": 1
+    },
+    {
+      "collected": 4,
+      "failed": 0,
+      "file": "local/results-final-affected.json",
+      "index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+      "passed": 4
+    }
+  ],
+  "unique_browser_cases": 10,
+  "unit_passed": 5,
+  "unit_tests": 5
+}

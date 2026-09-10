@@ -1,0 +1,6 @@
+[PASS] years: every column both directions matches exact input and CSV order (1698ms) detail={"directions":10,"rows":13}
+[PASS] groups: every column both directions matches exact input and CSV order (1323ms) detail={"directions":8,"rows":22}
+[PASS] chapters: every column both directions matches exact input and CSV order (1473ms) detail={"directions":10,"rows":5}
+[PASS] sort controls preserve centered figures, nowrap years and contained mobile scrolling (6897ms) detail={"tables":5,"widths":2,"extra320YearCheck":true}
+
+collected=4 passed=4 failed=0 not_run=0

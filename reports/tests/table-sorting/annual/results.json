@@ -1,0 +1,41 @@
+{
+  "build": {
+    "target": "local",
+    "expected_local_index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+    "index_modified": "2026-09-10T02:13:30.611Z",
+    "snapshot": "20260909T091429Z-c638aff167ea"
+  },
+  "results": [
+    {
+      "name": "invalid year/rank query recovery agrees with visible state",
+      "status": "PASS",
+      "ms": 2842
+    },
+    {
+      "name": "valid year/rank, header and hub navigation keep context",
+      "status": "PASS",
+      "ms": 1244
+    },
+    {
+      "name": "back and forward restore year with matching values",
+      "status": "PASS",
+      "ms": 682
+    },
+    {
+      "name": "select stays mounted and focused during rapid year changes; latest response wins",
+      "status": "PASS",
+      "ms": 633
+    },
+    {
+      "name": "slider stays mounted and focused during rapid year changes; latest response wins",
+      "status": "PASS",
+      "ms": 646
+    },
+    {
+      "name": "responsive layouts, focus and keyboard table scroll",
+      "status": "PASS",
+      "ms": 13255
+    }
+  ],
+  "pageErrors": []
+}

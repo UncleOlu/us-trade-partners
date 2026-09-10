@@ -1,0 +1,7 @@
+[PASS] negative zero exact large integers and missing values sort correctly both ways (0ms)
+[PASS] numeric ties keep stable identity order in both directions without mutation (1ms)
+[PASS] mixed-case text compares without case and blank descriptions stay last (0ms)
+[PASS] group sort follows independent canonical HS metadata (0ms)
+[PASS] observed zero and confirmed zero stay numeric; absent and NA stay missing (0ms)
+
+collected=5 passed=5 failed=0 not_run=0

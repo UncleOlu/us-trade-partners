@@ -1,0 +1,17 @@
+[FAIL] years: every column both directions matches exact input and CSV order reason=Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  [
+    'M100,231.59C126.167,231.567,152.333,231.543,178.5,231.448C204.667,231.354,230.833,211.894,257,211.894C283.167,211.894,309.333,227
+[FAIL] groups: every column both directions matches exact input and CSV order reason=Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  [
+    'M100,92.662C126.167,131.824,152.333,170.985,178.5,186.199C204.667,201.414,230.833,209.021,257,209.021C283.167,209.021,309.333,192
+[FAIL] chapters: every column both directions matches exact input and CSV order reason=Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  [
+    'M100,92.662C126.167,131.824,152.333,170.985,178.5,186.199C204.667,201.414,230.833,209.021,257,209.021C283.167,209.021,309.333,192
+[PASS] home sorting preserves financial rank and full export under search and visible limit
+Complete original diagnostic preserved outside publication.

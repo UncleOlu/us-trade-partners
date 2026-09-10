@@ -1,0 +1,8 @@
+[PASS] invalid year/rank query recovery agrees with visible state (2842ms)
+[PASS] valid year/rank, header and hub navigation keep context (1244ms)
+[PASS] back and forward restore year with matching values (682ms)
+[PASS] select stays mounted and focused during rapid year changes; latest response wins (633ms)
+[PASS] slider stays mounted and focused during rapid year changes; latest response wins (646ms)
+[PASS] responsive layouts, focus and keyboard table scroll (13255ms)
+
+collected=6 passed=6 failed=0 not_run=0

@@ -89,6 +89,12 @@ Agent D's EU calculation test reads partner_totals for full member-years and eu_
 
 The published Census values for the five partner-years are captured independently by Agent D or the orchestrator into tests/fixtures/published_examples/<code>_<year>.json with fields: code, name, year, flow values as published, url, table name, revision date, rounding unit, accessed date, and the saved page under tests/fixtures/published_examples/sources/. Agent A has no write access there. The pipeline's check 6 reads those fixtures read-only and compares within the recorded rounding only. If a fixture is missing at validation time, the row is FAIL with reason `fixture missing`, never NOT_APPLICABLE. The special-code row is NOT_APPLICABLE when no special code is observed in any year, or when Census publishes no Trade in Goods page for the observed special code; in the second case the reason records the URL tried and the HTTP status. kind special is reserved for non-geographic codes; a geographic partner without an ISO 3166-1 code (Kosovo 4803) is kind country with iso3 null.
 
+## UI table sorting
+
+Sorting is a view operation. It never changes canonical records or chart order. Compare raw integer money values, not formatted strings. Absent and not_applicable values remain after usable values in ascending and descending order. Confirmed zero is usable. Equal values use an ascending stable identifier as a tie-breaker.
+
+Each table owns separate URL fields: home_sort/home_dir, section_sort/section_dir, years_sort/years_dir, groups_sort/groups_dir and chapters_sort/chapters_dir. Direction is asc or desc. Unknown choices fall back to that table's defaults. A new heading starts ascending; repeat activation reverses direction. Home and section money headings synchronize the rank metric, while financial rank always means descending value rank, independent of displayed order. CSV rows follow the complete sorted table, with existing exact integers and statuses intact.
+
 ## Map interface (Agent B and Agent C)
 
 The signature below describes annual mode. For the all-years UI view, year also accepts `all`, summaryPartners holds cumulative values, and optional periodLabel gives the covered years.

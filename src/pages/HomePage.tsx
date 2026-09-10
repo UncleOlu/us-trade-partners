@@ -13,6 +13,9 @@ import { BASE_PATH, GLOBAL_LABEL } from '../lib/config';
 import { contextUrl, RANK_FIELDS, RANK_LABELS, useUrlState } from '../lib/urlState';
 import { periodLabel, periodCsv, type SummaryView } from '../lib/aggregate';
 import { PeriodNote } from '../components/PeriodNote';
+import { useTableSort } from '../lib/useTableSort';
+import { sortRows, fieldValue } from '../lib/sorting';
+import { SortableHeading, SortStatus } from '../components/SortableHeading';
 import { toCsv, downloadCsv } from '../lib/csv';
 
 export function HomePage(): JSX.Element {
@@ -23,6 +26,7 @@ export function HomePage(): JSX.Element {
   const metaState = useAsyncData(fetchMeta, []);
   const configuredYears = metaState.status === 'ready' ? metaState.data.configured_coverage.years : undefined;
   const { year, rank, params, notice, update } = useUrlState(configuredYears);
+  const sort = useTableSort('home', rank, 'desc');
   const summaryState = useAsyncData<SummaryView>(async () => {
     if (!year) throw new Error('Select a year');
     const view = year === 'all' ? await fetchAllSummary() : await fetchSummary(year);
@@ -32,13 +36,13 @@ export function HomePage(): JSX.Element {
   const partnersState = useAsyncData(fetchPartners, []);
   const ranked = useMemo(() => {
     if (summaryState.status !== 'ready') return [];
-    const value = (p: typeof summaryState.data.partners[number]) => p[rank].value ?? -Infinity;
-    return [...summaryState.data.partners].sort((a, b) => value(b) - value(a) || a.code.localeCompare(b.code));
+    return sortRows(summaryState.data.partners, (p) => fieldValue(p, rank), 'desc', (p) => p.code);
   }, [summaryState, rank]);
+  const ranks = useMemo(() => new Map(ranked.filter((p) => p[rank].value !== null).map((p, i) => [p.code, i + 1])), [ranked, rank]);
+  const sorted = useMemo(() => sortRows(ranked, (p) => sort.key === 'rank' ? ranks.get(p.code) : fieldValue(p, sort.key), sort.direction, (p) => p.code), [ranked, ranks, sort.key, sort.direction]);
   const normalizedQuery = query.trim().toLowerCase();
-  const matches = useMemo(() => ranked.filter((p) => !normalizedQuery || p.name.toLowerCase().includes(normalizedQuery) || p.code.toLowerCase().includes(normalizedQuery)), [ranked, normalizedQuery]);
+  const matches = useMemo(() => sorted.filter((p) => !normalizedQuery || p.name.toLowerCase().includes(normalizedQuery) || p.code.toLowerCase().includes(normalizedQuery)), [sorted, normalizedQuery]);
   const displayed = normalizedQuery || showAll ? matches : matches.slice(0, 25);
-  const ranks = useMemo(() => new Map(ranked.map((p, i) => [p.code, i + 1])), [ranked]);
   if (metaState.status === 'error') return <DataError error={metaState.error} />;
   if (metaState.status === 'loading' || !year) return <Loading label="Loading trade data" />;
   const summary = summaryState.status === 'ready' ? summaryState.data : null;
@@ -49,7 +53,7 @@ export function HomePage(): JSX.Element {
     const fields = ['imports', 'exports', 'balance', 'total_trade_value'] as const;
     downloadCsv(`partners_${year}.csv`, toCsv(
       [...csvPeriod.headers, 'code', 'name', 'kind', ...fields.flatMap((field) => [`${field}_status`, `${field}_usd`])],
-      ranked.map((p) => [...csvPeriod.cells, p.code, p.name, p.kind, ...fields.flatMap((field) => [p[field].status, p[field].value ?? ''])]),
+      sorted.map((p) => [...csvPeriod.cells, p.code, p.name, p.kind, ...fields.flatMap((field) => [p[field].status, p[field].value ?? ''])]),
     ));
   };
   return <div className="home-page">
@@ -68,7 +72,7 @@ export function HomePage(): JSX.Element {
         <input id="partner-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search any partner by name or code" />
       </div>
       <div className="field rank-field"><label htmlFor="rank-field">Rank partner table by</label>
-        <select id="rank-field" value={rank} onChange={(e) => update({ rank: e.target.value })}>{RANK_FIELDS.map((f) => <option key={f} value={f}>{RANK_LABELS[f]}</option>)}</select>
+        <select id="rank-field" value={rank} onChange={(e) => sort.set(e.target.value, 'desc')}>{RANK_FIELDS.map((f) => <option key={f} value={f}>{RANK_LABELS[f]}</option>)}</select>
       </div>
       <div className="year-range"><label htmlFor="year-slider">Move through years</label>
         <span>{configuredYears?.[0]}</span><input id="year-slider" type="range" min={0} max={(configuredYears?.length ?? 1) - 1}
@@ -93,14 +97,16 @@ export function HomePage(): JSX.Element {
         onSelect={(code) => navigate(contextUrl(`/partner/${code}`, params))} basePath={BASE_PATH} />
     </section>
     <section id="partner-results" tabIndex={-1} className="home-table-pane panel" aria-label="Ranked partners">
-      <div className="section-heading-row"><div><p className="eyebrow">Partner comparison</p><h2>Partners ranked by {RANK_LABELS[rank].toLowerCase()}</h2></div><button type="button" onClick={download}>Download all partners CSV</button></div>
+      <div className="section-heading-row"><div><p className="eyebrow">Partner comparison</p><h2>Partners</h2></div><button type="button" onClick={download}>Download all partners CSV</button></div>
       <div className="results-toolbar"><label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label><p role="status">Showing <strong>{displayed.length}</strong> of {ranked.length} partners for {label}{normalizedQuery ? ` (${matches.length} match your search)` : ''}.</p>
-        {!normalizedQuery && <button type="button" className="secondary-button" onClick={() => setShowAll(!showAll)}>{showAll ? 'Show top 25' : `Show all ${ranked.length}`}</button>}
+        {!normalizedQuery && <button type="button" className="secondary-button" onClick={() => setShowAll(!showAll)}>{showAll ? 'Show first 25' : `Show all ${ranked.length}`}</button>}
         {normalizedQuery && <button type="button" onClick={() => setQuery('')}>Clear search</button>}
       </div>
+      <SortStatus sort={sort} />
+      <p className="chart-note">Rank 1 has the largest {RANK_LABELS[rank].toLowerCase()}, regardless of row order.</p>
       {matches.length === 0 ? <div className="empty-state"><h3>No partners match “{query}”</h3><p>Try another name or a Census partner code.</p></div> : <TableScroll label={`Partner ranking for ${label}`}>
-        <table className="home-ranking-table"><thead><tr><th scope="col">Rank</th><th scope="col">Partner</th><th scope="col">Imports</th><th scope="col">Exports</th><th scope="col">Balance</th><th scope="col">Total trade</th></tr></thead>
-          <tbody>{displayed.map((p) => <tr key={p.code}><td>{year === 'all' && p[rank].value === null ? 'Not ranked' : ranks.get(p.code)}</td><th scope="row"><Link to={contextUrl(`/partner/${p.code}`, params)}>{p.name}</Link> <span className="partner-code">{p.code}</span>{p.kind === 'aggregate' && <span className="aggregate-tag">aggregate</span>}</th>
+        <table className="home-ranking-table"><thead><tr>{['rank', 'name', 'imports', 'exports', 'balance', 'total_trade_value'].map((column) => <SortableHeading key={column} column={column} sort={sort} />)}</tr></thead>
+          <tbody>{displayed.map((p) => <tr key={p.code}><td>{ranks.get(p.code) ?? 'Not ranked'}</td><th scope="row"><Link to={contextUrl(`/partner/${p.code}`, params)}>{p.name}</Link> <span className="partner-code">{p.code}</span>{p.kind === 'aggregate' && <span className="aggregate-tag">aggregate</span>}</th>
             <td><MoneyCell flow={p.imports} showExact={showExact} /></td><td><MoneyCell flow={p.exports} showExact={showExact} /></td><td><MoneyCell flow={p.balance} showExact={showExact} /></td><td><MoneyCell flow={p.total_trade_value} showExact={showExact} /></td></tr>)}</tbody>
         </table></TableScroll>}
       <p className="chart-note">Missing values sort last. The EU is an aggregate and overlaps its member countries. Do not add all displayed rows.</p>

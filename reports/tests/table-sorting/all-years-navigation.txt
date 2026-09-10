@@ -1,0 +1,3 @@
+[PASS] all period survives Hub partner section refresh navigation and browser Back (1869ms)
+
+collected=1 passed=1 failed=0 not_run=0

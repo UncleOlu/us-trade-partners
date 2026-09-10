@@ -195,3 +195,17 @@ details p { margin-top: 8px; }
 .partner-groups-table tbody td:first-child,
 .partner-chapters-table thead th:nth-child(-n + 2),
 .partner-chapters-table tbody td:nth-child(-n + 2) { text-align: left; }
+
+/* Equal arrow slots keep sortable numeric labels centered above their values. */
+.sort-heading { display: inline-grid; grid-template-columns: 1em max-content 1em; justify-content: center; min-width: max-content; align-items: center; gap: 6px; width: 100%; min-height: 44px; padding: 7px 0; border: 0; border-radius: 4px; color: inherit; background: transparent; font: inherit; font-weight: inherit; text-align: inherit; white-space: nowrap; }
+.sort-heading:hover { background: #e2edf0; }
+.sort-indicator, .sort-spacer { display: inline-block; width: 1em; text-align: center; }
+.sort-indicator { color: var(--accent-dark); }
+.sort-status { margin: 12px 0 4px; }
+
+.sort-heading-text { grid-template-columns: minmax(max-content, 1fr) 1em; }
+.sort-heading-text .sort-spacer { display: none; }
+.section-ranking-table thead th:first-child,
+.section-ranking-table tbody td:first-child,
+.section-ranking-table thead th:nth-child(n + 4),
+.section-ranking-table tbody td:nth-child(n + 4) { text-align: center; }

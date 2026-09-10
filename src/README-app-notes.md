@@ -105,3 +105,30 @@ from the committed release pin can reproduce the view with `npm run build`.
 All-year sums are nominal USD, not annual averages or inflation-adjusted values.
 Missing all-year ranking metrics show Not ranked and remain accessible below
 complete rows. Numeric alignment changes apply only to the home ranking table.
+
+## Sorting data tables
+
+Every data table has clickable column headings. Selecting a new heading starts
+ascending order; selecting the active heading reverses it. Arrows, `aria-sort`,
+and a live status line expose the current order. Header labels and numeric cells
+share their center. Product-group order follows HS sections I through XXI, then
+Special classification. Text uses case-insensitive English alphabetical order.
+Missing values stay last in both directions; ties use ascending record identity.
+Charts continue to use the unchanged annual/source arrays.
+
+Each table stores its choice in the URL, using `asc` or `desc`:
+
+- Home: `home_sort`, `home_dir`.
+- Section ranking: `section_sort`, `section_dir`.
+- Partner annual values: `years_sort`, `years_dir`.
+- Partner product groups: `groups_sort`, `groups_dir`.
+- Partner chapters: `chapters_sort`, `chapters_dir`.
+
+Links retain these separate choices. Invalid sort parameters use the table's
+default with a visible notice. Year and product-group changes preserve sorting.
+Financial ranks on Home and Section remain descending ranks of the chosen
+metric, independent of display order. A financial heading or rank-menu choice
+also sets that metric; text ordering leaves it unchanged. Unrankable values show
+Not ranked. Home displays the first 25 rows in the chosen order by default.
+CSV exports contain the complete sorted rows, not the 25-row slice or search
+result. Partner group/chapter/year CSV files follow each table's own order.

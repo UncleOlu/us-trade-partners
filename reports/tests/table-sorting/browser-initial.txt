@@ -1,0 +1,31 @@
+[PASS] home: every column both directions matches exact input and CSV order
+[PASS] section: every column both directions matches exact input and CSV order
+[FAIL] years: every column both directions matches exact input and CSV order reason=Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  [
+    'M100,231.59C126.167,231.567,152.333,231.543,178.5,231.448C204.667,231.354,230.833,211.894,257,211.894C283.167,211.894,309.333,227
+[FAIL] groups: every column both directions matches exact input and CSV order reason=Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  [
+    'M100,92.662C126.167,131.824,152.333,170.985,178.5,186.199C204.667,201.414,230.833,209.021,257,209.021C283.167,209.021,309.333,192
+[FAIL] chapters: every column both directions matches exact input and CSV order reason=Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  [
+    'M100,92.662C126.167,131.824,152.333,170.985,178.5,186.199C204.667,201.414,230.833,209.021,257,209.021C283.167,209.021,309.333,192
+[PASS] sort keyboard state survives refresh Back and year changes; charts and group selection stay stable
+[FAIL] home sorting preserves financial rank and full export under search and visible limit reason=The input did not match the regular expression /first 25/i. Input:
+
+'PARTNER COMPARISON\n' +
+  '\n' +
+  'Partners\n' +
+  'Download all partners CSV\n' +
+  'Show exact USD\n' +
+  '\n' +
+  'Showing 25 of 236 partners for 2
+[PASS] rank dropdown changes selected sort; independent table choices survive Hub navigation
+[PASS] invalid sort keys and directions normalize with visible explanation
+[FAIL] sort controls preserve centered figures, nowrap years and contained mobile scrolling reason={"label":"Rank↕","headerAlign":"center","bodyAlign":"center","labelCenterDelta":14.6640625,"columnDelta":0,"buttonWidth":41.109375,"buttonHeight":44,"nowrap":null}
+Complete original diagnostic preserved outside publication.

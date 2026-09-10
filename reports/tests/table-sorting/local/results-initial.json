@@ -1,0 +1,522 @@
+{
+  "checks": [
+    {
+      "column": "rank",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "EU",
+        "1220",
+        "5700"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "rank",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "1610",
+        "6144",
+        "6029"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "name",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5310",
+        "4810",
+        "7210"
+      ],
+      "last": [
+        "5210",
+        "7940",
+        "7960"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "name",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "7960",
+        "7940",
+        "5210"
+      ],
+      "last": [
+        "7210",
+        "4810",
+        "5310"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "imports",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "6029",
+        "6225",
+        "6022"
+      ],
+      "last": [
+        "2390",
+        "5790",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "imports",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "5700",
+        "EU",
+        "1220"
+      ],
+      "last": [
+        "2390",
+        "5790",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "exports",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "7370",
+        "5082",
+        "6144"
+      ],
+      "last": [
+        "EU",
+        "1220",
+        "6225"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "exports",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "1220",
+        "EU",
+        "2010"
+      ],
+      "last": [
+        "5082",
+        "7370",
+        "6225"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "balance",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5700",
+        "EU",
+        "5880"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "balance",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "5820",
+        "4210",
+        "5200"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "total_trade_value",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "1610",
+        "6144",
+        "6029"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "total_trade_value",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "EU",
+        "1220",
+        "5700"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "home"
+    },
+    {
+      "column": "rank",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5700",
+        "2010",
+        "EU"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "rank",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "6227",
+        "6029",
+        "5082"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "name",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5310",
+        "4810",
+        "7210"
+      ],
+      "last": [
+        "5210",
+        "7940",
+        "7960"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "name",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "7960",
+        "7940",
+        "5210"
+      ],
+      "last": [
+        "7210",
+        "4810",
+        "5310"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "kind",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "EU",
+        "1220",
+        "2010"
+      ],
+      "last": [
+        "7881",
+        "7904",
+        "7905"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "kind",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "1010",
+        "1610",
+        "2320"
+      ],
+      "last": [
+        "7970",
+        "7990",
+        "EU"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "imports",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5020",
+        "5070",
+        "5082"
+      ],
+      "last": [
+        "2390",
+        "5790",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "imports",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "5700",
+        "2010",
+        "EU"
+      ],
+      "last": [
+        "2390",
+        "5790",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "exports",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5790",
+        "8220",
+        "6413"
+      ],
+      "last": [
+        "1220",
+        "2010",
+        "6225"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "exports",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "2010",
+        "1220",
+        "EU"
+      ],
+      "last": [
+        "5790",
+        "8220",
+        "6225"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "balance",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "5700",
+        "5880",
+        "EU"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "balance",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "1220",
+        "3510",
+        "5820"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "total_trade_value",
+      "csvRows": 236,
+      "direction": "asc",
+      "first": [
+        "6227",
+        "6029",
+        "5082"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    },
+    {
+      "column": "total_trade_value",
+      "csvRows": 236,
+      "direction": "desc",
+      "first": [
+        "5700",
+        "2010",
+        "EU"
+      ],
+      "last": [
+        "5790",
+        "6225",
+        "8220"
+      ],
+      "rows": 236,
+      "table": "section"
+    }
+  ],
+  "errors": [],
+  "index_sha256": "d50a993246baf8540eca94704c66709260a779dcf66ad3831966f0ed3d3ad4dd",
+  "input_sha256": {
+    "hs_sections.json": "bb78181a486184f3ec69ee7f0d62567b4cbfa46e189494c8d5af44298c325012",
+    "partner/6022.json": "fed1dd455a4976fc00a5116830960c6f5c85e8b5f0c2a3685b4fb03695cdbad6",
+    "partner/7530.json": "89c213a017957d557568f1035d7684196095db9c61fe00035291a506f98b33d4",
+    "section/XVI.json": "7c351ad44c34fa381b1771f8914b1710cda1d870f6187c5460cf7bdee6b644b2",
+    "summary/2013.json": "d390f013b2895eae007aaf83d25c8cf1269a3619d28cedbd65428885a21427f2"
+  },
+  "results": [
+    {
+      "detail": {
+        "directions": 12,
+        "rows": 236
+      },
+      "ms": 1862,
+      "name": "home: every column both directions matches exact input and CSV order",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "directions": 14,
+        "rows": 236
+      },
+      "ms": 1991,
+      "name": "section: every column both directions matches exact input and CSV order",
+      "status": "PASS"
+    },
+    {
+      "ms": 712,
+      "name": "years: every column both directions matches exact input and CSV order",
+      "reason": "Expected values to be strictly deep-equal:\n+ actual - expected ... Lines skipped\n\n  [\n    'M100,231.59C126.167,231.567,152.333,231.543,178.5,231.448C204.667,231.354,230.833,211.894,257,211.894C283.167,211.894,309.333,227.248,335.5,227.248C361.667,227.248,387.833,227.207,414,227.125C440.167,227.043,466.333,219.871,492.5,219.871C518.667,219.871,544.833,229.968,571,230.432C597.167,230.897,623.333,231.129,649.5,231.129C675.667,231.129,701.833,231.061,728,230.927C754.167,230.792,780.333,227.326,806.5,227.326C832.667,227.326,858.833,231.669,885,231.684C911.167,231.699,937.333,231.703,963.5,231.707',\n...\n    'M 1022.1545454545454,256.53970571428573 h 15 v 0.46029428571426934 h -15 Z',\n    'M 332.7909090909091,256.4267664285714 h 15 v 0.5732335714286023 h -15 Z',\n+   'M 731.2454545454545,36.62006000000001 h 15 v 220.37993999999998 h -15 Z',\n-   'M 731.2454545454545,36.620060000000024 h 15 v 220.37993999999998 h -15 Z',\n    'M 775.5181818181818,210.07328214285712 h 15 v 46.926717857142876 h -15 Z',\n...\n    'M 864.0636363636363,256.5441521428572 h 15 v 0.45584785714282816 h -15 Z',\n    'M 1041.1545454545455,229.56767 h 15 v 27.432330000000007 h -15 Z'\n  ]",
+      "status": "FAIL"
+    },
+    {
+      "ms": 706,
+      "name": "groups: every column both directions matches exact input and CSV order",
+      "reason": "Expected values to be strictly deep-equal:\n+ actual - expected ... Lines skipped\n\n  [\n    'M100,92.662C126.167,131.824,152.333,170.985,178.5,186.199C204.667,201.414,230.833,209.021,257,209.021C283.167,209.021,309.333,192.405,335.5,182.253C361.667,172.101,387.833,148.109,414,148.109C440.167,148.109,466.333,160.297,492.5,165.123C518.667,169.948,544.833,169.103,571,177.064C597.167,185.026,623.333,214.136,649.5,214.136C675.667,214.136,701.833,197.411,728,190.89C754.167,184.368,780.333,179.452,806.5,175.007C832.667,170.562,858.833,164.629,885,164.221C911.167,163.812,937.333,163.608,963.5,163.608C989.667,163.608,1015.833,167.888,1042,172.169',\n...\n    'M 180.9727272727273,256.99532959000004 h 15 v 0.004670409999960157 h -15 Z',\n    'M 225.24545454545455,256.17863318275 h 15 v 0.8213668172500093 h -15 Z',\n+   'M 269.51818181818186,15.641825853000011 h 15 v 241.358174147 h -15 Z',\n-   'M 269.51818181818186,15.641825853 h 15 v 241.358174147 h -15 Z',\n    'M 313.7909090909091,256.9932357075 h 15 v 0.006764292500008651 h -15 Z',\n...\n    'M 996.8818181818182,256.99922143925 h 15 v 0.0007785607500068181 h -15 Z',\n    'M 1041.1545454545455,255.62605068125 h 15 v 1.3739493187499932 h -15 Z'\n  ]",
+      "status": "FAIL"
+    },
+    {
+      "ms": 690,
+      "name": "chapters: every column both directions matches exact input and CSV order",
+      "reason": "Expected values to be strictly deep-equal:\n+ actual - expected ... Lines skipped\n\n  [\n    'M100,92.662C126.167,131.824,152.333,170.985,178.5,186.199C204.667,201.414,230.833,209.021,257,209.021C283.167,209.021,309.333,192.405,335.5,182.253C361.667,172.101,387.833,148.109,414,148.109C440.167,148.109,466.333,160.297,492.5,165.123C518.667,169.948,544.833,169.103,571,177.064C597.167,185.026,623.333,214.136,649.5,214.136C675.667,214.136,701.833,197.411,728,190.89C754.167,184.368,780.333,179.452,806.5,175.007C832.667,170.562,858.833,164.629,885,164.221C911.167,163.812,937.333,163.608,963.5,163.608C989.667,163.608,1015.833,167.888,1042,172.169',\n...\n    'M 180.9727272727273,256.99532959000004 h 15 v 0.004670409999960157 h -15 Z',\n    'M 225.24545454545455,256.17863318275 h 15 v 0.8213668172500093 h -15 Z',\n+   'M 269.51818181818186,15.641825853000011 h 15 v 241.358174147 h -15 Z',\n-   'M 269.51818181818186,15.641825853 h 15 v 241.358174147 h -15 Z',\n    'M 313.7909090909091,256.9932357075 h 15 v 0.006764292500008651 h -15 Z',\n...\n    'M 996.8818181818182,256.99922143925 h 15 v 0.0007785607500068181 h -15 Z',\n    'M 1041.1545454545455,255.62605068125 h 15 v 1.3739493187499932 h -15 Z'\n  ]",
+      "status": "FAIL"
+    },
+    {
+      "ms": 1849,
+      "name": "sort keyboard state survives refresh Back and year changes; charts and group selection stay stable",
+      "status": "PASS"
+    },
+    {
+      "ms": 635,
+      "name": "home sorting preserves financial rank and full export under search and visible limit",
+      "reason": "The input did not match the regular expression /first 25/i. Input:\n\n'PARTNER COMPARISON\\n' +\n  '\\n' +\n  'Partners\\n' +\n  'Download all partners CSV\\n' +\n  'Show exact USD\\n' +\n  '\\n' +\n  'Showing 25 of 236 partners for 2013.\\n' +\n  '\\n' +\n  'Show all 236\\n' +\n  '\\n' +\n  'Imports: lowest to highest. Missing values last.\\n' +\n  '\\n' +\n  'Rank 1 has the largest imports, regardless of row order.\\n' +\n  '\\n' +\n  'Scroll horizontally to see all columns. Use Show exact USD to see full dollar amounts.\\n' +\n  '\\n' +\n  'Rank\\n' +\n  '\u2195\\n' +\n  '\\t\\n' +\n  'Partner\\n' +\n  '\u2195\\n' +\n  '\\t\\n' +\n  'Imports\\n' +\n  '\u2191\\n' +\n  '\\t\\n' +\n  'Exports\\n' +\n  '\u2195\\n' +\n  '\\t\\n' +\n  'Balance\\n' +\n  '\u2195\\n' +\n  '\\t\\n' +\n  'Total trade value\\n' +\n  '\u2195\\n' +\n  '\\n' +\n  '233\\tHEARD AND MCDONALD ISLANDS 6029\\t$125\\t$504k\\t$504k\\t$504k\\n' +\n  '232\\tPITCAIRN ISLANDS 6225\\t$3.44k\\t\\n' +\n  'absent +\\n' +\n  '\\t\\n' +\n  'absent +\\n' +\n  '\\t\\n' +\n  'absent +\\n' +\n  '\\n' +\n  '231\\tNORFOLK ISLAND 6022\\t$9.79k\\t$1.73m\\t$1.72m\\t$1.74m\\n' +\n  '230\\tMAYOTTE 7881\\t$16.6k\\t$8.52m\\t$8.50m\\t$8.54m\\n' +\n  '229\\tSVALBARD, JAN MAYEN ISLAND 4031\\t$20.6k\\t$1.63m\\t$1.61m\\t$1.65m\\n' +\n  '228\\tTUVALU 6227\\t$34.1k\\t$560k\\t$526k\\t$594k\\n' +\n  '227\\ [truncated; complete diagnostic retained outside publication]",
+      "reason_sha256": "e8d1a224e956ca11f5a84e7daac4d558d71615a4c43a9c6b4d0fba65480a7259",
+      "status": "FAIL"
+    },
+    {
+      "ms": 2027,
+      "name": "rank dropdown changes selected sort; independent table choices survive Hub navigation",
+      "status": "PASS"
+    },
+    {
+      "ms": 596,
+      "name": "invalid sort keys and directions normalize with visible explanation",
+      "status": "PASS"
+    },
+    {
+      "ms": 3777,
+      "name": "sort controls preserve centered figures, nowrap years and contained mobile scrolling",
+      "reason": "{\"label\":\"Rank\u2195\",\"headerAlign\":\"center\",\"bodyAlign\":\"center\",\"labelCenterDelta\":14.6640625,\"columnDelta\":0,\"buttonWidth\":41.109375,\"buttonHeight\":44,\"nowrap\":null}",
+      "status": "FAIL"
+    }
+  ],
+  "target": "local"
+}
