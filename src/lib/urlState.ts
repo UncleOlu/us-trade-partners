@@ -4,7 +4,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { SORT_TABLES, type SortTable } from './sorting';
 import { parsePeriod } from './period';
 
-export const SEARCH_PARAMS = ['home_q', 'hub_q', 'hub_sections_q'] as const;
+export const SEARCH_PARAMS = ['home_q', 'hub_q', 'hub_sections_q', 'section_q'] as const;
 
 export const RANK_FIELDS = ['total_trade_value', 'imports', 'exports', 'balance'] as const;
 export type RankField = typeof RANK_FIELDS[number];

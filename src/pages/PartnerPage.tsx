@@ -158,6 +158,7 @@ function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
             ]}
           />
           <Legend wrapperStyle={{ fontSize: '0.85rem' }} />
+          <ReferenceLine y={0} stroke="var(--muted)" strokeWidth={1.25} ifOverflow="extendDomain" />
           {noteYears.map((y) => (
             <ReferenceLine
               key={y.year}

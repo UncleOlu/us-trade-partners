@@ -1,0 +1,80 @@
+{
+  "assets": [
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 3976,
+      "raw_bytes": 15433,
+      "status": 200,
+      "transferred_bytes": 4341,
+      "url": "http://127.0.0.1:62817/us-trade-partners/assets/index-CKZ4k9Xb.css"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 77691,
+      "raw_bytes": 231724,
+      "status": 200,
+      "transferred_bytes": 78114,
+      "url": "http://127.0.0.1:62817/us-trade-partners/assets/index-CTQ9jUFw.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 105652,
+      "raw_bytes": 383752,
+      "status": 200,
+      "transferred_bytes": 106099,
+      "url": "http://127.0.0.1:62817/us-trade-partners/assets/LineChart-7r9UwV82.js"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 414,
+      "raw_bytes": 673,
+      "status": 200,
+      "transferred_bytes": 995,
+      "url": "http://127.0.0.1:62817/us-trade-partners/assets/sectionLabels-DNAnCw3g.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 2772,
+      "raw_bytes": 7089,
+      "status": 200,
+      "transferred_bytes": 3143,
+      "url": "http://127.0.0.1:62817/us-trade-partners/assets/SectionPage-BhVc29XG.js"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 1730,
+      "raw_bytes": 3561,
+      "status": 200,
+      "transferred_bytes": 2049,
+      "url": "http://127.0.0.1:62817/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
+    },
+    {
+      "encoding": "gzip",
+      "gzip_bytes": 130617,
+      "raw_bytes": 2111296,
+      "status": 200,
+      "transferred_bytes": 131041,
+      "url": "http://127.0.0.1:62817/us-trade-partners/data/20260909T091429Z-c638aff167ea/section/XVI.json"
+    },
+    {
+      "encoding": "identity",
+      "gzip_bytes": 342,
+      "raw_bytes": 575,
+      "status": 200,
+      "transferred_bytes": 825,
+      "url": "http://127.0.0.1:62817/us-trade-partners/section/XVI?year=all"
+    }
+  ],
+  "budget_bytes": null,
+  "budget_pass": null,
+  "console_errors": [],
+  "failures": 0,
+  "gzip_level": 6,
+  "mode": "local preview",
+  "totals": {
+    "gzip_bytes": 323194,
+    "raw_bytes": 2754103,
+    "transferred_bytes": 326607
+  },
+  "url": "/section/XVI?year=all"
+}

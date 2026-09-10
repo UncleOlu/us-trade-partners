@@ -77,6 +77,7 @@ main { padding-top: 32px; }
 .controls-row label { font-size: .82rem; font-weight: 600; }
 .controls-row .control-field { width: 230px; max-width: 100%; }
 .controls-row .control-field select { width: 100%; }
+.controls-row .search-field { flex: 1 1 280px; min-width: 280px; }
 .results-toolbar p { font-size: .85rem; color: var(--muted); margin: 0; }
 .exact-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; min-height: 44px; }
 .results-toolbar .exact-toggle { margin-right: auto; }
@@ -169,6 +170,7 @@ details p { margin-top: 8px; }
   .partner-directory li > a { min-height: 44px; }
   .section-card h3 { min-height: auto; }
   .controls-row select { max-width: 100%; }
+  .controls-row .search-field { flex-basis: 100%; min-width: 0; width: 100%; }
   .snapshot-label { display: block; margin: 12px 0 0; }
   th, td { padding: 10px; }
   .results-toolbar .exact-toggle { width: 100%; }
