@@ -120,7 +120,7 @@ export function HomePage(): JSX.Element {
       </div>
       <SortStatus sort={sort} />
       <p className="chart-note">Rank 1 has the largest {RANK_LABELS[rank].toLowerCase()}, regardless of row order.</p>
-      {matches.length === 0 ? <div className="empty-state"><h3>No partners match “{query}”</h3><p>Try another name or a Census partner code.</p><button type="button" onClick={resetSearch}>Reset search</button></div> : <TableScroll label={`Partner ranking for ${label}`}>
+      {matches.length === 0 ? <div className="empty-state"><h3>No partners match “{query}”</h3><p>Try another name or a Census partner code.</p><button type="button" onClick={resetSearch}>Clear search</button></div> : <TableScroll label={`Partner ranking for ${label}`}>
         <table className="home-ranking-table"><thead><tr>{['rank', 'name', 'imports', 'exports', 'balance', 'total_trade_value'].map((column) => <SortableHeading key={column} column={column} sort={sort} />)}</tr></thead>
           <tbody>{displayed.map((p) => <tr key={p.code}><td>{ranks.get(p.code) ?? 'Not ranked'}</td><th scope="row"><Link to={contextUrl(`/partner/${p.code}`, params)}>{p.name}</Link> <span className="partner-code">{p.code}</span>{p.kind === 'aggregate' && <span className="aggregate-tag">aggregate</span>}</th>
             <td><MoneyCell flow={p.imports} showExact={showExact} /></td><td><MoneyCell flow={p.exports} showExact={showExact} /></td><td><MoneyCell flow={p.balance} showExact={showExact} /></td><td><MoneyCell flow={p.total_trade_value} showExact={showExact} /></td></tr>)}</tbody>

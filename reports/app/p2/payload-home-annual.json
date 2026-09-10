@@ -6,23 +6,23 @@
       "raw_bytes": 575,
       "status": 200,
       "transferred_bytes": 825,
-      "url": "http://127.0.0.1:54052/us-trade-partners/?year=2025"
+      "url": "http://127.0.0.1:54814/us-trade-partners/?year=2025"
     },
     {
       "encoding": "gzip",
-      "gzip_bytes": 3963,
-      "raw_bytes": 15351,
+      "gzip_bytes": 77152,
+      "raw_bytes": 230360,
       "status": 200,
-      "transferred_bytes": 4328,
-      "url": "http://127.0.0.1:54052/us-trade-partners/assets/index-CBAPizj9.css"
+      "transferred_bytes": 77575,
+      "url": "http://127.0.0.1:54814/us-trade-partners/assets/index-CwCKjeWB.js"
     },
     {
       "encoding": "gzip",
-      "gzip_bytes": 77159,
-      "raw_bytes": 230355,
+      "gzip_bytes": 3951,
+      "raw_bytes": 15307,
       "status": 200,
-      "transferred_bytes": 77582,
-      "url": "http://127.0.0.1:54052/us-trade-partners/assets/index-CxRLugJu.js"
+      "transferred_bytes": 4316,
+      "url": "http://127.0.0.1:54814/us-trade-partners/assets/index-DuRQ6SAj.css"
     },
     {
       "encoding": "gzip",
@@ -30,7 +30,7 @@
       "raw_bytes": 107761,
       "status": 200,
       "transferred_bytes": 38769,
-      "url": "http://127.0.0.1:54052/us-trade-partners/atlas/countries-110m.json"
+      "url": "http://127.0.0.1:54814/us-trade-partners/atlas/countries-110m.json"
     },
     {
       "encoding": "gzip",
@@ -38,7 +38,7 @@
       "raw_bytes": 3561,
       "status": 200,
       "transferred_bytes": 2049,
-      "url": "http://127.0.0.1:54052/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
+      "url": "http://127.0.0.1:54814/us-trade-partners/data/20260909T091429Z-c638aff167ea/meta.json"
     },
     {
       "encoding": "gzip",
@@ -46,7 +46,7 @@
       "raw_bytes": 88097,
       "status": 200,
       "transferred_bytes": 7419,
-      "url": "http://127.0.0.1:54052/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json"
+      "url": "http://127.0.0.1:54814/us-trade-partners/data/20260909T091429Z-c638aff167ea/partners.json"
     },
     {
       "encoding": "gzip",
@@ -54,7 +54,7 @@
       "raw_bytes": 138527,
       "status": 200,
       "transferred_bytes": 10933,
-      "url": "http://127.0.0.1:54052/us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2025.json"
+      "url": "http://127.0.0.1:54814/us-trade-partners/data/20260909T091429Z-c638aff167ea/summary/2025.json"
     }
   ],
   "budget_bytes": 250000,
@@ -64,9 +64,9 @@
   "gzip_level": 6,
   "mode": "local preview",
   "totals": {
-    "gzip_bytes": 139325,
-    "raw_bytes": 584227,
-    "transferred_bytes": 141905
+    "gzip_bytes": 139306,
+    "raw_bytes": 584188,
+    "transferred_bytes": 141886
   },
   "url": "/?year=2025"
 }

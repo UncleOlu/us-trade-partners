@@ -261,31 +261,202 @@ test('hovering the trend chart shows a tooltip with Imports and not lowercase im
   }));
 
 // --- 3. Bar chart labels ------------------------------------------------------------
+//
+// Owner audit follow-up: below 600px the bar chart is now a horizontal bar
+// chart (category axis at the left, i.e. Recharts' Y axis; values along the
+// bottom, i.e. the X axis). At and above 600px it stays the original
+// vertical layout (category axis at the bottom, i.e. the X axis; values on
+// the Y axis). Both '.recharts-xAxis' and '.recharts-yAxis' are Recharts
+// library class names (not app-specific), verified by live DOM inspection
+// alongside the other selectors documented at the top of this file.
 
-async function barChartTickTexts(page) {
+function barChartAxes(page) {
   const { bar } = identifyPartnerCharts(page);
-  return bar
-    .first()
-    .locator('.recharts-xAxis .recharts-cartesian-axis-tick-value')
-    .evaluateAll((els) => els.map((e) => e.textContent));
+  return {
+    xAxis: bar.first().locator('.recharts-xAxis'),
+    yAxis: bar.first().locator('.recharts-yAxis'),
+  };
 }
 
-for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
-  test(`bar chart shows every section label at ${viewport.width}px`, () =>
-    pageTest(
-      async (page) => {
-        await visit(page, 'partner/1220?year=2025');
-        const texts = await barChartTickTexts(page);
-        assert.equal(texts.length, groupIds.length, `expected ${groupIds.length} bar x-axis tick labels, got ${texts.length}: ${JSON.stringify(texts)}`);
-        assert.deepEqual([...texts].sort(), groupIds, `bar x-axis tick label set must equal the HS section group ids: ${JSON.stringify(texts)}`);
-      },
-      { viewport },
-    ));
+// Reads every tick-value element on one axis and returns its text, bounding
+// rect, computed font-size, and whether any rotate() is applied to it or to
+// up to 3 SVG ancestors via the 'transform' attribute, or via a CSS
+// transform matrix with a non-trivial rotation component. Recharts rotates
+// angled tick text with an SVG 'transform="rotate(...)"' attribute, not a
+// CSS transform, so the attribute check is primary; the CSS check is
+// defense in depth only.
+async function axisTickInfo(axisLocator) {
+  return axisLocator.locator('.recharts-cartesian-axis-tick-value').evaluateAll((els) =>
+    els.map((e) => {
+      const rect = e.getBoundingClientRect();
+      const style = getComputedStyle(e);
+      let hasRotate = false;
+      let node = e;
+      for (let i = 0; i < 4 && node; i += 1, node = node.parentElement) {
+        const attr = node.getAttribute && node.getAttribute('transform');
+        if (attr && /rotate\s*\(/i.test(attr)) hasRotate = true;
+      }
+      if (style.transform && style.transform !== 'none') {
+        const match = /matrix\(([^)]+)\)/.exec(style.transform);
+        if (match) {
+          const parts = match[1].split(',').map((n) => parseFloat(n.trim()));
+          const [a, b] = parts;
+          if (Math.abs(b) > 0.001 || Math.abs(a - 1) > 0.001) hasRotate = true;
+        } else if (/rotate/i.test(style.transform)) {
+          hasRotate = true;
+        }
+      }
+      return {
+        text: e.textContent,
+        top: rect.top,
+        bottom: rect.bottom,
+        left: rect.left,
+        right: rect.right,
+        fontSize: parseFloat(style.fontSize),
+        hasRotate,
+      };
+    }),
+  );
 }
+
+function rectsIntersect(a, b) {
+  return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Runs assertions (a)-(e) against the bar chart's category and value axis
+ * ticks for one viewport width and returns the category tick info array (in
+ * DOM/render order, unsorted) for the caller's own use (the 390px test uses
+ * it to locate a specific bar to click).
+ */
+async function assertBarChartLabels(page, width) {
+  await visit(page, 'partner/1220?year=2025');
+  const { xAxis, yAxis } = barChartAxes(page);
+  const mobile = width < 600;
+  const categoryAxis = mobile ? yAxis : xAxis;
+  const valueAxis = mobile ? xAxis : yAxis;
+
+  const categoryTicks = await axisTickInfo(categoryAxis);
+  const valueTicks = await axisTickInfo(valueAxis);
+
+  // (a) count and set of the 22 section id labels, independent of layout.
+  const texts = categoryTicks.map((t) => t.text);
+  assert.equal(
+    texts.length,
+    groupIds.length,
+    `expected ${groupIds.length} category axis tick labels at ${width}px, got ${texts.length}: ${JSON.stringify(texts)}`,
+  );
+  assert.deepEqual(
+    [...texts].sort(),
+    groupIds,
+    `category axis tick label set must equal the HS section group ids at ${width}px: ${JSON.stringify(texts)}`,
+  );
+
+  // (b) no two category tick labels intersect.
+  for (let i = 0; i < categoryTicks.length; i += 1) {
+    for (let j = i + 1; j < categoryTicks.length; j += 1) {
+      assert.ok(
+        !rectsIntersect(categoryTicks[i], categoryTicks[j]),
+        `category tick labels "${categoryTicks[i].text}" and "${categoryTicks[j].text}" intersect at ${width}px`,
+      );
+    }
+  }
+
+  // (c) every tick label on both axes has computed font-size at least 12px.
+  for (const tick of [...categoryTicks, ...valueTicks]) {
+    assert.ok(tick.fontSize >= 12, `tick label "${tick.text}" font-size ${tick.fontSize}px is below 12px at ${width}px`);
+  }
+
+  // (d) no tick label on either axis has a rotate transform.
+  for (const tick of [...categoryTicks, ...valueTicks]) {
+    assert.ok(!tick.hasRotate, `tick label "${tick.text}" has a rotate transform at ${width}px`);
+  }
+
+  // (e) stacked vertically at 390px, side by side at 1280px.
+  if (mobile) {
+    const sorted = [...categoryTicks].sort((a, b) => a.top - b.top);
+    for (let i = 1; i < sorted.length; i += 1) {
+      assert.ok(
+        sorted[i].top >= sorted[i - 1].bottom - 1,
+        `category labels must be stacked vertically at ${width}px: "${sorted[i - 1].text}" bottom ${sorted[i - 1].bottom} vs "${sorted[i].text}" top ${sorted[i].top}`,
+      );
+    }
+  } else {
+    const sorted = [...categoryTicks].sort((a, b) => a.left - b.left);
+    for (let i = 1; i < sorted.length; i += 1) {
+      assert.ok(
+        sorted[i].left >= sorted[i - 1].right - 1,
+        `category labels must be side by side at ${width}px without horizontal overlap: "${sorted[i - 1].text}" right ${sorted[i - 1].right} vs "${sorted[i].text}" left ${sorted[i].left}`,
+      );
+    }
+    const tops = categoryTicks.map((t) => t.top);
+    const spread = Math.max(...tops) - Math.min(...tops);
+    assert.ok(spread <= 4, `category labels must sit in a single row (side by side) at ${width}px, top spread was ${spread}px`);
+  }
+
+  return categoryTicks;
+}
+
+test('bar chart shows every section label, legible, non-overlapping and unrotated, side by side at 1280px', () =>
+  pageTest(async (page) => assertBarChartLabels(page, 1280), { viewport: { width: 1280, height: 900 } }));
+
+test('bar chart shows every section label, legible, non-overlapping, unrotated and stacked at 390px, and clicking a bar selects its group', () =>
+  pageTest(
+    async (page) => {
+      const categoryTicks = await assertBarChartLabels(page, 390);
+
+      // Owner audit follow-up: clicking the bar for a section id other than
+      // the current selection must change the selected group button. The
+      // currently selected id is read from the group-buttons table
+      // (aria-pressed="true"), independent of the chart. Bar-rectangle
+      // order within a series was verified by live inspection to match the
+      // axis tick order 1:1 (monotonic position correspondence between
+      // '.recharts-rectangle' elements and their axis ticks), so the same
+      // index into the unsorted categoryTicks array used above addresses
+      // the matching bar rectangle.
+      const currentId = await page.evaluate(() => {
+        const btn = document.querySelector('.group-button[aria-pressed="true"]');
+        return btn ? btn.textContent.split(':')[0].trim() : null;
+      });
+      assert.ok(currentId, 'expected a currently selected group button on the partner page');
+      const targetIndex = categoryTicks.findIndex((t) => t.text !== currentId);
+      assert.ok(targetIndex >= 0, 'expected a category id other than the current selection');
+      const targetId = categoryTicks[targetIndex].text;
+
+      const { bar } = identifyPartnerCharts(page);
+      const rects = bar.first().locator('.recharts-bar').first().locator('.recharts-rectangle');
+      assert.equal(
+        await rects.count(),
+        groupIds.length,
+        `expected ${groupIds.length} bar rectangles in the first bar series at 390px`,
+      );
+      await rects.nth(targetIndex).click({ force: true });
+
+      const targetButton = page.locator('.group-button').filter({ hasText: new RegExp(`^${escapeRegExp(targetId)}:`) });
+      assert.equal(await targetButton.count(), 1, `expected exactly one group button for "${targetId}"`);
+      assert.equal(
+        await targetButton.getAttribute('aria-pressed'),
+        'true',
+        `clicking the bar for "${targetId}" must set its group button aria-pressed to true`,
+      );
+    },
+    { viewport: { width: 390, height: 844 } },
+  ));
 
 // --- 4. Empty states and focus return ------------------------------------------------
 
-test('home empty state names the query, has guidance, and Reset search returns focus and the full list', () =>
+// Owner audit follow-up: the home empty-state action was renamed from
+// "Reset search" to "Clear search", identical to the existing toolbar
+// button's accessible name. Both tests below therefore scope their button
+// lookup to a container ('.empty-state' or '.results-toolbar') rather than
+// using a page-wide getByRole('button', {name: 'Clear search'}), which
+// would now match two buttons on the same page once a search is active and
+// the list is empty.
+test('home empty state names the query, has guidance, and its Clear search returns focus and the full list', () =>
   pageTest(async (page) => {
     await visit(page, '?year=2025&home_q=zzzz');
     const emptyState = page.locator('.empty-state');
@@ -294,13 +465,13 @@ test('home empty state names the query, has guidance, and Reset search returns f
     assert.ok(heading.includes('zzzz'), `empty-state h3 must contain "zzzz": ${JSON.stringify(heading)}`);
     const guidance = await emptyState.locator('p').innerText();
     assert.ok(guidance.trim().length > 0, 'empty-state p must be non-empty');
-    const resetButton = emptyState.getByRole('button', { name: 'Reset search', exact: true });
-    assert.equal(await resetButton.count(), 1, 'empty state must contain a button named exactly "Reset search"');
-    await resetButton.click();
+    const clearButton = emptyState.getByRole('button', { name: 'Clear search', exact: true });
+    assert.equal(await clearButton.count(), 1, 'empty state must contain a button named exactly "Clear search"');
+    await clearButton.click();
     assert.equal(
       await page.evaluate(() => document.activeElement && document.activeElement.id),
       'partner-search',
-      'focus must return to #partner-search after Reset search',
+      'focus must return to #partner-search after Clear search',
     );
     assert.equal(await page.locator('#partner-search').inputValue(), '');
     assert.equal(new URL(page.url()).searchParams.has('home_q'), false, 'home_q must be removed from the URL');
@@ -311,7 +482,9 @@ test('home empty state names the query, has guidance, and Reset search returns f
 test('home toolbar Clear search still exists while a search is active', () =>
   pageTest(async (page) => {
     await visit(page, '?year=2025&home_q=Canada');
-    const toolbarClear = page.getByRole('button', { name: 'Clear search', exact: true });
+    const toolbar = page.locator('.results-toolbar');
+    assert.equal(await toolbar.count(), 1, 'expected a .results-toolbar container on the home page');
+    const toolbarClear = toolbar.getByRole('button', { name: 'Clear search', exact: true });
     assert.equal(await toolbarClear.count(), 1, 'home toolbar Clear search button must exist with an active search');
   }));
 

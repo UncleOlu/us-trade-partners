@@ -106,7 +106,6 @@ tr.selected-row > * { background: #e7f3f4 !important; }
 .chart-note, .eu-notes { color: var(--muted); font-size: .8rem; }
 .group-button { text-align: left; }
 .group-button[aria-pressed='true'] { background: var(--accent); color: #fff; border-color: var(--accent); }
-.recharts-legend-item-text { font-size: .85rem; }
 .partner-meta { color: var(--muted); font-size: .84rem; display: flex; gap: 8px; flex-wrap: wrap; }
 .partner-header h1 { text-transform: none; }
 .jump-links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 12px 0; }

@@ -3,27 +3,27 @@
     {
       "name": "a wrapped group-button label is left aligned and the button stays at the left of its cell (390px)",
       "status": "PASS",
-      "ms": 585
+      "ms": 592
     },
     {
       "name": "partner trend chart legend reads exactly Imports, Exports, Balance",
       "status": "PASS",
-      "ms": 597
+      "ms": 601
     },
     {
       "name": "partner product-group bar chart legend reads exactly Imports, Exports",
       "status": "PASS",
-      "ms": 597
+      "ms": 599
     },
     {
       "name": "section trend chart legend reads exactly Imports, Exports",
       "status": "PASS",
-      "ms": 601
+      "ms": 600
     },
     {
       "name": "every legend text on the partner page has computed font-size at least 13.6px",
       "status": "PASS",
-      "ms": 598
+      "ms": 597
     },
     {
       "name": "a note below the trend chart, inside the trend chart section, states balance is exports minus imports",
@@ -33,20 +33,20 @@
     {
       "name": "hovering the trend chart shows a tooltip with Imports and not lowercase imports",
       "status": "PASS",
-      "ms": 692
+      "ms": 708
     },
     {
-      "name": "bar chart shows every section label at 1280px",
+      "name": "bar chart shows every section label, legible, non-overlapping and unrotated, side by side at 1280px",
       "status": "PASS",
-      "ms": 597
+      "ms": 600
     },
     {
-      "name": "bar chart shows every section label at 390px",
+      "name": "bar chart shows every section label, legible, non-overlapping, unrotated and stacked at 390px, and clicking a bar selects its group",
       "status": "PASS",
-      "ms": 593
+      "ms": 646
     },
     {
-      "name": "home empty state names the query, has guidance, and Reset search returns focus and the full list",
+      "name": "home empty state names the query, has guidance, and its Clear search returns focus and the full list",
       "status": "PASS",
       "ms": 646
     },
@@ -58,22 +58,22 @@
     {
       "name": "hub empty states name each query, have guidance, and their clear actions return focus",
       "status": "PASS",
-      "ms": 1201
+      "ms": 1208
     },
     {
       "name": "jump links are at least 44x44, heading-row buttons span their cell width, and the document has no horizontal overflow (390px)",
       "status": "PASS",
-      "ms": 598
+      "ms": 596
     },
     {
       "name": "partner trend chart still has 3 line series with 13 dots each, bar chart still has 2 bar series",
       "status": "PASS",
-      "ms": 1011
+      "ms": 1009
     },
     {
       "name": "section trend chart still has 2 line series",
       "status": "PASS",
-      "ms": 601
+      "ms": 603
     }
   ]
 }

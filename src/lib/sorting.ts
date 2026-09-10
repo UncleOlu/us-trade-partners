@@ -1,3 +1,7 @@
+// This file is loaded standalone (transpiled and imported from a data: URL) by
+// tests/e2e/table-sorting-unit.mjs and tests/e2e/p1-unit.mjs, which cannot resolve
+// relative value imports. Keep SORT_LABELS free of runtime imports; src/lib/labels.ts
+// derives FLOW_LABELS from this file's literals instead, so the strings exist once.
 export type SortDirection = 'asc' | 'desc';
 export type SortValue = number | string | null | undefined;
 export const SORT_TABLES = {
