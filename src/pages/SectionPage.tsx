@@ -59,8 +59,8 @@ function SectionTrend({ section }: { section: Section }): JSX.Element {
             ]}
           />
           <Legend />
-          <Line type="monotone" dataKey="imports" stroke="#c0392b" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
-          <Line type="monotone" dataKey="exports" stroke="#2980b9" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
+          <Line type="monotone" dataKey="imports" name="Imports" stroke="#c0392b" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
+          <Line type="monotone" dataKey="exports" name="Exports" stroke="#2980b9" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
     </section>
