@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "name": "period parser waits for coverage and accepts only supported annual years or explicit all",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "sort allowlists match the displayed columns exactly",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "Period and per-table SortKey reject invalid types at compile time",
+      "status": "PASS",
+      "ms": 392
+    }
+  ]
+}

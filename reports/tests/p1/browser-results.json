@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "name": "each table rejects another table column and preserves all-years context on refresh",
+      "status": "PASS",
+      "ms": 5571
+    },
+    {
+      "name": "each table rejects case-sensitive invalid directions without discarding a valid column",
+      "status": "PASS",
+      "ms": 2822
+    },
+    {
+      "name": "Space sorts all five tables both ways using exact independent values and retains focus",
+      "status": "PASS",
+      "ms": 3258
+    },
+    {
+      "name": "home and both Hub searches survive direct entry refresh and browser Back independently",
+      "status": "PASS",
+      "ms": 3941
+    },
+    {
+      "name": "both CSV scopes stay correct with an active home search and sort on 2013",
+      "status": "PASS",
+      "ms": 680
+    },
+    {
+      "name": "filtered CSV for year=all uses independent all-years per-partner sums and the full coverage span",
+      "status": "PASS",
+      "ms": 614
+    },
+    {
+      "name": "home displayed counts match independent match counts with and without a search",
+      "status": "PASS",
+      "ms": 1157
+    },
+    {
+      "name": "mobile viewport keeps the document contained while the home table region scrolls horizontally under year=all with a search active",
+      "status": "PASS",
+      "ms": 626
+    }
+  ]
+}

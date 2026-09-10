@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { SORT_TABLES, type SortTable } from './sorting';
+import { parsePeriod } from './period';
+
+export const SEARCH_PARAMS = ['home_q', 'hub_q', 'hub_sections_q'] as const;
 
 export const RANK_FIELDS = ['total_trade_value', 'imports', 'exports', 'balance'] as const;
 export type RankField = typeof RANK_FIELDS[number];
@@ -9,7 +12,7 @@ export const RANK_LABELS: Record<RankField, string> = { total_trade_value: 'Tota
 
 export function contextUrl(path: string, params: URLSearchParams, changes: Record<string, string> = {}): string {
   const next = new URLSearchParams();
-  for (const key of ['year', 'rank', ...(path.startsWith('/partner/') ? ['section'] : []), ...Object.keys(SORT_TABLES).flatMap((table) => [`${table}_sort`, `${table}_dir`])]) {
+  for (const key of ['year', 'rank', ...(path.startsWith('/partner/') ? ['section'] : []), ...Object.keys(SORT_TABLES).flatMap((table) => [`${table}_sort`, `${table}_dir`]), ...SEARCH_PARAMS]) {
     const value = params.get(key);
     if (value !== null) next.set(key, value);
   }
@@ -27,8 +30,7 @@ export function useUrlState(years: number[] | undefined, groups?: string[]) {
   const rawYear = params.get('year');
   const rawRank = params.get('rank');
   const rawGroup = params.get('section');
-  const validYear = rawYear === 'all' || rawYear !== null && /^\d{4}$/.test(rawYear) && years?.includes(Number(rawYear));
-  const year = rawYear === 'all' ? (years?.length ? 'all' as const : undefined) : validYear ? Number(rawYear) : years?.[years.length - 1];
+  const { period: year, valid: validYear } = parsePeriod(rawYear, years);
   const activeTable = pathname === '/' ? 'home' : pathname.startsWith('/section/') ? 'section' : null;
   const rawSort = activeTable ? params.get(`${activeTable}_sort`) : null;
   const rank = RANK_FIELDS.includes(rawSort as RankField) ? rawSort as RankField : RANK_FIELDS.includes(rawRank as RankField) ? rawRank as RankField : 'total_trade_value';

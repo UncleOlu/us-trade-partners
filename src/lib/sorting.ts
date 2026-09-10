@@ -8,6 +8,7 @@ export const SORT_TABLES = {
   chapters: { label: 'Chapter details', keys: ['chapter', 'description', 'imports', 'exports', 'total_trade_value'] },
 } as const;
 export type SortTable = keyof typeof SORT_TABLES;
+export type SortKey<T extends SortTable> = typeof SORT_TABLES[T]['keys'][number];
 export const SORT_LABELS: Record<string, string> = {
   rank: 'Rank', name: 'Partner', kind: 'Kind', year: 'Year', group: 'Group order', chapter: 'Chapter', description: 'Description',
   imports: 'Imports', exports: 'Exports', balance: 'Balance', total_trade_value: 'Total trade value',

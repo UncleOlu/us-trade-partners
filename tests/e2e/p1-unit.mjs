@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import ts from 'typescript';
+import {test,runAll,formatResults} from './lib/harness.mjs';
+const compile=async file=>import('data:text/javascript;base64,'+Buffer.from(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText).toString('base64'));
+const {parsePeriod}=await compile('src/lib/period.ts'),{SORT_TABLES}=await compile('src/lib/sorting.ts');
+test('period parser waits for coverage and accepts only supported annual years or explicit all',()=>{
+ for(const raw of [null,'all','2013','wrong'])for(const coverage of [undefined,[]])assert.equal(parsePeriod(raw,coverage).period,undefined);
+ const years=Array.from({length:13},(_,i)=>2013+i);for(const year of years)assert.deepEqual(parsePeriod(String(year),years),{period:year,valid:true});assert.deepEqual(parsePeriod('all',years),{period:'all',valid:true});
+ for(const raw of [null,'','ALL','All','2012','2026','02013','2013.0','2e3',' 2013','2013 ','NaN','Infinity'])assert.deepEqual(parsePeriod(raw,years),{period:2025,valid:false},String(raw));
+});
+test('sort allowlists match the displayed columns exactly',()=>{const expected={home:['rank','name','imports','exports','balance','total_trade_value'],section:['rank','name','kind','imports','exports','balance','total_trade_value'],years:['year','imports','exports','balance','total_trade_value'],groups:['group','imports','exports','total_trade_value'],chapters:['chapter','description','imports','exports','total_trade_value']};assert.deepEqual(Object.keys(SORT_TABLES).sort(),Object.keys(expected).sort());for(const [key,columns]of Object.entries(expected))assert.deepEqual(SORT_TABLES[key].keys,columns);});
+test('Period and per-table SortKey reject invalid types at compile time',()=>{const config=ts.readConfigFile('tsconfig.json',ts.sys.readFile);assert.equal(config.error,undefined);const parsed=ts.parseJsonConfigFileContent(config.config,ts.sys,'.');const program=ts.createProgram(['tests/fixtures/p1/types.ts'],{...parsed.options,noEmit:true});const diagnostics=ts.getPreEmitDiagnostics(program);assert.deepEqual(diagnostics.map(d=>ts.flattenDiagnosticMessageText(d.messageText,' ')),[]);});
+const results=await runAll();console.log(formatResults(results));const output=process.env.TEST_REPORT_DIR??'reports/tests/p1';fs.mkdirSync(output,{recursive:true});fs.writeFileSync(`${output}/unit-results.json`,JSON.stringify({results},null,2)+'\n');if(results.some(r=>r.status!=='PASS'))process.exitCode=1;

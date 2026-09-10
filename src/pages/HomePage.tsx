@@ -17,9 +17,11 @@ import { useTableSort } from '../lib/useTableSort';
 import { sortRows, fieldValue } from '../lib/sorting';
 import { SortableHeading, SortStatus } from '../components/SortableHeading';
 import { toCsv, downloadCsv } from '../lib/csv';
+import { useSearchParam } from '../lib/useSearchParam';
 
 export function HomePage(): JSX.Element {
-  const [query, setQuery] = useState('');
+  const search = useSearchParam('home_q');
+  const query = search.value;
   const [showExact, setShowExact] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
@@ -49,11 +51,17 @@ export function HomePage(): JSX.Element {
   const partners = partnersState.status === 'ready' ? partnersState.data : null;
   const label = periodLabel(year, configuredYears!);
   const csvPeriod = periodCsv(year, configuredYears!);
+  const fields = ['imports', 'exports', 'balance', 'total_trade_value'] as const;
   const download = () => {
-    const fields = ['imports', 'exports', 'balance', 'total_trade_value'] as const;
     downloadCsv(`partners_${year}.csv`, toCsv(
       [...csvPeriod.headers, 'code', 'name', 'kind', ...fields.flatMap((field) => [`${field}_status`, `${field}_usd`])],
       sorted.map((p) => [...csvPeriod.cells, p.code, p.name, p.kind, ...fields.flatMap((field) => [p[field].status, p[field].value ?? ''])]),
+    ));
+  };
+  const downloadFiltered = () => {
+    downloadCsv(`partners_${year}_filtered.csv`, toCsv(
+      [...csvPeriod.headers, 'query', 'sort_key', 'sort_direction', 'rank_metric', 'rank', 'code', 'name', 'kind', ...fields.flatMap((field) => [`${field}_status`, `${field}_usd`])],
+      matches.map((p) => [...csvPeriod.cells, query.trim(), sort.key, sort.direction, rank, ranks.get(p.code) ?? '', p.code, p.name, p.kind, ...fields.flatMap((field) => [p[field].status, p[field].value ?? ''])]),
     ));
   };
   return <div className="home-page">
@@ -69,7 +77,7 @@ export function HomePage(): JSX.Element {
         </select>
       </div>
       <div className="field search-field"><label htmlFor="partner-search">Find a partner</label>
-        <input id="partner-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search any partner by name or code" />
+        <input id="partner-search" type="search" value={query} onChange={(e) => search.setValue(e.target.value)} placeholder="Search any partner by name or code" />
       </div>
       <div className="field rank-field"><label htmlFor="rank-field">Rank partner table by</label>
         <select id="rank-field" value={rank} onChange={(e) => sort.set(e.target.value, 'desc')}>{RANK_FIELDS.map((f) => <option key={f} value={f}>{RANK_LABELS[f]}</option>)}</select>
@@ -97,10 +105,13 @@ export function HomePage(): JSX.Element {
         onSelect={(code) => navigate(contextUrl(`/partner/${code}`, params))} basePath={BASE_PATH} />
     </section>
     <section id="partner-results" tabIndex={-1} className="home-table-pane panel" aria-label="Ranked partners">
-      <div className="section-heading-row"><div><p className="eyebrow">Partner comparison</p><h2>Partners</h2></div><button type="button" onClick={download}>Download all partners CSV</button></div>
+      <div className="section-heading-row"><div><p className="eyebrow">Partner comparison</p><h2>Partners</h2></div>
+        <button type="button" onClick={download}>Download all partners CSV</button>
+        {normalizedQuery && <button type="button" onClick={downloadFiltered}>Download filtered results CSV</button>}
+      </div>
       <div className="results-toolbar"><label className="exact-toggle"><input type="checkbox" checked={showExact} onChange={(e) => setShowExact(e.target.checked)} />Show exact USD</label><p role="status">Showing <strong>{displayed.length}</strong> of {ranked.length} partners for {label}{normalizedQuery ? ` (${matches.length} match your search)` : ''}.</p>
         {!normalizedQuery && <button type="button" className="secondary-button" onClick={() => setShowAll(!showAll)}>{showAll ? 'Show first 25' : `Show all ${ranked.length}`}</button>}
-        {normalizedQuery && <button type="button" onClick={() => setQuery('')}>Clear search</button>}
+        {normalizedQuery && <button type="button" onClick={search.clear}>Clear search</button>}
       </div>
       <SortStatus sort={sort} />
       <p className="chart-note">Rank 1 has the largest {RANK_LABELS[rank].toLowerCase()}, regardless of row order.</p>
