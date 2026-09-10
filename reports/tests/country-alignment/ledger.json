@@ -2,7 +2,12 @@
   "budget_gzip_bytes": 267342,
   "budget_limit": 300000,
   "final_index_sha256": "40e99aff033b03dd43524e8c330ca8aca70e6058be39e62c35f2b56785cec028",
-  "production": "pending",
+  "production": {
+    "failed": 0,
+    "passed": 18,
+    "report": "live/ledger.json",
+    "states": 18
+  },
   "runs": [
     {
       "cases": 24,

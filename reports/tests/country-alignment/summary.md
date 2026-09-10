@@ -10,7 +10,7 @@ Evidence is local/results.json, local/results-year-nowrap.json and local/results
 
 Final index SHA256: `40e99aff033b03dd43524e8c330ca8aca70e6058be39e62c35f2b56785cec028`.
 
-Final Canada all-years gzip budget: 267,342 bytes against 300,000, PASS. See payload-partner.md/json. This is the reproducible local gzip sum, not deployed network traffic. Live checks follow deployment.
+Final Canada all-years gzip budget: 267,342 bytes against 300,000, PASS. See payload-partner.md/json. This is the reproducible local gzip sum, not deployed network traffic. Live checks passed 18 states after deployment. See live/summary.md for actual transfer and deployment evidence.
 
 Screenshots are in local/. Inspected Nigeria desktop compact/exact yearly tables, Nigeria mobile tables, Canada compact/exact group tables and mobile chapters, then final Canada 390px exact, Nigeria 320px exact and EU 320px exact yearly tables. Final years stay on one line. Exact values need more width, so small screens retain horizontal table scrolling; edge columns may be partly visible while scrolling.
 
