@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "suite": "all-years-unit",
+      "code": 0,
+      "signal": null,
+      "timedOut": false,
+      "duration_ms": 871,
+      "status": "PASS",
+      "receipt_sha256": "fde84d1ee13bc5cf4de0e11796f502daca78a8c199a55a1b68ff3752ffc9d810",
+      "tests": 8,
+      "integrity_checks": 0
+    },
+    {
+      "suite": "derived-integrity",
+      "code": 0,
+      "signal": null,
+      "timedOut": false,
+      "duration_ms": 72,
+      "status": "PASS",
+      "receipt_sha256": "8d7f0d759b0678cee0442b3f39eb691e4292f393fb4cad39577f737f47929481",
+      "tests": 0,
+      "integrity_checks": 948
+    },
+    {
+      "suite": "sorting-unit",
+      "code": 0,
+      "signal": null,
+      "timedOut": false,
+      "duration_ms": 625,
+      "status": "PASS",
+      "receipt_sha256": "7ba8fc8f98772193a9e8ff70a155ab9be5d9423846a5939b759170cb301e766c",
+      "tests": 5,
+      "integrity_checks": 0
+    },
+    {
+      "suite": "sorting-browser",
+      "code": 0,
+      "signal": null,
+      "timedOut": false,
+      "duration_ms": 58013,
+      "status": "PASS",
+      "receipt_sha256": "c2de1b62925c3a03d033991d06eb2aeba7340738867d61f2c114e502e0af446b",
+      "tests": 10,
+      "integrity_checks": 0
+    },
+    {
+      "suite": "all-years-browser",
+      "code": 0,
+      "signal": null,
+      "timedOut": false,
+      "duration_ms": 12384,
+      "status": "PASS",
+      "receipt_sha256": "595281467388ad19b64a7dd35081dd4f6f0c7a0782d029503d713ddd3b87dba7",
+      "tests": 5,
+      "integrity_checks": 0
+    }
+  ],
+  "expected_suites": 5,
+  "completed_suites": 5,
+  "passed_tests": 28,
+  "error": null
+}

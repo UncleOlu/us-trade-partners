@@ -14,4 +14,8 @@ Seventeen subprocess self-tests passed. They cover valid results, child failure,
 
 One fresh local build and full gate passed: 28 tests, 948 derived checks, no skips. This includes 3,832 flow-value comparisons and 54 sort-direction checks. The built index is unchanged at SHA256 `9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb`. Runtime outputs stay in ignored run directories; the compact ledger is in `reports/tests/critical-ci/`.
 
-The actual GitHub Actions result will be recorded after execution. Usage and billing metrics are unknown.
+The first Linux run, `34434140746`, failed three chart checks. The primary workflow receipt confirms that diagnostics uploaded, Pages artifact upload was skipped and the deploy job was skipped. A timed browser observation then showed an animated bar moving during the original sampling window. The test now waits for 600 ms of stable chart paths, with a 5-second limit. It retains the same geometry tolerance and exact row/CSV checks. Three affected local cases passed. The trade-off is added test time, with no app change.
+
+The final Linux run [34434495122](https://github.com/UncleOlu/us-trade-partners/actions/runs/34434495122) passed all 28 tests and 948 derived checks, with no skips, then deployed successfully. It tested source commit `91ca0e4a90615c599fec045f6ef9e4dd2b89e1ae`. The five suites took about 72 seconds in total on that runner. The downloaded production index matches the tested build hash above. No app, dependency or snapshot change occurred.
+
+Compact workflow and test receipts are in `reports/tests/critical-ci/linux-success/`. Full diagnostics remain in the workflow artifact for seven days. The first failed run proves that the gate blocks publication; 17 local subprocess fixtures cover runner failure handling. Usage and billing metrics are unknown.

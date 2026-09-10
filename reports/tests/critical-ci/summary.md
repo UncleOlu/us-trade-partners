@@ -17,3 +17,7 @@ The three line series disable animation, but bars use the installed Recharts 400
 The test now waits up to 5 seconds for all chart paths to stay unchanged for 600 ms. It then retains the original 1e-8 coordinate tolerance, path order and command checks. Failure text now includes actual, expected and delta. Exact row and CSV assertions remain unchanged. This adds bounded test time, with no app change.
 
 Only the three affected local cases reran: 3 passed, 0 failed, 0 skipped, 28 column/direction orders. Results are in `chart-fix/results.json`. The next Linux workflow must run the full fixed gate before publication.
+
+## Final Linux CI result
+
+[Run 34434495122](https://github.com/UncleOlu/us-trade-partners/actions/runs/34434495122), source `91ca0e4a90615c599fec045f6ef9e4dd2b89e1ae`, passed the full gate and deployed successfully. All five receipt hashes and their exact names/counts passed independent verification: 28 tests, 948 derived checks, 0 skips. Browser receipts match the build index hash `9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb`, also reported by the live-site check. Sorting completed in 58.0 seconds, below its 180-second limit. Critical checks completed before Pages artifact upload. Compact primary receipts are in `linux-success/`. No extra browser run or screenshot was needed for this test-only fix.
