@@ -28,6 +28,7 @@ import { contextUrl, useUrlState, RANK_FIELDS, RANK_LABELS } from '../lib/urlSta
 import { SECTION_LABELS } from '../lib/sectionLabels';
 import { UrlNotice } from '../components/UrlNotice';
 import { TradeTotals } from '../components/TradeTotals';
+import { FLOW_LABELS } from '../lib/labels';
 import type { Section, FlowValue, DerivedValue } from '../types/generated';
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
@@ -58,9 +59,9 @@ function SectionTrend({ section }: { section: Section }): JSX.Element {
               name,
             ]}
           />
-          <Legend />
-          <Line type="monotone" dataKey="imports" stroke="#c0392b" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
-          <Line type="monotone" dataKey="exports" stroke="#2980b9" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
+          <Legend wrapperStyle={{ fontSize: '0.85rem' }} />
+          <Line type="monotone" dataKey="imports" name={FLOW_LABELS.imports} stroke="#c0392b" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
+          <Line type="monotone" dataKey="exports" name={FLOW_LABELS.exports} stroke="#2980b9" connectNulls={false} dot={{ r: 3 }} isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
     </section>

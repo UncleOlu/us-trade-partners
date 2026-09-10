@@ -31,6 +31,8 @@ import { UrlNotice } from '../components/UrlNotice';
 import { TradeTotals } from '../components/TradeTotals';
 import { aggregatePartnerSections, periodTotals, periodLabel, periodCsv, type PartnerView, type Period } from '../lib/aggregate';
 import { PeriodNote } from '../components/PeriodNote';
+import { useMediaQuery } from '../lib/useMediaQuery';
+import { FLOW_LABELS } from '../lib/labels';
 import type { FlowValue, DerivedValue } from '../types/generated';
 
 function chartValue(flow: FlowValue | DerivedValue): number | null {
@@ -155,7 +157,7 @@ function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
               name,
             ]}
           />
-          <Legend />
+          <Legend wrapperStyle={{ fontSize: '0.85rem' }} />
           {noteYears.map((y) => (
             <ReferenceLine
               key={y.year}
@@ -178,6 +180,7 @@ function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
           <Line
             type="monotone"
             dataKey="imports"
+            name={FLOW_LABELS.imports}
             stroke="#c0392b"
             connectNulls={false}
             dot={{ r: 3 }}
@@ -187,6 +190,7 @@ function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
           <Line
             type="monotone"
             dataKey="exports"
+            name={FLOW_LABELS.exports}
             stroke="#2980b9"
             connectNulls={false}
             dot={{ r: 3 }}
@@ -196,6 +200,7 @@ function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
           <Line
             type="monotone"
             dataKey="balance"
+            name={FLOW_LABELS.balance}
             stroke="#27ae60"
             connectNulls={false}
             dot={{ r: 3 }}
@@ -204,6 +209,7 @@ function TrendChart({ partner }: { partner: PartnerView }): JSX.Element {
           />
         </LineChart>
       </ResponsiveContainer>
+      <p className="chart-note">Balance is exports minus imports.</p>
       {isEu && noteYears.length > 0 && (
         <ul className="eu-notes">
           {noteYears.map((y) => (
@@ -268,6 +274,8 @@ function GroupsSection({
     imports: chartValue(g.imports),
     exports: chartValue(g.exports),
   }));
+  const narrow = useMediaQuery('(max-width: 600px)');
+  const valueTick = (v: number) => formatAutoUsd(v).display;
 
   return (
     <section className="panel" aria-labelledby="groups-heading">
@@ -278,27 +286,37 @@ function GroupsSection({
         </button>
       </div>
       <p>Select a chart bar or a product-group button to see its chapters below. <a href="#chapters-heading">View selected chapters ↓</a></p>
-      <ResponsiveContainer width="100%" height={320}>
+      <ResponsiveContainer width="100%" height={narrow ? 620 : 340}>
         <BarChart
           data={chartData}
-          margin={{ top: 8, right: 24, left: 8, bottom: 8 }}
+          layout={narrow ? 'vertical' : 'horizontal'}
+          margin={{ top: 8, right: 24, left: 8, bottom: narrow ? 8 : 12 }}
           onClick={(state) => {
             const label = state?.activeLabel;
             if (typeof label === 'string') onSelectGroup(label);
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="section_id" />
-          <YAxis tickFormatter={(v: number) => formatAutoUsd(v).display} width={80} />
+          {narrow ? (
+            <>
+              <XAxis type="number" tickFormatter={valueTick} fontSize={12} />
+              <YAxis type="category" dataKey="section_id" interval={0} width={64} fontSize={12} />
+            </>
+          ) : (
+            <>
+              <XAxis dataKey="section_id" interval={0} fontSize={12} />
+              <YAxis tickFormatter={valueTick} width={80} fontSize={12} />
+            </>
+          )}
           <Tooltip
             formatter={(value: number | string | Array<number | string>, name: string) => [
               typeof value === 'number' ? formatExactUsd(value) : 'absent',
               name,
             ]}
           />
-          <Legend />
-          <Bar dataKey="imports" fill="#c0392b" cursor="pointer" />
-          <Bar dataKey="exports" fill="#2980b9" cursor="pointer" />
+          <Legend wrapperStyle={{ fontSize: '0.85rem' }} />
+          <Bar dataKey="imports" name={FLOW_LABELS.imports} fill="#c0392b" cursor="pointer" />
+          <Bar dataKey="exports" name={FLOW_LABELS.exports} fill="#2980b9" cursor="pointer" />
         </BarChart>
       </ResponsiveContainer>
       <SortStatus sort={sort} />
