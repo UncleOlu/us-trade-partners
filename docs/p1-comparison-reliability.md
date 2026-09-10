@@ -53,3 +53,7 @@ Gzip budgets from `scripts/measure-payload.mjs`, level 6 response bodies, not de
 | Partner 1220 all years | 269,332 | 300,000 |
 
 Built index SHA256 for this tree: `94f641573733ccbc7f5551afbf6192e1c2978b28df812209f4c4fbe852b78a67`. The deployed index hash check runs after merge and deployment. The P1 suite is not part of the critical deployment gate; adding it requires a reviewed manifest update. Usage and billing metrics are unknown.
+
+## Deployment, 2026-09-10
+
+Pull request 1 merged into main as 29ea926. Pages run [34444324320](https://github.com/UncleOlu/us-trade-partners/actions/runs/34444324320) built, passed the critical gate, and deployed. The live index returns HTTP 200 and its SHA256 matches the tested build hash above. The Hub route returns the canonical 301 redirect before loading, as documented in the deployed-site audit. No snapshot, dependency, or pipeline change.
