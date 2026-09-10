@@ -1,0 +1,517 @@
+{
+  "target": "local",
+  "index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+  "results": [
+    {
+      "name": "years: every column both directions matches exact input and CSV order",
+      "status": "PASS",
+      "detail": {
+        "directions": 10,
+        "rows": 13
+      },
+      "ms": 8431
+    },
+    {
+      "name": "groups: every column both directions matches exact input and CSV order",
+      "status": "PASS",
+      "detail": {
+        "directions": 8,
+        "rows": 22
+      },
+      "ms": 7014
+    },
+    {
+      "name": "chapters: every column both directions matches exact input and CSV order",
+      "status": "PASS",
+      "detail": {
+        "directions": 10,
+        "rows": 5
+      },
+      "ms": 8369
+    }
+  ],
+  "checks": [
+    {
+      "table": "years",
+      "column": "year",
+      "direction": "asc",
+      "rows": 13,
+      "first": [
+        "2013",
+        "2014",
+        "2015"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "year",
+      "direction": "desc",
+      "rows": 13,
+      "first": [
+        "2025",
+        "2024",
+        "2023"
+      ],
+      "last": [
+        "2015",
+        "2014",
+        "2013"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "imports",
+      "direction": "asc",
+      "rows": 13,
+      "first": [
+        "2024",
+        "2023",
+        "2013"
+      ],
+      "last": [
+        "2018",
+        "2015",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "imports",
+      "direction": "desc",
+      "rows": 13,
+      "first": [
+        "2015",
+        "2018",
+        "2017"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "exports",
+      "direction": "asc",
+      "rows": 13,
+      "first": [
+        "2019",
+        "2022",
+        "2016"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "exports",
+      "direction": "desc",
+      "rows": 13,
+      "first": [
+        "2020",
+        "2021",
+        "2013"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "balance",
+      "direction": "asc",
+      "rows": 13,
+      "first": [
+        "2015",
+        "2018",
+        "2022"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "balance",
+      "direction": "desc",
+      "rows": 13,
+      "first": [
+        "2020",
+        "2021",
+        "2013"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "total_trade_value",
+      "direction": "asc",
+      "rows": 13,
+      "first": [
+        "2019",
+        "2022",
+        "2016"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "years",
+      "column": "total_trade_value",
+      "direction": "desc",
+      "rows": 13,
+      "first": [
+        "2020",
+        "2021",
+        "2013"
+      ],
+      "last": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "csvRows": 13
+    },
+    {
+      "table": "groups",
+      "column": "group",
+      "direction": "asc",
+      "rows": 22,
+      "first": [
+        "I",
+        "II",
+        "III"
+      ],
+      "last": [
+        "XX",
+        "XXI",
+        "SPECIAL"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "group",
+      "direction": "desc",
+      "rows": 22,
+      "first": [
+        "SPECIAL",
+        "XXI",
+        "XX"
+      ],
+      "last": [
+        "III",
+        "II",
+        "I"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "imports",
+      "direction": "asc",
+      "rows": 22,
+      "first": [
+        "XIX",
+        "XIII",
+        "XX"
+      ],
+      "last": [
+        "SPECIAL",
+        "IV",
+        "V"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "imports",
+      "direction": "desc",
+      "rows": 22,
+      "first": [
+        "V",
+        "IV",
+        "SPECIAL"
+      ],
+      "last": [
+        "XX",
+        "XIII",
+        "XIX"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "exports",
+      "direction": "asc",
+      "rows": 22,
+      "first": [
+        "XXI",
+        "XIX",
+        "XIV"
+      ],
+      "last": [
+        "II",
+        "XVII",
+        "V"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "exports",
+      "direction": "desc",
+      "rows": 22,
+      "first": [
+        "V",
+        "XVII",
+        "II"
+      ],
+      "last": [
+        "XIV",
+        "XIX",
+        "XXI"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "total_trade_value",
+      "direction": "asc",
+      "rows": 22,
+      "first": [
+        "XIX",
+        "XIV",
+        "IX"
+      ],
+      "last": [
+        "II",
+        "XVII",
+        "V"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "groups",
+      "column": "total_trade_value",
+      "direction": "desc",
+      "rows": 22,
+      "first": [
+        "V",
+        "XVII",
+        "II"
+      ],
+      "last": [
+        "IX",
+        "XIV",
+        "XIX"
+      ],
+      "csvRows": 22
+    },
+    {
+      "table": "chapters",
+      "column": "chapter",
+      "direction": "asc",
+      "rows": 5,
+      "first": [
+        "01",
+        "02",
+        "03"
+      ],
+      "last": [
+        "03",
+        "04",
+        "05"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "chapter",
+      "direction": "desc",
+      "rows": 5,
+      "first": [
+        "05",
+        "04",
+        "03"
+      ],
+      "last": [
+        "03",
+        "02",
+        "01"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "description",
+      "direction": "asc",
+      "rows": 5,
+      "first": [
+        "04",
+        "03",
+        "02"
+      ],
+      "last": [
+        "02",
+        "05",
+        "01"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "description",
+      "direction": "desc",
+      "rows": 5,
+      "first": [
+        "05",
+        "02",
+        "03"
+      ],
+      "last": [
+        "03",
+        "04",
+        "01"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "imports",
+      "direction": "asc",
+      "rows": 5,
+      "first": [
+        "01",
+        "02",
+        "04"
+      ],
+      "last": [
+        "04",
+        "05",
+        "03"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "imports",
+      "direction": "desc",
+      "rows": 5,
+      "first": [
+        "03",
+        "05",
+        "01"
+      ],
+      "last": [
+        "01",
+        "02",
+        "04"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "exports",
+      "direction": "asc",
+      "rows": 5,
+      "first": [
+        "01",
+        "05",
+        "02"
+      ],
+      "last": [
+        "02",
+        "04",
+        "03"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "exports",
+      "direction": "desc",
+      "rows": 5,
+      "first": [
+        "03",
+        "04",
+        "02"
+      ],
+      "last": [
+        "02",
+        "05",
+        "01"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "total_trade_value",
+      "direction": "asc",
+      "rows": 5,
+      "first": [
+        "01",
+        "05",
+        "02"
+      ],
+      "last": [
+        "02",
+        "04",
+        "03"
+      ],
+      "csvRows": 5
+    },
+    {
+      "table": "chapters",
+      "column": "total_trade_value",
+      "direction": "desc",
+      "rows": 5,
+      "first": [
+        "03",
+        "04",
+        "02"
+      ],
+      "last": [
+        "02",
+        "05",
+        "01"
+      ],
+      "csvRows": 5
+    }
+  ],
+  "errors": [],
+  "input_sha256": {
+    "hs_sections.json": "bb78181a486184f3ec69ee7f0d62567b4cbfa46e189494c8d5af44298c325012",
+    "partner/6022.json": "fed1dd455a4976fc00a5116830960c6f5c85e8b5f0c2a3685b4fb03695cdbad6",
+    "partner/7530.json": "89c213a017957d557568f1035d7684196095db9c61fe00035291a506f98b33d4"
+  }
+}

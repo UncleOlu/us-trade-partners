@@ -29,8 +29,15 @@ function expected(rows,config,key,dir,metric='total_trade_value'){
  const value=r=>key==='rank'?ranks.get(r[config.id]):key==='group'?groupIndex(r.section_id):flowValue(r,key);
  return expectedOrder(rows,value,r=>r[config.id],dir).map(r=>String(r[config.id]));
 }
-const chartPaths=async page=>{await page.mouse.move(0,0);return page.locator('.recharts-line-curve,.recharts-bar-rectangle path').evaluateAll(a=>a.map(e=>e.getAttribute('d')));};
-function assertCharts(actual,expected){assert.equal(actual.length,expected.length);for(let i=0;i<actual.length;i++){const tokenize=s=>s.match(/[a-zA-Z]|[-+]?(?:\d*\.)?\d+(?:e[-+]?\d+)?/g);const a=tokenize(actual[i]),b=tokenize(expected[i]);assert.equal(a.length,b.length);for(let j=0;j<a.length;j++){if(Number.isNaN(Number(a[j]))||Number.isNaN(Number(b[j])))assert.equal(a[j],b[j]);else assert.ok(Math.abs(Number(a[j])-Number(b[j]))<=1e-8,`Chart coordinate ${i}/${j} changed`);}}}
+// Recharts bars animate after network idle. Compare only after the actual paths settle.
+const chartPaths=async page=>{await page.mouse.move(0,0);return page.evaluate(async()=>{
+ const read=()=>[...document.querySelectorAll('.recharts-line-curve,.recharts-bar-rectangle path')].map(e=>e.getAttribute('d'));
+ let previous=read();if(!previous.length)return previous;
+ const started=performance.now();let stableSince=started;
+ while(performance.now()-started<5000){await new Promise(requestAnimationFrame);const current=read();if(JSON.stringify(current)!==JSON.stringify(previous)){previous=current;stableSince=performance.now();}else if(performance.now()-stableSince>=600)return current;}
+ throw new Error('Chart geometry did not settle within 5 seconds');
+ });};
+function assertCharts(actual,expected){assert.equal(actual.length,expected.length);for(let i=0;i<actual.length;i++){const tokenize=s=>s.match(/[a-zA-Z]|[-+]?(?:\d*\.)?\d+(?:e[-+]?\d+)?/g);const a=tokenize(actual[i]),b=tokenize(expected[i]);assert.equal(a.length,b.length);for(let j=0;j<a.length;j++){if(Number.isNaN(Number(a[j]))||Number.isNaN(Number(b[j])))assert.equal(a[j],b[j]);else assert.ok(Math.abs(Number(a[j])-Number(b[j]))<=1e-8,`Chart coordinate ${i}/${j} changed: actual=${a[j]} expected=${b[j]} delta=${Math.abs(Number(a[j])-Number(b[j]))}`);}}}
 for(const config of configs)test(`${config.kind}: every column both directions matches exact input and CSV order`,()=>withPage(async page=>{
  await go(page,config.route);const table=page.locator(config.selector),rows=annualRows(config.kind,config.code,2013,'I');if(config.kind==='home')await page.getByRole('button',{name:/Show all/}).click();
  const initialCharts=await chartPaths(page),totals=await page.locator('.world-total-card').allTextContents();

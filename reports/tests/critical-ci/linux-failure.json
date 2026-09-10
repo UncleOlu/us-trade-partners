@@ -1,0 +1,77 @@
+{
+  "run": 34434140746,
+  "gate_status": "FAIL",
+  "pages_artifact_upload": "SKIPPED",
+  "diagnostics_uploaded": true,
+  "index_sha256": "9eb20ec87aba080e0007de3602d8c6eb9233709cdd83a9c2c479a79b15bd95bb",
+  "results": [
+    {
+      "name": "home: every column both directions matches exact input and CSV order",
+      "status": "PASS",
+      "detail": {
+        "directions": 12,
+        "rows": 236
+      },
+      "ms": 3307
+    },
+    {
+      "name": "section: every column both directions matches exact input and CSV order",
+      "status": "PASS",
+      "detail": {
+        "directions": 14,
+        "rows": 236
+      },
+      "ms": 3548
+    },
+    {
+      "name": "years: every column both directions matches exact input and CSV order",
+      "status": "FAIL",
+      "reason": "Chart coordinate 3/2 changed",
+      "ms": 996
+    },
+    {
+      "name": "groups: every column both directions matches exact input and CSV order",
+      "status": "FAIL",
+      "reason": "Chart coordinate 3/2 changed",
+      "ms": 1017
+    },
+    {
+      "name": "chapters: every column both directions matches exact input and CSV order",
+      "status": "FAIL",
+      "reason": "Chart coordinate 3/2 changed",
+      "ms": 933
+    },
+    {
+      "name": "sort keyboard state survives refresh Back and year changes; charts and group selection stay stable",
+      "status": "PASS",
+      "ms": 2359
+    },
+    {
+      "name": "home sorting preserves financial rank and full export under search and visible limit",
+      "status": "PASS",
+      "ms": 967
+    },
+    {
+      "name": "rank dropdown changes selected sort; independent table choices survive Hub navigation",
+      "status": "PASS",
+      "ms": 2588
+    },
+    {
+      "name": "invalid sort keys and directions normalize with visible explanation",
+      "status": "PASS",
+      "ms": 683
+    },
+    {
+      "name": "sort controls preserve centered figures, nowrap years and contained mobile scrolling",
+      "status": "PASS",
+      "detail": {
+        "tables": 5,
+        "widths": 2,
+        "extra320YearCheck": true
+      },
+      "ms": 8568
+    }
+  ],
+  "errors": [],
+  "sort_checks_completed": 26
+}
